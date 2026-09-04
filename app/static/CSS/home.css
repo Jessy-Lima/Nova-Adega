@@ -469,3 +469,41 @@ body {
         min-width: 140px;
     }
 }
+
+/* =========================
+   FOOTER
+========================= */
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+.footer {
+    width: 100%;
+    margin-top: auto;
+    padding: 18px 20px;
+    box-sizing: border-box;
+    text-align: center;
+
+    background: #121212;
+    color: #f9fafb;
+
+    border-top: 1px solid #333;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.footer strong {
+    color: #fde68a;
+}

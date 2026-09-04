@@ -5,7 +5,10 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>
         {% block title %}Nova Adega{% endblock %}
@@ -14,7 +17,10 @@
 
     <!-- CSS PRINCIPAL -->
 
-    <link rel="stylesheet" href="/static/CSS/home.css">
+    <link
+        rel="stylesheet"
+        href="/static/CSS/home.css"
+    >
 
 
     <!-- CSS ESPECÍFICO DE CADA PÁGINA -->
@@ -28,70 +34,28 @@
 
 
     <!-- =========================
-     NAVBAR
-========================= -->
-
-    <nav class="navbar">
-
-
-        <!-- LOGO -->
-
-        <div class="logo">
-
-            <a href="/">
-
-                🍷 Nova Adega
-
-            </a>
-
-        </div>
-
-
-
-        <!-- MENU -->
-
-        <div class="menu">
-
-            <a href="/pdv/">
-                PDV
-            </a>
-
-            <a href="/movimentacoes/">
-                Histórico
-            </a>
-
-            <a href="/produtos/">
-                Produtos
-            </a>
-
-            <a href="/categorias/">
-                Categorias
-            </a>
-
-            <a href="/clientes/">
-                Clientes
-            </a>
-
-            <a href="/auth/logout" class="btn-sair">
-                Sair
-            </a>
-
-        </div>
-
-
-    </nav>
-
-
-
-    <!-- =========================
-     CONTEÚDO DA PÁGINA
-========================= -->
+         CONTEÚDO DA PÁGINA
+    ========================= -->
 
     {% block content %}{% endblock %}
 
 
+    <!-- =========================
+         FOOTER
+    ========================= -->
 
-    <!-- JAVASCRIPT -->
+    <footer class="footer">
+
+        <p>
+            © 2026 <strong>Nova Adega</strong> · @novaadega
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
 
     {% block scripts %}{% endblock %}
 
