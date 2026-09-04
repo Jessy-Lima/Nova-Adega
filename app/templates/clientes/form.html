@@ -1,47 +1,195 @@
-<!-- template/clientes/form.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
-<head><meta charset="UTF-8">
-<title>{{ "Editar" if editando else "Novo" }} Cliente — AAPM SENAI</title>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {{ "Editar cliente" if editando else "Novo cliente" }} — Nova Adega
+    </title>
+
+    <link rel="stylesheet" href="/static/css/clientes.css">
 </head>
+
 <body>
-    <h1>{{ "Editar cliente" if editando else "Novo cliente" }}</h1>
 
-    {% if erro %}<p style="color:red">{{ erro }}</p>{% endif %}
-    {% if request.query_params.get('erro') == 'matricula' %}
-        <p style="color:red">Esta matrícula já está em uso.</p>
-    {% endif %}
+    <!-- =========================================
+         BARRA SUPERIOR
+         ========================================= -->
 
-    <form action="{{ '/clientes/' + editando.id|string + '/editar' if editando else '/clientes/novo' }}"
-          method="post">
+    <header class="topbar">
 
-        <label>Nome completo:
-            <input type="text" name="nome" required autofocus
-                   value="{{ editando.nome if editando else (valores.nome if valores else '') }}">
-        </label><br>
+        <a href="/" class="logo">
+            🍷 <span>Nova Adega</span>
+        </a>
 
-        <label>Matrícula SENAI (opcional):
-            <input type="text" name="matricula"
-                   placeholder="Ex: 2024001"
-                   value="{{ editando.matricula if editando else (valores.matricula if valores else '') }}">
-        </label><br>
+        <nav class="menu">
 
-        <label>Telefone (opcional):
-            <input type="text" name="telefone"
-                   placeholder="Ex: (11) 99999-9999"
-                   value="{{ editando.telefone if editando else (valores.telefone if valores else '') }}">
-        </label><br>
+            <a href="/pdv/">
+                PDV
+            </a>
 
-        <label>
-            <input type="checkbox" name="is_associado" value="true"
-                {{ 'checked' if (editando and editando.is_associado) or (valores and valores.is_associado) }}>
-            É associado AAPM (recebe 10% de desconto)
-        </label><br><br>
+            <a href="/movimentacoes/">
+                Histórico
+            </a>
 
-        <button type="submit">
-            {{ "Salvar alterações" if editando else "Cadastrar cliente" }}
-        </button>
-        <a href="/clientes">Cancelar</a>
-    </form>
+            <a href="/produtos/">
+                Produtos
+            </a>
+
+            <a href="/categorias/">
+                Categorias
+            </a>
+
+            <a href="/clientes/" class="ativo">
+                Clientes
+            </a>
+
+            <a href="/auth/logout" class="btn-sair">
+                Sair
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================================
+         CONTEÚDO
+         ========================================= -->
+
+    <main class="form-container">
+
+        <div class="form-card">
+
+            <div class="form-cabecalho">
+
+                <a href="/clientes" class="voltar">
+                    ← Voltar para clientes
+                </a>
+
+                <h1>
+                    {{ "Editar cliente" if editando else "Novo cliente" }}
+                </h1>
+
+                <p>
+                    {{ "Atualize os dados do cliente." if editando
+                       else "Cadastre um novo cliente no sistema." }}
+                </p>
+
+            </div>
+
+
+            <!-- =========================================
+                 ERROS
+                 ========================================= -->
+
+            {% if erro %}
+
+                <div class="mensagem erro">
+                    {{ erro }}
+                </div>
+
+            {% endif %}
+
+
+            <!-- =========================================
+                 FORMULÁRIO
+                 ========================================= -->
+
+            <form
+                action="{{ '/clientes/' + editando.id|string + '/editar' if editando else '/clientes/novo' }}"
+                method="post"
+                class="cliente-form"
+            >
+
+                <!-- NOME -->
+
+                <div class="form-grupo">
+
+                    <label for="nome">
+                        Nome completo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite o nome completo"
+                        value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
+                        required
+                        autofocus
+                    >
+
+                </div>
+
+
+                <!-- TELEFONE -->
+
+                <div class="form-grupo">
+
+                    <label for="telefone">
+                        Telefone
+                        <span>(opcional)</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="telefone"
+                        name="telefone"
+                        placeholder="Ex: (11) 99999-9999"
+                        value="{{ editando.telefone if editando else (valores.telefone if valores else '') }}"
+                    >
+
+                </div>
+
+
+                <!-- CPF -->
+
+                <div class="form-grupo">
+
+                    <label for="cpf">
+                        CPF
+                        <span>(opcional)</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cpf"
+                        name="cpf"
+                        placeholder="Ex: 000.000.000-00"
+                        value="{{ editando.cpf if editando else (valores.cpf if valores else '') }}"
+                    >
+
+                </div>
+
+
+                <!-- BOTÕES -->
+
+                <div class="form-acoes">
+
+                    <a
+                        href="/clientes"
+                        class="btn-cancelar"
+                    >
+                        Cancelar
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn-salvar"
+                    >
+                        {{ "Salvar alterações" if editando else "Cadastrar cliente" }}
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
 </body>
 </html>
