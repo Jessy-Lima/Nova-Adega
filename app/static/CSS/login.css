@@ -1,298 +1,301 @@
-/* =========================
-RESET
-========================= */
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  }
-
-/* =========================
-PÁGINA
-========================= */
-
-body {
-font-family: Arial, sans-serif;
-
-
-background-color: #121212;
-
-color: #F9FAFB;
-
-min-height: 100vh;
-
-display: flex;
-
-justify-content: center;
-
-align-items: center;
-
-padding: 20px;
-
-
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* =========================
-CARD DE LOGIN
-========================= */
+
+/* =========================================================
+   PÁGINA DE LOGIN
+========================================================= */
+
+.login-page {
+    min-height: 100vh;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background-color: #121212;
+
+    color: #F9FAFB;
+}
+
+
+/* =========================================================
+   CARD DE LOGIN
+========================================================= */
 
 .login-card {
-background-color: #1E1E1E;
+    width: 100%;
+    max-width: 420px;
 
+    padding: 45px 40px;
 
-width: 100%;
-max-width: 420px;
+    background-color: #1E1E1E;
 
-padding: 45px 40px;
+    border-radius: 18px;
 
-border-radius: 18px;
+    text-align: center;
 
-text-align: center;
+    border: 1px solid rgba(253, 230, 138, 0.15);
 
-box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-
-border: 1px solid rgba(253, 230, 138, 0.15);
-
-
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.5);
 }
 
-/* =========================
-LOGO
-========================= */
 
-.logo {
-width: 75px;
-height: 75px;
+/* =========================================================
+   LOGO
+========================================================= */
 
+.login-card .logo {
+    width: 75px;
+    height: 75px;
 
-margin: 0 auto 20px;
+    margin: 0 auto 20px;
 
-display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-justify-content: center;
-align-items: center;
+    background-color: #FDE68A;
 
-background-color: #FDE68A;
+    color: #121212;
 
-color: #121212;
+    border-radius: 50%;
 
-border-radius: 50%;
-
-font-size: 32px;
-
-
+    font-size: 32px;
 }
 
-/* =========================
-TÍTULO
-========================= */
+
+/* =========================================================
+   TÍTULO
+========================================================= */
 
 .login-card h1 {
-color: #F9FAFB;
+    color: #F9FAFB;
 
+    font-size: 30px;
 
-font-size: 30px;
-
-margin-bottom: 10px;
-
-
+    margin-bottom: 10px;
 }
 
-/* SUBTÍTULO */
+
+/* =========================================================
+   SUBTÍTULO
+========================================================= */
 
 .login-card > p {
-color: #FDE68A;
+    color: #FDE68A;
 
+    font-size: 16px;
 
-font-size: 16px;
-
-margin-bottom: 35px;
-
-
+    margin-bottom: 35px;
 }
 
-/* =========================
-FORMULÁRIO
-========================= */
 
-form {
-text-align: left;
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
+
+.login-card form {
+    width: 100%;
+
+    text-align: left;
 }
 
-/* LABEL */
 
-label {
-display: block;
+/* =========================================================
+   LABEL
+========================================================= */
 
+.login-card label {
+    display: block;
 
-margin-bottom: 8px;
+    margin-bottom: 8px;
 
-color: #F9FAFB;
+    color: #F9FAFB;
 
-font-size: 14px;
+    font-size: 14px;
 
-font-weight: bold;
-
-
+    font-weight: bold;
 }
 
-/* =========================
-INPUT COM ÍCONE
-========================= */
 
-.input-group {
-position: relative;
+/* =========================================================
+   INPUT COM ÍCONE
+========================================================= */
 
+.login-card .input-group {
+    position: relative;
 
-display: flex;
+    width: 100%;
 
-align-items: center;
+    display: flex;
+    align-items: center;
 
-margin-bottom: 22px;
-
-
+    margin-bottom: 22px;
 }
 
-.input-group i {
-position: absolute;
 
+/* =========================================================
+   ÍCONE
+========================================================= */
 
-left: 15px;
+.login-card .input-group i {
+    position: absolute;
 
-color: #FDE68A;
+    left: 15px;
 
-font-size: 17px;
+    color: #FDE68A;
 
-z-index: 1;
+    font-size: 17px;
 
-
+    z-index: 2;
 }
 
-/* INPUT */
 
-.input-group input {
-width: 100%;
+/* =========================================================
+   INPUT
+========================================================= */
 
+.login-card .input-group input {
+    width: 100%;
 
-background-color: #121212;
+    height: 48px;
 
-color: #F9FAFB;
+    padding: 14px 15px 14px 48px;
 
-border: 1px solid #3a3a3a;
+    background-color: #121212;
 
-border-radius: 10px;
+    color: #F9FAFB;
 
-padding: 14px 15px 14px 48px;
+    border: 1px solid #3a3a3a;
 
-font-size: 15px;
+    border-radius: 10px;
 
-outline: none;
+    font-size: 15px;
 
-transition: 0.3s;
+    outline: none;
 
-
+    transition: 0.3s;
 }
 
-/* PLACEHOLDER */
 
-.input-group input::placeholder {
-color: #777;
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
+
+.login-card .input-group input::placeholder {
+    color: #777;
 }
 
-/* QUANDO O INPUT ESTÁ SELECIONADO */
 
-.input-group input:focus {
-border-color: #FDE68A;
+/* =========================================================
+   INPUT FOCADO
+========================================================= */
 
+.login-card .input-group input:focus {
+    border-color: #FDE68A;
 
-box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.1);
-
-
+    box-shadow:
+        0 0 0 3px rgba(253, 230, 138, 0.1);
 }
 
-/* =========================
-BOTÃO
-========================= */
 
-button {
-width: 100%;
+/* =========================================================
+   BOTÃO
+========================================================= */
 
+.login-card button {
+    width: 100%;
 
-background-color: #FDE68A;
+    height: 48px;
 
-color: #121212;
+    margin-top: 5px;
 
-border: none;
+    padding: 15px;
 
-border-radius: 10px;
+    background-color: #FDE68A;
 
-padding: 15px;
+    color: #121212;
 
-margin-top: 5px;
+    border: none;
 
-font-size: 16px;
+    border-radius: 10px;
 
-font-weight: bold;
+    font-size: 16px;
 
-cursor: pointer;
+    font-weight: bold;
 
-transition: 0.3s;
+    cursor: pointer;
 
-
+    transition: 0.3s;
 }
 
-button:hover {
-background-color: #FEF3C7;
 
+/* =========================================================
+   HOVER DO BOTÃO
+========================================================= */
 
-transform: translateY(-2px);
+.login-card button:hover {
+    background-color: #FEF3C7;
 
-
+    transform: translateY(-2px);
 }
 
-/* =========================
-FOOTER
-========================= */
 
-.footer {
-margin-top: 30px;
+/* =========================================================
+   FOOTER
+========================================================= */
 
+.login-card .footer {
+    margin-top: 30px;
 
-padding-top: 20px;
+    padding-top: 20px;
 
-border-top: 1px solid #333;
+    border-top: 1px solid #333;
 
-color: #777;
+    color: #777;
 
-font-size: 13px;
+    font-size: 13px;
 
-
+    line-height: 1.4;
 }
 
-/* =========================
-RESPONSIVIDADE
-========================= */
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
 
 @media (max-width: 480px) {
 
+    .login-page {
+        padding: 15px;
+    }
 
-.login-card {
-    padding: 35px 25px;
-}
+    .login-card {
+        padding: 35px 25px;
+    }
 
+    .login-card h1 {
+        font-size: 26px;
+    }
 
-.login-card h1 {
-    font-size: 26px;
-}
+    .login-card .logo {
+        width: 65px;
+        height: 65px;
 
-
-.logo {
-    width: 65px;
-    height: 65px;
-
-    font-size: 28px;
-}
-
+        font-size: 28px;
+    }
 
 }
