@@ -1,52 +1,228 @@
-<!-- templates/categorias/form.html -->
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ "Editar" if editando else "Nova" }} Categoria — AAPM SENAI</title>
-</head>
-<body>
-    <h1>{{ "Editar categoria" if editando else "Nova categoria" }}</h1>
+{% extends "base.html" %}
 
-    {% if erro %}
-        <p style="color:red">{{ erro }}</p>
-    {% endif %}
 
-    <form action="{{ '/categorias/' + editando.id|string + '/editar' if editando else '/categorias/nova' }}"
-          method="post">
+{% block title %}
 
-        <label>Nome:
-            <input type="text"
-                   name="nome"
-                   value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
-                   required
-                   autofocus>
-        </label>
-        <br>
+{{ "Editar" if editando else "Nova" }} Categoria — Nova Adega
 
-        <button type="submit">
-            {{ "Salvar alterações" if editando else "Criar categoria" }}
-        </button>
-        <a href="/categorias">Cancelar</a>
-    </form>
+{% endblock %}
 
-    <!--
-        Na edição, exibe os produtos vinculados para o admin
-        ter contexto antes de fazer alterações.
-    -->
+
+{% block styles %}
+
+<link rel="stylesheet" href="/static/css/categorias.css">
+
+{% endblock %}
+
+
+{% block content %}
+
+<main class="container">
+
+
+    <section class="form-categoria">
+
+
+        <!-- TÍTULO -->
+
+        <div class="form-titulo">
+
+            <h1>
+
+                {{ "Editar categoria" if editando else "Nova categoria" }}
+
+            </h1>
+
+            <p>
+
+                {{
+                    "Altere as informações da categoria selecionada."
+                    if editando
+                    else "Cadastre uma nova categoria para organizar os produtos."
+                }}
+
+            </p>
+
+        </div>
+
+
+        <!-- MENSAGEM DE ERRO -->
+
+        {% if erro %}
+
+        <div class="mensagem erro">
+
+            {{ erro }}
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- FORMULÁRIO -->
+
+        <form
+            action="{{ '/categorias/' + editando.id|string + '/editar' if editando else '/categorias/nova' }}"
+            method="post"
+            class="categoria-form"
+        >
+
+
+            <!-- NOME -->
+
+            <div class="form-grupo">
+
+                <label for="nome">
+
+                    Nome da categoria
+
+                </label>
+
+
+                <input
+                    type="text"
+                    id="nome"
+                    name="nome"
+                    value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
+                    placeholder="Ex: Cervejas, Vinhos, Destilados..."
+                    required
+                    autofocus
+                >
+
+            </div>
+
+
+            <!-- BOTÕES -->
+
+            <div class="form-botoes">
+
+
+                <button
+                    type="submit"
+                    class="btn-salvar"
+                >
+
+                    {{
+                        "Salvar alterações"
+                        if editando
+                        else "Criar categoria"
+                    }}
+
+                </button>
+
+
+                <a
+                    href="/categorias"
+                    class="btn-cancelar"
+                >
+
+                    Cancelar
+
+                </a>
+
+
+            </div>
+
+
+        </form>
+
+
+    </section>
+
+
+    <!-- PRODUTOS VINCULADOS -->
+
     {% if editando and editando.produtos %}
-        <hr>
-        <h3>Produtos vinculados a esta categoria</h3>
-        <ul>
+
+    <section class="produtos-vinculados">
+
+
+        <div class="titulo-vinculados">
+
+            <h2>
+
+                Produtos vinculados
+
+            </h2>
+
+            <p>
+
+                Produtos ativos pertencentes a esta categoria.
+
+            </p>
+
+        </div>
+
+
+        <div class="lista-produtos">
+
+
             {% for p in editando.produtos if p.ativo %}
-                <li>
-                    <a href="/produtos/{{ p.id }}">{{ p.nome }}</a>
-                    — R$ {{ "%.2f"|format(p.preco) }}
-                </li>
+
+            <a
+                href="/produtos/{{ p.id }}"
+                class="produto-vinculado"
+            >
+
+                <div>
+
+                    <strong>
+
+                        {{ p.nome }}
+
+                    </strong>
+
+
+                    <span>
+
+                        R$ {{ "%.2f"|format(p.preco) }}
+
+                    </span>
+
+                </div>
+
+
+                <span class="ver-produto">
+
+                    Ver →
+
+                </span>
+
+            </a>
+
+
             {% else %}
-                <li>Nenhum produto ativo vinculado.</li>
+
+            <p class="sem-produtos">
+
+                Nenhum produto ativo vinculado.
+
+            </p>
+
             {% endfor %}
-        </ul>
+
+
+        </div>
+
+
+    </section>
+
     {% endif %}
-</body>
-</html>
+
+
+    <!-- VOLTAR -->
+
+    <div class="voltar">
+
+        <a href="/categorias">
+
+            ← Voltar para categorias
+
+        </a>
+
+    </div>
+
+
+</main>
+
+{% endblock %}

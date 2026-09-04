@@ -8,31 +8,6 @@
     box-sizing: border-box;
 }
 
-<<<<<<< HEAD
-
-/* =========================================
-   CORES
-========================================= */
-
-:root {
-    --fundo: #121212;
-    --card: #1E1E1E;
-    --botao: #FDE68A;
-    --destaque: #FEF3C7;
-    --texto: #F9FAFB;
-    --borda: #333333;
-}
-
-
-/* =========================================
-   CORPO
-========================================= */
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: var(--fundo);
-    color: var(--texto);
-=======
 html {
     scroll-behavior: smooth;
 }
@@ -41,7 +16,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     background: #121212;
     color: #F9FAFB;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
     min-height: 100vh;
 }
 
@@ -52,23 +26,12 @@ body {
 
 .navbar {
     width: 100%;
-<<<<<<< HEAD
-    min-height: 72px;
-
-    background-color: var(--card);
-=======
     background: #1E1E1E;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-<<<<<<< HEAD
-    padding: 0 8%;
-
-    border-bottom: 1px solid var(--borda);
-=======
     padding: 18px 7%;
 
     border-bottom: 1px solid #333;
@@ -76,7 +39,6 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 }
 
 
@@ -90,16 +52,10 @@ body {
 }
 
 .logo h2 {
-<<<<<<< HEAD
-    color: var(--botao);
-    font-size: 24px;
-    white-space: nowrap;
-=======
     color: #FDE68A;
     font-size: 25px;
     font-weight: 700;
     letter-spacing: 0.5px;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 }
 
 
@@ -113,21 +69,6 @@ body {
     gap: 28px;
 }
 
-<<<<<<< HEAD
-
-/* =========================================
-   LINKS
-========================================= */
-
-.menu a {
-    color: var(--texto);
-    text-decoration: none;
-    font-size: 16px;
-
-    padding: 8px 0;
-
-    transition: 0.25s ease;
-=======
 .menu a {
     color: #F9FAFB;
     text-decoration: none;
@@ -135,7 +76,6 @@ body {
     font-weight: 500;
 
     transition: all 0.25s ease;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 }
 
 .menu a:hover {
@@ -148,62 +88,37 @@ body {
 ========================================= */
 
 .menu .btn-sair {
-<<<<<<< HEAD
-    background-color: var(--botao);
-    color: var(--fundo);
-=======
     background: #FDE68A;
     color: #121212;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 
     padding: 10px 18px;
 
     border-radius: 8px;
 
     font-weight: bold;
-<<<<<<< HEAD
-=======
 
     transition: all 0.25s ease;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 }
 
 .menu .btn-sair:hover {
-<<<<<<< HEAD
-    background-color: var(--destaque);
-    color: var(--fundo);
-=======
     background: #FEF3C7;
     color: #121212;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 
     transform: translateY(-2px);
 }
 
 
 /* =========================================
-<<<<<<< HEAD
-   CONTAINER
-========================================= */
-
-.container {
-    width: 85%;
-=======
    CONTAINER PRINCIPAL
 ========================================= */
 
 .container {
     width: 88%;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
     max-width: 1400px;
 
     margin: 0 auto;
 
-<<<<<<< HEAD
-    padding: 50px 0;
-=======
     padding: 45px 0 70px;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 }
 
 
@@ -212,11 +127,7 @@ body {
 ========================================= */
 
 .boas-vindas {
-<<<<<<< HEAD
-    background-color: var(--card);
-=======
     background: #1E1E1E;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 
     padding: 30px;
 
@@ -224,13 +135,7 @@ body {
 
     margin-bottom: 45px;
 
-<<<<<<< HEAD
-    border: 1px solid var(--borda);
-    border-left: 5px solid var(--botao);
-}
-=======
     border-left: 5px solid #FDE68A;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
 }
@@ -243,13 +148,8 @@ body {
 }
 
 .boas-vindas p {
-<<<<<<< HEAD
-    color: var(--texto);
-    opacity: 0.7;
-=======
     color: #D1D5DB;
     opacity: 0.8;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 }
 
 
@@ -272,11 +172,7 @@ body {
 }
 
 .titulo-secao p {
-<<<<<<< HEAD
-    color: var(--texto);
-=======
     color: #D1D5DB;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 
     font-size: 15px;
 
@@ -285,12 +181,6 @@ body {
 
 
 /* =========================================
-<<<<<<< HEAD
-   BARRA DE CATEGORIAS
-========================================= */
-
-.categorias {
-=======
    CATEGORIAS
 ========================================= */
 
@@ -301,7 +191,6 @@ body {
 
     gap: 16px;
 
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
     width: 100%;
 
     display: flex;
@@ -311,27 +200,14 @@ body {
 
     overflow-x: auto;
 
-<<<<<<< HEAD
-    padding: 8px 2px 18px;
-
-    scroll-behavior: smooth;
-=======
     padding: 10px 4px 18px;
 
     scrollbar-width: thin;
     scrollbar-color: #555 #121212;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 }
 
 
 /* =========================================
-<<<<<<< HEAD
-   CARDS DAS CATEGORIAS
-========================================= */
-
-.card-categoria {
-    background-color: var(--card);
-=======
    CARD DA CATEGORIA
 ========================================= */
 
@@ -343,7 +219,6 @@ body {
     min-height: 95px;
 
     background: #1E1E1E;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 
     color: var(--texto);
 
@@ -361,27 +236,10 @@ body {
 
     gap: 10px;
 
-<<<<<<< HEAD
-    min-width: 170px;
-
-    padding: 16px 20px;
-
-    border: 1px solid var(--borda);
-=======
     position: relative;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 
     overflow: hidden;
 
-<<<<<<< HEAD
-    white-space: nowrap;
-
-    transition:
-        transform 0.25s ease,
-        background-color 0.25s ease,
-        border-color 0.25s ease,
-        color 0.25s ease;
-=======
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
 
     transition:
@@ -412,7 +270,6 @@ body {
     transform-origin: left;
 
     transition: transform 0.25s ease;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 }
 
 
@@ -421,15 +278,9 @@ body {
 ========================================= */
 
 .card-categoria:hover {
-<<<<<<< HEAD
-    background-color: var(--botao);
-
-    color: var(--fundo);
-=======
     background: #252525;
 
     color: #FDE68A;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 
     border-color: var(--botao);
 
@@ -448,25 +299,16 @@ body {
 ========================================= */
 
 .icone {
-<<<<<<< HEAD
-    font-size: 27px;
-
-=======
     font-size: 30px;
 
     line-height: 1;
 
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
     flex-shrink: 0;
 }
 
 
 /* =========================================
-<<<<<<< HEAD
-   NOME DA CATEGORIA
-=======
    TÍTULO
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 ========================================= */
 
 .card-categoria h3 {
@@ -482,13 +324,7 @@ body {
 }
 
 
-<<<<<<< HEAD
-/* =========================================
-   DESCRIÇÃO
-========================================= */
-=======
 /* DESCRIÇÃO OCULTA */
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 
 .card-categoria p {
     display: none;
@@ -504,18 +340,7 @@ body {
 }
 
 .categorias::-webkit-scrollbar-track {
-<<<<<<< HEAD
-    background-color: var(--fundo);
-
-    border-radius: 10px;
-}
-
-
-.categorias::-webkit-scrollbar-thumb {
-    background-color: #444444;
-=======
     background: #121212;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 
     border-radius: 10px;
 }
@@ -527,9 +352,6 @@ body {
 }
 
 .categorias::-webkit-scrollbar-thumb:hover {
-<<<<<<< HEAD
-    background-color: var(--botao);
-=======
     background: #FDE68A;
 }
 
@@ -542,7 +364,6 @@ body {
     outline: 2px solid #FDE68A;
 
     outline-offset: 3px;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 }
 
 
@@ -551,64 +372,12 @@ body {
 ========================================= */
 
 @media (max-width: 900px) {
-<<<<<<< HEAD
-
-    .navbar {
-        padding: 15px 5%;
-        gap: 15px;
-    }
-
-
-    .menu {
-        gap: 18px;
-    }
-
-
-    .container {
-        width: 90%;
-    }
-
-}
-
-
-@media (max-width: 700px) {
-
-    .navbar {
-        flex-direction: column;
-
-        justify-content: center;
-
-        padding: 18px 20px;
-=======
 
     .navbar {
         padding: 18px 5%;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
     }
 
     .menu {
-<<<<<<< HEAD
-        flex-wrap: wrap;
-
-        justify-content: center;
-
-        gap: 12px 18px;
-    }
-
-
-    .menu a {
-        font-size: 15px;
-    }
-
-
-    .boas-vindas {
-        padding: 25px;
-    }
-
-
-    .boas-vindas h1 {
-        font-size: 26px;
-=======
         gap: 18px;
     }
 
@@ -618,7 +387,6 @@ body {
 
     .card-categoria {
         min-width: 165px;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
     }
 }
 
@@ -631,41 +399,12 @@ body {
         gap: 18px;
     }
 
-<<<<<<< HEAD
-    .container {
-        width: 92%;
-
-        padding: 35px 0;
-    }
-
-
-    .titulo-secao h2 {
-        font-size: 24px;
-    }
-
-
-    .card-categoria {
-        min-width: 145px;
-
-        padding: 14px 16px;
-    }
-
-
-    .icone {
-        font-size: 23px;
-    }
-
-
-    .card-categoria h3 {
-        font-size: 15px;
-=======
     .menu {
         width: 100%;
 
         justify-content: center;
 
         flex-wrap: wrap;
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
     }
 
     .container {
@@ -674,8 +413,6 @@ body {
         padding-top: 30px;
     }
 
-<<<<<<< HEAD
-=======
     .boas-vindas {
         padding: 22px;
     }
@@ -731,5 +468,4 @@ body {
     .card-categoria {
         min-width: 140px;
     }
->>>>>>> 83ac6a739d53d28d31b07c748276c1e816452833
 }
