@@ -1,238 +1,298 @@
-/* Reset básico */
+/* =========================
+RESET
+========================= */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
 
-
-/* Corpo da página */
+/* =========================
+PÁGINA
+========================= */
 
 body {
-    font-family: Arial, sans-serif;
-
-    background-color: #121212;
-
-    color: #F9FAFB;
-
-    min-height: 100vh;
-}
+font-family: Arial, sans-serif;
 
 
-/* Centraliza o card */
+background-color: #121212;
 
-.login-container {
+color: #F9FAFB;
 
-    min-height: 100vh;
+min-height: 100vh;
 
-    display: flex;
+display: flex;
 
-    justify-content: center;
+justify-content: center;
 
-    align-items: center;
+align-items: center;
 
-    padding: 20px;
+padding: 20px;
+
 
 }
 
-
-/* Card de login */
+/* =========================
+CARD DE LOGIN
+========================= */
 
 .login-card {
+background-color: #1E1E1E;
 
-    background-color: #1E1E1E;
 
-    width: 100%;
+width: 100%;
+max-width: 420px;
 
-    max-width: 420px;
+padding: 45px 40px;
 
-    padding: 40px;
+border-radius: 18px;
 
-    border-radius: 15px;
+text-align: center;
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+
+border: 1px solid rgba(253, 230, 138, 0.15);
+
 
 }
 
+/* =========================
+LOGO
+========================= */
 
-/* Cabeçalho */
+.logo {
+width: 75px;
+height: 75px;
 
-.login-header {
 
-    text-align: center;
+margin: 0 auto 20px;
 
-    margin-bottom: 30px;
+display: flex;
+
+justify-content: center;
+align-items: center;
+
+background-color: #FDE68A;
+
+color: #121212;
+
+border-radius: 50%;
+
+font-size: 32px;
+
 
 }
 
+/* =========================
+TÍTULO
+========================= */
 
-.login-header h1 {
+.login-card h1 {
+color: #F9FAFB;
 
-    color: #FDE68A;
 
-    font-size: 32px;
+font-size: 30px;
 
-    margin-bottom: 10px;
+margin-bottom: 10px;
+
 
 }
 
+/* SUBTÍTULO */
 
-.login-header p {
+.login-card > p {
+color: #FDE68A;
 
-    color: #F9FAFB;
 
-    opacity: 0.7;
+font-size: 16px;
+
+margin-bottom: 35px;
+
 
 }
 
+/* =========================
+FORMULÁRIO
+========================= */
 
-/* Campos */
+form {
+text-align: left;
+}
 
-.campo {
+/* LABEL */
 
-    display: flex;
+label {
+display: block;
 
-    flex-direction: column;
 
-    margin-bottom: 20px;
+margin-bottom: 8px;
+
+color: #F9FAFB;
+
+font-size: 14px;
+
+font-weight: bold;
+
 
 }
 
+/* =========================
+INPUT COM ÍCONE
+========================= */
 
-.campo label {
+.input-group {
+position: relative;
 
-    margin-bottom: 8px;
 
-    font-weight: bold;
+display: flex;
+
+align-items: center;
+
+margin-bottom: 22px;
+
 
 }
 
+.input-group i {
+position: absolute;
 
-/* Inputs */
 
-.campo input {
+left: 15px;
 
-    background-color: #121212;
+color: #FDE68A;
 
-    color: #F9FAFB;
+font-size: 17px;
 
-    border: 1px solid #444;
+z-index: 1;
 
-    padding: 14px;
-
-    border-radius: 8px;
-
-    font-size: 16px;
-
-    outline: none;
 
 }
 
+/* INPUT */
 
-/* Quando clicar no input */
+.input-group input {
+width: 100%;
 
-.campo input:focus {
 
-    border-color: #FDE68A;
+background-color: #121212;
+
+color: #F9FAFB;
+
+border: 1px solid #3a3a3a;
+
+border-radius: 10px;
+
+padding: 14px 15px 14px 48px;
+
+font-size: 15px;
+
+outline: none;
+
+transition: 0.3s;
+
 
 }
 
+/* PLACEHOLDER */
 
-/* Placeholder */
+.input-group input::placeholder {
+color: #777;
+}
 
-.campo input::placeholder {
+/* QUANDO O INPUT ESTÁ SELECIONADO */
 
-    color: #888;
+.input-group input:focus {
+border-color: #FDE68A;
+
+
+box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.1);
+
 
 }
 
+/* =========================
+BOTÃO
+========================= */
 
-/* Botão */
+button {
+width: 100%;
 
-.btn-login {
 
-    width: 100%;
+background-color: #FDE68A;
 
-    background-color: #FDE68A;
+color: #121212;
 
-    color: #121212;
+border: none;
 
-    border: none;
+border-radius: 10px;
 
-    padding: 14px;
+padding: 15px;
 
-    border-radius: 8px;
+margin-top: 5px;
 
-    font-size: 16px;
+font-size: 16px;
 
-    font-weight: bold;
+font-weight: bold;
 
-    cursor: pointer;
+cursor: pointer;
 
-    transition: 0.3s;
+transition: 0.3s;
+
 
 }
 
+button:hover {
+background-color: #FEF3C7;
 
-/* Hover do botão */
 
-.btn-login:hover {
+transform: translateY(-2px);
 
-    background-color: #FEF3C7;
-
-    transform: translateY(-2px);
 
 }
 
+/* =========================
+FOOTER
+========================= */
 
-/* Cadastro */
+.footer {
+margin-top: 30px;
 
-.cadastro {
 
-    text-align: center;
+padding-top: 20px;
 
-    margin-top: 25px;
+border-top: 1px solid #333;
 
-    color: #F9FAFB;
+color: #777;
+
+font-size: 13px;
+
 
 }
 
+/* =========================
+RESPONSIVIDADE
+========================= */
 
-/* Link */
+@media (max-width: 480px) {
 
-.cadastro a {
 
-    color: #FDE68A;
-
-    font-weight: bold;
-
-    text-decoration: none;
-
+.login-card {
+    padding: 35px 25px;
 }
 
 
-.cadastro a:hover {
-
-    text-decoration: underline;
-
+.login-card h1 {
+    font-size: 26px;
 }
 
 
-/* Alertas */
+.logo {
+    width: 65px;
+    height: 65px;
 
-.alerta {
+    font-size: 28px;
+}
 
-    background-color: #FEF3C7;
-
-    color: #121212;
-
-    padding: 12px;
-
-    border-radius: 8px;
-
-    margin-bottom: 20px;
-
-    text-align: center;
 
 }

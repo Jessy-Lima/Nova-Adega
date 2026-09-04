@@ -4,12 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-
-    <title>Login | Nova Adega</title>
-
-    <link rel="stylesheet" href="/static/css/login.css">
-=======
     <title>Login - Nova Adega</title>
 
     <link rel="stylesheet" href="/static/css/login.css">
@@ -17,95 +11,10 @@
     <!-- Font Awesome -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
->>>>>>> c4dddb39df1425ab52c1e0c8bb4527a4cc974956
 </head>
 
 <body>
 
-<<<<<<< HEAD
-    <main class="login-container">
-
-        <section class="login-card">
-
-            <div class="login-header">
-                <h1>Nova Adega</h1>
-                <p>Entre no sistema</p>
-            </div>
-
-
-            <!-- Mensagem de erro -->
-            {% if erro %}
-                <div class="alerta erro">
-                    {{ erro }}
-                </div>
-            {% endif %}
-
-
-            <!-- Mensagem de confirmação -->
-            {% if request.query_params.get("cadastro") == "ok" %}
-                <div class="alerta sucesso">
-                    Cadastro realizado! Faça login.
-                </div>
-            {% endif %}
-
-
-            <form action="/auth/login" method="post">
-
-                <div class="campo">
-
-                    <label for="email">
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Digite seu email"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label for="senha">
-                        Senha
-                    </label>
-
-                    <input
-                        type="password"
-                        id="senha"
-                        name="senha"
-                        placeholder="Digite sua senha"
-                        required
-                    >
-
-                </div>
-
-
-                <button type="submit" class="btn-login">
-                    Entrar
-                </button>
-
-            </form>
-
-
-            <p class="cadastro">
-
-                Não tem conta?
-
-                <a href="/auth/cadastro">
-                    Cadastre-se
-                </a>
-
-            </p>
-
-        </section>
-
-    </main>
-=======
     <div class="login-card">
 
         <div class="logo">
@@ -151,7 +60,6 @@
         </div>
 
     </div>
->>>>>>> c4dddb39df1425ab52c1e0c8bb4527a4cc974956
 
 </body>
 

@@ -1,322 +1,345 @@
 /* RESET */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 
 /* CORPO */
 
 body {
-font-family: Arial, sans-serif;
-
-
-background-color: #121212;
-
-color: #F9FAFB;
-
-min-height: 100vh;
-
-
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #F9FAFB;
+    min-height: 100vh;
 }
+
 
 /* NAVBAR */
 
 .navbar {
+    background-color: #1E1E1E;
 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-background-color: #1E1E1E;
+    padding: 18px 8%;
 
-display: flex;
-
-justify-content: space-between;
-
-align-items: center;
-
-padding: 18px 8%;
-
-border-bottom: 1px solid #333;
-
-
+    border-bottom: 1px solid #333;
 }
+
 
 /* LOGO */
 
 .logo h2 {
-
-
-color: #FDE68A;
-
-font-size: 24px;
-
-
+    color: #FDE68A;
+    font-size: 24px;
 }
+
 
 /* MENU */
 
 .menu {
-
-
-display: flex;
-
-align-items: center;
-
-gap: 25px;
-
-
+    display: flex;
+    align-items: center;
+    gap: 25px;
 }
+
 
 /* LINKS */
 
 .menu a {
+    color: #F9FAFB;
 
+    text-decoration: none;
 
-color: #F9FAFB;
+    font-size: 16px;
 
-text-decoration: none;
-
-font-size: 16px;
-
-transition: 0.3s;
-
-
+    transition: 0.3s;
 }
+
 
 .menu a:hover {
-
-
-color: #FDE68A;
-
-
+    color: #FDE68A;
 }
+
 
 /* BOTÃO SAIR */
 
 .menu .btn-sair {
+    background-color: #FDE68A;
 
+    color: #121212;
 
-background-color: #FDE68A;
+    padding: 10px 18px;
 
-color: #121212;
+    border-radius: 8px;
 
-padding: 10px 18px;
+    font-weight: bold;
 
-border-radius: 8px;
-
-font-weight: bold;
-
-
+    transition: 0.3s;
 }
+
 
 .menu .btn-sair:hover {
+    background-color: #FEF3C7;
 
+    color: #121212;
 
-background-color: #FEF3C7;
-
-color: #121212;
-
-
+    transform: translateY(-2px);
 }
+
 
 /* CONTAINER */
 
 .container {
+    width: 85%;
 
+    max-width: 1400px;
 
-width: 85%;
+    margin: auto;
 
-max-width: 1200px;
-
-margin: auto;
-
-padding: 50px 0;
-
-
+    padding: 55px 0;
 }
+
 
 /* BOAS-VINDAS */
 
 .boas-vindas {
+    background-color: #1E1E1E;
 
+    padding: 30px;
 
-background-color: #1E1E1E;
+    border-radius: 15px;
 
-padding: 30px;
+    margin-bottom: 50px;
 
-border-radius: 15px;
-
-margin-bottom: 50px;
-
-border-left: 5px solid #FDE68A;
-
-
+    border-left: 5px solid #FDE68A;
 }
+
 
 .boas-vindas h1 {
+    font-size: 30px;
 
-
-font-size: 30px;
-
-margin-bottom: 10px;
-
-
+    margin-bottom: 10px;
 }
+
 
 .boas-vindas p {
-
-
-opacity: 0.7;
-
-
+    opacity: 0.7;
 }
 
-/* TÍTULO DA SEÇÃO */
+
+/* =========================================
+   TÍTULO DA SEÇÃO
+========================================= */
 
 .titulo-secao {
-
-
-margin-bottom: 30px;
-
-
+    margin-bottom: 25px;
 }
+
 
 .titulo-secao h2 {
+    color: #FDE68A;
 
+    font-size: 30px;
 
-color: #FDE68A;
-
-font-size: 28px;
-
-margin-bottom: 8px;
-
-
+    margin-bottom: 8px;
 }
+
 
 .titulo-secao p {
+    color: #F9FAFB;
 
-
-opacity: 0.7;
-
-
+    opacity: 0.65;
 }
 
-/* GRID DE CATEGORIAS */
+
+/* =========================================
+   CATEGORIAS - UMA ÚNICA LINHA
+========================================= */
 
 .categorias {
+    display: flex;
 
+    align-items: center;
 
-display: grid;
+    gap: 18px;
 
-grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    width: 100%;
 
-gap: 25px;
+    overflow-x: auto;
 
-
+    padding: 10px 0 20px 0;
 }
 
-/* CARD */
+
+/* =========================================
+   CATEGORIA
+========================================= */
 
 .card-categoria {
+    background-color: #1E1E1E;
 
+    color: #F9FAFB;
 
-background-color: #1E1E1E;
+    text-decoration: none;
 
-padding: 30px;
+    display: flex;
 
-border-radius: 15px;
-
-text-decoration: none;
-
-color: #F9FAFB;
-
-transition: 0.3s;
-
-border: 1px solid transparent;
-
-
-}
-
-.card-categoria:hover {
-
-
-transform: translateY(-5px);
-
-border-color: #FDE68A;
-
-background-color: #252525;
-
-
-}
-
-/* ÍCONES */
-
-.icone {
-
-
-font-size: 45px;
-
-margin-bottom: 20px;
-
-
-}
-
-/* TÍTULO DO CARD */
-
-.card-categoria h3 {
-
-
-color: #FDE68A;
-
-font-size: 21px;
-
-margin-bottom: 12px;
-
-
-}
-
-/* DESCRIÇÃO */
-
-.card-categoria p {
-
-
-opacity: 0.7;
-
-line-height: 1.5;
-
-
-}
-
-/* RESPONSIVIDADE */
-
-@media (max-width: 800px) {
-
-
-.navbar {
-
-    flex-direction: column;
-
-    gap: 20px;
-
-}
-
-
-.menu {
-
-    flex-wrap: wrap;
+    align-items: center;
 
     justify-content: center;
 
-    gap: 15px;
+    gap: 12px;
+
+    padding: 18px 24px;
+
+    border-radius: 10px;
+
+    border: 1px solid transparent;
+
+    white-space: nowrap;
+
+    min-width: max-content;
+
+    transition: 0.3s;
+}
+
+
+/* HOVER */
+
+.card-categoria:hover {
+    background-color: #FDE68A;
+
+    color: #121212;
+
+    border-color: #FDE68A;
+
+    transform: translateY(-3px);
+}
+
+
+/* =========================================
+   ÍCONES
+========================================= */
+
+.icone {
+    font-size: 28px;
+
+    margin: 0;
+}
+
+
+/* =========================================
+   TÍTULO DA CATEGORIA
+========================================= */
+
+.card-categoria h3 {
+    color: inherit;
+
+    font-size: 17px;
+
+    margin: 0;
+}
+
+
+/* =========================================
+   ESCONDE A DESCRIÇÃO
+   PARA FICAR PARECIDO COM A NAVBAR
+========================================= */
+
+.card-categoria p {
+    display: none;
+}
+
+
+/* =========================================
+   SCROLLBAR DAS CATEGORIAS
+========================================= */
+
+.categorias::-webkit-scrollbar {
+    height: 6px;
+}
+
+
+.categorias::-webkit-scrollbar-track {
+    background-color: #121212;
+}
+
+
+.categorias::-webkit-scrollbar-thumb {
+    background-color: #444;
+
+    border-radius: 10px;
+}
+
+
+.categorias::-webkit-scrollbar-thumb:hover {
+    background-color: #FDE68A;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        flex-direction: column;
+
+        gap: 20px;
+
+        padding: 20px;
+    }
+
+
+    .menu {
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 15px;
+    }
+
+
+    .container {
+        width: 90%;
+    }
+
+
+    .categorias {
+        justify-content: flex-start;
+    }
+
+
+    .card-categoria {
+        padding: 15px 20px;
+    }
 
 }
 
 
-.container {
+@media (max-width: 500px) {
 
-    width: 90%;
+    .menu {
+        font-size: 14px;
 
-}
+        gap: 12px;
+    }
 
+
+    .menu .btn-sair {
+        padding: 8px 14px;
+    }
+
+
+    .titulo-secao h2 {
+        font-size: 26px;
+    }
 
 }
