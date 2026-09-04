@@ -15,7 +15,9 @@
     </title>
 
 
-    <!-- CSS PRINCIPAL -->
+    <!-- =========================
+         CSS PRINCIPAL
+    ========================= -->
 
     <link
         rel="stylesheet"
@@ -23,7 +25,9 @@
     >
 
 
-    <!-- CSS ESPECÍFICO DE CADA PÁGINA -->
+    <!-- =========================
+         CSS ESPECÍFICO DA PÁGINA
+    ========================= -->
 
     {% block styles %}{% endblock %}
 
@@ -33,76 +37,92 @@
 <body>
 
 
-<!-- =========================
-     NAVBAR
-========================= -->
+    <!-- =========================
+         NAVBAR
+    ========================= -->
 
-<nav class="navbar">
+    {% block navbar %}
 
+    <nav class="navbar">
 
-    <!-- LOGO -->
+        <!-- LOGO -->
 
-    <div class="logo">
+        <div class="logo">
 
-        <a href="/">
+            <a href="/">
+                🍷 Nova Adega
+            </a>
 
-            🍷 Nova Adega
-
-        </a>
-
-    </div>
-
+        </div>
 
 
-    <!-- MENU -->
+        <!-- MENU -->
 
-    <div class="menu">
+        <div class="menu">
 
-        <a href="/pdv/">
-            PDV
-        </a>
+            <a href="/pdv/">
+                PDV
+            </a>
 
+            <a href="/movimentacoes/">
+                Histórico
+            </a>
 
-        <a href="/movimentacoes/">
-            Histórico
-        </a>
+            <a href="/produtos/">
+                Produtos
+            </a>
 
+            <a href="/categorias/">
+                Categorias
+            </a>
 
-        <a href="/produtos/">
-            Produtos
-        </a>
+            <a href="/clientes/">
+                Clientes
+            </a>
 
+            <a
+                href="/auth/logout"
+                class="btn-sair"
+            >
+                Sair
+            </a>
 
-        <a href="/categorias/">
-            Categorias
-        </a>
+        </div>
 
+    </nav>
 
-        <a
-            href="/auth/logout"
-            class="btn-sair"
-        >
-            Sair
-        </a>
-
-    </div>
-
-
-</nav>
-
-
-
-<!-- =========================
-     CONTEÚDO DA PÁGINA
-========================= -->
-
-{% block content %}{% endblock %}
+    {% endblock %}
 
 
+    <!-- =========================
+         CONTEÚDO DA PÁGINA
+    ========================= -->
 
-<!-- JAVASCRIPT -->
+    {% block content %}{% endblock %}
 
-{% block scripts %}{% endblock %}
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    {% block footer %}
+
+    <footer class="footer">
+
+        <p>
+            © 2026 <strong>Nova Adega</strong> · @novaadega
+        </p>
+
+    </footer>
+
+    {% endblock %}
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    {% block scripts %}{% endblock %}
 
 
 </body>

@@ -63,7 +63,7 @@
 
     padding: 11px 18px;
 
-    background: #facc15;
+    background: #FDE68A ;
 
     color: #1e293b;
 
@@ -343,7 +343,7 @@
 
     background: transparent;
 
-    color: #facc15;
+    color: #FDE68A ;
 
     border: 1px solid rgba(250, 204, 21, 0.4);
 
@@ -404,7 +404,7 @@
 
 
 .voltar a:hover {
-    color: #facc15;
+    color: #FDE68A ;
 }
 
 

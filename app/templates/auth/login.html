@@ -1,61 +1,149 @@
 {% extends "base.html" %}
 
-{% block title %}Login - Nova Adega{% endblock %}
+
+{% block title %}
+Login - Nova Adega
+{% endblock %}
+
+
+<!-- =========================
+     ESCONDER NAVBAR NO LOGIN
+========================= -->
+
+{% block navbar %}{% endblock %}
+
+
+<!-- =========================
+     ESCONDER FOOTER DO BASE
+========================= -->
+
+{% block footer %}{% endblock %}
+
+
+<!-- =========================
+     CSS DO LOGIN
+========================= -->
 
 {% block styles %}
-<link rel="stylesheet" href="/static/css/login.css">
+
+<link
+    rel="stylesheet"
+    href="/static/css/login.css"
+>
+
 
 <!-- Font Awesome -->
-<link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+>
+
 {% endblock %}
+
+
+<!-- =========================
+     CONTEÚDO DO LOGIN
+========================= -->
 
 {% block content %}
 
-<div class="login-card">
+<main class="login-page">
 
-    <div class="logo">
-        <i class="fa-solid fa-wine-glass"></i>
-    </div>
+    <div class="login-card">
 
-    <h1>Bem-vindo</h1>
 
-    <p>Sistema PDV - Adega</p>
+        <!-- ÍCONE -->
 
-    <form method="POST">
+        <div class="logo">
 
-        <label for="email">E-mail ou Usuário</label>
+            <i class="fa-solid fa-wine-glass"></i>
 
-        <div class="input-group">
-            <i class="fa-regular fa-envelope"></i>
-            <input
-                type="text"
-                id="email"
-                name="email"
-                placeholder="Digite seu e-mail"
-                required>
         </div>
 
-        <label for="senha">Senha</label>
 
-        <div class="input-group">
-            <i class="fa-solid fa-lock"></i>
-            <input
-                type="password"
-                id="senha"
-                name="senha"
-                placeholder="Digite sua senha"
-                required>
+        <!-- TÍTULO -->
+
+        <h1>
+            Bem-vindo
+        </h1>
+
+
+        <p>
+            Sistema PDV - Adega
+        </p>
+
+
+        <!-- FORMULÁRIO -->
+
+        <form method="POST">
+
+
+            <!-- E-MAIL -->
+
+            <label for="email">
+                E-mail ou Usuário
+            </label>
+
+
+            <div class="input-group">
+
+                <i class="fa-regular fa-envelope"></i>
+
+                <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu e-mail"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <!-- SENHA -->
+
+            <label for="senha">
+                Senha
+            </label>
+
+
+            <div class="input-group">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <input
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    placeholder="Digite sua senha"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- BOTÃO -->
+
+            <button type="submit">
+                Entrar
+            </button>
+
+
+        </form>
+
+
+        <!-- RODAPÉ DO CARD -->
+
+        <div class="login-footer">
+            Sistema de Ponto de Venda v1.0
         </div>
 
-        <button type="submit">Entrar</button>
 
-    </form>
-
-    <div class="footer">
-        Sistema de Ponto de Venda v1.0
     </div>
 
-</div>
+</main>
 
 {% endblock %}

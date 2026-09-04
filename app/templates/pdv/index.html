@@ -6,7 +6,7 @@ PDV — Nova Adega
 
 
 {% block styles %}
-<link rel="stylesheet" href="/static/css/pdv.css">
+<link rel="stylesheet" href="/static/CSS/pdv.css">
 {% endblock %}
 
 
@@ -155,6 +155,7 @@ PDV — Nova Adega
                     onchange="atualizarCliente(this)"
                 >
 
+                    <!-- SEM CLIENTE -->
                     <option
                         value="0"
                         data-associado="false"
@@ -163,6 +164,7 @@ PDV — Nova Adega
                     </option>
 
 
+                    <!-- CLIENTES -->
                     {% for c in clientes %}
 
                     <option
@@ -171,10 +173,6 @@ PDV — Nova Adega
                     >
 
                         {{ c.nome }}
-
-                        {% if c.matricula %}
-                            ({{ c.matricula }})
-                        {% endif %}
 
                         {% if c.is_associado %}
                             — ASSOCIADO
@@ -187,7 +185,7 @@ PDV — Nova Adega
                 </select>
 
 
-                <!-- DESCONTO -->
+                <!-- DESCONTO ASSOCIADO -->
                 <div
                     class="desconto-badge"
                     id="badge-desconto"
@@ -235,6 +233,7 @@ PDV — Nova Adega
                     style="display:none"
                 >
 
+                    <!-- SUBTOTAL -->
                     <div class="total-linha">
 
                         <span>Subtotal</span>
@@ -246,6 +245,7 @@ PDV — Nova Adega
                     </div>
 
 
+                    <!-- DESCONTO -->
                     <div
                         class="total-linha desconto"
                         id="linha-desconto"
@@ -263,6 +263,7 @@ PDV — Nova Adega
                     </div>
 
 
+                    <!-- TOTAL FINAL -->
                     <div class="total-linha final">
 
                         <span>Total</span>
@@ -311,6 +312,14 @@ PDV — Nova Adega
                         id="input-obs"
                     >
 
+                    <!-- VALOR DO DESCONTO PARA O JAVASCRIPT -->
+                    <input
+                        type="hidden"
+                        id="config-desconto"
+                        value="{{ desconto_associado|default(0) }}"
+                    >
+
+
                     <button
                         class="btn-finalizar"
                         id="btn-finalizar"
@@ -346,15 +355,21 @@ let clienteAtual = {
 };
 
 
-/*
-    Valor vindo do Python/Jinja.
+/* =========================================
+   CONFIGURAÇÃO DO DESCONTO
+========================================= */
 
-    O tojson garante que o valor seja
-    inserido corretamente no JavaScript.
+/*
+    O valor vem do Python/Jinja através
+    de um campo hidden no HTML.
+
+    Dessa forma o Jinja não fica misturado
+    diretamente com o JavaScript.
 */
 
-const DESCONTO_PCT =
-    Number({{ desconto_associado|default(0)|tojson }});
+const DESCONTO_PCT = Number(
+    document.getElementById('config-desconto').value
+);
 
 
 /* =========================================
@@ -367,6 +382,7 @@ function adicionarAoCarrinho(card) {
     const nome = card.dataset.nome;
     const preco = parseFloat(card.dataset.preco);
     const estoque = parseInt(card.dataset.estoque);
+
 
     const existente =
         carrinho.find(
@@ -417,6 +433,7 @@ function alterarQtd(produtoId, delta) {
             item => item.produto_id === produtoId
         );
 
+
     if (!item) {
         return;
     }
@@ -428,8 +445,8 @@ function alterarQtd(produtoId, delta) {
     if (item.quantidade <= 0) {
 
         removerItem(produtoId);
-        return;
 
+        return;
     }
 
 
@@ -507,10 +524,12 @@ function renderizarCarrinho() {
             'lista-carrinho'
         );
 
+
     const totais =
         document.getElementById(
             'totais'
         );
+
 
     const btnFinal =
         document.getElementById(
@@ -525,11 +544,13 @@ function renderizarCarrinho() {
                 class="carrinho-vazio"
                 id="msg-vazio"
             >
+
                 <span class="carrinho-vazio-icon">
                     🛒
                 </span>
 
                 Clique nos produtos para adicionar
+
             </div>
         `;
 
@@ -539,7 +560,6 @@ function renderizarCarrinho() {
         btnFinal.disabled = true;
 
         return;
-
     }
 
 
@@ -573,10 +593,13 @@ function renderizarCarrinho() {
                 </div>
 
                 <div class="item-preco-unit">
+
                     R$ ${item.preco
                         .toFixed(2)
                         .replace('.', ',')}
+
                     / un.
+
                 </div>
 
             </div>
@@ -663,9 +686,7 @@ function renderizarTotais() {
 
     const descontoValor =
         clienteAtual.associado
-
             ? subtotal * (DESCONTO_PCT / 100)
-
             : 0;
 
 
@@ -681,11 +702,15 @@ function renderizarTotais() {
                 .replace('.', ',');
 
 
+    /* SUBTOTAL */
+
     document.getElementById(
         'val-subtotal'
     ).textContent =
         formatar(subtotal);
 
+
+    /* TOTAL */
 
     document.getElementById(
         'val-total'
@@ -710,6 +735,8 @@ function renderizarTotais() {
             'val-desconto'
         );
 
+
+    /* MOSTRAR DESCONTO */
 
     if (
         clienteAtual.associado &&

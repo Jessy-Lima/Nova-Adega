@@ -1,10 +1,3 @@
-# models/venda.py — Cabeçalho da venda e itens
-#
-# Uma Venda tem um cabeçalho (quem comprou, quando e valores)
-# e N ItensVenda (qual produto, quantos, a que preço).
-#
-# ============================================================
-
 from sqlalchemy import Column, Integer, Float, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
@@ -34,14 +27,21 @@ class Venda(Base):
         nullable=True
     )
 
-    # Valor total da venda
+    # Percentual de desconto aplicado ao associado
+    desconto_percentual = Column(
+        Float,
+        nullable=False,
+        default=0.0
+    )
+
+    # Valor total da venda antes do desconto
     total_bruto = Column(
         Float,
         nullable=False,
         default=0.0
     )
 
-    # Valor final da venda
+    # Valor final da venda após o desconto
     total_liquido = Column(
         Float,
         nullable=False,
@@ -79,13 +79,14 @@ class Venda(Base):
         cascade="all, delete-orphan"
     )
 
+    @property
+    def desconto_valor(self) -> float:
+        """Valor monetário do desconto."""
+        return self.total_bruto - self.total_liquido
+
     def __repr__(self):
         return f"<Venda id={self.id} total={self.total_liquido}>"
 
-
-# ============================================================
-# ITENS DA VENDA
-# ============================================================
 
 class ItemVenda(Base):
     __tablename__ = "itens_venda"
@@ -108,7 +109,6 @@ class ItemVenda(Base):
         nullable=True
     )
 
-    # Dados históricos da venda
     produto_nome = Column(
         String(150),
         nullable=False
@@ -127,10 +127,6 @@ class ItemVenda(Base):
     @property
     def subtotal(self) -> float:
         return self.quantidade * self.preco_unitario
-
-    # ========================================================
-    # Relacionamentos
-    # ========================================================
 
     venda = relationship(
         "Venda",
