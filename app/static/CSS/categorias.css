@@ -1,0 +1,443 @@
+/* =========================================================
+   CATEGORIAS — NOVA ADEGA
+========================================================= */
+
+
+/* CONTAINER */
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 40px 25px;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.titulo-pagina {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+
+.titulo-pagina h1 {
+    margin: 0;
+
+    font-size: 32px;
+
+    color: #e2e8f0;
+}
+
+
+.titulo-pagina p {
+    margin-top: 6px;
+
+    color: #94a3b8;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   BOTÃO NOVA CATEGORIA
+========================================================= */
+
+.btn-nova {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 11px 18px;
+
+    background: #facc15;
+
+    color: #1e293b;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition:
+        transform 0.2s,
+        opacity 0.2s;
+}
+
+
+.btn-nova:hover {
+    transform: translateY(-2px);
+
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   MENSAGENS
+========================================================= */
+
+.mensagem {
+    padding: 14px 18px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+
+.mensagem.sucesso {
+    background: rgba(34, 197, 94, 0.15);
+
+    border: 1px solid #22c55e;
+
+    color: #86efac;
+}
+
+
+.mensagem.erro {
+    background: rgba(239, 68, 68, 0.15);
+
+    border: 1px solid #ef4444;
+
+    color: #fca5a5;
+}
+
+
+/* =========================================================
+   CONTAINER DA TABELA
+========================================================= */
+
+.tabela-container {
+    width: 100%;
+
+    overflow-x: auto;
+
+    background: #1f1f22;
+
+    border: 1px solid #333338;
+
+    border-radius: 12px;
+}
+
+
+/* =========================================================
+   TABELA
+========================================================= */
+
+.tabela-container table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 650px;
+}
+
+
+.tabela-container thead {
+    background: #29292e;
+}
+
+
+.tabela-container th {
+    padding: 15px 18px;
+
+    text-align: left;
+
+    color: #a1a1aa;
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+
+    border-bottom: 1px solid #333338;
+}
+
+
+.tabela-container td {
+    padding: 16px 18px;
+
+    color: #e4e4e7;
+
+    font-size: 14px;
+
+    border-bottom: 1px solid #333338;
+}
+
+
+.tabela-container tbody tr {
+    transition: background 0.2s;
+}
+
+
+.tabela-container tbody tr:hover {
+    background: #29292e;
+}
+
+
+.tabela-container tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   NOME DA CATEGORIA
+========================================================= */
+
+.categoria-nome {
+    font-weight: 600;
+
+    color: #f8fafc !important;
+}
+
+
+/* =========================================================
+   QUANTIDADE DE PRODUTOS
+========================================================= */
+
+.quantidade-produtos {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 32px;
+
+    height: 26px;
+
+    padding: 0 9px;
+
+    background: #2a2a30;
+
+    border-radius: 999px;
+
+    color: #d4d4d8;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 6px 11px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+.status.ativo {
+    background: rgba(34, 197, 94, 0.15);
+
+    color: #86efac;
+
+    border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+
+.status.inativo {
+    background: rgba(239, 68, 68, 0.12);
+
+    color: #fca5a5;
+
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+.acoes {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.acoes form {
+    margin: 0;
+}
+
+
+/* EDITAR */
+
+.btn-editar {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 8px 13px;
+
+    background: #2a2a30;
+
+    color: #d4d4d8;
+
+    border: 1px solid #3f3f46;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        background 0.2s,
+        transform 0.2s;
+}
+
+
+.btn-editar:hover {
+    background: #3f3f46;
+
+    transform: translateY(-1px);
+}
+
+
+/* ATIVAR / DESATIVAR */
+
+.btn-status {
+    padding: 8px 13px;
+
+    background: transparent;
+
+    color: #facc15;
+
+    border: 1px solid rgba(250, 204, 21, 0.4);
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        transform 0.2s;
+}
+
+
+.btn-status:hover {
+    background: rgba(250, 204, 21, 0.1);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   SEM RESULTADOS
+========================================================= */
+
+.sem-resultados {
+    padding: 40px !important;
+
+    text-align: center;
+
+    color: #71717a !important;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   VOLTAR
+========================================================= */
+
+.voltar {
+    margin-top: 25px;
+}
+
+
+.voltar a {
+    color: #a1a1aa;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: color 0.2s;
+}
+
+
+.voltar a:hover {
+    color: #facc15;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .container {
+        padding: 25px 15px;
+    }
+
+
+    .titulo-pagina {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .titulo-pagina h1 {
+        font-size: 26px;
+    }
+
+
+    .btn-nova {
+        width: 100%;
+    }
+
+
+    .acoes {
+        flex-wrap: wrap;
+    }
+
+}

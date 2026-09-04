@@ -1,0 +1,566 @@
+/* =========================================================
+   PRODUTOS — NOVA ADEGA
+   CSS ÚNICO PARA:
+   - index.html
+   - form.html
+   - detalhe.html
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+.produtos-container,
+.produto-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.produtos-header,
+.produto-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    margin-bottom: 30px;
+}
+
+.produtos-header h1,
+.produto-header h1,
+.produto-container h1 {
+    font-size: 28px;
+    color: #1e293b;
+    margin: 0;
+}
+
+.produtos-header p,
+.produto-header p {
+    color: #64748b;
+    margin-top: 6px;
+}
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.btn,
+button,
+.btn-novo,
+.btn-editar,
+.btn-voltar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition:
+        background 0.2s,
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+button:hover,
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-novo,
+.btn-primary,
+button[type="submit"] {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-novo:hover,
+.btn-primary:hover,
+button[type="submit"]:hover {
+    background: #1d4ed8;
+}
+
+.btn-voltar,
+.btn-secondary {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.btn-voltar:hover,
+.btn-secondary:hover {
+    background: #cbd5e1;
+}
+
+
+/* =========================================================
+   ALERTAS
+========================================================= */
+
+.alerta,
+.mensagem-sucesso,
+.mensagem-erro {
+    padding: 14px 18px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+
+    font-size: 14px;
+}
+
+.mensagem-sucesso {
+    background: #dcfce7;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.mensagem-erro {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+
+
+/* =========================================================
+   LISTA DE PRODUTOS
+========================================================= */
+
+.produtos-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(230px, 1fr));
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   CARD DO PRODUTO
+========================================================= */
+
+.produto-card {
+    background: white;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.produto-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.produto-card img {
+    width: 100%;
+    height: 180px;
+
+    object-fit: cover;
+
+    display: block;
+
+    background: #f1f5f9;
+}
+
+.produto-card-conteudo {
+    padding: 16px;
+}
+
+.produto-card h2,
+.produto-card-nome {
+    font-size: 17px;
+
+    color: #1e293b;
+
+    margin-bottom: 8px;
+}
+
+.produto-card-preco {
+    font-size: 20px;
+
+    font-weight: 700;
+
+    color: #16a34a;
+
+    margin-bottom: 8px;
+}
+
+.produto-card-categoria {
+    color: #64748b;
+
+    font-size: 13px;
+
+    margin-bottom: 12px;
+}
+
+.produto-card-estoque {
+    font-size: 13px;
+
+    color: #475569;
+}
+
+
+/* =========================================================
+   STATUS DE ESTOQUE
+========================================================= */
+
+.estoque-disponivel {
+    color: #16a34a;
+
+    font-weight: 600;
+}
+
+.estoque-baixo {
+    color: #d97706;
+
+    font-weight: 600;
+}
+
+.sem-estoque {
+    color: #dc2626;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   FORMULÁRIO DE PRODUTO
+========================================================= */
+
+.produto-form-container {
+    max-width: 700px;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 12px;
+
+    border: 1px solid #e2e8f0;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.produto-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.produto-form label,
+form label {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #334155;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.produto-form input,
+.produto-form select,
+form input[type="text"],
+form input[type="number"],
+form select {
+    width: 100%;
+
+    padding: 11px 13px;
+
+    border: 1px solid #cbd5e1;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #1e293b;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.produto-form input:focus,
+.produto-form select:focus,
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form select:focus {
+    border-color: #2563eb;
+
+    box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+
+/* =========================================================
+   INPUT DE IMAGEM
+========================================================= */
+
+input[type="file"] {
+    padding: 10px;
+
+    border: 1px dashed #94a3b8;
+
+    border-radius: 8px;
+
+    background: #f8fafc;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   IMAGEM ATUAL NO FORMULÁRIO
+========================================================= */
+
+.imagem-atual {
+    margin-top: 10px;
+}
+
+.imagem-atual img {
+    width: 150px;
+    height: 150px;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+    border: 1px solid #e2e8f0;
+}
+
+
+/* =========================================================
+   AÇÕES DO FORMULÁRIO
+========================================================= */
+
+.form-acoes {
+    display: flex;
+
+    gap: 12px;
+
+    align-items: center;
+
+    margin-top: 10px;
+}
+
+.form-acoes a {
+    text-decoration: none;
+}
+
+
+/* =========================================================
+   DETALHE DO PRODUTO
+========================================================= */
+
+.produto-detalhe {
+    display: grid;
+
+    grid-template-columns: 320px 1fr;
+
+    gap: 35px;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 14px;
+
+    border: 1px solid #e2e8f0;
+}
+
+.produto-imagem img {
+    width: 100%;
+
+    height: 320px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    background: #f1f5f9;
+}
+
+.produto-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.produto-info h1 {
+    margin: 0;
+
+    font-size: 30px;
+
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   INFORMAÇÕES DO PRODUTO
+========================================================= */
+
+.produto-info table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+.produto-info table td {
+    padding: 14px;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.produto-info table tr:last-child td {
+    border-bottom: none;
+}
+
+.produto-info table td:first-child {
+    width: 40%;
+
+    background: #f8fafc;
+
+    color: #64748b;
+}
+
+
+/* =========================================================
+   LINKS E AÇÕES
+========================================================= */
+
+.produto-acoes {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 15px;
+}
+
+.produto-acoes a {
+    padding: 10px 16px;
+
+    background: #f1f5f9;
+
+    color: #334155;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: background 0.2s;
+}
+
+.produto-acoes a:hover {
+    background: #e2e8f0;
+}
+
+.produto-acoes .btn-editar {
+    background: #2563eb;
+
+    color: white;
+}
+
+.produto-acoes .btn-editar:hover {
+    background: #1d4ed8;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .produtos-header,
+    .produto-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .produtos-grid {
+        grid-template-columns:
+            repeat(auto-fill, minmax(180px, 1fr));
+    }
+
+    .produto-detalhe {
+        grid-template-columns: 1fr;
+
+        padding: 20px;
+    }
+
+    .produto-imagem img {
+        height: 250px;
+    }
+
+    .produto-form-container {
+        padding: 20px;
+    }
+
+    .form-acoes {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .form-acoes button,
+    .form-acoes a {
+        width: 100%;
+    }
+
+}
