@@ -6,6 +6,24 @@ Bem-vindo - Nova Adega
 {% endblock %}
 
 
+<!-- =========================
+     ESCONDER NAVBAR
+========================= -->
+
+{% block navbar %}{% endblock %}
+
+
+<!-- =========================
+     ESCONDER FOOTER
+========================= -->
+
+{% block footer %}{% endblock %}
+
+
+<!-- =========================
+     CSS DA PÁGINA
+========================= -->
+
 {% block styles %}
 
 <link
@@ -16,10 +34,13 @@ Bem-vindo - Nova Adega
 {% endblock %}
 
 
+<!-- =========================
+     CONTEÚDO
+========================= -->
+
 {% block content %}
 
 <main class="index-container">
-
 
     <section class="index-card">
 
@@ -27,9 +48,7 @@ Bem-vindo - Nova Adega
         <!-- ÍCONE -->
 
         <div class="index-icone">
-
             🍷
-
         </div>
 
 
@@ -55,16 +74,13 @@ Bem-vindo - Nova Adega
                 href="/auth/login"
                 class="btn-entrar"
             >
-
                 Entrar
-
             </a>
 
         </div>
 
 
     </section>
-
 
 </main>
 

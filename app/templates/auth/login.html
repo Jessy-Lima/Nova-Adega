@@ -1,14 +1,50 @@
 {% extends "base.html" %}
 
-{% block title %}Login - Nova Adega{% endblock %}
+
+{% block title %}
+Login - Nova Adega
+{% endblock %}
+
+
+<!-- =========================
+     ESCONDER NAVBAR NO LOGIN
+========================= -->
+
+{% block navbar %}{% endblock %}
+
+
+<!-- =========================
+     ESCONDER FOOTER DO BASE
+========================= -->
+
+{% block footer %}{% endblock %}
+
+
+<!-- =========================
+     CSS DO LOGIN
+========================= -->
 
 {% block styles %}
-<link rel="stylesheet" href="/static/css/login.css">
+
+<link
+    rel="stylesheet"
+    href="/static/css/login.css"
+>
+
 
 <!-- Font Awesome -->
-<link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+>
+
 {% endblock %}
+
+
+<!-- =========================
+     CONTEÚDO DO LOGIN
+========================= -->
 
 {% block content %}
 
@@ -16,19 +52,42 @@
 
     <div class="login-card">
 
+
+        <!-- ÍCONE -->
+
         <div class="logo">
+
             <i class="fa-solid fa-wine-glass"></i>
+
         </div>
 
-        <h1>Bem-vindo</h1>
 
-        <p>Sistema PDV - Adega</p>
+        <!-- TÍTULO -->
+
+        <h1>
+            Bem-vindo
+        </h1>
+
+
+        <p>
+            Sistema PDV - Adega
+        </p>
+
+
+        <!-- FORMULÁRIO -->
 
         <form method="POST">
 
-            <label for="email">E-mail ou Usuário</label>
+
+            <!-- E-MAIL -->
+
+            <label for="email">
+                E-mail ou Usuário
+            </label>
+
 
             <div class="input-group">
+
                 <i class="fa-regular fa-envelope"></i>
 
                 <input
@@ -37,12 +96,21 @@
                     name="email"
                     placeholder="Digite seu e-mail"
                     autocomplete="username"
-                    required>
+                    required
+                >
+
             </div>
 
-            <label for="senha">Senha</label>
+
+            <!-- SENHA -->
+
+            <label for="senha">
+                Senha
+            </label>
+
 
             <div class="input-group">
+
                 <i class="fa-solid fa-lock"></i>
 
                 <input
@@ -51,18 +119,28 @@
                     name="senha"
                     placeholder="Digite sua senha"
                     autocomplete="current-password"
-                    required>
+                    required
+                >
+
             </div>
+
+
+            <!-- BOTÃO -->
 
             <button type="submit">
                 Entrar
             </button>
 
+
         </form>
 
-        <div class="footer">
+
+        <!-- RODAPÉ DO CARD -->
+
+        <div class="login-footer">
             Sistema de Ponto de Venda v1.0
         </div>
+
 
     </div>
 
