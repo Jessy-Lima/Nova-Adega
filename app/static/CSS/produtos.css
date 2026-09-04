@@ -1,15 +1,26 @@
 /* =========================================================
    PRODUTOS — NOVA ADEGA
-   CSS ÚNICO PARA:
-   - index.html
-   - form.html
-   - detalhe.html
+   PALETA:
+   Fundo       #121212
+   Card        #1E1E1E
+   Dourado     #FDE68A
+   Dourado 2   #FEF3C7
+   Texto       #F9FAFB
+   Secundário  #A1A1AA
+========================================================= */
+
+
+/* =========================================================
+   RESET
 ========================================================= */
 
 * {
     box-sizing: border-box;
 }
 
+<<<<<<< HEAD
+.container {
+=======
 /* Fundo geral em cinza muito suave */
 body {
     background-color: #0b0b0b;
@@ -18,387 +29,256 @@ body {
 
 .produtos-container,
 .produto-container {
+>>>>>>> 31df76059ddd09866834e2b394578b63207f5dab
     width: 100%;
-    max-width: 1200px;
+    max-width: 1250px;
     margin: 0 auto;
+    padding: 40px 30px 50px;
 }
 
 
 /* =========================================================
-   CABEÇALHO
+   TÍTULO DA PÁGINA
 ========================================================= */
 
-.produtos-header,
-.produto-header {
+.titulo-pagina {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+
+    gap: 25px;
 
     margin-bottom: 30px;
 }
 
-.produtos-header h1,
-.produto-header h1,
-.produto-container h1 {
-    font-size: 28px;
-    color: #1e293b;
-    margin: 0;
+.titulo-pagina h1 {
+    margin: 0 0 6px;
+
+    font-size: 32px;
+    font-weight: 700;
+
+    color: #F9FAFB;
 }
 
-.produtos-header p,
-.produto-header p {
-    color: #64748b;
-    margin-top: 6px;
+.titulo-pagina p {
+    margin: 0;
+
+    font-size: 15px;
+
+    color: #A1A1AA;
 }
 
 
 /* =========================================================
-   BOTÕES
+   BOTÃO NOVO PRODUTO
 ========================================================= */
 
-.btn,
-button,
-.btn-novo,
-.btn-editar,
-.btn-voltar {
+.btn-novo {
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
 
-    padding: 10px 18px;
+    padding: 12px 20px;
 
-    border: none;
-    border-radius: 8px;
+    background: #FDE68A;
+    color: #121212;
 
-    font-size: 14px;
-    font-weight: 600;
-
-    cursor: pointer;
+    border-radius: 9px;
 
     text-decoration: none;
 
-    transition:
-        background 0.2s,
-        transform 0.2s,
-        box-shadow 0.2s;
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: 0.2s ease;
 }
 
-button:hover,
-.btn:hover {
-    transform: translateY(-1px);
-}
+.btn-novo:hover {
+    background: #FEF3C7;
 
-.btn-novo,
-.btn-primary,
-button[type="submit"] {
-    background: #FDE68A ;
-    color: rgb(8, 8, 8);
-}
+    transform: translateY(-2px);
 
-.btn-novo:hover,
-.btn-primary:hover,
-button[type="submit"]:hover {
-    background: #FDE68A ;
-}
-
-.btn-voltar,
-.btn-secondary {
-    background: #e2e8f0;
-    color: #334155;
-}
-
-.btn-voltar:hover,
-.btn-secondary:hover {
-    background: #cbd5e1;
+    box-shadow:
+        0 6px 18px rgba(253, 230, 138, 0.15);
 }
 
 
 /* =========================================================
-   ALERTAS
+   MENSAGENS
 ========================================================= */
 
-.alerta,
-.mensagem-sucesso,
-.mensagem-erro {
+.mensagem-sucesso {
+    margin-bottom: 25px;
+
     padding: 14px 18px;
 
-    border-radius: 8px;
+    background: #17251B;
 
-    margin-bottom: 20px;
+    color: #86EFAC;
+
+    border: 1px solid #275A35;
+
+    border-radius: 9px;
 
     font-size: 14px;
 }
 
-.mensagem-sucesso {
-    background: #dcfce7;
-    color: #166534;
-    border: 1px solid #bbf7d0;
-}
-
-.mensagem-erro {
-    background: #fee2e2;
-    color: #b91c1c;
-    border: 1px solid #fecaca;
-}
-
 
 /* =========================================================
-   LISTA DE PRODUTOS
+   FILTROS
 ========================================================= */
 
-.produtos-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fill, minmax(230px, 1fr));
-
-    gap: 20px;
-}
-
-
-/* =========================================================
-   CARD DO PRODUTO
-========================================================= */
-
-.produto-card {
-    background: white;
-
-    border: 1px solid #e2e8f0;
-
-    border-radius: 12px;
-
-    overflow: hidden;
-
-    transition:
-        transform 0.2s,
-        box-shadow 0.2s;
-}
-
-.produto-card:hover {
-    transform: translateY(-4px);
-
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.08);
-}
-
-.produto-card img {
-    width: 100%;
-    height: 180px;
-
-    object-fit: cover;
-
-    display: block;
-
-    background: #f1f5f9;
-}
-
-.produto-card-conteudo {
-    padding: 16px;
-}
-
-.produto-card h2,
-.produto-card-nome {
-    font-size: 17px;
-
-    color: #1e293b;
-
-    margin-bottom: 8px;
-}
-
-.produto-card-preco {
-    font-size: 20px;
-
-    font-weight: 700;
-
-    color: #16a34a;
-
-    margin-bottom: 8px;
-}
-
-.produto-card-categoria {
-    color: #64748b;
-
-    font-size: 13px;
-
-    margin-bottom: 12px;
-}
-
-.produto-card-estoque {
-    font-size: 13px;
-
-    color: #475569;
-}
-
-
-/* =========================================================
-   STATUS DE ESTOQUE
-========================================================= */
-
-.estoque-disponivel {
-    color: #16a34a;
-
-    font-weight: 600;
-}
-
-.estoque-baixo {
-    color: #d97706;
-
-    font-weight: 600;
-}
-
-.sem-estoque {
-    color: #dc2626;
-
-    font-weight: 600;
-}
-
-
-/* =========================================================
-   FORMULÁRIO DE PRODUTO
-========================================================= */
-
-.produto-form-container {
-    max-width: 700px;
-
-    background: white;
-
-    padding: 30px;
-
-    border-radius: 12px;
-
-    border: 1px solid #e2e8f0;
-
-    box-shadow:
-        0 4px 12px rgba(0, 0, 0, 0.04);
-}
-
-.produto-form {
+.filtros {
     display: flex;
 
-    flex-direction: column;
+    align-items: flex-end;
 
-    gap: 20px;
+    gap: 16px;
+
+    margin-bottom: 30px;
+
+    padding: 20px;
+
+    background: #1E1E1E;
+
+    border: 1px solid #3F3F46;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.20);
 }
 
-.produto-form label,
-form label {
+
+/* =========================================================
+   CAMPOS DOS FILTROS
+========================================================= */
+
+.campo {
     display: flex;
 
     flex-direction: column;
 
     gap: 7px;
 
-    font-size: 14px;
+    min-width: 240px;
+}
+
+.campo label {
+    font-size: 13px;
 
     font-weight: 600;
 
-    color: #334155;
+    color: #F9FAFB;
 }
 
 
 /* =========================================================
-   INPUTS
+   INPUT E SELECT
 ========================================================= */
 
-.produto-form input,
-.produto-form select,
-form input[type="text"],
-form input[type="number"],
-form select {
+.campo input,
+.campo select {
     width: 100%;
 
-    padding: 11px 13px;
+    height: 42px;
 
-    border: 1px solid #cbd5e1;
+    padding: 0 13px;
+
+    background: #121212;
+
+    color: #F9FAFB;
+
+    border: 1px solid #3F3F46;
 
     border-radius: 8px;
-
-    background: white;
-
-    color: #1e293b;
-
-    font-size: 14px;
 
     outline: none;
 
-    transition:
-        border-color 0.2s,
-        box-shadow 0.2s;
+    font-size: 14px;
+
+    transition: 0.2s ease;
 }
 
-.produto-form input:focus,
-.produto-form select:focus,
-form input[type="text"]:focus,
-form input[type="number"]:focus,
-form select:focus {
-    border-color: #2563eb;
+.campo input::placeholder {
+    color: #71717A;
+}
+
+.campo input:focus,
+.campo select:focus {
+    border-color: #FDE68A;
 
     box-shadow:
-        0 0 0 3px rgba(37, 99, 235, 0.1);
+        0 0 0 3px rgba(253, 230, 138, 0.10);
 }
 
 
 /* =========================================================
-   INPUT DE IMAGEM
+   AÇÕES DO FILTRO
 ========================================================= */
 
-input[type="file"] {
-    padding: 10px;
+.acoes-filtro {
+    display: flex;
 
-    border: 1px dashed #94a3b8;
+    gap: 10px;
+}
+
+
+/* =========================================================
+   BOTÃO FILTRAR
+========================================================= */
+
+.btn-filtrar {
+    height: 42px;
+
+    padding: 0 20px;
+
+    background: #FDE68A;
+
+    color: #121212;
+
+    border: none;
 
     border-radius: 8px;
 
-    background: #f8fafc;
+    font-size: 14px;
+
+    font-weight: 700;
 
     cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.btn-filtrar:hover {
+    background: #FEF3C7;
+
+    transform: translateY(-1px);
 }
 
 
 /* =========================================================
-   IMAGEM ATUAL NO FORMULÁRIO
+   BOTÃO LIMPAR
 ========================================================= */
 
-.imagem-atual {
-    margin-top: 10px;
-}
-
-.imagem-atual img {
-    width: 150px;
-    height: 150px;
-
-    object-fit: cover;
-
-    border-radius: 10px;
-
-    border: 1px solid #e2e8f0;
-}
-
-
-/* =========================================================
-   AÇÕES DO FORMULÁRIO
-========================================================= */
-
-.form-acoes {
-    display: flex;
-
-    gap: 12px;
+.btn-limpar {
+    display: inline-flex;
 
     align-items: center;
+    justify-content: center;
 
-    margin-top: 10px;
-}
+    height: 42px;
 
-.form-acoes a {
-    text-decoration: none;
-}
+    padding: 0 18px;
 
+    background: #27272A;
 
-/* =========================================================
-   DETALHE DO PRODUTO
-========================================================= */
+    color: #F9FAFB;
 
+<<<<<<< HEAD
+    border: 1px solid #3F3F46;
+=======
 .produto-detalhe {
     display: grid;
 
@@ -499,6 +379,7 @@ input[type="file"] {
     background: #f1f5f9;
 
     color: #334155;
+>>>>>>> 31df76059ddd09866834e2b394578b63207f5dab
 
     border-radius: 8px;
 
@@ -508,21 +389,393 @@ input[type="file"] {
 
     font-weight: 600;
 
-    transition: background 0.2s;
+    transition: 0.2s ease;
 }
 
-.produto-acoes a:hover {
-    background: #e2e8f0;
+.btn-limpar:hover {
+    background: #323236;
+
+    border-color: #52525B;
 }
 
-.produto-acoes .btn-editar {
-    background: #FDE68A ;
 
+<<<<<<< HEAD
+/* =========================================================
+   TABELA
+========================================================= */
+
+.tabela-container {
+    width: 100%;
+
+    overflow-x: auto;
+
+    background: #1E1E1E;
+
+    border: 1px solid #3F3F46;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.20);
+=======
         color: #422006;
+>>>>>>> 31df76059ddd09866834e2b394578b63207f5dab
 }
 
-.produto-acoes .btn-editar:hover {
-    background: #FDE68A ;
+
+/* =========================================================
+   TABELA
+========================================================= */
+
+.tabela-container table {
+    width: 100%;
+
+    min-width: 800px;
+
+    border-collapse: collapse;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA TABELA
+========================================================= */
+
+.tabela-container thead {
+    background: #242424;
+}
+
+.tabela-container th {
+    padding: 16px 18px;
+
+    text-align: left;
+
+    color: #FDE68A;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.3px;
+
+    border-bottom: 1px solid #3F3F46;
+}
+
+
+/* =========================================================
+   LINHAS
+========================================================= */
+
+.tabela-container tbody tr {
+    transition: background 0.2s ease;
+}
+
+.tabela-container tbody tr:hover {
+    background: #242424;
+}
+
+.tabela-container td {
+    padding: 16px 18px;
+
+    color: #D4D4D8;
+
+    font-size: 14px;
+
+    border-bottom: 1px solid #2F2F33;
+
+    vertical-align: middle;
+}
+
+.tabela-container tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   IMAGEM DO PRODUTO
+========================================================= */
+
+.produto-imagem {
+    width: 70px;
+
+    height: 70px;
+
+    object-fit: cover;
+
+    display: block;
+
+    border-radius: 9px;
+
+    background: #121212;
+
+    border: 1px solid #3F3F46;
+}
+
+
+/* =========================================================
+   NOME DO PRODUTO
+========================================================= */
+
+.link-produto {
+    color: #F9FAFB;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.link-produto:hover {
+    color: #FDE68A;
+}
+
+
+/* =========================================================
+   PREÇO
+========================================================= */
+
+.produto-preco {
+    color: #FDE68A !important;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   ESTOQUE
+========================================================= */
+
+.estoque {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 42px;
+
+    padding: 5px 9px;
+
+    background: #27272A;
+
+    color: #F9FAFB;
+
+    border: 1px solid #3F3F46;
+
+    border-radius: 6px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   AÇÕES DO PRODUTO
+========================================================= */
+
+.acoes-produto {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   BOTÃO EDITAR
+========================================================= */
+
+.btn-editar {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 14px;
+
+    background: transparent;
+
+    color: #FDE68A;
+
+    border: 1px solid #FDE68A;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.btn-editar:hover {
+    background: #FDE68A;
+
+    color: #121212;
+}
+
+
+/* =========================================================
+   FORM DESATIVAR
+========================================================= */
+
+.form-desativar {
+    margin: 0;
+}
+
+
+/* =========================================================
+   BOTÃO DESATIVAR
+========================================================= */
+
+.btn-desativar {
+    padding: 9px 14px;
+
+    background: #27272A;
+
+    color: #FCA5A5;
+
+    border: 1px solid #6B2929;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.btn-desativar:hover {
+    background: #3A1D1D;
+
+    border-color: #FCA5A5;
+}
+
+
+/* =========================================================
+   TABELA VAZIA
+========================================================= */
+
+.tabela-vazia {
+    padding: 50px !important;
+
+    text-align: center !important;
+
+    color: #71717A !important;
+
+    font-size: 15px !important;
+}
+
+
+/* =========================================================
+   PAGINAÇÃO
+========================================================= */
+
+.paginacao {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-top: 25px;
+
+    padding: 18px 20px;
+
+    background: #1E1E1E;
+
+    border: 1px solid #3F3F46;
+
+    border-radius: 10px;
+}
+
+.info-paginacao p {
+    margin: 3px 0;
+
+    color: #A1A1AA;
+
+    font-size: 13px;
+}
+
+.botoes-paginacao {
+    display: flex;
+
+    gap: 10px;
+}
+
+
+/* =========================================================
+   BOTÕES DE PAGINAÇÃO
+========================================================= */
+
+.btn-pagina {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 15px;
+
+    background: #27272A;
+
+    color: #F9FAFB;
+
+    border: 1px solid #3F3F46;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.btn-pagina:hover {
+    background: #FDE68A;
+
+    color: #121212;
+
+    border-color: #FDE68A;
+}
+
+
+/* =========================================================
+   VOLTAR
+========================================================= */
+
+.voltar-pagina {
+    margin-top: 25px;
+}
+
+.voltar-pagina a {
+    color: #FDE68A;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.voltar-pagina a:hover {
+    color: #FEF3C7;
+
+    text-decoration: underline;
 }
 
 
@@ -530,45 +783,59 @@ input[type="file"] {
    RESPONSIVIDADE
 ========================================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
 
-    .produtos-header,
-    .produto-header {
+    .container {
+        padding: 25px 18px 40px;
+    }
+
+    .titulo-pagina {
         flex-direction: column;
 
         align-items: flex-start;
     }
 
-    .produtos-grid {
-        grid-template-columns:
-            repeat(auto-fill, minmax(180px, 1fr));
+    .btn-novo {
+        width: 100%;
     }
 
-    .produto-detalhe {
-        grid-template-columns: 1fr;
-
-        padding: 20px;
-    }
-
-    .produto-imagem img {
-        height: 250px;
-    }
-
-    .produto-form-container {
-        padding: 20px;
-    }
-
-    .form-acoes {
+    .filtros {
         flex-direction: column;
 
         align-items: stretch;
     }
 
-    .form-acoes button,
-    .form-acoes a {
+    .campo {
+        min-width: 0;
+
         width: 100%;
     }
 
+<<<<<<< HEAD
+    .acoes-filtro {
+        width: 100%;
+    }
+
+    .btn-filtrar,
+    .btn-limpar {
+        flex: 1;
+    }
+
+    .paginacao {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+    .botoes-paginacao {
+        width: 100%;
+    }
+
+    .btn-pagina {
+        flex: 1;
+    }
+}
+=======
 }
 
 
@@ -716,3 +983,4 @@ body {
 .produto-detalhe .produto-acoes .btn-editar {
     color: #000000 !important;
 }
+>>>>>>> 31df76059ddd09866834e2b394578b63207f5dab
