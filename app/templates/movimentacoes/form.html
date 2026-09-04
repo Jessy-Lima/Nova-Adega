@@ -1,384 +1,202 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
+{% block title %}Nova Movimentação — Nova Adega{% endblock %}
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-    <link rel="stylesheet" href="/static/css/movimentacoes.css">
+<main>
 
-    <title>Nova Movimentação — Nova Adega</title>
-</head>
-
-<body>
-
-
-    <!-- =========================================
-         NAVBAR
-    ========================================= -->
-
-    <header class="navbar">
-
-        <div class="logo">
-            <h2>🍷 Nova Adega</h2>
+    <div>
+        <div>
+            <h1>Registrar movimentação</h1>
+            <p>
+                Registre uma entrada ou saída de produtos.
+            </p>
         </div>
 
+        {% if erro %}
+        <div>
+            {{ erro }}
+        </div>
+        {% endif %}
 
-        <nav class="menu">
+        <form action="/movimentacoes/nova" method="post">
 
-            <a href="/pdv">
-                PDV
-            </a>
+            <div>
+                <label for="select-produto">
+                    Produto
+                </label>
 
-            <a href="/movimentacoes" class="ativo">
-                Histórico
-            </a>
+                <select name="produto_id" required id="select-produto">
+                    <option value="">
+                        Selecione um produto
+                    </option>
 
-            <a href="/produtos">
-                Produtos
-            </a>
+                    {% for p in produtos %}
+                    <option
+                        value="{{ p.id }}"
+                        data-estoque="{{ p.estoque_atual }}"
+                        data-preco="{{ p.preco }}"
+                        {{ 'selected' if produto_id == p.id else '' }}>
 
-            <a href="/categorias">
-                Categorias
-            </a>
+                        {{ p.nome }} — estoque: {{ p.estoque_atual }}
 
-            <a href="/auth/logout" class="btn-sair">
-                Sair
-            </a>
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        </nav>
+            <div id="info-estoque" hidden>
+                Estoque atual:
+                <strong id="valor-estoque">0</strong>
+            </div>
 
-    </header>
+            <div>
+                <label for="select-tipo">
+                    Tipo de movimentação
+                </label>
 
+                <select name="tipo" required id="select-tipo">
+                    <option value="">
+                        Selecione o tipo
+                    </option>
 
-    <!-- =========================================
-         CONTEÚDO
-    ========================================= -->
+                    {% for t in tipos %}
+                    <option value="{{ t.value }}">
+                        {{ "▲ Entrada" if t.value == 'entrada' else "▼ Saída" }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
 
-    <main class="container">
+            <div>
 
-        <div class="form-movimentacao">
+                <div>
+                    <label for="input-quantidade">
+                        Quantidade
+                    </label>
 
-            <!-- TÍTULO -->
+                    <input
+                        type="number"
+                        name="quantidade"
+                        min="1"
+                        required
+                        id="input-quantidade"
+                        placeholder="Digite a quantidade">
+                </div>
 
-            <div class="form-titulo">
+                <div>
+                    <label for="input-preco">
+                        Preço unitário (R$)
+                    </label>
 
-                <h1>Registrar movimentação</h1>
-
-                <p>
-                    Registre uma entrada ou saída de produtos.
-                </p>
+                    <input
+                        type="number"
+                        name="preco_unitario"
+                        step="0.01"
+                        min="0"
+                        required
+                        id="input-preco"
+                        placeholder="0,00">
+                </div>
 
             </div>
 
-
-            <!-- ERRO -->
-
-            {% if erro %}
-
-            <div class="mensagem-erro">
-                {{ erro }}
+            <div id="info-subtotal" hidden>
+                Subtotal:
+                <strong id="valor-subtotal">
+                    R$ 0,00
+                </strong>
             </div>
 
-            {% endif %}
-
-
-            <!-- FORMULÁRIO -->
-
-            <form action="/movimentacoes/nova"
-                  method="post"
-                  class="movimentacao-form">
-
-
-                <!-- PRODUTO -->
-
-                <div class="form-grupo">
-
-                    <label for="select-produto">
-                        Produto
-                    </label>
-
-                    <select name="produto_id"
-                            required
-                            id="select-produto">
-
-                        <option value="">
-                            Selecione um produto
-                        </option>
-
-                        {% for p in produtos %}
-
-                        <option value="{{ p.id }}"
-                                data-estoque="{{ p.estoque_atual }}"
-                                data-preco="{{ p.preco }}"
-                                {{ 'selected' if produto_id == p.id else '' }}>
-
-                            {{ p.nome }} — estoque: {{ p.estoque_atual }}
-
-                        </option>
-
-                        {% endfor %}
-
-                    </select>
-
-                </div>
-
-
-                <!-- ESTOQUE -->
-
-                <div class="info-caixa"
-                     id="info-estoque"
-                     style="display:none">
-
-                    Estoque atual:
-
-                    <strong id="valor-estoque">
-                        0
-                    </strong>
-
-                </div>
-
-
-                <!-- TIPO -->
-
-                <div class="form-grupo">
-
-                    <label for="select-tipo">
-                        Tipo de movimentação
-                    </label>
-
-                    <select name="tipo"
-                            required
-                            id="select-tipo">
-
-                        <option value="">
-                            Selecione o tipo
-                        </option>
-
-                        {% for t in tipos %}
-
-                        <option value="{{ t.value }}">
-
-                            {{ "▲ Entrada" if t.value == 'entrada' else "▼ Saída" }}
-
-                        </option>
-
-                        {% endfor %}
-
-                    </select>
-
-                </div>
-
-
-                <!-- QUANTIDADE E PREÇO -->
-
-                <div class="form-linha">
-
-
-                    <div class="form-grupo">
-
-                        <label for="input-quantidade">
-                            Quantidade
-                        </label>
-
-                        <input type="number"
-                               name="quantidade"
-                               min="1"
-                               required
-                               id="input-quantidade"
-                               placeholder="Digite a quantidade">
-
-                    </div>
-
-
-                    <div class="form-grupo">
-
-                        <label for="input-preco">
-                            Preço unitário (R$)
-                        </label>
-
-                        <input type="number"
-                               name="preco_unitario"
-                               step="0.01"
-                               min="0"
-                               required
-                               id="input-preco"
-                               placeholder="0,00">
-
-                    </div>
-
-
-                </div>
-
-
-                <!-- SUBTOTAL -->
-
-                <div class="info-caixa subtotal"
-                     id="info-subtotal"
-                     style="display:none">
-
-                    Subtotal:
-
-                    <strong id="valor-subtotal">
-                        R$ 0,00
-                    </strong>
-
-                </div>
-
-
-                <!-- OBSERVAÇÃO -->
-
-                <div class="form-grupo">
-
-                    <label for="observacao">
-                        Observação
-                        <span>(opcional)</span>
-                    </label>
-
-                    <input type="text"
-                           id="observacao"
-                           name="observacao"
-                           maxlength="255"
-                           placeholder="Ex: Compra fornecedor X, Venda balcão...">
-
-                </div>
-
-
-                <!-- BOTÕES -->
-
-                <div class="form-botoes">
-
-                    <button type="submit"
-                            class="btn-registrar">
-
-                        Registrar movimentação
-
-                    </button>
-
-
-                    <a href="/movimentacoes"
-                       class="btn-cancelar">
-
-                        Cancelar
-
-                    </a>
-
-                </div>
-
-
-            </form>
-
-        </div>
-
-    </main>
-
-
-    <script>
-
-        const selectProduto = document.getElementById('select-produto');
-        const inputQuantidade = document.getElementById('input-quantidade');
-        const inputPreco = document.getElementById('input-preco');
-        const infoEstoque = document.getElementById('info-estoque');
-        const valorEstoque = document.getElementById('valor-estoque');
-        const infoSubtotal = document.getElementById('info-subtotal');
-        const valorSubtotal = document.getElementById('valor-subtotal');
-
-
-        // Selecionar produto
-
-        selectProduto.addEventListener('change', function () {
-
-            const option =
-                this.options[this.selectedIndex];
-
-            const estoque =
-                option.dataset.estoque;
-
-            const preco =
-                option.dataset.preco;
-
-
-            if (estoque !== undefined) {
-
-                valorEstoque.textContent =
-                    estoque;
-
-                infoEstoque.style.display =
-                    'block';
-
-
-                // Preenche o preço cadastrado
-
-                inputPreco.value =
-                    parseFloat(preco).toFixed(2);
-
-            } else {
-
-                infoEstoque.style.display =
-                    'none';
-
+            <div>
+                <label for="observacao">
+                    Observação
+                    <span>(opcional)</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="observacao"
+                    name="observacao"
+                    maxlength="255"
+                    placeholder="Ex: Compra fornecedor X, Venda balcão...">
+            </div>
+
+            <div>
+                <button type="submit">
+                    Registrar movimentação
+                </button>
+
+                <a href="/movimentacoes">
+                    Cancelar
+                </a>
+            </div>
+
+        </form>
+    </div>
+
+</main>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const selectProduto = document.getElementById('select-produto');
+    const inputQuantidade = document.getElementById('input-quantidade');
+    const inputPreco = document.getElementById('input-preco');
+    const infoEstoque = document.getElementById('info-estoque');
+    const valorEstoque = document.getElementById('valor-estoque');
+    const infoSubtotal = document.getElementById('info-subtotal');
+    const valorSubtotal = document.getElementById('valor-subtotal');
+
+    selectProduto.addEventListener('change', function () {
+        const option = this.options[this.selectedIndex];
+        const estoque = option.dataset.estoque;
+        const preco = option.dataset.preco;
+
+        if (estoque !== undefined) {
+            valorEstoque.textContent = estoque;
+            infoEstoque.hidden = false;
+
+            if (preco !== undefined) {
+                inputPreco.value = parseFloat(preco).toFixed(2);
             }
-
-
-            atualizarSubtotal();
-
-        });
-
-
-        // Calcular subtotal
-
-        function atualizarSubtotal() {
-
-            const qtd =
-                parseFloat(inputQuantidade.value) || 0;
-
-            const preco =
-                parseFloat(inputPreco.value) || 0;
-
-            const total =
-                qtd * preco;
-
-
-            if (qtd > 0 && preco > 0) {
-
-                valorSubtotal.textContent =
-                    total.toLocaleString(
-                        'pt-BR',
-                        {
-                            style: 'currency',
-                            currency: 'BRL'
-                        }
-                    );
-
-
-                infoSubtotal.style.display =
-                    'block';
-
-            } else {
-
-                infoSubtotal.style.display =
-                    'none';
-
-            }
-
+        } else {
+            infoEstoque.hidden = true;
         }
 
+        atualizarSubtotal();
+    });
 
-        inputQuantidade.addEventListener(
-            'input',
-            atualizarSubtotal
-        );
+    function atualizarSubtotal() {
+        const qtd = parseFloat(inputQuantidade.value) || 0;
+        const preco = parseFloat(inputPreco.value) || 0;
+        const total = qtd * preco;
 
+        if (qtd > 0 && preco > 0) {
+            valorSubtotal.textContent = total.toLocaleString(
+                'pt-BR',
+                {
+                    style: 'currency',
+                    currency: 'BRL'
+                }
+            );
 
-        inputPreco.addEventListener(
-            'input',
-            atualizarSubtotal
-        );
+            infoSubtotal.hidden = false;
+        } else {
+            infoSubtotal.hidden = true;
+        }
+    }
 
-    </script>
+    inputQuantidade.addEventListener(
+        'input',
+        atualizarSubtotal
+    );
 
-
-</body>
-
-</html>
+    inputPreco.addEventListener(
+        'input',
+        atualizarSubtotal
+    );
+</script>
+{% endblock %}
