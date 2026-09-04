@@ -1,32 +1,66 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - Nova Adega</title>
+
+    <link rel="stylesheet" href="/static/css/login.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
+
 <body>
-    
-    <h1>Entrar no Sistema</h1>
-    <!-- Exibe mensagem de erro se existir -->
-    {% if erro %}
-        <p style="color: red;">{{ erro }}</p>
-    {% endif %}
 
-    <!-- Exibe mensagem de confirmação após cadastro -->
-    {% if request.query_params.get("cadastro") == "ok" %}
-        <p style="color: green;">Cadastro realizado! faça login.</p>
-    {% endif %}    
-    
-    <form action="/auth/login" method="post">
-        Email: <input type="email" name="email" required>
-        <br><br>
-        Senha: <input type="password" name="senha">
-        <br><br>
-        <button type="submit">Entrar</button>
-    </form>
+    <div class="login-card">
 
-    <p>Não tem conta? <a href="/auth/cadastro">Cadastre-se</a></p>
+        <div class="logo">
+            <i class="fa-solid fa-wine-glass"></i>
+        </div>
+
+        <h1>Bem-vindo</h1>
+
+        <p>Sistema PDV - Adega</p>
+
+        <form method="POST">
+
+            <label for="email">E-mail ou Usuário</label>
+
+            <div class="input-group">
+                <i class="fa-regular fa-envelope"></i>
+                <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    placeholder="Digite seu e-mail"
+                    required>
+            </div>
+
+            <label for="senha">Senha</label>
+
+            <div class="input-group">
+                <i class="fa-solid fa-lock"></i>
+                <input
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    placeholder="Digite sua senha"
+                    required>
+            </div>
+
+            <button type="submit">Entrar</button>
+
+        </form>
+
+        <div class="footer">
+            Sistema de Ponto de Venda v1.0
+        </div>
+
+    </div>
 
 </body>
+
 </html>
