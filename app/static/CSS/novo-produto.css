@@ -1,0 +1,367 @@
+/* =========================================================
+   NOVA ADEGA — CADASTRO DE PRODUTO
+   CSS EXCLUSIVO DA PÁGINA
+========================================================= */
+
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+========================================================= */
+
+main.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 45px 30px 60px;
+
+    color: #F9FAFB;
+}
+
+
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+main.container > h1 {
+    margin: 0 0 8px;
+
+    font-size: 34px;
+    font-weight: 700;
+
+    color: #FDE68A;
+
+    letter-spacing: -0.5px;
+}
+
+main.container > p {
+    margin: 0 0 30px;
+
+    color: #FDE68A;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
+
+main.container form {
+    width: 100%;
+
+    padding: 32px;
+
+    background: #1E1E1E;
+
+    border: 1px solid #3F3F46;
+    border-radius: 16px;
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.30);
+}
+
+
+/* =========================================================
+   LABELS — AMARELO
+========================================================= */
+
+main.container form label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #FDE68A;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   CAMPOS
+========================================================= */
+
+main.container form input[type="text"],
+main.container form input[type="number"],
+main.container form input[type="file"],
+main.container form select {
+
+    width: 100%;
+
+    min-height: 46px;
+
+    padding: 11px 14px;
+
+    margin-bottom: 20px;
+
+    background: #121212;
+
+    color: #F9FAFB;
+
+    border: 1px solid #3F3F46;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
+
+main.container form input::placeholder {
+    color: #71717A;
+}
+
+
+/* =========================================================
+   FOCO DOS CAMPOS
+========================================================= */
+
+main.container form input[type="text"]:focus,
+main.container form input[type="number"]:focus,
+main.container form select:focus {
+
+    border-color: #FDE68A;
+
+    box-shadow:
+        0 0 0 3px rgba(253, 230, 138, 0.10);
+
+    background: #171717;
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+main.container form select {
+    cursor: pointer;
+}
+
+main.container form select option {
+    background: #1E1E1E;
+
+    color: #F9FAFB;
+}
+
+
+/* =========================================================
+   CAMPO DE IMAGEM
+========================================================= */
+
+main.container form input[type="file"] {
+
+    padding: 9px;
+
+    background: #171717;
+
+    border: 1px dashed #52525B;
+
+    cursor: pointer;
+}
+
+main.container form input[type="file"]:hover {
+    border-color: #FDE68A;
+}
+
+
+/* =========================================================
+   TEXTO DE FORMATOS ACEITOS
+========================================================= */
+
+main.container form small,
+main.container form .ajuda,
+main.container form p {
+
+    color: #FDE68A;
+}
+
+
+/* =========================================================
+   ÁREA DOS BOTÕES
+========================================================= */
+
+main.container form button,
+main.container form input[type="submit"],
+main.container form a {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 46px;
+
+    padding: 0 24px;
+
+    margin-top: 8px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* =========================================================
+   BOTÃO CRIAR PRODUTO
+========================================================= */
+
+main.container form button,
+main.container form input[type="submit"] {
+
+    background: #FDE68A;
+
+    color: #121212;
+
+    border: 1px solid #FDE68A;
+}
+
+main.container form button:hover,
+main.container form input[type="submit"]:hover {
+
+    background: #FEF3C7;
+
+    border-color: #FEF3C7;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 18px rgba(253, 230, 138, 0.18);
+}
+
+
+/* =========================================================
+   BOTÃO CANCELAR
+========================================================= */
+
+main.container form a {
+
+    margin-left: 10px;
+
+    background: #FDE68A;
+
+    color: #121212;
+
+    border: 1px solid #FDE68A;
+}
+
+main.container form a:hover {
+
+    background: #FEF3C7;
+
+    border-color: #FEF3C7;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 18px rgba(253, 230, 138, 0.18);
+}
+
+
+/* =========================================================
+   MENSAGEM DE ERRO
+========================================================= */
+
+main.container .erro,
+main.container .mensagem-erro {
+
+    width: 100%;
+
+    margin-bottom: 20px;
+
+    padding: 12px 15px;
+
+    background: #2A1717;
+
+    color: #FCA5A5;
+
+    border: 1px solid #7F1D1D;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   LINK VOLTAR
+========================================================= */
+
+main.container > a {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    margin-top: 20px;
+
+    color: #FDE68A;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+main.container > a:hover {
+    color: #FEF3C7;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 700px) {
+
+    main.container {
+        padding: 30px 18px 45px;
+    }
+
+    main.container > h1 {
+        font-size: 28px;
+    }
+
+    main.container > p {
+        font-size: 14px;
+
+        margin-bottom: 24px;
+    }
+
+    main.container form {
+        padding: 22px;
+
+        border-radius: 12px;
+    }
+
+    main.container form button,
+    main.container form input[type="submit"],
+    main.container form a {
+
+        width: 100%;
+
+        margin-left: 0;
+        margin-top: 10px;
+    }
+}
