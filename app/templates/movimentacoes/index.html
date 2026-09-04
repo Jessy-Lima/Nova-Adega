@@ -1,91 +1,320 @@
 <!-- templates/movimentacoes/index.html -->
+
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    <title>Movimentações — AAPM SENAI</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/static/css/movimentacoes.css">
+
+    <title>Movimentações — Nova Adega</title>
 </head>
+
 <body>
-    <h1>Histórico de movimentações</h1>
 
-    <!-- Filtros -->
-    <form method="get" action="/movimentacoes">
-        <select name="produto_id">
-            <option value="0">Todos os produtos</option>
-            {% for p in produtos %}
-                <option value="{{ p.id }}"
-                    {{ 'selected' if produto_id == p.id else '' }}>
-                    {{ p.nome }}
-                </option>
-            {% endfor %}
-        </select>
 
-        <select name="tipo">
-            <option value="">Todos os tipos</option>
-            <option value="entrada" {{ 'selected' if tipo == 'entrada' else '' }}>
-                Entrada
-            </option>
-            <option value="saida" {{ 'selected' if tipo == 'saida' else '' }}>
-                Saída
-            </option>
-        </select>
+    <!-- =========================================
+         NAVBAR
+    ========================================= -->
 
-        <button type="submit">Filtrar</button>
+    <header class="navbar">
 
-        {% if produto_id or tipo %}
-            <a href="/movimentacoes">Limpar</a>
-        {% endif %}
-    </form>
+        <div class="logo">
+            <h2>🍷 Nova Adega</h2>
+        </div>
 
-    <a href="/movimentacoes/nova">+ Registrar movimentação</a>
 
-    <table border="1" cellpadding="8">
-        <thead>
-            <tr>
-                <th>Data</th>
-                <th>Produto</th>
-                <th>Tipo</th>
-                <th>Quantidade</th>
-                <th>Preço unit.</th>
-                <th>Total</th>
-                <th>Observação</th>
-                <th>Registrado por</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for m in movimentacoes %}
-            <tr>
-                <td>{{ m.criado_em.strftime('%d/%m/%Y %H:%M') }}</td>
-                <td>
-                    <a href="/produtos/{{ m.produto_id }}">
-                        {{ m.produto.nome }}
+        <nav class="menu">
+
+            <a href="/pdv">
+                PDV
+            </a>
+
+            <a href="/movimentacoes" class="ativo">
+                Histórico
+            </a>
+
+            <a href="/produtos">
+                Produtos
+            </a>
+
+            <a href="/categorias">
+                Categorias
+            </a>
+
+            <a href="/auth/logout" class="btn-sair">
+                Sair
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================================
+         CONTEÚDO PRINCIPAL
+    ========================================= -->
+
+    <main class="container">
+
+
+        <!-- TÍTULO -->
+
+        <div class="titulo-pagina">
+
+            <div>
+
+                <h1>Histórico de movimentações</h1>
+
+                <p>
+                    Acompanhe todas as entradas e saídas dos produtos.
+                </p>
+
+            </div>
+
+
+            <a href="/movimentacoes/nova" class="btn-nova">
+                + Registrar movimentação
+            </a>
+
+        </div>
+
+
+        <!-- =========================================
+             FILTROS
+        ========================================= -->
+
+        <form method="get"
+              action="/movimentacoes"
+              class="filtros">
+
+            <div class="campo">
+
+                <label for="produto_id">
+                    Produto
+                </label>
+
+                <select name="produto_id"
+                        id="produto_id">
+
+                    <option value="0">
+                        Todos os produtos
+                    </option>
+
+                    {% for p in produtos %}
+
+                        <option value="{{ p.id }}"
+                            {{ 'selected' if produto_id == p.id else '' }}>
+
+                            {{ p.nome }}
+
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="tipo">
+                    Tipo
+                </label>
+
+                <select name="tipo"
+                        id="tipo">
+
+                    <option value="">
+                        Todos os tipos
+                    </option>
+
+                    <option value="entrada"
+                        {{ 'selected' if tipo == 'entrada' else '' }}>
+
+                        Entrada
+
+                    </option>
+
+                    <option value="saida"
+                        {{ 'selected' if tipo == 'saida' else '' }}>
+
+                        Saída
+
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="acoes-filtro">
+
+                <button type="submit">
+                    Filtrar
+                </button>
+
+
+                {% if produto_id or tipo %}
+
+                    <a href="/movimentacoes"
+                       class="btn-limpar">
+
+                        Limpar
+
                     </a>
-                </td>
-                <td>
-                    {% if m.tipo.value == 'entrada' %}
-                        <span style="color:green">▲ Entrada</span>
-                    {% else %}
-                        <span style="color:red">▼ Saída</span>
+
+                {% endif %}
+
+            </div>
+
+        </form>
+
+
+        <!-- =========================================
+             TABELA
+        ========================================= -->
+
+        <div class="tabela-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Data</th>
+
+                        <th>Produto</th>
+
+                        <th>Tipo</th>
+
+                        <th>Quantidade</th>
+
+                        <th>Preço unit.</th>
+
+                        <th>Total</th>
+
+                        <th>Observação</th>
+
+                        <th>Registrado por</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for m in movimentacoes %}
+
+                    <tr>
+
+                        <td>
+                            {{ m.criado_em.strftime('%d/%m/%Y %H:%M') }}
+                        </td>
+
+
+                        <td>
+
+                            <a href="/produtos/{{ m.produto_id }}"
+                               class="link-produto">
+
+                                {{ m.produto.nome }}
+
+                            </a>
+
+                        </td>
+
+
+                        <td>
+
+                            {% if m.tipo.value == 'entrada' %}
+
+                                <span class="tipo entrada">
+                                    ▲ Entrada
+                                </span>
+
+                            {% else %}
+
+                                <span class="tipo saida">
+                                    ▼ Saída
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+                            {{ m.quantidade }}
+                        </td>
+
+
+                        <td>
+                            R$ {{ "%.2f"|format(m.preco_unitario) }}
+                        </td>
+
+
+                        <td class="valor-total">
+                            R$ {{ "%.2f"|format(m.valor_total) }}
+                        </td>
+
+
+                        <td>
+                            {{ m.observacao or "—" }}
+                        </td>
+
+
+                        <td>
+                            {{ m.usuario.nome if m.usuario else "—" }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                    {% if not movimentacoes %}
+
+                    <tr>
+
+                        <td colspan="8"
+                            class="sem-resultados">
+
+                            Nenhuma movimentação encontrada.
+
+                        </td>
+
+                    </tr>
+
                     {% endif %}
-                </td>
-                <td>{{ m.quantidade }}</td>
-                <td>R$ {{ "%.2f"|format(m.preco_unitario) }}</td>
-                <td>R$ {{ "%.2f"|format(m.valor_total) }}</td>
-                <td>{{ m.observacao or "—" }}</td>
-                <td>{{ m.usuario.nome if m.usuario else "—" }}</td>
-            </tr>
-            {% endfor %}
 
-            {% if not movimentacoes %}
-            <tr>
-                <td colspan="8" style="text-align:center">
-                    Nenhuma movimentação encontrada.
-                </td>
-            </tr>
-            {% endif %}
-        </tbody>
-    </table>
+                </tbody>
 
-    <p><a href="/">← Dashboard</a></p>
+            </table>
+
+        </div>
+
+
+        <!-- VOLTAR -->
+
+        <div class="voltar">
+
+            <a href="/">
+                ← Voltar para o início
+            </a>
+
+        </div>
+
+
+    </main>
+
+
 </body>
+
 </html>

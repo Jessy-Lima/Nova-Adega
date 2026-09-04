@@ -1,139 +1,384 @@
-<!-- templates/movimentacoes/form.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    <title>Nova Movimentação — AAPM SENAI</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/static/css/movimentacoes.css">
+
+    <title>Nova Movimentação — Nova Adega</title>
 </head>
+
 <body>
-    <h1>Registrar movimentação</h1>
 
-    {% if erro %}
-        <p style="color:red">{{ erro }}</p>
-    {% endif %}
 
-    <form action="/movimentacoes/nova" method="post">
+    <!-- =========================================
+         NAVBAR
+    ========================================= -->
 
-        <label>Produto:
-            <select name="produto_id" required id="select-produto">
-                <option value="">Selecione...</option>
-                {% for p in produtos %}
-                    <option value="{{ p.id }}"
-                            data-estoque="{{ p.estoque_atual }}"
-                            data-preco="{{ p.preco }}"
-                        {{ 'selected' if produto_id == p.id else '' }}>
-                        {{ p.nome }} — estoque: {{ p.estoque_atual }}
-                    </option>
-                {% endfor %}
-            </select>
-        </label>
-        <br>
+    <header class="navbar">
 
-        <!--
-            Exibe o estoque atual do produto selecionado
-            para o usuário não precisar adivinhar o saldo.
-        -->
-        <p id="info-estoque" style="color:gray;display:none">
-            Estoque atual: <strong id="valor-estoque">0</strong>
-        </p>
-        <br>
+        <div class="logo">
+            <h2>🍷 Nova Adega</h2>
+        </div>
 
-        <label>Tipo:
-            <select name="tipo" required id="select-tipo">
-                <option value="">Selecione...</option>
-                {% for t in tipos %}
-                    <option value="{{ t.value }}">
-                        {{ "▲ Entrada" if t.value == 'entrada' else "▼ Saída" }}
-                    </option>
-                {% endfor %}
-            </select>
-        </label>
-        <br>
 
-        <label>Quantidade:
-            <input type="number"
-                   name="quantidade"
-                   min="1"
-                   required
-                   id="input-quantidade">
-        </label>
-        <br>
+        <nav class="menu">
 
-        <label>Preço unitário (R$):
-            <input type="number"
-                   name="preco_unitario"
-                   step="0.01"
-                   min="0"
-                   required
-                   id="input-preco">
-        </label>
-        <br>
+            <a href="/pdv">
+                PDV
+            </a>
 
-        <!-- Subtotal calculado em tempo real via JS -->
-        <p id="info-subtotal" style="display:none">
-            Subtotal: <strong id="valor-subtotal">R$ 0,00</strong>
-        </p>
-        <br>
+            <a href="/movimentacoes" class="ativo">
+                Histórico
+            </a>
 
-        <label>Observação (opcional):
-            <input type="text"
-                   name="observacao"
-                   maxlength="255"
-                   placeholder="Ex: Compra fornecedor X, Venda balcão...">
-        </label>
-        <br>
+            <a href="/produtos">
+                Produtos
+            </a>
 
-        <button type="submit">Registrar</button>
-        <a href="/movimentacoes">Cancelar</a>
-    </form>
+            <a href="/categorias">
+                Categorias
+            </a>
+
+            <a href="/auth/logout" class="btn-sair">
+                Sair
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =========================================
+         CONTEÚDO
+    ========================================= -->
+
+    <main class="container">
+
+        <div class="form-movimentacao">
+
+            <!-- TÍTULO -->
+
+            <div class="form-titulo">
+
+                <h1>Registrar movimentação</h1>
+
+                <p>
+                    Registre uma entrada ou saída de produtos.
+                </p>
+
+            </div>
+
+
+            <!-- ERRO -->
+
+            {% if erro %}
+
+            <div class="mensagem-erro">
+                {{ erro }}
+            </div>
+
+            {% endif %}
+
+
+            <!-- FORMULÁRIO -->
+
+            <form action="/movimentacoes/nova"
+                  method="post"
+                  class="movimentacao-form">
+
+
+                <!-- PRODUTO -->
+
+                <div class="form-grupo">
+
+                    <label for="select-produto">
+                        Produto
+                    </label>
+
+                    <select name="produto_id"
+                            required
+                            id="select-produto">
+
+                        <option value="">
+                            Selecione um produto
+                        </option>
+
+                        {% for p in produtos %}
+
+                        <option value="{{ p.id }}"
+                                data-estoque="{{ p.estoque_atual }}"
+                                data-preco="{{ p.preco }}"
+                                {{ 'selected' if produto_id == p.id else '' }}>
+
+                            {{ p.nome }} — estoque: {{ p.estoque_atual }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- ESTOQUE -->
+
+                <div class="info-caixa"
+                     id="info-estoque"
+                     style="display:none">
+
+                    Estoque atual:
+
+                    <strong id="valor-estoque">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <!-- TIPO -->
+
+                <div class="form-grupo">
+
+                    <label for="select-tipo">
+                        Tipo de movimentação
+                    </label>
+
+                    <select name="tipo"
+                            required
+                            id="select-tipo">
+
+                        <option value="">
+                            Selecione o tipo
+                        </option>
+
+                        {% for t in tipos %}
+
+                        <option value="{{ t.value }}">
+
+                            {{ "▲ Entrada" if t.value == 'entrada' else "▼ Saída" }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- QUANTIDADE E PREÇO -->
+
+                <div class="form-linha">
+
+
+                    <div class="form-grupo">
+
+                        <label for="input-quantidade">
+                            Quantidade
+                        </label>
+
+                        <input type="number"
+                               name="quantidade"
+                               min="1"
+                               required
+                               id="input-quantidade"
+                               placeholder="Digite a quantidade">
+
+                    </div>
+
+
+                    <div class="form-grupo">
+
+                        <label for="input-preco">
+                            Preço unitário (R$)
+                        </label>
+
+                        <input type="number"
+                               name="preco_unitario"
+                               step="0.01"
+                               min="0"
+                               required
+                               id="input-preco"
+                               placeholder="0,00">
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- SUBTOTAL -->
+
+                <div class="info-caixa subtotal"
+                     id="info-subtotal"
+                     style="display:none">
+
+                    Subtotal:
+
+                    <strong id="valor-subtotal">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+                <!-- OBSERVAÇÃO -->
+
+                <div class="form-grupo">
+
+                    <label for="observacao">
+                        Observação
+                        <span>(opcional)</span>
+                    </label>
+
+                    <input type="text"
+                           id="observacao"
+                           name="observacao"
+                           maxlength="255"
+                           placeholder="Ex: Compra fornecedor X, Venda balcão...">
+
+                </div>
+
+
+                <!-- BOTÕES -->
+
+                <div class="form-botoes">
+
+                    <button type="submit"
+                            class="btn-registrar">
+
+                        Registrar movimentação
+
+                    </button>
+
+
+                    <a href="/movimentacoes"
+                       class="btn-cancelar">
+
+                        Cancelar
+
+                    </a>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </main>
+
 
     <script>
-        const selectProduto  = document.getElementById('select-produto');
-        const inputQuantidade = document.getElementById('input-quantidade');
-        const inputPreco     = document.getElementById('input-preco');
-        const infoEstoque    = document.getElementById('info-estoque');
-        const valorEstoque   = document.getElementById('valor-estoque');
-        const infoSubtotal   = document.getElementById('info-subtotal');
-        const valorSubtotal  = document.getElementById('valor-subtotal');
 
-        // Ao selecionar produto: mostra estoque atual e preenche preço
+        const selectProduto = document.getElementById('select-produto');
+        const inputQuantidade = document.getElementById('input-quantidade');
+        const inputPreco = document.getElementById('input-preco');
+        const infoEstoque = document.getElementById('info-estoque');
+        const valorEstoque = document.getElementById('valor-estoque');
+        const infoSubtotal = document.getElementById('info-subtotal');
+        const valorSubtotal = document.getElementById('valor-subtotal');
+
+
+        // Selecionar produto
+
         selectProduto.addEventListener('change', function () {
-            const option = this.options[this.selectedIndex];
-            const estoque = option.dataset.estoque;
-            const preco   = option.dataset.preco;
+
+            const option =
+                this.options[this.selectedIndex];
+
+            const estoque =
+                option.dataset.estoque;
+
+            const preco =
+                option.dataset.preco;
+
 
             if (estoque !== undefined) {
-                valorEstoque.textContent = estoque;
-                infoEstoque.style.display = 'block';
 
-                // Pré-preenche o preço unitário com o preço cadastrado
-                inputPreco.value = parseFloat(preco).toFixed(2);
+                valorEstoque.textContent =
+                    estoque;
+
+                infoEstoque.style.display =
+                    'block';
+
+
+                // Preenche o preço cadastrado
+
+                inputPreco.value =
+                    parseFloat(preco).toFixed(2);
+
             } else {
-                infoEstoque.style.display = 'none';
+
+                infoEstoque.style.display =
+                    'none';
+
             }
+
 
             atualizarSubtotal();
+
         });
 
-        // Atualiza o subtotal ao digitar quantidade ou preço
+
+        // Calcular subtotal
+
         function atualizarSubtotal() {
-            const qtd   = parseFloat(inputQuantidade.value) || 0;
-            const preco = parseFloat(inputPreco.value) || 0;
-            const total = qtd * preco;
+
+            const qtd =
+                parseFloat(inputQuantidade.value) || 0;
+
+            const preco =
+                parseFloat(inputPreco.value) || 0;
+
+            const total =
+                qtd * preco;
+
 
             if (qtd > 0 && preco > 0) {
-                valorSubtotal.textContent = total.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL'
-                });
-                infoSubtotal.style.display = 'block';
+
+                valorSubtotal.textContent =
+                    total.toLocaleString(
+                        'pt-BR',
+                        {
+                            style: 'currency',
+                            currency: 'BRL'
+                        }
+                    );
+
+
+                infoSubtotal.style.display =
+                    'block';
+
             } else {
-                infoSubtotal.style.display = 'none';
+
+                infoSubtotal.style.display =
+                    'none';
+
             }
+
         }
 
-        inputQuantidade.addEventListener('input', atualizarSubtotal);
-        inputPreco.addEventListener('input', atualizarSubtotal);
+
+        inputQuantidade.addEventListener(
+            'input',
+            atualizarSubtotal
+        );
+
+
+        inputPreco.addEventListener(
+            'input',
+            atualizarSubtotal
+        );
+
     </script>
+
+
 </body>
+
 </html>
