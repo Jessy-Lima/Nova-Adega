@@ -1,4 +1,6 @@
-/* RESET */
+/* =========================================
+   RESET
+========================================= */
 
 * {
     margin: 0;
@@ -6,37 +8,52 @@
     box-sizing: border-box;
 }
 
-
-/* CORPO */
+html {
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #121212;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #121212;
     color: #F9FAFB;
     min-height: 100vh;
 }
 
 
-/* NAVBAR */
+/* =========================================
+   NAVBAR
+========================================= */
 
 .navbar {
-    background-color: #1E1E1E;
+    width: 100%;
+    background: #1E1E1E;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
-    padding: 18px 8%;
+    padding: 18px 7%;
 
     border-bottom: 1px solid #333;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 
 /* LOGO */
 
+.logo {
+    display: flex;
+    align-items: center;
+}
+
 .logo h2 {
     color: #FDE68A;
-    font-size: 24px;
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 
@@ -45,22 +62,17 @@ body {
 .menu {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 28px;
 }
-
-
-/* LINKS */
 
 .menu a {
     color: #F9FAFB;
-
     text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
 
-    font-size: 16px;
-
-    transition: 0.3s;
+    transition: all 0.25s ease;
 }
-
 
 .menu a:hover {
     color: #FDE68A;
@@ -70,8 +82,7 @@ body {
 /* BOTÃO SAIR */
 
 .menu .btn-sair {
-    background-color: #FDE68A;
-
+    background: #FDE68A;
     color: #121212;
 
     padding: 10px 18px;
@@ -80,56 +91,57 @@ body {
 
     font-weight: bold;
 
-    transition: 0.3s;
+    transition: all 0.25s ease;
 }
 
-
 .menu .btn-sair:hover {
-    background-color: #FEF3C7;
-
+    background: #FEF3C7;
     color: #121212;
 
     transform: translateY(-2px);
 }
 
 
-/* CONTAINER */
+/* =========================================
+   CONTAINER PRINCIPAL
+========================================= */
 
 .container {
-    width: 85%;
-
+    width: 88%;
     max-width: 1400px;
 
-    margin: auto;
+    margin: 0 auto;
 
-    padding: 55px 0;
+    padding: 45px 0 70px;
 }
 
 
-/* BOAS-VINDAS */
+/* =========================================
+   BOAS-VINDAS
+========================================= */
 
 .boas-vindas {
-    background-color: #1E1E1E;
+    background: #1E1E1E;
 
     padding: 30px;
 
-    border-radius: 15px;
+    border-radius: 16px;
 
-    margin-bottom: 50px;
+    margin-bottom: 45px;
 
     border-left: 5px solid #FDE68A;
-}
 
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
 
 .boas-vindas h1 {
     font-size: 30px;
-
     margin-bottom: 10px;
 }
 
-
 .boas-vindas p {
-    opacity: 0.7;
+    color: #D1D5DB;
+    opacity: 0.8;
 }
 
 
@@ -138,9 +150,8 @@ body {
 ========================================= */
 
 .titulo-secao {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
-
 
 .titulo-secao h2 {
     color: #FDE68A;
@@ -148,45 +159,63 @@ body {
     font-size: 30px;
 
     margin-bottom: 8px;
+
+    font-weight: 700;
 }
 
-
 .titulo-secao p {
-    color: #F9FAFB;
+    color: #D1D5DB;
 
-    opacity: 0.65;
+    font-size: 15px;
+
+    opacity: 0.75;
 }
 
 
 /* =========================================
-   CATEGORIAS - UMA ÚNICA LINHA
+   CATEGORIAS
 ========================================= */
 
 .categorias {
     display: flex;
 
-    align-items: center;
+    align-items: stretch;
 
-    gap: 18px;
+    gap: 16px;
 
     width: 100%;
 
     overflow-x: auto;
 
-    padding: 10px 0 20px 0;
+    padding: 10px 4px 18px;
+
+    scrollbar-width: thin;
+    scrollbar-color: #555 #121212;
 }
 
 
 /* =========================================
-   CATEGORIA
+   CARD DA CATEGORIA
 ========================================= */
 
 .card-categoria {
-    background-color: #1E1E1E;
+    flex: 0 0 auto;
+
+    min-width: 180px;
+
+    min-height: 95px;
+
+    background: #1E1E1E;
 
     color: #F9FAFB;
 
     text-decoration: none;
+
+    border: 1px solid #333;
+
+    border-radius: 14px;
+
+    padding: 18px 22px;
 
     display: flex;
 
@@ -196,46 +225,77 @@ body {
 
     gap: 12px;
 
-    padding: 18px 24px;
+    position: relative;
 
-    border-radius: 10px;
+    overflow: hidden;
 
-    border: 1px solid transparent;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
 
-    white-space: nowrap;
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+}
 
-    min-width: max-content;
 
-    transition: 0.3s;
+/* BRILHO DO CARD */
+
+.card-categoria::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background: #FDE68A;
+
+    transform: scaleX(0);
+
+    transform-origin: left;
+
+    transition: transform 0.25s ease;
 }
 
 
 /* HOVER */
 
 .card-categoria:hover {
-    background-color: #FDE68A;
+    background: #252525;
 
-    color: #121212;
+    color: #FDE68A;
 
     border-color: #FDE68A;
 
-    transform: translateY(-3px);
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 25px rgba(253, 230, 138, 0.12);
+}
+
+.card-categoria:hover::before {
+    transform: scaleX(1);
 }
 
 
 /* =========================================
-   ÍCONES
+   ÍCONE
 ========================================= */
 
 .icone {
-    font-size: 28px;
+    font-size: 30px;
 
-    margin: 0;
+    line-height: 1;
+
+    flex-shrink: 0;
 }
 
 
 /* =========================================
-   TÍTULO DA CATEGORIA
+   TÍTULO
 ========================================= */
 
 .card-categoria h3 {
@@ -243,14 +303,15 @@ body {
 
     font-size: 17px;
 
+    font-weight: 600;
+
     margin: 0;
+
+    white-space: nowrap;
 }
 
 
-/* =========================================
-   ESCONDE A DESCRIÇÃO
-   PARA FICAR PARECIDO COM A NAVBAR
-========================================= */
+/* DESCRIÇÃO OCULTA */
 
 .card-categoria p {
     display: none;
@@ -258,28 +319,38 @@ body {
 
 
 /* =========================================
-   SCROLLBAR DAS CATEGORIAS
+   SCROLLBAR
 ========================================= */
 
 .categorias::-webkit-scrollbar {
-    height: 6px;
+    height: 7px;
 }
-
 
 .categorias::-webkit-scrollbar-track {
-    background-color: #121212;
-}
-
-
-.categorias::-webkit-scrollbar-thumb {
-    background-color: #444;
+    background: #121212;
 
     border-radius: 10px;
 }
 
+.categorias::-webkit-scrollbar-thumb {
+    background: #444;
+
+    border-radius: 10px;
+}
 
 .categorias::-webkit-scrollbar-thumb:hover {
-    background-color: #FDE68A;
+    background: #FDE68A;
+}
+
+
+/* =========================================
+   EFEITO DE FOCO
+========================================= */
+
+.card-categoria:focus {
+    outline: 2px solid #FDE68A;
+
+    outline-offset: 3px;
 }
 
 
@@ -287,59 +358,101 @@ body {
    RESPONSIVIDADE
 ========================================= */
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 
     .navbar {
-        flex-direction: column;
-
-        gap: 20px;
-
-        padding: 20px;
+        padding: 18px 5%;
     }
-
 
     .menu {
-        flex-wrap: wrap;
-
-        justify-content: center;
-
-        gap: 15px;
+        gap: 18px;
     }
-
 
     .container {
         width: 90%;
     }
 
-
-    .categorias {
-        justify-content: flex-start;
-    }
-
-
     .card-categoria {
-        padding: 15px 20px;
+        min-width: 165px;
     }
-
 }
 
 
-@media (max-width: 500px) {
+@media (max-width: 650px) {
+
+    .navbar {
+        flex-direction: column;
+
+        gap: 18px;
+    }
 
     .menu {
-        font-size: 14px;
+        width: 100%;
 
-        gap: 12px;
+        justify-content: center;
+
+        flex-wrap: wrap;
     }
 
+    .container {
+        width: 92%;
 
-    .menu .btn-sair {
-        padding: 8px 14px;
+        padding-top: 30px;
     }
 
+    .boas-vindas {
+        padding: 22px;
+    }
+
+    .boas-vindas h1 {
+        font-size: 25px;
+    }
 
     .titulo-secao h2 {
         font-size: 26px;
     }
 
+    .card-categoria {
+        min-width: 150px;
+
+        min-height: 80px;
+
+        padding: 15px 18px;
+    }
+
+    .icone {
+        font-size: 25px;
+    }
+
+    .card-categoria h3 {
+        font-size: 15px;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .menu {
+        gap: 12px;
+    }
+
+    .menu a {
+        font-size: 14px;
+    }
+
+    .menu .btn-sair {
+        padding: 8px 14px;
+    }
+
+    .container {
+        width: 94%;
+    }
+
+    .titulo-secao h2 {
+        font-size: 23px;
+    }
+
+    .card-categoria {
+        min-width: 140px;
+    }
 }
