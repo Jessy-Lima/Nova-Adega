@@ -2,44 +2,121 @@
 
 {% block title %}Movimentações — Nova Adega{% endblock %}
 
+
+{% block styles %}
+<link rel="stylesheet" href="/static/CSS/movimentacoes.css">
+{% endblock %}
+
+
 {% block content %}
 
-<main>
 
-    <div>
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <h2>
+            🍷 Nova Adega
+        </h2>
+
+    </div>
+
+
+    <div class="menu">
+
+        <a href="/pdv/">
+            PDV
+        </a>
+
+        <a href="/movimentacoes/" class="ativo">
+            Histórico
+        </a>
+
+        <a href="/produtos/">
+            Produtos
+        </a>
+
+        <a href="/categorias/">
+            Categorias
+        </a>
+
+        <a href="/auth/logout" class="btn-sair">
+            Sair
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- CONTEÚDO PRINCIPAL -->
+
+<main class="container">
+
+
+    <!-- TÍTULO -->
+
+    <div class="titulo-pagina">
+
         <div>
-            <h1>Histórico de movimentações</h1>
+
+            <h1>
+                Histórico de movimentações
+            </h1>
 
             <p>
                 Acompanhe todas as entradas e saídas dos produtos.
             </p>
+
         </div>
 
-        <a href="/movimentacoes/nova">
+
+        <a
+            href="/movimentacoes/nova"
+            class="btn-nova"
+        >
             + Registrar movimentação
         </a>
+
     </div>
+
 
     <!-- FILTROS -->
 
-    <form method="get" action="/movimentacoes">
+    <form
+        method="get"
+        action="/movimentacoes/"
+        class="filtros"
+    >
 
-        <div>
+
+        <!-- PRODUTO -->
+
+        <div class="campo">
+
             <label for="produto_id">
                 Produto
             </label>
 
-            <select name="produto_id" id="produto_id">
+
+            <select
+                name="produto_id"
+                id="produto_id"
+            >
 
                 <option value="0">
                     Todos os produtos
                 </option>
 
+
                 {% for p in produtos %}
 
                 <option
                     value="{{ p.id }}"
-                    {{ 'selected' if produto_id == p.id else '' }}>
+                    {{ 'selected' if produto_id == p.id else '' }}
+                >
 
                     {{ p.nome }}
 
@@ -48,47 +125,64 @@
                 {% endfor %}
 
             </select>
+
         </div>
 
-        <div>
+
+        <!-- TIPO -->
+
+        <div class="campo">
+
             <label for="tipo">
                 Tipo
             </label>
 
-            <select name="tipo" id="tipo">
+
+            <select
+                name="tipo"
+                id="tipo"
+            >
 
                 <option value="">
                     Todos os tipos
                 </option>
 
+
                 <option
                     value="entrada"
-                    {{ 'selected' if tipo == 'entrada' else '' }}>
-
+                    {{ 'selected' if tipo == 'entrada' else '' }}
+                >
                     Entrada
-
                 </option>
+
 
                 <option
                     value="saida"
-                    {{ 'selected' if tipo == 'saida' else '' }}>
-
+                    {{ 'selected' if tipo == 'saida' else '' }}
+                >
                     Saída
-
                 </option>
 
             </select>
+
         </div>
 
-        <div>
+
+        <!-- BOTÕES -->
+
+        <div class="acoes-filtro">
 
             <button type="submit">
                 Filtrar
             </button>
 
+
             {% if produto_id or tipo %}
 
-            <a href="/movimentacoes">
+            <a
+                href="/movimentacoes/"
+                class="btn-limpar"
+            >
                 Limpar
             </a>
 
@@ -96,88 +190,150 @@
 
         </div>
 
+
     </form>
 
-    <br>
 
     <!-- TABELA -->
 
-    <div>
+    <div class="tabela-container">
 
-        <table border="1">
+        <table>
 
             <thead>
+
                 <tr>
-                    <th>Data</th>
-                    <th>Produto</th>
-                    <th>Tipo</th>
-                    <th>Quantidade</th>
-                    <th>Preço unit.</th>
-                    <th>Total</th>
-                    <th>Observação</th>
-                    <th>Registrado por</th>
+
+                    <th>
+                        Data
+                    </th>
+
+                    <th>
+                        Produto
+                    </th>
+
+                    <th>
+                        Tipo
+                    </th>
+
+                    <th>
+                        Quantidade
+                    </th>
+
+                    <th>
+                        Preço unit.
+                    </th>
+
+                    <th>
+                        Total
+                    </th>
+
+                    <th>
+                        Observação
+                    </th>
+
+                    <th>
+                        Registrado por
+                    </th>
+
                 </tr>
+
             </thead>
 
+
             <tbody>
+
 
                 {% for m in movimentacoes %}
 
                 <tr>
 
+
                     <td>
                         {{ m.criado_em.strftime('%d/%m/%Y %H:%M') }}
                     </td>
 
+
                     <td>
-                        <a href="/produtos/{{ m.produto_id }}">
+
+                        <a
+                            href="/produtos/{{ m.produto_id }}"
+                            class="link-produto"
+                        >
                             {{ m.produto.nome }}
                         </a>
+
                     </td>
+
 
                     <td>
 
                         {% if m.tipo.value == 'entrada' %}
+
+                        <span class="tipo entrada">
                             ▲ Entrada
+                        </span>
+
                         {% else %}
+
+                        <span class="tipo saida">
                             ▼ Saída
+                        </span>
+
                         {% endif %}
 
                     </td>
+
 
                     <td>
                         {{ m.quantidade }}
                     </td>
 
+
                     <td>
                         R$ {{ "%.2f"|format(m.preco_unitario) }}
                     </td>
 
-                    <td>
+
+                    <td class="valor-total">
                         R$ {{ "%.2f"|format(m.valor_total) }}
                     </td>
+
 
                     <td>
                         {{ m.observacao or "—" }}
                     </td>
 
+
                     <td>
                         {{ m.usuario.nome if m.usuario else "—" }}
                     </td>
+
 
                 </tr>
 
                 {% endfor %}
 
+
+                <!-- SEM MOVIMENTAÇÕES -->
+
                 {% if not movimentacoes %}
 
                 <tr>
-                    <td colspan="8">
+
+                    <td
+                        colspan="8"
+                        class="sem-resultados"
+                    >
+
                         Nenhuma movimentação encontrada.
+
                     </td>
+
                 </tr>
 
                 {% endif %}
+
 
             </tbody>
 
@@ -185,14 +341,19 @@
 
     </div>
 
-    <br>
 
-    <div>
+    <!-- VOLTAR -->
+
+    <div class="voltar">
+
         <a href="/">
             ← Voltar para o início
         </a>
+
     </div>
 
+
 </main>
+
 
 {% endblock %}
