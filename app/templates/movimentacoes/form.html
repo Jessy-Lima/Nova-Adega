@@ -4,74 +4,125 @@
 
 {% block content %}
 
-<main>
+<link rel="stylesheet" href="/static/css/movimentacoes.css">
 
-    <div>
-        <div>
+<main class="container">
+
+    <div class="form-movimentacao">
+
+        <div class="form-titulo">
+
             <h1>Registrar movimentação</h1>
+
             <p>
                 Registre uma entrada ou saída de produtos.
             </p>
+
         </div>
+
 
         {% if erro %}
-        <div>
+
+        <div class="mensagem-erro">
             {{ erro }}
         </div>
+
         {% endif %}
 
-        <form action="/movimentacoes/nova" method="post">
 
-            <div>
+        <form
+            action="/movimentacoes/nova"
+            method="post"
+            class="movimentacao-form"
+        >
+
+            <!-- PRODUTO -->
+
+            <div class="form-grupo">
+
                 <label for="select-produto">
                     Produto
                 </label>
 
-                <select name="produto_id" required id="select-produto">
+                <select
+                    name="produto_id"
+                    required
+                    id="select-produto"
+                >
+
                     <option value="">
                         Selecione um produto
                     </option>
 
                     {% for p in produtos %}
+
                     <option
                         value="{{ p.id }}"
                         data-estoque="{{ p.estoque_atual }}"
                         data-preco="{{ p.preco }}"
-                        {{ 'selected' if produto_id == p.id else '' }}>
-
+                        {{ 'selected' if produto_id == p.id else '' }}
+                    >
                         {{ p.nome }} — estoque: {{ p.estoque_atual }}
-
                     </option>
+
                     {% endfor %}
+
                 </select>
+
             </div>
 
-            <div id="info-estoque" hidden>
+
+            <!-- ESTOQUE -->
+
+            <div
+                id="info-estoque"
+                class="info-caixa"
+                hidden
+            >
+
                 Estoque atual:
                 <strong id="valor-estoque">0</strong>
+
             </div>
 
-            <div>
+
+            <!-- TIPO -->
+
+            <div class="form-grupo">
+
                 <label for="select-tipo">
                     Tipo de movimentação
                 </label>
 
-                <select name="tipo" required id="select-tipo">
+                <select
+                    name="tipo"
+                    required
+                    id="select-tipo"
+                >
+
                     <option value="">
                         Selecione o tipo
                     </option>
 
                     {% for t in tipos %}
+
                     <option value="{{ t.value }}">
                         {{ "▲ Entrada" if t.value == 'entrada' else "▼ Saída" }}
                     </option>
+
                     {% endfor %}
+
                 </select>
+
             </div>
 
-            <div>
 
-                <div>
+            <!-- QUANTIDADE E PREÇO -->
+
+            <div class="form-linha">
+
+                <div class="form-grupo">
+
                     <label for="input-quantidade">
                         Quantidade
                     </label>
@@ -82,10 +133,14 @@
                         min="1"
                         required
                         id="input-quantidade"
-                        placeholder="Digite a quantidade">
+                        placeholder="Digite a quantidade"
+                    >
+
                 </div>
 
-                <div>
+
+                <div class="form-grupo">
+
                     <label for="input-preco">
                         Preço unitário (R$)
                     </label>
@@ -97,22 +152,42 @@
                         min="0"
                         required
                         id="input-preco"
-                        placeholder="0,00">
+                        placeholder="0,00"
+                    >
+
                 </div>
 
             </div>
 
-            <div id="info-subtotal" hidden>
+
+            <!-- SUBTOTAL -->
+
+            <div
+                id="info-subtotal"
+                class="info-caixa subtotal"
+                hidden
+            >
+
                 Subtotal:
                 <strong id="valor-subtotal">
                     R$ 0,00
                 </strong>
+
             </div>
 
-            <div>
+
+            <!-- OBSERVAÇÃO -->
+
+            <div class="form-grupo">
+
                 <label for="observacao">
+
                     Observação
-                    <span>(opcional)</span>
+
+                    <span>
+                        (opcional)
+                    </span>
+
                 </label>
 
                 <input
@@ -120,83 +195,159 @@
                     id="observacao"
                     name="observacao"
                     maxlength="255"
-                    placeholder="Ex: Compra fornecedor X, Venda balcão...">
+                    placeholder="Ex: Compra fornecedor X, Venda balcão..."
+                >
+
             </div>
 
-            <div>
-                <button type="submit">
+
+            <!-- BOTÕES -->
+
+            <div class="form-botoes">
+
+                <button
+                    type="submit"
+                    class="btn-registrar"
+                >
                     Registrar movimentação
                 </button>
 
-                <a href="/movimentacoes">
+
+                <a
+                    href="/movimentacoes"
+                    class="btn-cancelar"
+                >
                     Cancelar
                 </a>
+
             </div>
 
         </form>
+
     </div>
 
 </main>
 
 {% endblock %}
 
+
 {% block scripts %}
+
 <script>
-    const selectProduto = document.getElementById('select-produto');
-    const inputQuantidade = document.getElementById('input-quantidade');
-    const inputPreco = document.getElementById('input-preco');
-    const infoEstoque = document.getElementById('info-estoque');
-    const valorEstoque = document.getElementById('valor-estoque');
-    const infoSubtotal = document.getElementById('info-subtotal');
-    const valorSubtotal = document.getElementById('valor-subtotal');
 
-    selectProduto.addEventListener('change', function () {
-        const option = this.options[this.selectedIndex];
-        const estoque = option.dataset.estoque;
-        const preco = option.dataset.preco;
+    const selectProduto =
+        document.getElementById('select-produto');
 
-        if (estoque !== undefined) {
-            valorEstoque.textContent = estoque;
-            infoEstoque.hidden = false;
+    const inputQuantidade =
+        document.getElementById('input-quantidade');
 
-            if (preco !== undefined) {
-                inputPreco.value = parseFloat(preco).toFixed(2);
+    const inputPreco =
+        document.getElementById('input-preco');
+
+    const infoEstoque =
+        document.getElementById('info-estoque');
+
+    const valorEstoque =
+        document.getElementById('valor-estoque');
+
+    const infoSubtotal =
+        document.getElementById('info-subtotal');
+
+    const valorSubtotal =
+        document.getElementById('valor-subtotal');
+
+
+    selectProduto.addEventListener(
+        'change',
+        function () {
+
+            const option =
+                this.options[this.selectedIndex];
+
+            const estoque =
+                option.dataset.estoque;
+
+            const preco =
+                option.dataset.preco;
+
+
+            if (estoque !== undefined && estoque !== "") {
+
+                valorEstoque.textContent =
+                    estoque;
+
+                infoEstoque.hidden =
+                    false;
+
+
+                if (preco !== undefined && preco !== "") {
+
+                    inputPreco.value =
+                        parseFloat(preco).toFixed(2);
+
+                }
+
+            } else {
+
+                infoEstoque.hidden =
+                    true;
+
             }
-        } else {
-            infoEstoque.hidden = true;
-        }
 
-        atualizarSubtotal();
-    });
+
+            atualizarSubtotal();
+
+        }
+    );
+
 
     function atualizarSubtotal() {
-        const qtd = parseFloat(inputQuantidade.value) || 0;
-        const preco = parseFloat(inputPreco.value) || 0;
-        const total = qtd * preco;
+
+        const qtd =
+            parseFloat(inputQuantidade.value) || 0;
+
+        const preco =
+            parseFloat(inputPreco.value) || 0;
+
+        const total =
+            qtd * preco;
+
 
         if (qtd > 0 && preco > 0) {
-            valorSubtotal.textContent = total.toLocaleString(
-                'pt-BR',
-                {
-                    style: 'currency',
-                    currency: 'BRL'
-                }
-            );
 
-            infoSubtotal.hidden = false;
+            valorSubtotal.textContent =
+                total.toLocaleString(
+                    'pt-BR',
+                    {
+                        style: 'currency',
+                        currency: 'BRL'
+                    }
+                );
+
+            infoSubtotal.hidden =
+                false;
+
         } else {
-            infoSubtotal.hidden = true;
+
+            infoSubtotal.hidden =
+                true;
+
         }
+
     }
+
 
     inputQuantidade.addEventListener(
         'input',
         atualizarSubtotal
     );
 
+
     inputPreco.addEventListener(
         'input',
         atualizarSubtotal
     );
+
 </script>
+
 {% endblock %}
