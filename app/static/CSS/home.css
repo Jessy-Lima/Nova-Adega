@@ -1,4 +1,6 @@
-/* RESET */
+/* =========================================
+   RESET
+========================================= */
 
 * {
     margin: 0;
@@ -7,40 +9,66 @@
 }
 
 
-/* CORPO */
+/* =========================================
+   CORES
+========================================= */
+
+:root {
+    --fundo: #121212;
+    --card: #1E1E1E;
+    --botao: #FDE68A;
+    --destaque: #FEF3C7;
+    --texto: #F9FAFB;
+    --borda: #333333;
+}
+
+
+/* =========================================
+   CORPO
+========================================= */
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #121212;
-    color: #F9FAFB;
+    background-color: var(--fundo);
+    color: var(--texto);
     min-height: 100vh;
 }
 
 
-/* NAVBAR */
+/* =========================================
+   NAVBAR
+========================================= */
 
 .navbar {
-    background-color: #1E1E1E;
+    width: 100%;
+    min-height: 72px;
+
+    background-color: var(--card);
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    padding: 18px 8%;
+    padding: 0 8%;
 
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--borda);
 }
 
 
-/* LOGO */
+/* =========================================
+   LOGO
+========================================= */
 
 .logo h2 {
-    color: #FDE68A;
+    color: var(--botao);
     font-size: 24px;
+    white-space: nowrap;
 }
 
 
-/* MENU */
+/* =========================================
+   MENU
+========================================= */
 
 .menu {
     display: flex;
@@ -49,79 +77,85 @@ body {
 }
 
 
-/* LINKS */
+/* =========================================
+   LINKS
+========================================= */
 
 .menu a {
-    color: #F9FAFB;
-
+    color: var(--texto);
     text-decoration: none;
-
     font-size: 16px;
 
-    transition: 0.3s;
+    padding: 8px 0;
+
+    transition: 0.25s ease;
 }
 
 
 .menu a:hover {
-    color: #FDE68A;
+    color: var(--botao);
 }
 
 
-/* BOTÃO SAIR */
+/* =========================================
+   BOTÃO SAIR
+========================================= */
 
 .menu .btn-sair {
-    background-color: #FDE68A;
-
-    color: #121212;
+    background-color: var(--botao);
+    color: var(--fundo);
 
     padding: 10px 18px;
 
     border-radius: 8px;
 
     font-weight: bold;
-
-    transition: 0.3s;
 }
 
 
 .menu .btn-sair:hover {
-    background-color: #FEF3C7;
-
-    color: #121212;
+    background-color: var(--destaque);
+    color: var(--fundo);
 
     transform: translateY(-2px);
 }
 
 
-/* CONTAINER */
+/* =========================================
+   CONTAINER
+========================================= */
 
 .container {
     width: 85%;
-
     max-width: 1400px;
 
-    margin: auto;
+    margin: 0 auto;
 
-    padding: 55px 0;
+    padding: 50px 0;
 }
 
 
-/* BOAS-VINDAS */
+/* =========================================
+   BOAS-VINDAS
+========================================= */
 
 .boas-vindas {
-    background-color: #1E1E1E;
+    background-color: var(--card);
 
     padding: 30px;
 
     border-radius: 15px;
 
-    margin-bottom: 50px;
+    margin-bottom: 45px;
 
-    border-left: 5px solid #FDE68A;
+    border: 1px solid var(--borda);
+    border-left: 5px solid var(--botao);
 }
 
 
 .boas-vindas h1 {
+    color: var(--texto);
+
     font-size: 30px;
 
     margin-bottom: 10px;
@@ -129,6 +163,7 @@ body {
 
 
 .boas-vindas p {
+    color: var(--texto);
     opacity: 0.7;
 }
 
@@ -138,86 +173,91 @@ body {
 ========================================= */
 
 .titulo-secao {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 
 .titulo-secao h2 {
-    color: #FDE68A;
+    color: var(--botao);
 
-    font-size: 30px;
+    font-size: 28px;
 
     margin-bottom: 8px;
 }
 
 
 .titulo-secao p {
-    color: #F9FAFB;
+    color: var(--texto);
 
     opacity: 0.65;
 }
 
 
 /* =========================================
-   CATEGORIAS - UMA ÚNICA LINHA
+   BARRA DE CATEGORIAS
 ========================================= */
 
 .categorias {
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
-
     width: 100%;
+
+    display: flex;
+    align-items: stretch;
+
+    gap: 15px;
 
     overflow-x: auto;
 
-    padding: 10px 0 20px 0;
+    padding: 8px 2px 18px;
+
+    scroll-behavior: smooth;
 }
 
 
 /* =========================================
-   CATEGORIA
+   CARDS DAS CATEGORIAS
 ========================================= */
 
 .card-categoria {
-    background-color: #1E1E1E;
+    background-color: var(--card);
 
-    color: #F9FAFB;
+    color: var(--texto);
 
     text-decoration: none;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    gap: 12px;
+    gap: 10px;
 
-    padding: 18px 24px;
+    min-width: 170px;
+
+    padding: 16px 20px;
+
+    border: 1px solid var(--borda);
 
     border-radius: 10px;
 
-    border: 1px solid transparent;
-
     white-space: nowrap;
 
-    min-width: max-content;
-
-    transition: 0.3s;
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease;
 }
 
 
-/* HOVER */
+/* =========================================
+   HOVER DA CATEGORIA
+========================================= */
 
 .card-categoria:hover {
-    background-color: #FDE68A;
+    background-color: var(--botao);
 
-    color: #121212;
+    color: var(--fundo);
 
-    border-color: #FDE68A;
+    border-color: var(--botao);
 
     transform: translateY(-3px);
 }
@@ -228,28 +268,27 @@ body {
 ========================================= */
 
 .icone {
-    font-size: 28px;
+    font-size: 27px;
 
-    margin: 0;
+    flex-shrink: 0;
 }
 
 
 /* =========================================
-   TÍTULO DA CATEGORIA
+   NOME DA CATEGORIA
 ========================================= */
 
 .card-categoria h3 {
     color: inherit;
 
-    font-size: 17px;
+    font-size: 16px;
 
     margin: 0;
 }
 
 
 /* =========================================
-   ESCONDE A DESCRIÇÃO
-   PARA FICAR PARECIDO COM A NAVBAR
+   DESCRIÇÃO
 ========================================= */
 
 .card-categoria p {
@@ -258,28 +297,30 @@ body {
 
 
 /* =========================================
-   SCROLLBAR DAS CATEGORIAS
+   SCROLLBAR
 ========================================= */
 
 .categorias::-webkit-scrollbar {
-    height: 6px;
+    height: 7px;
 }
 
 
 .categorias::-webkit-scrollbar-track {
-    background-color: #121212;
+    background-color: var(--fundo);
+
+    border-radius: 10px;
 }
 
 
 .categorias::-webkit-scrollbar-thumb {
-    background-color: #444;
+    background-color: #444444;
 
     border-radius: 10px;
 }
 
 
 .categorias::-webkit-scrollbar-thumb:hover {
-    background-color: #FDE68A;
+    background-color: var(--botao);
 }
 
 
@@ -287,14 +328,34 @@ body {
    RESPONSIVIDADE
 ========================================= */
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 15px 5%;
+        gap: 15px;
+    }
+
+
+    .menu {
+        gap: 18px;
+    }
+
+
+    .container {
+        width: 90%;
+    }
+
+}
+
+
+@media (max-width: 700px) {
 
     .navbar {
         flex-direction: column;
 
-        gap: 20px;
+        justify-content: center;
 
-        padding: 20px;
+        padding: 18px 20px;
     }
 
 
@@ -303,22 +364,22 @@ body {
 
         justify-content: center;
 
-        gap: 15px;
+        gap: 12px 18px;
     }
 
 
-    .container {
-        width: 90%;
+    .menu a {
+        font-size: 15px;
     }
 
 
-    .categorias {
-        justify-content: flex-start;
+    .boas-vindas {
+        padding: 25px;
     }
 
 
-    .card-categoria {
-        padding: 15px 20px;
+    .boas-vindas h1 {
+        font-size: 26px;
     }
 
 }
@@ -326,20 +387,37 @@ body {
 
 @media (max-width: 500px) {
 
-    .menu {
-        font-size: 14px;
+    .container {
+        width: 92%;
 
-        gap: 12px;
+        padding: 35px 0;
+    }
+
+
+    .titulo-secao h2 {
+        font-size: 24px;
+    }
+
+
+    .card-categoria {
+        min-width: 145px;
+
+        padding: 14px 16px;
+    }
+
+
+    .icone {
+        font-size: 23px;
+    }
+
+
+    .card-categoria h3 {
+        font-size: 15px;
     }
 
 
     .menu .btn-sair {
         padding: 8px 14px;
-    }
-
-
-    .titulo-secao h2 {
-        font-size: 26px;
     }
 
 }

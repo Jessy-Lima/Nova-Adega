@@ -1,175 +1,206 @@
-/* Reset básico */
+/* =========================================
+   RESET
+========================================= */
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  }
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* Corpo da página */
+
+/* =========================================
+   CORES DO PROJETO
+========================================= */
+
+:root {
+    --fundo: #121212;
+    --card: #1E1E1E;
+    --botao: #FDE68A;
+    --destaque: #FEF3C7;
+    --texto: #F9FAFB;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
 
 body {
-font-family: Arial, sans-serif;
-
-
-background-color: #121212;
-
-color: #F9FAFB;
-
-min-height: 100vh;
-
-
+    font-family: Arial, sans-serif;
+    background-color: var(--fundo);
+    color: var(--texto);
+    min-height: 100vh;
 }
 
-/* Centralização */
 
-.pagina-inicial {
-min-height: 100vh;
+/* =========================================
+   ÁREA PRINCIPAL
+========================================= */
 
+main {
+    min-height: 100vh;
 
-display: flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-justify-content: center;
-
-align-items: center;
-
-padding: 20px;
-
-
+    padding: 20px;
 }
 
-/* Card principal */
 
-.card-inicial {
-background-color: #1E1E1E;
+/* =========================================
+   CARD PRINCIPAL
+========================================= */
 
+main section {
+    width: 100%;
+    max-width: 500px;
 
-width: 100%;
-max-width: 500px;
+    background-color: var(--card);
 
-padding: 50px 40px;
+    padding: 50px 40px;
 
-text-align: center;
+    border-radius: 16px;
 
-border-radius: 15px;
+    text-align: center;
 
-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border: 1px solid #333;
 
-
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
-/* Logo */
 
-.logo {
-font-size: 55px;
+/* =========================================
+   ÍCONE
+========================================= */
 
+main section > div:first-child {
+    width: 85px;
+    height: 85px;
 
-margin-bottom: 20px;
+    margin: 0 auto 25px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--botao);
+
+    border-radius: 50%;
+
+    font-size: 42px;
+
+    box-shadow:
+        0 5px 20px rgba(253, 230, 138, 0.15);
 }
 
-/* Título */
 
-.card-inicial h1 {
-color: #FDE68A;
+/* =========================================
+   TÍTULO
+========================================= */
 
+main section h1 {
+    color: var(--botao);
 
-font-size: 32px;
+    font-size: 32px;
 
-margin-bottom: 15px;
-
-
+    margin-bottom: 15px;
 }
 
-/* Texto */
 
-.card-inicial p {
-color: #F9FAFB;
+/* =========================================
+   DESCRIÇÃO
+========================================= */
 
+main section p {
+    color: var(--texto);
 
-opacity: 0.75;
+    opacity: 0.75;
 
-font-size: 17px;
+    font-size: 17px;
 
-line-height: 1.6;
+    line-height: 1.6;
 
-margin-bottom: 35px;
-
-
+    margin-bottom: 35px;
 }
 
-/* Área dos botões */
 
-.botoes {
-display: flex;
+/* =========================================
+   ÁREA DO BOTÃO
+========================================= */
 
-
-flex-direction: column;
-
-gap: 15px;
-
-
+main section > div:last-child {
+    width: 100%;
 }
 
-/* Botões */
 
-.btn {
-display: block;
+/* =========================================
+   BOTÃO ENTRAR
+========================================= */
 
+main section a {
+    width: 100%;
 
-padding: 14px;
+    display: block;
 
-border-radius: 8px;
+    padding: 14px 20px;
 
-text-decoration: none;
+    background-color: var(--botao);
 
-font-weight: bold;
+    color: var(--fundo);
 
-font-size: 16px;
+    text-decoration: none;
 
-transition: 0.3s;
+    font-size: 16px;
 
+    font-weight: bold;
 
+    border-radius: 8px;
+
+    transition: 0.3s;
 }
 
-/* Botão Entrar */
 
-.btn-entrar {
-background-color: #FDE68A;
+main section a:hover {
+    background-color: var(--destaque);
 
+    transform: translateY(-2px);
 
-color: #121212;
-
-
+    box-shadow:
+        0 6px 18px rgba(253, 230, 138, 0.15);
 }
 
-.btn-entrar:hover {
-background-color: #FEF3C7;
 
-
-transform: translateY(-2px);
-
-
+main section a:active {
+    transform: translateY(0);
 }
 
-/* Botão Criar Conta */
 
-.btn-cadastro {
-border: 2px solid #FDE68A;
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
 
+@media (max-width: 600px) {
 
-color: #FDE68A;
-
-background-color: transparent;
-
-
-}
-
-.btn-cadastro:hover {
-background-color: #FDE68A;
+    main {
+        padding: 15px;
+    }
 
 
-color: #121212;
+    main section {
+        padding: 40px 25px;
+    }
 
+
+    main section h1 {
+        font-size: 26px;
+    }
+
+
+    main section p {
+        font-size: 15px;
+    }
 
 }
