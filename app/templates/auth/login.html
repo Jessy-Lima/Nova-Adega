@@ -3,30 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+
+    <title>Login | Nova Adega</title>
+
+    <link rel="stylesheet" href="/static/css/login.css">
 </head>
+
 <body>
-    
-    <h1>Entrar no Sistema</h1>
-    <!-- Exibe mensagem de erro se existir -->
-    {% if erro %}
-        <p style="color: red;">{{ erro }}</p>
-    {% endif %}
 
-    <!-- Exibe mensagem de confirmação após cadastro -->
-    {% if request.query_params.get("cadastro") == "ok" %}
-        <p style="color: green;">Cadastro realizado! faça login.</p>
-    {% endif %}    
-    
-    <form action="/auth/login" method="post">
-        Email: <input type="email" name="email" required>
-        <br><br>
-        Senha: <input type="password" name="senha">
-        <br><br>
-        <button type="submit">Entrar</button>
-    </form>
+    <main class="login-container">
 
-    <p>Não tem conta? <a href="/auth/cadastro">Cadastre-se</a></p>
+        <section class="login-card">
+
+            <div class="login-header">
+                <h1>Nova Adega</h1>
+                <p>Entre no sistema</p>
+            </div>
+
+
+            <!-- Mensagem de erro -->
+            {% if erro %}
+                <div class="alerta erro">
+                    {{ erro }}
+                </div>
+            {% endif %}
+
+
+            <!-- Mensagem de confirmação -->
+            {% if request.query_params.get("cadastro") == "ok" %}
+                <div class="alerta sucesso">
+                    Cadastro realizado! Faça login.
+                </div>
+            {% endif %}
+
+
+            <form action="/auth/login" method="post">
+
+                <div class="campo">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="Digite sua senha"
+                        required
+                    >
+
+                </div>
+
+
+                <button type="submit" class="btn-login">
+                    Entrar
+                </button>
+
+            </form>
+
+
+            <p class="cadastro">
+
+                Não tem conta?
+
+                <a href="/auth/cadastro">
+                    Cadastre-se
+                </a>
+
+            </p>
+
+        </section>
+
+    </main>
 
 </body>
 </html>

@@ -1,0 +1,175 @@
+/* Reset básico */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+
+/* Corpo da página */
+
+body {
+font-family: Arial, sans-serif;
+
+
+background-color: #121212;
+
+color: #F9FAFB;
+
+min-height: 100vh;
+
+
+}
+
+/* Centralização */
+
+.pagina-inicial {
+min-height: 100vh;
+
+
+display: flex;
+
+justify-content: center;
+
+align-items: center;
+
+padding: 20px;
+
+
+}
+
+/* Card principal */
+
+.card-inicial {
+background-color: #1E1E1E;
+
+
+width: 100%;
+max-width: 500px;
+
+padding: 50px 40px;
+
+text-align: center;
+
+border-radius: 15px;
+
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+
+
+}
+
+/* Logo */
+
+.logo {
+font-size: 55px;
+
+
+margin-bottom: 20px;
+
+}
+
+/* Título */
+
+.card-inicial h1 {
+color: #FDE68A;
+
+
+font-size: 32px;
+
+margin-bottom: 15px;
+
+
+}
+
+/* Texto */
+
+.card-inicial p {
+color: #F9FAFB;
+
+
+opacity: 0.75;
+
+font-size: 17px;
+
+line-height: 1.6;
+
+margin-bottom: 35px;
+
+
+}
+
+/* Área dos botões */
+
+.botoes {
+display: flex;
+
+
+flex-direction: column;
+
+gap: 15px;
+
+
+}
+
+/* Botões */
+
+.btn {
+display: block;
+
+
+padding: 14px;
+
+border-radius: 8px;
+
+text-decoration: none;
+
+font-weight: bold;
+
+font-size: 16px;
+
+transition: 0.3s;
+
+
+}
+
+/* Botão Entrar */
+
+.btn-entrar {
+background-color: #FDE68A;
+
+
+color: #121212;
+
+
+}
+
+.btn-entrar:hover {
+background-color: #FEF3C7;
+
+
+transform: translateY(-2px);
+
+
+}
+
+/* Botão Criar Conta */
+
+.btn-cadastro {
+border: 2px solid #FDE68A;
+
+
+color: #FDE68A;
+
+background-color: transparent;
+
+
+}
+
+.btn-cadastro:hover {
+background-color: #FDE68A;
+
+
+color: #121212;
+
+
+}

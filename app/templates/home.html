@@ -1,15 +1,193 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pós - login</title>
-</head>
-<body>
-    <h1>Olá, {{ usuario.nome }}</h1>
-    <p>Perfil: {{ usuario.role }}</p>
 
-    <a href="/auth/logout">Sair</a>
+
+<title>Nova Adega - Início</title>
+
+<link rel="stylesheet" href="/static/css/home.css">
+
+
+</head>
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<header class="navbar">
+
+    <div class="logo">
+        <h2>🍷 Nova Adega</h2>
+    </div>
+
+
+    <nav class="menu">
+
+        <a href="/pdv">
+            PDV
+        </a>
+
+        <a href="/movimentacoes">
+            Histórico
+        </a>
+
+        <a href="/produtos">
+            Produtos
+        </a>
+
+        <a href="/categorias">
+            Categorias
+        </a>
+
+        <a href="/auth/logout" class="btn-sair">
+            Sair
+        </a>
+
+    </nav>
+
+</header>
+
+
+<!-- CONTEÚDO PRINCIPAL -->
+
+<main class="container">
+
+
+    <!-- BEM-VINDO -->
+
+    <section class="boas-vindas">
+
+        <div>
+
+            <h1>
+                Olá, {{ usuario.nome }} 👋
+            </h1>
+
+            <p>
+                Perfil: <strong>{{ usuario.role }}</strong>
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- CATEGORIAS -->
+
+    <section class="secao-categorias">
+
+        <div class="titulo-secao">
+
+            <h2>Categorias</h2>
+
+            <p>
+                Escolha uma categoria para visualizar os produtos.
+            </p>
+
+        </div>
+
+
+        <div class="categorias">
+
+
+            <!-- CERVEJAS -->
+
+            <a href="/produtos/categoria/cerveja" class="card-categoria">
+
+                <div class="icone">
+                    🍺
+                </div>
+
+                <h3>Cervejas</h3>
+
+                <p>
+                    Veja todas as cervejas disponíveis.
+                </p>
+
+            </a>
+
+
+            <!-- DESTILADOS -->
+
+            <a href="/produtos/categoria/destilados" class="card-categoria">
+
+                <div class="icone">
+                    🥃
+                </div>
+
+                <h3>Destilados</h3>
+
+                <p>
+                    Whisky, vodka, gin e muito mais.
+                </p>
+
+            </a>
+
+
+            <!-- VINHOS -->
+
+            <a href="/produtos/categoria/vinhos" class="card-categoria">
+
+                <div class="icone">
+                    🍷
+                </div>
+
+                <h3>Vinhos</h3>
+
+                <p>
+                    Vinhos tintos, brancos e rosés.
+                </p>
+
+            </a>
+
+
+            <!-- REFRIGERANTES -->
+
+            <a href="/produtos/categoria/refrigerantes" class="card-categoria">
+
+                <div class="icone">
+                    🥤
+                </div>
+
+                <h3>Refrigerantes</h3>
+
+                <p>
+                    Bebidas sem álcool.
+                </p>
+
+            </a>
+
+
+            <!-- OUTROS -->
+
+            <a href="/produtos/categoria/outros" class="card-categoria">
+
+                <div class="icone">
+                    🛒
+                </div>
+
+                <h3>Outros</h3>
+
+                <p>
+                    Outros produtos disponíveis.
+                </p>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
 
 </body>
+
 </html>
