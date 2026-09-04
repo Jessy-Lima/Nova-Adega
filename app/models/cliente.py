@@ -17,4 +17,4 @@ class Cliente(Base):
     vendas = relationship("Venda", back_populates="cliente")
 
     def __repr__(self):
-        return f"<Cliente id={self.id} nome={self.nome} associado={self.is_associado}>"
+        return f"<Cliente id={self.id} nome={self.nome} >"
