@@ -312,6 +312,13 @@ PDV — Nova Adega
                         id="input-obs"
                     >
 
+                    <!-- VALOR DO DESCONTO PARA O JAVASCRIPT -->
+                    <input
+                        type="hidden"
+                        id="config-desconto"
+                        value="{{ desconto_associado|default(0) }}"
+                    >
+
 
                     <button
                         class="btn-finalizar"
@@ -348,14 +355,21 @@ let clienteAtual = {
 };
 
 
-/*
-    Valor do desconto definido pelo Python.
+/* =========================================
+   CONFIGURAÇÃO DO DESCONTO
+========================================= */
 
-    O Jinja coloca o valor dentro do JavaScript.
+/*
+    O valor vem do Python/Jinja através
+    de um campo hidden no HTML.
+
+    Dessa forma o Jinja não fica misturado
+    diretamente com o JavaScript.
 */
 
-const DESCONTO_PCT =
-    Number({{ desconto_associado|default(0)|tojson }});
+const DESCONTO_PCT = Number(
+    document.getElementById('config-desconto').value
+);
 
 
 /* =========================================
