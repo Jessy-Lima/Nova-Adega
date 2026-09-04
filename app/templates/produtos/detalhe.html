@@ -1,48 +1,223 @@
-<!-- templates/produtos/detalhe.html -->
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ produto.nome }} — AAPM SENAI</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+
+{% block title %}
+
+{{ produto.nome }} — Nova Adega
+
+{% endblock %}
+
+
+
+{% block styles %}
+
+<link
+    rel="stylesheet"
+    href="/static/css/produtos.css"
+>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<main class="container">
+
+
+    <!-- MENSAGEM DE SUCESSO -->
+
     {% if request.query_params.get('editado') == 'ok' %}
-        <p style="color:green">Produto atualizado com sucesso!</p>
+
+    <div class="mensagem-sucesso">
+
+        Produto atualizado com sucesso!
+
+    </div>
+
     {% endif %}
 
-    <img src="{{ produto.imagem_url }}"
-         alt="{{ produto.nome }}"
-         width="200"
-         style="object-fit:cover">
 
-    <h1>{{ produto.nome }}</h1>
-
-    <p>Categoria: {{ produto.categoria.nome if produto.categoria else "—" }}</p>
-
-    <table border="1" cellpadding="8">
-        <tr><td><strong>Preço</strong></td>
-            <td>R$ {{ "%.2f"|format(produto.preco) }}</td></tr>
-        <tr><td><strong>Estoque atual</strong></td>
-            <td>{{ produto.estoque_atual }}</td></tr>
-    </table>
 
     {% if request.query_params.get('movimentacao') == 'ok' %}
-        <p style="color:green">Movimentação registrada com sucesso!</p>
+
+    <div class="mensagem-sucesso">
+
+        Movimentação registrada com sucesso!
+
+    </div>
+
     {% endif %}
 
-    <!-- Links de movimentação -->
-    <a href="/movimentacoes/nova?produto_id={{ produto.id }}">
-        + Registrar movimentação
-    </a>
-    &nbsp;|&nbsp;
-    <a href="/movimentacoes/produto/{{ produto.id }}">
-        Ver histórico completo
-    </a>
 
-    {% if usuario.role == 'admin' %}
-        <a href="/produtos/{{ produto.id }}/editar">Editar</a>
-    {% endif %}
 
-    <a href="/produtos">← Voltar</a>
-</body>
-</html>
+    <!-- CABEÇALHO DO PRODUTO -->
+
+    <section class="produto-detalhe">
+
+
+        <!-- IMAGEM -->
+
+        <div class="produto-detalhe-imagem">
+
+            <img
+                src="{{ produto.imagem_url }}"
+                alt="{{ produto.nome }}"
+            >
+
+        </div>
+
+
+
+        <!-- INFORMAÇÕES -->
+
+        <div class="produto-detalhe-info">
+
+
+            <div class="produto-detalhe-titulo">
+
+                <div>
+
+                    <p class="produto-categoria">
+
+                        {{
+                            produto.categoria.nome
+                            if produto.categoria
+                            else "Sem categoria"
+                        }}
+
+                    </p>
+
+
+                    <h1>
+
+                        {{ produto.nome }}
+
+                    </h1>
+
+                </div>
+
+
+                {% if usuario.role == 'admin' %}
+
+                <a
+                    href="/produtos/{{ produto.id }}/editar"
+                    class="btn-editar"
+                >
+
+                    Editar produto
+
+                </a>
+
+                {% endif %}
+
+
+            </div>
+
+
+
+            <!-- INFORMAÇÕES DO PRODUTO -->
+
+            <div class="produto-informacoes">
+
+
+                <!-- PREÇO -->
+
+                <div class="info-produto">
+
+                    <span>
+
+                        Preço
+
+                    </span>
+
+
+                    <strong class="produto-preco">
+
+                        R$
+                        {{ "%.2f"|format(produto.preco) }}
+
+                    </strong>
+
+                </div>
+
+
+
+                <!-- ESTOQUE -->
+
+                <div class="info-produto">
+
+                    <span>
+
+                        Estoque atual
+
+                    </span>
+
+
+                    <strong class="produto-estoque">
+
+                        {{ produto.estoque_atual }}
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- MOVIMENTAÇÕES -->
+
+            <div class="produto-acoes">
+
+
+                <a
+                    href="/movimentacoes/nova?produto_id={{ produto.id }}"
+                    class="btn-movimentacao"
+                >
+
+                    + Registrar movimentação
+
+                </a>
+
+
+
+                <a
+                    href="/movimentacoes/produto/{{ produto.id }}"
+                    class="btn-historico"
+                >
+
+                    Ver histórico completo
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- VOLTAR -->
+
+    <div class="voltar-pagina">
+
+        <a href="/produtos/">
+
+            ← Voltar para produtos
+
+        </a>
+
+    </div>
+
+
+</main>
+
+
+{% endblock %}

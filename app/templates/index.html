@@ -1,35 +1,71 @@
 {% extends "base.html" %}
 
-{% block title %}Bem-vindo - Nova Adega{% endblock %}
+
+{% block title %}
+Bem-vindo - Nova Adega
+{% endblock %}
+
+
+{% block styles %}
+
+<link
+    rel="stylesheet"
+    href="/static/CSS/index.css"
+>
+
+{% endblock %}
+
 
 {% block content %}
 
-<link rel="stylesheet" href="/static/css/index.css">
-<main>
+<main class="index-container">
 
-    <section>
 
-        <div>
+    <section class="index-card">
+
+
+        <!-- ÍCONE -->
+
+        <div class="index-icone">
+
             🍷
+
         </div>
 
-        <h1>Sistema da Nova Adega</h1>
+
+        <!-- TÍTULO -->
+
+        <h1>
+            Sistema da Nova Adega
+        </h1>
+
+
+        <!-- DESCRIÇÃO -->
 
         <p>
             Faça login para acessar o sistema.
         </p>
 
-        <div>
 
-            <a href="/auth/login">
+        <!-- BOTÃO -->
+
+        <div class="index-botoes">
+
+            <a
+                href="/auth/login"
+                class="btn-entrar"
+            >
+
                 Entrar
+
             </a>
 
         </div>
 
+
     </section>
+
 
 </main>
 
 {% endblock %}
-

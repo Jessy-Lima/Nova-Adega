@@ -1,84 +1,332 @@
-<!-- templates/usuarios/form.html -->
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <!--
-        editando é None na criação e o objeto Usuario na edição.
-        O template usa isso para adaptar título, action e campos.
-    -->
-    <title>{{ "Editar" if editando else "Novo" }} Usuário — Estoque</title>
-</head>
-<body>
-    <h1>{{ "Editar usuário" if editando else "Novo usuário" }}</h1>
 
-    {% if erro %}
-        <p style="color: red;">{{ erro }}</p>
-    {% endif %}
+{% block title %}
 
-    <!--
-        action muda dinamicamente:
-        - criação → POST /usuarios/novo
-        - edição  → POST /usuarios/{id}/editar
-    -->
-    <form action="{{ '/usuarios/' + editando.id|string + '/editar' if editando else '/usuarios/novo' }}"
-          method="post">
+{{ "Editar usuário" if editando else "Novo usuário" }} — Nova Adega
 
-        <label>Nome:
-            <!--
-                value recupera do objeto na edição,
-                ou do dicionário "valores" se houve erro na criação
-            -->
-            <input type="text"
-                   name="nome"
-                   value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
-                   required>
-        </label>
-        <br>
+{% endblock %}
 
-        <label>E-mail:
-            <input type="email"
-                   name="email"
-                   value="{{ editando.email if editando else (valores.email if valores else '') }}"
-                   required>
-        </label>
-        <br>
 
-        <label>Senha:
-            <!--
-                Na edição o campo é opcional — deixar vazio mantém a senha atual.
-                Na criação é obrigatório.
-            -->
-            <input type="password"
-                   name="senha"
-                   {{ "placeholder='Deixe vazio para não alterar'" if editando else "required minlength='6'" }}>
-        </label>
-        <br>
 
-        <label>Perfil de acesso:
-            <select name="role">
-                <!--
-                    selected é definido comparando com o valor atual.
-                    Na criação usa "valores.role" se voltou com erro,
-                    senão deixa "operador" como padrão.
-                -->
-                <option value="operador"
-                    {{ 'selected' if (editando and editando.role == 'operador') or (valores and valores.role == 'operador') else '' }}>
-                    Operador
-                </option>
-                <option value="admin"
-                    {{ 'selected' if (editando and editando.role == 'admin') or (valores and valores.role == 'admin') else '' }}>
-                    Administrador
-                </option>
-            </select>
-        </label>
-        <br>
+{% block styles %}
 
-        <button type="submit">
-            {{ "Salvar alterações" if editando else "Criar usuário" }}
-        </button>
-        <a href="/usuarios">Cancelar</a>
-    </form>
-</body>
-</html>
+<link
+    rel="stylesheet"
+    href="/static/css/usuarios.css"
+>
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+<main class="container">
+
+
+    <section class="form-usuario">
+
+
+        <!-- TÍTULO -->
+
+        <div class="form-titulo">
+
+            <h1>
+
+                {{
+                    "Editar usuário"
+                    if editando
+                    else "Novo usuário"
+                }}
+
+            </h1>
+
+
+            <p>
+
+                {{
+                    "Atualize as informações do usuário."
+                    if editando
+                    else "Cadastre um novo usuário no sistema."
+                }}
+
+            </p>
+
+        </div>
+
+
+
+        <!-- MENSAGEM DE ERRO -->
+
+        {% if erro %}
+
+        <div class="mensagem-erro">
+
+            {{ erro }}
+
+        </div>
+
+        {% endif %}
+
+
+
+        <!-- FORMULÁRIO -->
+
+        <form
+
+            action="{{
+                '/usuarios/' + editando.id|string + '/editar'
+                if editando
+                else '/usuarios/novo'
+            }}"
+
+            method="post"
+
+            class="usuario-form"
+
+        >
+
+
+            <!-- NOME -->
+
+            <div class="form-grupo">
+
+                <label for="nome">
+                    Nome completo
+                </label>
+
+
+                <input
+
+                    type="text"
+
+                    id="nome"
+
+                    name="nome"
+
+                    value="{{
+                        editando.nome
+                        if editando
+                        else (valores.nome if valores else '')
+                    }}"
+
+                    placeholder="Digite o nome do usuário"
+
+                    required
+
+                >
+
+            </div>
+
+
+
+            <!-- E-MAIL -->
+
+            <div class="form-grupo">
+
+                <label for="email">
+                    E-mail
+                </label>
+
+
+                <input
+
+                    type="email"
+
+                    id="email"
+
+                    name="email"
+
+                    value="{{
+                        editando.email
+                        if editando
+                        else (valores.email if valores else '')
+                    }}"
+
+                    placeholder="exemplo@email.com"
+
+                    required
+
+                >
+
+            </div>
+
+
+
+            <!-- SENHA -->
+
+            <div class="form-grupo">
+
+                <label for="senha">
+
+                    Senha
+
+                    {% if editando %}
+
+                    <span>
+                        (deixe vazio para manter a senha atual)
+                    </span>
+
+                    {% endif %}
+
+                </label>
+
+
+                <input
+
+                    type="password"
+
+                    id="senha"
+
+                    name="senha"
+
+                    {% if editando %}
+
+                    placeholder="Deixe vazio para não alterar"
+
+                    {% else %}
+
+                    placeholder="Mínimo de 6 caracteres"
+
+                    minlength="6"
+
+                    required
+
+                    {% endif %}
+
+                >
+
+            </div>
+
+
+
+            <!-- PERFIL -->
+
+            <div class="form-grupo">
+
+                <label for="role">
+                    Perfil de acesso
+                </label>
+
+
+                <select
+
+                    name="role"
+
+                    id="role"
+
+                    required
+
+                >
+
+
+                    <!-- OPERADOR -->
+
+                    <option
+
+                        value="operador"
+
+                        {{
+                            'selected'
+                            if
+                            (
+                                (editando and editando.role == 'operador')
+                                or
+                                (not editando and
+                                (
+                                    not valores
+                                    or valores.role == 'operador'
+                                ))
+                            )
+                            else ''
+                        }}
+
+                    >
+
+                        Operador
+
+                    </option>
+
+
+
+                    <!-- ADMIN -->
+
+                    <option
+
+                        value="admin"
+
+                        {{
+                            'selected'
+                            if
+                            (
+                                (editando and editando.role == 'admin')
+                                or
+                                (valores and valores.role == 'admin')
+                            )
+                            else ''
+                        }}
+
+                    >
+
+                        Administrador
+
+                    </option>
+
+
+                </select>
+
+            </div>
+
+
+
+            <!-- BOTÕES -->
+
+            <div class="form-botoes">
+
+
+                <button
+
+                    type="submit"
+
+                    class="btn-salvar"
+
+                >
+
+                    {{
+                        "Salvar alterações"
+                        if editando
+                        else "Criar usuário"
+                    }}
+
+                </button>
+
+
+
+                <a
+
+                    href="/usuarios/"
+
+                    class="btn-cancelar"
+
+                >
+
+                    Cancelar
+
+                </a>
+
+
+            </div>
+
+
+        </form>
+
+
+    </section>
+
+
+</main>
+
+
+{% endblock %}

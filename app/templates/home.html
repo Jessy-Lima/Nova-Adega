@@ -1,36 +1,66 @@
 {% extends "base.html" %}
 
-{% block title %}Nova Adega - Início{% endblock %}
+{% block title %}
+Nova Adega - Início
+{% endblock %}
+
+
+{% block styles %}
+
+<link
+    rel="stylesheet"
+    href="/static/CSS/home.css"
+>
+
+{% endblock %}
+
 
 {% block content %}
-<link rel="stylesheet" href="/static/CSS/home.css">
 
-<link rel="stylesheet" href="/static/css/home.css">
-<main>
+<main class="container">
 
-    <!-- CATEGORIAS -->
 
-    <section>
+    <!-- =========================
+         CATEGORIAS
+    ========================== -->
 
-        <div>
-            <h2>Categorias</h2>
+    <section class="secao-categorias">
+
+
+        <!-- TÍTULO -->
+
+        <div class="titulo-secao">
+
+            <h2>
+                Categorias
+            </h2>
 
             <p>
                 Escolha uma categoria para visualizar os produtos.
             </p>
+
         </div>
 
-        <div>
+
+        <!-- CATEGORIAS -->
+
+        <div class="categorias">
+
 
             <!-- CERVEJAS -->
 
-            <a href="/produtos/categoria/cerveja">
+            <a
+                href="/produtos/categoria/cerveja"
+                class="card-categoria"
+            >
 
-                <div>
+                <div class="icone">
                     🍺
                 </div>
 
-                <h3>Cervejas</h3>
+                <h3>
+                    Cervejas
+                </h3>
 
                 <p>
                     Veja todas as cervejas disponíveis.
@@ -38,15 +68,22 @@
 
             </a>
 
+
+
             <!-- DESTILADOS -->
 
-            <a href="/produtos/categoria/destilados">
+            <a
+                href="/produtos/categoria/destilados"
+                class="card-categoria"
+            >
 
-                <div>
+                <div class="icone">
                     🥃
                 </div>
 
-                <h3>Destilados</h3>
+                <h3>
+                    Destilados
+                </h3>
 
                 <p>
                     Whisky, vodka, gin e muito mais.
@@ -54,15 +91,22 @@
 
             </a>
 
+
+
             <!-- VINHOS -->
 
-            <a href="/produtos/categoria/vinhos">
+            <a
+                href="/produtos/categoria/vinhos"
+                class="card-categoria"
+            >
 
-                <div>
+                <div class="icone">
                     🍷
                 </div>
 
-                <h3>Vinhos</h3>
+                <h3>
+                    Vinhos
+                </h3>
 
                 <p>
                     Vinhos tintos, brancos e rosés.
@@ -70,15 +114,22 @@
 
             </a>
 
+
+
             <!-- REFRIGERANTES -->
 
-            <a href="/produtos/categoria/refrigerantes">
+            <a
+                href="/produtos/categoria/refrigerantes"
+                class="card-categoria"
+            >
 
-                <div>
+                <div class="icone">
                     🥤
                 </div>
 
-                <h3>Refrigerantes</h3>
+                <h3>
+                    Refrigerantes
+                </h3>
 
                 <p>
                     Bebidas sem álcool.
@@ -86,15 +137,22 @@
 
             </a>
 
+
+
             <!-- OUTROS -->
 
-            <a href="/produtos/categoria/outros">
+            <a
+                href="/produtos/categoria/outros"
+                class="card-categoria"
+            >
 
-                <div>
+                <div class="icone">
                     🛒
                 </div>
 
-                <h3>Outros</h3>
+                <h3>
+                    Outros
+                </h3>
 
                 <p>
                     Outros produtos disponíveis.
@@ -102,9 +160,11 @@
 
             </a>
 
+
         </div>
 
     </section>
+
 
 </main>
 

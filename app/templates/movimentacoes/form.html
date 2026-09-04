@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+
 {% block title %}
 Nova Movimentação — Nova Adega
 {% endblock %}
@@ -9,7 +10,7 @@ Nova Movimentação — Nova Adega
 
 <link
     rel="stylesheet"
-    href="/static/CSS/movimentacoes.css"
+    href="/static/css/movimentacoes.css"
 >
 
 {% endblock %}
@@ -18,10 +19,12 @@ Nova Movimentação — Nova Adega
 {% block content %}
 
 
-<main class="container">
+<main class="container movimentacoes-page">
 
     <div class="form-movimentacao">
 
+
+        <!-- TÍTULO -->
 
         <div class="form-titulo">
 
@@ -36,6 +39,8 @@ Nova Movimentação — Nova Adega
         </div>
 
 
+        <!-- MENSAGEM DE ERRO -->
+
         {% if erro %}
 
         <div class="mensagem-erro">
@@ -47,6 +52,7 @@ Nova Movimentação — Nova Adega
         {% endif %}
 
 
+        <!-- FORMULÁRIO -->
 
         <form
             action="/movimentacoes/nova"
@@ -84,8 +90,7 @@ Nova Movimentação — Nova Adega
                         {{ 'selected' if produto_id == p.id else '' }}
                     >
 
-                        {{ p.nome }} — estoque:
-                        {{ p.estoque_atual }}
+                        {{ p.nome }} — estoque: {{ p.estoque_atual }}
 
                     </option>
 
@@ -96,8 +101,7 @@ Nova Movimentação — Nova Adega
             </div>
 
 
-
-            <!-- ESTOQUE -->
+            <!-- ESTOQUE ATUAL -->
 
             <div
                 id="info-estoque"
@@ -112,7 +116,6 @@ Nova Movimentação — Nova Adega
                 </strong>
 
             </div>
-
 
 
             <!-- TIPO -->
@@ -154,7 +157,6 @@ Nova Movimentação — Nova Adega
             </div>
 
 
-
             <!-- QUANTIDADE E PREÇO -->
 
             <div class="form-linha">
@@ -177,7 +179,6 @@ Nova Movimentação — Nova Adega
                     >
 
                 </div>
-
 
 
                 <div class="form-grupo">
@@ -203,7 +204,6 @@ Nova Movimentação — Nova Adega
             </div>
 
 
-
             <!-- SUBTOTAL -->
 
             <div
@@ -219,7 +219,6 @@ Nova Movimentação — Nova Adega
                 </strong>
 
             </div>
-
 
 
             <!-- OBSERVAÇÃO -->
@@ -248,7 +247,6 @@ Nova Movimentação — Nova Adega
             </div>
 
 
-
             <!-- BOTÕES -->
 
             <div class="form-botoes">
@@ -262,7 +260,6 @@ Nova Movimentação — Nova Adega
                     Registrar movimentação
 
                 </button>
-
 
 
                 <a
@@ -330,6 +327,8 @@ Nova Movimentação — Nova Adega
         );
 
 
+    /* MOSTRA O ESTOQUE E PREENCHE O PREÇO */
+
     selectProduto.addEventListener(
         'change',
         function () {
@@ -346,7 +345,10 @@ Nova Movimentação — Nova Adega
                 option.dataset.preco;
 
 
-            if (estoque !== undefined) {
+            if (
+                estoque !== undefined &&
+                estoque !== ""
+            ) {
 
                 valorEstoque.textContent =
                     estoque;
@@ -355,7 +357,10 @@ Nova Movimentação — Nova Adega
                     false;
 
 
-                if (preco !== undefined) {
+                if (
+                    preco !== undefined &&
+                    preco !== ""
+                ) {
 
                     inputPreco.value =
                         parseFloat(
@@ -378,12 +383,15 @@ Nova Movimentação — Nova Adega
     );
 
 
+    /* CALCULA O SUBTOTAL */
+
     function atualizarSubtotal() {
 
         const qtd =
             parseFloat(
                 inputQuantidade.value
             ) || 0;
+
 
         const preco =
             parseFloat(
@@ -395,7 +403,10 @@ Nova Movimentação — Nova Adega
             qtd * preco;
 
 
-        if (qtd > 0 && preco > 0) {
+        if (
+            qtd > 0 &&
+            preco > 0
+        ) {
 
             valorSubtotal.textContent =
                 total.toLocaleString(
@@ -405,6 +416,7 @@ Nova Movimentação — Nova Adega
                         currency: 'BRL'
                     }
                 );
+
 
             infoSubtotal.hidden =
                 false;
@@ -429,6 +441,19 @@ Nova Movimentação — Nova Adega
         'input',
         atualizarSubtotal
     );
+
+
+    /* CASO JÁ EXISTA UM PRODUTO SELECIONADO */
+
+    if (
+        selectProduto.value
+    ) {
+
+        selectProduto.dispatchEvent(
+            new Event('change')
+        );
+
+    }
 
 </script>
 
