@@ -575,3 +575,263 @@ tbody tr:last-child td {
     }
 
 }
+
+/* =========================================
+   FORMULÁRIO DE MOVIMENTAÇÃO
+========================================= */
+
+.form-movimentacao {
+    width: 100%;
+    max-width: 700px;
+
+    margin: 0 auto;
+
+    background-color: #1E1E1E;
+
+    border: 1px solid #333;
+
+    border-radius: 16px;
+
+    padding: 35px;
+}
+
+
+.form-titulo {
+    margin-bottom: 30px;
+}
+
+
+.form-titulo h1 {
+    color: #FDE68A;
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+}
+
+
+.form-titulo p {
+    color: #F9FAFB;
+
+    opacity: 0.7;
+}
+
+
+/* FORMULÁRIO */
+
+.movimentacao-form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+/* GRUPOS */
+
+.form-grupo {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.form-grupo label {
+    color: #FEF3C7;
+
+    font-size: 15px;
+
+    font-weight: bold;
+}
+
+
+.form-grupo label span {
+    font-weight: normal;
+
+    opacity: 0.6;
+}
+
+
+/* INPUTS E SELECTS */
+
+.form-grupo input,
+.form-grupo select {
+    width: 100%;
+
+    background-color: #121212;
+
+    color: #F9FAFB;
+
+    border: 1px solid #444;
+
+    border-radius: 9px;
+
+    padding: 13px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+
+.form-grupo input:focus,
+.form-grupo select:focus {
+    border-color: #FDE68A;
+
+    box-shadow: 0 0 0 2px rgba(253, 230, 138, 0.1);
+}
+
+
+/* QUANTIDADE E PREÇO */
+
+.form-linha {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+
+/* INFORMAÇÕES */
+
+.info-caixa {
+    background-color: #121212;
+
+    border-left: 4px solid #FDE68A;
+
+    padding: 12px 15px;
+
+    border-radius: 8px;
+
+    color: #F9FAFB;
+}
+
+
+.info-caixa strong {
+    color: #FDE68A;
+}
+
+
+.subtotal {
+    border-left-color: #FEF3C7;
+}
+
+
+/* MENSAGEM DE ERRO */
+
+.mensagem-erro {
+    background-color: #FEF3C7;
+
+    color: #121212;
+
+    padding: 13px;
+
+    border-radius: 8px;
+
+    margin-bottom: 20px;
+
+    font-weight: bold;
+}
+
+
+/* BOTÕES */
+
+.form-botoes {
+    display: flex;
+
+    gap: 15px;
+
+    margin-top: 10px;
+}
+
+
+.btn-registrar {
+    flex: 1;
+
+    background-color: #FDE68A;
+
+    color: #121212;
+
+    border: none;
+
+    padding: 14px 20px;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.btn-registrar:hover {
+    background-color: #FEF3C7;
+
+    transform: translateY(-2px);
+}
+
+
+.btn-cancelar {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 14px 25px;
+
+    background-color: transparent;
+
+    border: 1px solid #444;
+
+    border-radius: 10px;
+
+    color: #F9FAFB;
+
+    text-decoration: none;
+
+    transition: 0.3s;
+}
+
+
+.btn-cancelar:hover {
+    border-color: #FDE68A;
+
+    color: #FDE68A;
+}
+
+
+/* RESPONSIVIDADE DO FORM */
+
+@media (max-width: 600px) {
+
+    .form-movimentacao {
+        padding: 25px 20px;
+    }
+
+
+    .form-linha {
+        grid-template-columns: 1fr;
+    }
+
+
+    .form-botoes {
+        flex-direction: column;
+    }
+
+
+    .btn-cancelar {
+        width: 100%;
+    }
+
+}
