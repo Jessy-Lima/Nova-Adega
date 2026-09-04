@@ -5,10 +5,7 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
         {% block title %}Nova Adega{% endblock %}
@@ -17,10 +14,7 @@
 
     <!-- CSS PRINCIPAL -->
 
-    <link
-        rel="stylesheet"
-        href="/static/CSS/home.css"
-    >
+    <link rel="stylesheet" href="/static/CSS/home.css">
 
 
     <!-- CSS ESPECÍFICO DE CADA PÁGINA -->
@@ -33,76 +27,73 @@
 <body>
 
 
-<!-- =========================
+    <!-- =========================
      NAVBAR
 ========================= -->
 
-<nav class="navbar">
+    <nav class="navbar">
 
 
-    <!-- LOGO -->
+        <!-- LOGO -->
 
-    <div class="logo">
+        <div class="logo">
 
-        <a href="/">
+            <a href="/">
 
-            🍷 Nova Adega
+                🍷 Nova Adega
 
-        </a>
+            </a>
 
-    </div>
-
-
-
-    <!-- MENU -->
-
-    <div class="menu">
-
-        <a href="/pdv/">
-            PDV
-        </a>
-
-
-        <a href="/movimentacoes/">
-            Histórico
-        </a>
-
-
-        <a href="/produtos/">
-            Produtos
-        </a>
-
-
-        <a href="/categorias/">
-            Categorias
-        </a>
-
-
-        <a
-            href="/auth/logout"
-            class="btn-sair"
-        >
-            Sair
-        </a>
-
-    </div>
-
-
-</nav>
+        </div>
 
 
 
-<!-- =========================
+        <!-- MENU -->
+
+        <div class="menu">
+
+            <a href="/pdv/">
+                PDV
+            </a>
+
+            <a href="/movimentacoes/">
+                Histórico
+            </a>
+
+            <a href="/produtos/">
+                Produtos
+            </a>
+
+            <a href="/categorias/">
+                Categorias
+            </a>
+
+            <a href="/clientes/">
+                Clientes
+            </a>
+
+            <a href="/auth/logout" class="btn-sair">
+                Sair
+            </a>
+
+        </div>
+
+
+    </nav>
+
+
+
+    <!-- =========================
      CONTEÚDO DA PÁGINA
 ========================= -->
 
-{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 
 
 
-<!-- JAVASCRIPT -->
+    <!-- JAVASCRIPT -->
 
-{% block scripts %}{% endblock %}
+    {% block scripts %}{% endblock %}
 
 
 </body>
