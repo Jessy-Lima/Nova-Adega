@@ -9,7 +9,7 @@
         {{ "Editar cliente" if editando else "Novo cliente" }} — Nova Adega
     </title>
 
-    <link rel="stylesheet" href="/static/css/clientes.css">
+    <link rel="stylesheet" href="/static/CSS/clientes.css">
 </head>
 
 <body>
@@ -75,7 +75,7 @@
 
                 <p>
                     {{ "Atualize os dados do cliente." if editando
-                       else "Cadastre um novo cliente no sistema." }}
+                    else "Cadastre um novo cliente no sistema." }}
                 </p>
 
             </div>
@@ -87,9 +87,9 @@
 
             {% if erro %}
 
-                <div class="mensagem erro">
-                    {{ erro }}
-                </div>
+            <div class="mensagem erro">
+                {{ erro }}
+            </div>
 
             {% endif %}
 
@@ -98,11 +98,8 @@
                  FORMULÁRIO
                  ========================================= -->
 
-            <form
-                action="{{ '/clientes/' + editando.id|string + '/editar' if editando else '/clientes/novo' }}"
-                method="post"
-                class="cliente-form"
-            >
+            <form action="{{ '/clientes/' + editando.id|string + '/editar' if editando else '/clientes/novo' }}"
+                method="post" class="cliente-form">
 
                 <!-- NOME -->
 
@@ -112,15 +109,9 @@
                         Nome completo
                     </label>
 
-                    <input
-                        type="text"
-                        id="nome"
-                        name="nome"
-                        placeholder="Digite o nome completo"
-                        value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
-                        required
-                        autofocus
-                    >
+                    <input type="text" id="nome" name="nome" placeholder="Digite o nome completo"
+                        value="{{ editando.nome if editando else (valores.nome if valores else '') }}" required
+                        autofocus>
 
                 </div>
 
@@ -134,13 +125,33 @@
                         <span>(opcional)</span>
                     </label>
 
-                    <input
-                        type="text"
-                        id="telefone"
-                        name="telefone"
-                        placeholder="Ex: (11) 99999-9999"
-                        value="{{ editando.telefone if editando else (valores.telefone if valores else '') }}"
-                    >
+                    <input type="text" id="telefone" name="telefone" placeholder="Ex: (11) 99999-9999"
+                        value="{{ editando.telefone if editando else (valores.telefone if valores else '') }}">
+
+                </div>
+
+                <!-- ASSOCIADO -->
+
+                <div class="form-grupo associado-grupo">
+
+                    <label>
+                        Tipo de cliente
+                    </label>
+
+                    <label class="associado-checkbox">
+
+                        <input type="checkbox" name="is_associado" value="true" {% if editando and editando.is_associado
+                            %} checked {% endif %}>
+
+                        <span>
+                            Cliente associado
+                        </span>
+
+                    </label>
+
+                    <small>
+                        Associados recebem 10% de desconto nas compras.
+                    </small>
 
                 </div>
 
@@ -154,13 +165,8 @@
                         <span>(opcional)</span>
                     </label>
 
-                    <input
-                        type="text"
-                        id="cpf"
-                        name="cpf"
-                        placeholder="Ex: 000.000.000-00"
-                        value="{{ editando.cpf if editando else (valores.cpf if valores else '') }}"
-                    >
+                    <input type="text" id="cpf" name="cpf" placeholder="Ex: 000.000.000-00"
+                        value="{{ editando.cpf if editando else (valores.cpf if valores else '') }}">
 
                 </div>
 
@@ -169,17 +175,11 @@
 
                 <div class="form-acoes">
 
-                    <a
-                        href="/clientes"
-                        class="btn-cancelar"
-                    >
+                    <a href="/clientes" class="btn-cancelar">
                         Cancelar
                     </a>
 
-                    <button
-                        type="submit"
-                        class="btn-salvar"
-                    >
+                    <button type="submit" class="btn-salvar">
                         {{ "Salvar alterações" if editando else "Cadastrar cliente" }}
                     </button>
 
@@ -192,4 +192,5 @@
     </main>
 
 </body>
+
 </html>

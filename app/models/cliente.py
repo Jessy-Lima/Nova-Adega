@@ -7,14 +7,12 @@ from app.database import Base
 class Cliente(Base):
     __tablename__ = "clientes"
 
-    id         = Column(Integer, primary_key=True, index=True)
-    nome       = Column(String(150), nullable=False, index=True)
-    telefone   = Column(String(20), nullable=True)
-    ativo      = Column(Boolean, default=True)
-    criado_em  = Column(DateTime, server_default=func.now())
-
-    # Relacionamento reverso para consultar vendas do cliente
+    id = Column(Integer, primary_key=True, index=True)
+    nome = Column(String(150), nullable=False, index=True)
+    telefone = Column(String(20), nullable=True)
+    is_associado = Column(Boolean, default=False, nullable=False)
+    ativo = Column(Boolean, default=True)
+    criado_em = Column(DateTime, server_default=func.now())
     vendas = relationship("Venda", back_populates="cliente")
-
     def __repr__(self):
-        return f"<Cliente id={self.id} nome={self.nome} >"
+        return f"<Cliente id={self.id} nome={self.nome} associado={self.is_associado}>"

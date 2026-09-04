@@ -62,7 +62,7 @@ body {
 
     gap: 8px;
 
-    color: #f7e7a8;
+    color: #FDE68A;
 
     text-decoration: none;
 
@@ -72,11 +72,11 @@ body {
 }
 
 .logo span {
-    color: #f7e7a8;
+    color: #FDE68A;
 }
 
 .logo:hover {
-    color: #ffe98b;
+    color: #FDE68A;
 }
 
 
@@ -103,7 +103,7 @@ body {
 }
 
 .menu a:hover {
-    color: #f7e7a8;
+    color: #FDE68A;
 }
 
 
@@ -112,7 +112,7 @@ body {
    ========================================= */
 
 .menu a.ativo {
-    color: #f7e7a8;
+    color: #FDE68A;
 
     font-weight: 700;
 }
@@ -144,7 +144,7 @@ body {
 }
 
 .menu .btn-sair:hover {
-    background: #ffe98b;
+    background: #FDE68A ;
 
     color: #111111;
 
@@ -211,7 +211,7 @@ body {
 
     padding: 0 18px;
 
-    background: #f7e7a8;
+    background: #FDE68A ;
 
     color: #111111;
 
@@ -227,7 +227,7 @@ body {
 }
 
 .btn-novo:hover {
-    background: #ffe98b;
+    background: #FDE68A ;
 
     transform: translateY(-1px);
 
@@ -313,7 +313,7 @@ body {
 }
 
 .campo-busca:focus-within {
-    border-color: #d8c46e;
+    border-color: #FDE68A;
 
     box-shadow:
         0 0 0 2px rgba(247, 231, 168, 0.08);
@@ -394,7 +394,7 @@ body {
 }
 
 .btn-limpar:hover {
-    color: #f7e7a8;
+    color: #FDE68A;
 }
 
 
@@ -512,7 +512,7 @@ body {
 
     flex-shrink: 0;
 
-    background: #f7e7a8;
+    background: #FDE68A ;
 
     color: #111111;
 
@@ -650,7 +650,7 @@ body {
 .btn-status:hover {
     background: #242424;
 
-    color: #f7e7a8;
+    color: #FDE68A ;
 
     border-color: #575033;
 }
@@ -712,7 +712,7 @@ body {
 }
 
 .voltar:hover {
-    color: #f7e7a8;
+    color: #FDE68A ;
 }
 
 
@@ -851,7 +851,7 @@ body {
 }
 
 .form-grupo input:focus {
-    border-color: #d8c46e;
+    border-color: #FDE68A ;
 
     box-shadow:
         0 0 0 2px rgba(247, 231, 168, 0.08);
@@ -927,7 +927,7 @@ body {
 
     padding: 0 20px;
 
-    background: #f7e7a8;
+    background: #FDE68A ;
 
     border: none;
 
@@ -945,7 +945,7 @@ body {
 }
 
 .btn-salvar:hover {
-    background: #ffe98b;
+    background: #FDE68A ;
 
     transform: translateY(-1px);
 
