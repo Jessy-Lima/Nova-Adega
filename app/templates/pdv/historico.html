@@ -1,7 +1,13 @@
 <!-- templates/pdv/historico.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
-<head><meta charset="UTF-8"><title>Histórico de Vendas — AAPM SENAI</title></head>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/pdv.css">
+    <title>Histórico de Vendas — AAPM SENAI</title>
+</head>
+
 <body>
     <h1>Histórico de vendas</h1>
     <a href="/pdv">← Voltar ao PDV</a>
@@ -27,10 +33,10 @@
                 <td>{{ v.itens | length }}</td>
                 <td>
                     {% if v.desconto_percentual > 0 %}
-                        <span style="color:green">
-                            {{ v.desconto_percentual|int }}%
-                            (− R$ {{ "%.2f"|format(v.desconto_valor) }})
-                        </span>
+                    <span style="color:green">
+                        {{ v.desconto_percentual|int }}%
+                        (− R$ {{ "%.2f"|format(v.desconto_valor) }})
+                    </span>
                     {% else %}—{% endif %}
                 </td>
                 <td>R$ {{ "%.2f"|format(v.total_liquido) }}</td>
@@ -38,9 +44,12 @@
             </tr>
             {% endfor %}
             {% if not vendas %}
-            <tr><td colspan="7" style="text-align:center">Nenhuma venda.</td></tr>
+            <tr>
+                <td colspan="7" style="text-align:center">Nenhuma venda.</td>
+            </tr>
             {% endif %}
         </tbody>
     </table>
 </body>
+
 </html>
