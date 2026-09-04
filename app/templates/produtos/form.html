@@ -1,86 +1,432 @@
-<!-- templates/produtos/form.html -->
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ "Editar" if editando else "Novo" }} Produto — AAPM SENAI</title>
-</head>
-<body>
-    <h1>{{ "Editar produto" if editando else "Novo produto" }}</h1>
+{% extends "base.html" %}
 
-    {% if erro %}
-        <p style="color:red">{{ erro }}</p>
-    {% endif %}
+{% block title %}
+    {{ "Editar" if editando else "Novo" }} Produto — Adega Premium
+{% endblock %}
 
-    <!--
-        enctype="multipart/form-data" é obrigatório para envio de arquivos.
-        Sem ele o FastAPI não consegue ler o UploadFile.
-    -->
-    <form action="{{ '/produtos/' + editando.id|string + '/editar' if editando else '/produtos/novo' }}"
-          method="post"
-          enctype="multipart/form-data">
+{% block styles %}
+<link rel="stylesheet" href="/static/css/home.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-        <label>Nome:
-            <input type="text"
-                   name="nome"
-                   value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
-                   required>
-        </label>
-        <br>
+<style>
+    /* Estilização específica para formulários do PDV */
+    .card-form {
+        background: var(--card-bg, #1e293b);
+        border: 1px solid var(--border-color, #334155);
+        border-radius: 12px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 800px;
+    }
 
-        <label>Preço (R$):
-            <input type="number"
-                   name="preco"
-                   step="0.01"
-                   min="0"
-                   value="{{ editando.preco if editando else (valores.preco if valores else '0.00') }}"
-                   required>
-        </label>
-        <br>
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
 
-        <label>Estoque atual:
-            <input type="number"
-                   name="estoque_atual"
-                   min="0"
-                   value="{{ editando.estoque_atual if editando else (valores.estoque_atual if valores else '0') }}"
-                   required>
-        </label>
-        <br>
+    @media (max-width: 640px) {
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 
-        <label>Categoria:
-            <select name="categoria_id">
-                <option value="0">Sem categoria</option>
-                {% for c in categorias %}
-                    <option value="{{ c.id }}"
-                        {{ 'selected' if (editando and editando.categoria_id == c.id) or (valores and valores.categoria_id == c.id) else '' }}>
-                        {{ c.nome }}
-                    </option>
-                {% endfor %}
-            </select>
-        </label>
-        <br>
+    .campo-full {
+        grid-column: 1 / -1;
+    }
 
-        <!-- Imagem atual na edição -->
-        {% if editando and editando.imagem_path %}
-            <p>Imagem atual:</p>
-            <img src="{{ editando.imagem_url }}"
-                 alt="{{ editando.nome }}"
-                 width="100"
-                 style="object-fit:cover">
-            <br>
+    .preview-imagem {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        background: rgba(15, 23, 42, 0.5);
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color, #334155);
+    }
+
+    .botoes-form {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .btn-salvar {
+        background: var(--accent, #8b5cf6);
+        color: #ffffff;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: 0.2s;
+    }
+
+    .btn-salvar:hover {
+        background: var(--accent-hover, #7c3aed);
+    }
+
+    .btn-cancelar {
+        background: transparent;
+        color: var(--text-dim, #94a3b8);
+        border: 1px solid var(--border-color, #334155);
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: 0.2s;
+    }
+
+    .btn-cancelar:hover {
+        color: #ffffff;
+        border-color: var(--text-dim, #94a3b8);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <main class="conteudo">
+
+        <header>
+
+            <div class="logo">
+
+                <div class="icone">
+                    <i class="fa-solid fa-wine-glass"></i>
+                </div>
+
+                <div>
+                    <h2>Adega Premium</h2>
+                    <span>Sistema PDV</span>
+                </div>
+
+            </div>
+
+            <div class="data">
+
+                <i class="fa-regular fa-clock"></i>
+
+                <span id="relogio">--:--</span>
+
+                <span>•</span>
+
+                <span id="data-atual">
+                    -- de -- de ----
+                </span>
+
+            </div>
+
+        </header>
+
+        <nav>
+
+            <a href="/">
+                <i class="fa-solid fa-cart-shopping"></i>
+                Ponto de Venda
+            </a>
+
+            <a href="/movimentacoes">
+                <i class="fa-solid fa-chart-line"></i>
+                Histórico
+            </a>
+
+            <a href="/produtos" class="ativo">
+                <i class="fa-solid fa-box"></i>
+                Produtos
+            </a>
+
+            <a href="/clientes">
+                <i class="fa-solid fa-users"></i>
+                Clientes
+            </a>
+
+            <a href="/auth/logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Sair
+            </a>
+
+        </nav>
+
+        <div class="titulo-pagina">
+
+            <div>
+                <span style="color: var(--neon, #8b5cf6); font-size: 12px; font-weight: bold; text-transform: uppercase;">
+                    {{ "Edição" if editando else "Cadastro" }}
+                </span>
+                <h1 style="margin-top: 4px;">
+                    {{ "Editar Produto" if editando else "Novo Produto" }}
+                </h1>
+            </div>
+
+        </div>
+
+        {% if erro %}
+
+            <div style="background: rgba(239, 68, 68, 0.15); color: #ef4444; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px; border: 1px solid rgba(239, 68, 68, 0.3); font-size: 14px; display: flex; align-items: center; gap: 10px;">
+
+                <i class="fa-solid fa-circle-exclamation" style="font-size: 16px;"></i>
+                <span>{{ erro }}</span>
+
+            </div>
+
         {% endif %}
 
-        <label>{{ "Nova imagem (deixe vazio para manter a atual):" if editando else "Imagem:" }}
-            <input type="file"
-                   name="imagem"
-                   accept=".jpg,.jpeg,.png,.webp">
-        </label>
-        <br>
+        <form
+            action="{{ '/produtos/' + editando.id|string + '/editar' if editando else '/produtos/novo' }}"
+            method="post"
+            enctype="multipart/form-data"
+            class="card-form"
+        >
 
-        <button type="submit">
-            {{ "Salvar alterações" if editando else "Criar produto" }}
-        </button>
-        <a href="/produtos">Cancelar</a>
-    </form>
-</body>
-</html>
+            <div class="form-grid">
+
+                <!-- Nome do Produto -->
+                <div class="campo campo-full">
+
+                    <label for="nome">
+                        Nome do Produto
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
+                        required
+                        placeholder="Ex: Cerveja Heineken 600ml"
+                    >
+
+                </div>
+
+                <!-- Categoria -->
+                <div class="campo campo-full">
+
+                    <label for="categoria">
+                        Categoria
+                    </label>
+
+                    <select
+                        id="categoria"
+                        name="categoria_id"
+                        required
+                    >
+
+                        <option value="0">
+                            Sem categoria
+                        </option>
+
+                        {% for c in categorias %}
+
+                            <option
+                                value="{{ c.id }}"
+                                {{ 'selected' if (editando and editando.categoria_id == c.id) or (valores and valores.categoria_id == c.id) else '' }}
+                            >
+                                {{ c.nome }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <!-- Preço -->
+                <div class="campo">
+
+                    <label for="preco">
+                        Preço (R$)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="preco"
+                        name="preco"
+                        step="0.01"
+                        min="0"
+                        value="{{ editando.preco if editando else (valores.preco if valores else '0.00') }}"
+                        required
+                        placeholder="0.00"
+                    >
+
+                </div>
+
+                <!-- Estoque -->
+                <div class="campo">
+
+                    <label for="estoque">
+                        Estoque (unidades)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="estoque"
+                        name="estoque_atual"
+                        min="0"
+                        value="{{ editando.estoque_atual if editando else (valores.estoque_atual if valores else '0') }}"
+                        required
+                        placeholder="0"
+                    >
+
+                </div>
+
+                <!-- Preview Imagem Atual -->
+                {% if editando and editando.imagem_path %}
+
+                    <div class="campo campo-full">
+
+                        <label>Imagem Atual</label>
+
+                        <div class="preview-imagem">
+
+                            <img
+                                src="{{ editando.imagem_url }}"
+                                alt="{{ editando.nome }}"
+                                width="70"
+                                height="70"
+                                style="object-fit:cover; border-radius: 6px;"
+                            >
+
+                            <span style="font-size: 13px; color: var(--text-dim, #94a3b8);">
+                                Uma imagem já foi associada a este produto. Escolha um novo arquivo abaixo se desejar alterá-la.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+                <!-- Input Upload Imagem -->
+                <div class="campo campo-full">
+
+                    <label for="imagem">
+                        {{ "Substituir Imagem:" if editando else "Imagem do Produto:" }}
+                    </label>
+
+                    <input
+                        type="file"
+                        id="imagem"
+                        name="imagem"
+                        accept=".jpg,.jpeg,.png,.webp"
+                        style="padding: 8px;"
+                    >
+
+                </div>
+
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="botoes-form">
+
+                <button
+                    type="submit"
+                    class="btn-salvar"
+                >
+                    <i class="fa-solid fa-check"></i>
+                    {{ "Salvar Alterações" if editando else "Criar Produto" }}
+                </button>
+
+                <a
+                    href="/produtos"
+                    class="btn-cancelar"
+                >
+                    Cancelar
+                </a>
+
+            </div>
+
+        </form>
+
+        <p style="margin-top: 24px;">
+
+            <a
+                href="/produtos"
+                style="color: var(--neon, #8b5cf6); text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;"
+            >
+                <i class="fa-solid fa-arrow-left"></i>
+                Voltar à Lista
+            </a>
+
+        </p>
+
+    </main>
+
+    <aside class="carrinho">
+
+        <div class="titulo">
+
+            <h2>
+                <i class="fa-solid fa-cart-shopping"></i>
+                Carrinho
+            </h2>
+
+            <span>
+                0 item(s)
+            </span>
+
+        </div>
+
+        <div class="vazio">
+
+            <i class="fa-solid fa-cart-shopping"></i>
+
+            <h3>
+                Carrinho vazio
+            </h3>
+
+            <p>
+                Adicione produtos para começar.
+            </p>
+
+        </div>
+
+    </aside>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    // Script simples para manter a data/hora atualizada no cabeçalho
+    function atualizarDataHora() {
+        const agora = new Date();
+
+        const horas = String(agora.getHours()).padStart(2, '0');
+        const minutos = String(agora.getMinutes()).padStart(2, '0');
+
+        const relogioEl = document.getElementById('relogio');
+        if (relogioEl) {
+            relogioEl.textContent = `${horas}:${minutos}`;
+        }
+
+        const opcoes = {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        };
+
+        const dataEl = document.getElementById('data-atual');
+        if (dataEl) {
+            dataEl.textContent = agora.toLocaleDateString('pt-BR', opcoes);
+        }
+    }
+
+    setInterval(atualizarDataHora, 1000);
+    atualizarDataHora();
+</script>
+
+{% endblock %}

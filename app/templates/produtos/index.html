@@ -1,123 +1,318 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Produtos — AAPM SENAI</title>
-</head>
-<body>
-    <h1>Produtos</h1>
+{% extends "base.html" %}
+
+{% block title %}
+Produtos — Adega Premium
+{% endblock %}
+
+{% block content %}
+
+<div>
+    <main>
+
+```
+    <header>
+        <div>
+            <div>
+                <i class="fa-solid fa-wine-glass"></i>
+            </div>
+
+            <div>
+                <h2>Adega Premium</h2>
+                <span>Sistema PDV</span>
+            </div>
+        </div>
+
+        <div>
+            <i class="fa-regular fa-clock"></i>
+            <span id="relogio">--:--</span>
+            <span>•</span>
+            <span id="data-atual">-- de -- de ----</span>
+        </div>
+    </header>
+
+    <nav>
+        <a href="/">
+            <i class="fa-solid fa-cart-shopping"></i>
+            Ponto de Venda
+        </a>
+
+        <a href="/movimentacoes">
+            <i class="fa-solid fa-chart-line"></i>
+            Histórico
+        </a>
+
+        <a href="/produtos">
+            <i class="fa-solid fa-box"></i>
+            Produtos
+        </a>
+
+        <a href="/clientes">
+            <i class="fa-solid fa-users"></i>
+            Clientes
+        </a>
+
+        <a href="/auth/logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Sair
+        </a>
+    </nav>
+
+    <div>
+        <h1>Catálogo de Produtos</h1>
+    </div>
 
     {% if request.query_params.get('criado') == 'ok' %}
-        <p style="color:green">Produto criado com sucesso!</p>
+        <div>
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Produto criado com sucesso!</span>
+        </div>
     {% endif %}
+
     {% if request.query_params.get('desativado') == 'ok' %}
-        <p style="color:green">Produto desativado.</p>
+        <div>
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Produto desativado com sucesso.</span>
+        </div>
     {% endif %}
 
     <!-- Filtros -->
-    <form method="get" action="/produtos">
-        <input  type="text"
+    <div>
+
+        <form method="get" action="/produtos">
+
+            <input
+                type="text"
                 name="busca"
                 placeholder="Buscar por nome..."
-                value="{{ busca }}">
+                value="{{ busca }}"
+            >
 
-        <select name="categoria_id">
-            <option value="0">Todas as categorias</option>
-            {% for c in categorias %}
-                <option value="{{ c.id }}"
-                    {{ 'selected' if categoria_id == c.id else '' }}>
-                    {{ c.nome }}
+            <select name="categoria_id">
+
+                <option value="0">
+                    Todas as categorias
                 </option>
-            {% endfor %}
-        </select>
 
-        <button type="submit">Filtrar</button>
+                {% for c in categorias %}
 
-        {% if busca or categoria_id %}
-            <a href="/produtos">Limpar</a>
-        {% endif %}
-    </form>
+                    <option
+                        value="{{ c.id }}"
+                        {{ 'selected' if categoria_id == c.id else '' }}
+                    >
+                        {{ c.nome }}
+                    </option>
 
-    {% if usuario.role == 'admin' %}
-        <a href="/produtos/novo">+ Novo produto</a>
-    {% endif %}
+                {% endfor %}
 
-    <table border="1" cellpadding="8">
-        <thead>
-            <tr>
-                <th>Imagem</th>
-                <th>Nome</th>
-                <th>Categoria</th>
-                <th>Preço</th>
-                <th>Estoque</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for p in produtos %}
-            <tr>
-                <td>
-                    <img src="{{ p.imagem_url }}"
-                         alt="{{ p.nome }}"
-                         width="50" height="50"
-                         style="object-fit:cover">
-                </td>
-                <td><a href="/produtos/{{ p.id }}">{{ p.nome }}</a></td>
-                <td>{{ p.categoria.nome if p.categoria else "—" }}</td>
-                <td>R$ {{ "%.2f"|format(p.preco) }}</td>
-                <td>{{ p.estoque_atual }}</td>
-                <td>
-                    {% if usuario.role == 'admin' %}
-                        <a href="/produtos/{{ p.id }}/editar">Editar</a>
-                        <form action="/produtos/{{ p.id }}/desativar"
-                              method="post"
-                              style="display:inline"
-                              onsubmit="return confirm('Desativar {{ p.nome }}?')">
-                            <button type="submit">Desativar</button>
-                        </form>
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
+            </select>
 
-            {% if not produtos %}
-            <tr>
-                <td colspan="6" style="text-align:center">
-                    Nenhum produto encontrado.
-                </td>
-            </tr>
+            <button type="submit">
+                <i class="fa-solid fa-filter"></i>
+                Filtrar
+            </button>
+
+            {% if busca or categoria_id %}
+                <a href="/produtos">
+                    <i class="fa-solid fa-xmark"></i>
+                    Limpar
+                </a>
             {% endif %}
-        </tbody>
-    </table>
 
-    <br><br>
-    {% if total_paginas > 1 %}
-    <div>
-        <p>{{ total_produtos }} produtos </p>
-        <p>Página {{ pagina}} de {{ total_paginas }}</p>
+        </form>
 
-        {% if pagina > 1 %}
+        {% if usuario.role == 'admin' %}
 
-            <a href="/produtos/?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}
-            &busca={{ busca }}&categoria_id={{ categoria_id }}">
-                ← Anterior
-            </a>
-
-        {% endif %}
-
-        {% if pagina < total_paginas %}
-
-            <a href="/produtos/?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}
-            &busca={{ busca }}&categoria_id={{ categoria_id }}">
-                Próxima →
+            <a href="/produtos/novo">
+                <i class="fa-solid fa-plus"></i>
+                Novo Produto
             </a>
 
         {% endif %}
 
     </div>
-    {% endif %}
 
+    <!-- Tabela de produtos -->
+    <div>
 
-    <p><a href="/">← Dashboard</a></p>
-</body>
-</html>
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Imagem</th>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+
+                    {% if usuario.role == 'admin' %}
+                        <th>Ações</th>
+                    {% endif %}
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for p in produtos %}
+
+                <tr>
+
+                    <td>
+                        <img
+                            src="{{ p.imagem_url }}"
+                            alt="{{ p.nome }}"
+                        >
+                    </td>
+
+                    <td>
+                        <a href="/produtos/{{ p.id }}">
+                            {{ p.nome }}
+                        </a>
+                    </td>
+
+                    <td>
+                        {{ p.categoria.nome if p.categoria else "Sem Categoria" }}
+                    </td>
+
+                    <td>
+                        R$ {{ "%.2f"|format(p.preco) }}
+                    </td>
+
+                    <td>
+                        {{ p.estoque_atual }} un.
+                    </td>
+
+                    {% if usuario.role == 'admin' %}
+
+                    <td>
+
+                        <a
+                            href="/produtos/{{ p.id }}/editar"
+                            title="Editar Produto"
+                        >
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            Editar
+                        </a>
+
+                        <form
+                            action="/produtos/{{ p.id }}/desativar"
+                            method="post"
+                            onsubmit="return confirm('Tem certeza que deseja desativar o produto {{ p.nome }}?')"
+                        >
+
+                            <button
+                                type="submit"
+                                title="Desativar Produto"
+                            >
+                                <i class="fa-solid fa-trash-can"></i>
+                                Desativar
+                            </button>
+
+                        </form>
+
+                    </td>
+
+                    {% endif %}
+
+                </tr>
+
+                {% endfor %}
+
+                {% if not produtos %}
+
+                <tr>
+
+                    <td colspan="{{ 6 if usuario.role == 'admin' else 5 }}">
+                        <i class="fa-solid fa-box-open"></i>
+                        Nenhum produto encontrado.
+                    </td>
+
+                </tr>
+
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</main>
+
+<aside>
+
+    <div>
+        <h2>
+            <i class="fa-solid fa-cart-shopping"></i>
+            Carrinho
+        </h2>
+
+        <span>
+            0 item(s)
+        </span>
+    </div>
+
+    <div>
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        <h3>
+            Carrinho vazio
+        </h3>
+
+        <p>
+            Adicione produtos para começar.
+        </p>
+
+    </div>
+
+</aside>
+```
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+function atualizarDataHora() {
+
+    const agora = new Date();
+
+    const horas = String(agora.getHours()).padStart(2, '0');
+    const minutos = String(agora.getMinutes()).padStart(2, '0');
+
+    const relogioEl = document.getElementById('relogio');
+
+    if (relogioEl) {
+        relogioEl.textContent = `${horas}:${minutos}`;
+    }
+
+    const opcoes = {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    };
+
+    const dataEl = document.getElementById('data-atual');
+
+    if (dataEl) {
+        dataEl.textContent = agora.toLocaleDateString(
+            'pt-BR',
+            opcoes
+        );
+    }
+
+}
+
+setInterval(atualizarDataHora, 1000);
+
+atualizarDataHora();
+
+</script>
+
+{% endblock %}

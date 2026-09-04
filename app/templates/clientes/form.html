@@ -1,84 +1,81 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}
+{{ "Editar" if editando else "Novo" }} Cliente — Adega Premium
+{% endblock %}
 
-    <title>
-        {{ "Editar" if editando else "Novo" }} Cliente — Nova Adega
-    </title>
-</head>
+{% block content %}
 
-<body>
+<h1>
+    {{ "Editar cliente" if editando else "Novo cliente" }}
+</h1>
 
-    <h1>
-        {{ "Editar cliente" if editando else "Novo cliente" }}
-    </h1>
+{% if erro %} <p style="color: red;">
+{{ erro }} </p>
+{% endif %}
 
-    {% if erro %}
-        <p style="color: red;">
-            {{ erro }}
-        </p>
-    {% endif %}
+<form
+    action="{{ '/clientes/' + editando.id|string + '/editar' if editando else '/clientes/novo' }}"
+    method="post"
+>
 
-    <form
-        action="{{ '/clientes/' + editando.id|string + '/editar' if editando else '/clientes/novo' }}"
-        method="post"
-    >
+```
+<!-- Nome -->
+<label for="nome">
+    Nome completo:
+</label>
 
-        <!-- Nome -->
-        <label>
-            Nome completo:
+<input
+    type="text"
+    id="nome"
+    name="nome"
+    required
+    autofocus
+    placeholder="Digite o nome do cliente"
+    value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
+>
 
-            <input
-                type="text"
-                name="nome"
-                required
-                autofocus
-                value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
-            >
-        </label>
+<br><br>
 
-        <br><br>
+<!-- Telefone -->
+<label for="telefone">
+    Telefone:
+</label>
 
-        <!-- Telefone -->
-        <label>
-            Telefone (opcional):
+<input
+    type="text"
+    id="telefone"
+    name="telefone"
+    placeholder="Ex: (11) 99999-9999"
+    value="{{ editando.telefone if editando else (valores.telefone if valores else '') }}"
+>
 
-            <input
-                type="text"
-                name="telefone"
-                placeholder="Ex: (11) 99999-9999"
-                value="{{ editando.telefone if editando else (valores.telefone if valores else '') }}"
-            >
-        </label>
+<br><br>
 
-        <br><br>
+<!-- CPF -->
+<label for="cpf">
+    CPF:
+</label>
 
-        <!-- CPF -->
-        <label>
-            CPF (opcional):
+<input
+    type="text"
+    id="cpf"
+    name="cpf"
+    placeholder="Ex: 000.000.000-00"
+    value="{{ editando.cpf if editando else (valores.cpf if valores else '') }}"
+>
 
-            <input
-                type="text"
-                name="cpf"
-                placeholder="Ex: 000.000.000-00"
-                value="{{ editando.cpf if editando else (valores.cpf if valores else '') }}"
-            >
-        </label>
+<br><br>
 
-        <br><br>
+<button type="submit">
+    {{ "Salvar alterações" if editando else "Cadastrar cliente" }}
+</button>
 
-        <button type="submit">
-            {{ "Salvar alterações" if editando else "Cadastrar cliente" }}
-        </button>
+<a href="/clientes">
+    Cancelar
+</a>
+```
 
-        <a href="/clientes">
-            Cancelar
-        </a>
+</form>
 
-    </form>
-
-</body>
-</html>
+{% endblock %}
