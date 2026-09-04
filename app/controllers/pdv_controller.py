@@ -177,7 +177,6 @@ def finalizar_venda(
                 Produto.id == item["produto_id"],
                 Produto.ativo == True
             )
-            .with_for_update()
             .first()
         )
 
@@ -250,8 +249,6 @@ def finalizar_venda(
     # Não existe mais desconto de associado.
     # ========================================================
 
-    desconto_percentual = 0.0
-    desconto_valor = 0.0
 
     total_liquido = total_bruto
 
@@ -263,8 +260,6 @@ def finalizar_venda(
         cliente_id=cliente_id or None,
 
         usuario_id=usuario.get("id"),
-
-        desconto_percentual=desconto_percentual,
 
         total_bruto=round(total_bruto, 2),
 
