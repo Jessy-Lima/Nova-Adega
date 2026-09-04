@@ -18,7 +18,18 @@
     box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 .container {
+=======
+/* Fundo geral em cinza muito suave */
+body {
+    background-color: #0b0b0b;
+    color: #f1f5f9;
+}
+
+.produtos-container,
+.produto-container {
+>>>>>>> 31df76059ddd09866834e2b394578b63207f5dab
     width: 100%;
     max-width: 1250px;
     margin: 0 auto;
@@ -265,7 +276,110 @@
 
     color: #F9FAFB;
 
+<<<<<<< HEAD
     border: 1px solid #3F3F46;
+=======
+.produto-detalhe {
+    display: grid;
+
+    grid-template-columns: 320px 1fr;
+
+    gap: 35px;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 14px;
+
+    border: 1px solid #e2e8f0;
+}
+
+.produto-imagem img {
+    width: 100%;
+
+    height: 320px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    background: #f1f5f9;
+}
+
+.produto-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.produto-info h1 {
+    margin: 0;
+
+    font-size: 30px;
+
+    color: #1e293b;
+}
+
+
+/* =========================================================
+   INFORMAÇÕES DO PRODUTO
+========================================================= */
+
+.produto-info table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+.produto-info table td {
+    padding: 14px;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.produto-info table tr:last-child td {
+    border-bottom: none;
+}
+
+.produto-info table td:first-child {
+    width: 40%;
+
+    background: #f8fafc;
+
+    color: #334155;
+}
+
+
+/* =========================================================
+   LINKS E AÇÕES
+========================================================= */
+
+.produto-acoes {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 15px;
+}
+
+.produto-acoes a {
+    padding: 10px 16px;
+
+    background: #f1f5f9;
+
+    color: #334155;
+>>>>>>> 31df76059ddd09866834e2b394578b63207f5dab
 
     border-radius: 8px;
 
@@ -285,6 +399,7 @@
 }
 
 
+<<<<<<< HEAD
 /* =========================================================
    TABELA
 ========================================================= */
@@ -302,6 +417,9 @@
 
     box-shadow:
         0 8px 25px rgba(0, 0, 0, 0.20);
+=======
+        color: #422006;
+>>>>>>> 31df76059ddd09866834e2b394578b63207f5dab
 }
 
 
@@ -693,6 +811,7 @@
         width: 100%;
     }
 
+<<<<<<< HEAD
     .acoes-filtro {
         width: 100%;
     }
@@ -716,3 +835,152 @@
         flex: 1;
     }
 }
+=======
+}
+
+
+/* =========================================================
+   CORREÇÕES DE VISIBILIDADE DO FORMULÁRIO
+========================================================= */
+
+.produto-form-container,
+.produto-form {
+    color: #1e293b;
+    opacity: 1;
+    visibility: visible;
+}
+
+.produto-form-container h1,
+.produto-form h1,
+.produto-form label {
+    color: #334155;
+}
+
+.produto-form input,
+.produto-form textarea,
+.produto-form select {
+    color: #1e293b;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+}
+
+.produto-form input::placeholder,
+.produto-form textarea::placeholder {
+    color: #64748b;
+    opacity: 1;
+}
+
+.produto-form button,
+.produto-form input[type="submit"] {
+    color: #422006;
+    background: #facc15;
+}
+
+.produto-form button:hover,
+.produto-form input[type="submit"]:hover {
+    background: #eab308;
+}
+
+@media (max-width: 768px) {
+    .produto-form-container {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   CARDS EM CINZA SUAVE
+========================================================= */
+
+.produto-card,
+.produto-form-container,
+.produto-detalhe {
+    background: #f5f6f7;
+}
+
+.produto-card,
+.produto-form-container,
+.produto-detalhe {
+    border-color: #e2e5e9;
+}
+
+
+/* =========================================================
+   TEXTO PRETO DENTRO DOS CARDS
+========================================================= */
+
+.produto-card,
+.produto-form-container,
+.produto-detalhe {
+    color: #111111;
+}
+
+.produto-card h1,
+.produto-card h2,
+.produto-card h3,
+.produto-card p,
+.produto-card span,
+.produto-card strong,
+.produto-form-container h1,
+.produto-form-container h2,
+.produto-form-container h3,
+.produto-form-container p,
+.produto-form-container span,
+.produto-form-container label,
+.produto-detalhe h1,
+.produto-detalhe h2,
+.produto-detalhe h3,
+.produto-detalhe p,
+.produto-detalhe span,
+.produto-detalhe td {
+    color: #111111;
+}
+
+.produto-card a,
+.produto-form-container a,
+.produto-detalhe a {
+    color: #111111;
+}
+
+.produto-card,
+.produto-form-container,
+.produto-detalhe {
+    background-color: #f1f3f5;
+}
+
+body {
+    background-color: #000000;
+}
+
+
+/* =========================================================
+   CONTRASTE FINAL DO CARD
+========================================================= */
+
+.produto-detalhe,
+.produto-detalhe h1,
+.produto-detalhe h2,
+.produto-detalhe h3,
+.produto-detalhe p,
+.produto-detalhe span,
+.produto-detalhe strong,
+.produto-detalhe label,
+.produto-detalhe td,
+.produto-detalhe th,
+.produto-detalhe a,
+.produto-detalhe a:visited,
+.produto-detalhe a:hover,
+.produto-detalhe .produto-info,
+.produto-detalhe .produto-acoes {
+    color: #000000 !important;
+}
+
+.produto-detalhe {
+    background-color: #e2e5e8 !important;
+}
+
+.produto-detalhe .produto-acoes a,
+.produto-detalhe .produto-acoes .btn-editar {
+    color: #000000 !important;
+}
+>>>>>>> 31df76059ddd09866834e2b394578b63207f5dab
