@@ -15,7 +15,9 @@
     </title>
 
 
-    <!-- CSS PRINCIPAL -->
+    <!-- =========================
+         CSS PRINCIPAL
+    ========================= -->
 
     <link
         rel="stylesheet"
@@ -23,7 +25,9 @@
     >
 
 
-    <!-- CSS ESPECÍFICO DE CADA PÁGINA -->
+    <!-- =========================
+         CSS ESPECÍFICO DA PÁGINA
+    ========================= -->
 
     {% block styles %}{% endblock %}
 
@@ -31,6 +35,63 @@
 
 
 <body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    {% block navbar %}
+
+    <nav class="navbar">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <a href="/">
+                🍷 Nova Adega
+            </a>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <div class="menu">
+
+            <a href="/pdv/">
+                PDV
+            </a>
+
+            <a href="/movimentacoes/">
+                Histórico
+            </a>
+
+            <a href="/produtos/">
+                Produtos
+            </a>
+
+            <a href="/categorias/">
+                Categorias
+            </a>
+
+            <a href="/clientes/">
+                Clientes
+            </a>
+
+            <a
+                href="/auth/logout"
+                class="btn-sair"
+            >
+                Sair
+            </a>
+
+        </div>
+
+    </nav>
+
+    {% endblock %}
 
 
     <!-- =========================
@@ -44,6 +105,8 @@
          FOOTER
     ========================= -->
 
+    {% block footer %}
+
     <footer class="footer">
 
         <p>
@@ -51,6 +114,8 @@
         </p>
 
     </footer>
+
+    {% endblock %}
 
 
     <!-- =========================
