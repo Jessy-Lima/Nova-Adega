@@ -86,14 +86,14 @@ button:hover,
 .btn-novo,
 .btn-primary,
 button[type="submit"] {
-    background: #2563eb;
-    color: white;
+    background: #FDE68A ;
+    color: rgb(8, 8, 8);
 }
 
 .btn-novo:hover,
 .btn-primary:hover,
 button[type="submit"]:hover {
-    background: #1d4ed8;
+    background: #FDE68A ;
 }
 
 .btn-voltar,
@@ -469,7 +469,7 @@ input[type="file"] {
 
     background: #f8fafc;
 
-    color: #64748b;
+    color: #f5f6f9;
 }
 
 
@@ -492,7 +492,7 @@ input[type="file"] {
 
     background: #f1f5f9;
 
-    color: #334155;
+    color: hsl(216, 100%, 98%);
 
     border-radius: 8px;
 
@@ -510,13 +510,13 @@ input[type="file"] {
 }
 
 .produto-acoes .btn-editar {
-    background: #2563eb;
+    background: #FDE68A ;
 
     color: white;
 }
 
 .produto-acoes .btn-editar:hover {
-    background: #1d4ed8;
+    background: #FDE68A ;
 }
 
 
