@@ -1,86 +1,30 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html lang="pt-br">
+{% block title %}Nova Adega - Início{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
-
-<title>Nova Adega - Início</title>
-
-<link rel="stylesheet" href="/static/css/home.css">
-
-
-</head>
-
-<body>
-
-
-<!-- NAVBAR -->
-
-<header class="navbar">
-
-    <div class="logo">
-        <h2>🍷 Nova Adega</h2>
-    </div>
-
-
-    <nav class="menu">
-
-        <a href="/pdv">
-            PDV
-        </a>
-
-        <a href="/movimentacoes">
-            Histórico
-        </a>
-
-        <a href="/produtos">
-            Produtos
-        </a>
-
-        <a href="/categorias">
-            Categorias
-        </a>
-
-        <a href="/auth/logout" class="btn-sair">
-            Sair
-        </a>
-
-    </nav>
-
-</header>
-
-
-<!-- CONTEÚDO PRINCIPAL -->
-
-<main class="container">
-
+<main>
 
     <!-- CATEGORIAS -->
 
-    <section class="secao-categorias">
+    <section>
 
-        <div class="titulo-secao">
-
+        <div>
             <h2>Categorias</h2>
 
             <p>
                 Escolha uma categoria para visualizar os produtos.
             </p>
-
         </div>
 
-
-        <div class="categorias">
-
+        <div>
 
             <!-- CERVEJAS -->
 
-            <a href="/produtos/categoria/cerveja" class="card-categoria">
+            <a href="/produtos/categoria/cerveja">
 
-                <div class="icone">
+                <div>
                     🍺
                 </div>
 
@@ -92,12 +36,11 @@
 
             </a>
 
-
             <!-- DESTILADOS -->
 
-            <a href="/produtos/categoria/destilados" class="card-categoria">
+            <a href="/produtos/categoria/destilados">
 
-                <div class="icone">
+                <div>
                     🥃
                 </div>
 
@@ -109,12 +52,11 @@
 
             </a>
 
-
             <!-- VINHOS -->
 
-            <a href="/produtos/categoria/vinhos" class="card-categoria">
+            <a href="/produtos/categoria/vinhos">
 
-                <div class="icone">
+                <div>
                     🍷
                 </div>
 
@@ -126,12 +68,11 @@
 
             </a>
 
-
             <!-- REFRIGERANTES -->
 
-            <a href="/produtos/categoria/refrigerantes" class="card-categoria">
+            <a href="/produtos/categoria/refrigerantes">
 
-                <div class="icone">
+                <div>
                     🥤
                 </div>
 
@@ -143,12 +84,11 @@
 
             </a>
 
-
             <!-- OUTROS -->
 
-            <a href="/produtos/categoria/outros" class="card-categoria">
+            <a href="/produtos/categoria/outros">
 
-                <div class="icone">
+                <div>
                     🛒
                 </div>
 
@@ -160,15 +100,10 @@
 
             </a>
 
-
         </div>
 
     </section>
 
-
 </main>
 
-
-</body>
-
-</html>
+{% endblock %}

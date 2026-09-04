@@ -1,42 +1,28 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html lang="pt-br">
+{% block title %}Bem-vindo - Nova Adega{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
 
+<main>
 
-<title>Bem-vindo - Nova Adega</title>
+    <section>
 
-<link rel="stylesheet" href="/static/css/index.css">
-
-
-</head>
-
-<body>
-
-
-<main class="pagina-inicial">
-
-    <section class="card-inicial">
-
-        <div class="logo">
+        <div>
             🍷
         </div>
 
         <h1>Sistema da Nova Adega</h1>
 
         <p>
-            Faça login ou crie uma conta para acessar o sistema.
+            Faça login para acessar o sistema.
         </p>
 
-        <div class="botoes">
+        <div>
 
-            <a href="/auth/login" class="btn btn-entrar">
+            <a href="/auth/login">
                 Entrar
             </a>
-
 
         </div>
 
@@ -44,6 +30,5 @@
 
 </main>
 
-</body>
+{% endblock %}
 
-</html>
