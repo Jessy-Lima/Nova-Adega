@@ -1,18 +1,33 @@
 {% extends "base.html" %}
 
-{% block title %}Nova Movimentação — Nova Adega{% endblock %}
+{% block title %}
+Nova Movimentação — Nova Adega
+{% endblock %}
+
+
+{% block styles %}
+
+<link
+    rel="stylesheet"
+    href="/static/CSS/movimentacoes.css"
+>
+
+{% endblock %}
+
 
 {% block content %}
 
-<link rel="stylesheet" href="/static/css/movimentacoes.css">
 
 <main class="container">
 
     <div class="form-movimentacao">
 
+
         <div class="form-titulo">
 
-            <h1>Registrar movimentação</h1>
+            <h1>
+                Registrar movimentação
+            </h1>
 
             <p>
                 Registre uma entrada ou saída de produtos.
@@ -24,10 +39,13 @@
         {% if erro %}
 
         <div class="mensagem-erro">
+
             {{ erro }}
+
         </div>
 
         {% endif %}
+
 
 
         <form
@@ -36,6 +54,7 @@
             class="movimentacao-form"
         >
 
+
             <!-- PRODUTO -->
 
             <div class="form-grupo">
@@ -43,6 +62,7 @@
                 <label for="select-produto">
                     Produto
                 </label>
+
 
                 <select
                     name="produto_id"
@@ -54,6 +74,7 @@
                         Selecione um produto
                     </option>
 
+
                     {% for p in produtos %}
 
                     <option
@@ -62,7 +83,10 @@
                         data-preco="{{ p.preco }}"
                         {{ 'selected' if produto_id == p.id else '' }}
                     >
-                        {{ p.nome }} — estoque: {{ p.estoque_atual }}
+
+                        {{ p.nome }} — estoque:
+                        {{ p.estoque_atual }}
+
                     </option>
 
                     {% endfor %}
@@ -70,6 +94,7 @@
                 </select>
 
             </div>
+
 
 
             <!-- ESTOQUE -->
@@ -81,9 +106,13 @@
             >
 
                 Estoque atual:
-                <strong id="valor-estoque">0</strong>
+
+                <strong id="valor-estoque">
+                    0
+                </strong>
 
             </div>
+
 
 
             <!-- TIPO -->
@@ -93,6 +122,7 @@
                 <label for="select-tipo">
                     Tipo de movimentação
                 </label>
+
 
                 <select
                     name="tipo"
@@ -104,10 +134,17 @@
                         Selecione o tipo
                     </option>
 
+
                     {% for t in tipos %}
 
                     <option value="{{ t.value }}">
-                        {{ "▲ Entrada" if t.value == 'entrada' else "▼ Saída" }}
+
+                        {{
+                            "▲ Entrada"
+                            if t.value == 'entrada'
+                            else "▼ Saída"
+                        }}
+
                     </option>
 
                     {% endfor %}
@@ -117,15 +154,18 @@
             </div>
 
 
+
             <!-- QUANTIDADE E PREÇO -->
 
             <div class="form-linha">
+
 
                 <div class="form-grupo">
 
                     <label for="input-quantidade">
                         Quantidade
                     </label>
+
 
                     <input
                         type="number"
@@ -139,11 +179,13 @@
                 </div>
 
 
+
                 <div class="form-grupo">
 
                     <label for="input-preco">
                         Preço unitário (R$)
                     </label>
+
 
                     <input
                         type="number"
@@ -157,7 +199,9 @@
 
                 </div>
 
+
             </div>
+
 
 
             <!-- SUBTOTAL -->
@@ -169,11 +213,13 @@
             >
 
                 Subtotal:
+
                 <strong id="valor-subtotal">
                     R$ 0,00
                 </strong>
 
             </div>
+
 
 
             <!-- OBSERVAÇÃO -->
@@ -190,6 +236,7 @@
 
                 </label>
 
+
                 <input
                     type="text"
                     id="observacao"
@@ -201,34 +248,46 @@
             </div>
 
 
+
             <!-- BOTÕES -->
 
             <div class="form-botoes">
+
 
                 <button
                     type="submit"
                     class="btn-registrar"
                 >
+
                     Registrar movimentação
+
                 </button>
 
 
+
                 <a
-                    href="/movimentacoes"
+                    href="/movimentacoes/"
                     class="btn-cancelar"
                 >
+
                     Cancelar
+
                 </a>
+
 
             </div>
 
+
         </form>
+
 
     </div>
 
 </main>
 
+
 {% endblock %}
+
 
 
 {% block scripts %}
@@ -236,25 +295,39 @@
 <script>
 
     const selectProduto =
-        document.getElementById('select-produto');
+        document.getElementById(
+            'select-produto'
+        );
 
     const inputQuantidade =
-        document.getElementById('input-quantidade');
+        document.getElementById(
+            'input-quantidade'
+        );
 
     const inputPreco =
-        document.getElementById('input-preco');
+        document.getElementById(
+            'input-preco'
+        );
 
     const infoEstoque =
-        document.getElementById('info-estoque');
+        document.getElementById(
+            'info-estoque'
+        );
 
     const valorEstoque =
-        document.getElementById('valor-estoque');
+        document.getElementById(
+            'valor-estoque'
+        );
 
     const infoSubtotal =
-        document.getElementById('info-subtotal');
+        document.getElementById(
+            'info-subtotal'
+        );
 
     const valorSubtotal =
-        document.getElementById('valor-subtotal');
+        document.getElementById(
+            'valor-subtotal'
+        );
 
 
     selectProduto.addEventListener(
@@ -262,7 +335,9 @@
         function () {
 
             const option =
-                this.options[this.selectedIndex];
+                this.options[
+                    this.selectedIndex
+                ];
 
             const estoque =
                 option.dataset.estoque;
@@ -271,7 +346,7 @@
                 option.dataset.preco;
 
 
-            if (estoque !== undefined && estoque !== "") {
+            if (estoque !== undefined) {
 
                 valorEstoque.textContent =
                     estoque;
@@ -280,10 +355,12 @@
                     false;
 
 
-                if (preco !== undefined && preco !== "") {
+                if (preco !== undefined) {
 
                     inputPreco.value =
-                        parseFloat(preco).toFixed(2);
+                        parseFloat(
+                            preco
+                        ).toFixed(2);
 
                 }
 
@@ -304,10 +381,15 @@
     function atualizarSubtotal() {
 
         const qtd =
-            parseFloat(inputQuantidade.value) || 0;
+            parseFloat(
+                inputQuantidade.value
+            ) || 0;
 
         const preco =
-            parseFloat(inputPreco.value) || 0;
+            parseFloat(
+                inputPreco.value
+            ) || 0;
+
 
         const total =
             qtd * preco;
