@@ -1,6 +1,6 @@
-/* =========================================
+/* =========================
    RESET
-========================================= */
+========================= */
 
 * {
     margin: 0;
@@ -20,373 +20,465 @@ body {
 }
 
 
-/* =========================================
+/* =========================
    NAVBAR
-========================================= */
+========================= */
 
 .navbar {
     width: 100%;
+    min-height: 75px;
+
     background: #1E1E1E;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 18px 7%;
+    padding: 12px 50px;
 
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid rgba(253, 230, 138, 0.15);
 
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+
+    position: relative;
+    z-index: 100;
 }
 
 
-/* =========================================
+/* =========================
    LOGO
-========================================= */
+========================= */
 
-.logo {
+.logo a {
+    color: #ffffff !important;
+    text-decoration: none !important;
+
     display: flex;
     align-items: center;
+    gap: 10px;
+
+    transition: all 0.3s ease;
 }
+
+
+/* Ícone da taça */
+
+.logo-icone {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #FDE68A;
+
+    border-radius: 12px;
+
+    font-size: 28px;
+
+    box-shadow:
+        0 4px 12px rgba(253, 230, 138, 0.20);
+
+    transition: all 0.3s ease;
+}
+
+
+/* Nome Nova Adega */
 
 .logo h2 {
-    color: #FDE68A;
-    font-size: 25px;
+    margin: 0;
+
+    padding: 8px 14px;
+
+    background: #FDE68A;
+
+    border-radius: 10px;
+
+    font-size: 24px;
     font-weight: 700;
-    letter-spacing: 0.5px;
+
+    color: #ffffff !important;
+
+    box-shadow:
+        0 4px 12px rgba(253, 230, 138, 0.15);
+
+    transition: all 0.3s ease;
 }
 
 
-/* =========================================
+/* Garante que as duas palavras sejam brancas */
+
+.logo .logo-nova,
+.logo .logo-adega {
+    color: #ffffff !important;
+}
+
+
+/* Impede o navegador de deixar o link roxo ou sublinhado */
+
+.logo a:link,
+.logo a:visited,
+.logo a:hover,
+.logo a:active,
+.logo a:focus {
+    color: #ffffff !important;
+    text-decoration: none !important;
+}
+
+
+/* Efeito do logo */
+
+.logo a:hover {
+    transform: translateY(-2px);
+}
+
+.logo a:hover .logo-icone {
+    transform: rotate(-5deg) scale(1.05);
+}
+
+.logo a:hover h2 {
+    transform: scale(1.02);
+    color: #ffffff !important;
+}
+
+
+/* =========================
    MENU
-========================================= */
+========================= */
 
 .menu {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 30px;
 }
 
 .menu a {
-    color: #F9FAFB;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 500;
+    position: relative;
 
-    transition: all 0.25s ease;
+    color: #F9FAFB;
+
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    padding: 8px 2px;
+
+    transition: color 0.3s ease;
+}
+
+
+/* Linha dourada embaixo */
+
+.menu a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 2px;
+
+    background: #FDE68A;
+
+    transition: width 0.3s ease;
 }
 
 .menu a:hover {
-    color: var(--botao);
+    color: #FDE68A;
+}
+
+.menu a:hover::after {
+    width: 100%;
 }
 
 
-/* =========================================
+/* =========================
    BOTÃO SAIR
-========================================= */
+========================= */
 
-.menu .btn-sair {
+.menu .sair {
     background: #FDE68A;
+
+    color: #121212 !important;
+
+    padding: 9px 18px;
+
+    border-radius: 8px;
+
+    font-weight: 700;
+
+    transition: all 0.3s ease;
+}
+
+.menu .sair::after {
+    display: none;
+}
+
+.menu .sair:hover {
+    background: #FEF3C7;
+
+    color: #121212 !important;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px rgba(253, 230, 138, 0.20);
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 40px auto;
+}
+
+
+/* =========================
+   CARD DE BOAS-VINDAS
+========================= */
+
+.welcome-card {
+    background: #1E1E1E;
+
+    border: 1px solid rgba(253, 230, 138, 0.12);
+
+    border-radius: 18px;
+
+    padding: 35px;
+
+    margin-bottom: 40px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.25);
+
+    transition: all 0.3s ease;
+}
+
+.welcome-card:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(253, 230, 138, 0.30);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.welcome-card h1 {
+    color: #FDE68A;
+
+    font-size: 32px;
+
+    margin-bottom: 10px;
+}
+
+.welcome-card p {
+    color: #D1D5DB;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   TÍTULOS
+========================= */
+
+h1,
+h2,
+h3 {
+    color: #FDE68A;
+}
+
+.section-title {
+    margin-bottom: 20px;
+
+    font-size: 25px;
+
+    color: #FDE68A;
+}
+
+
+/* =========================
+   CATEGORIAS
+========================= */
+
+.categorias {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(200px, 1fr));
+
+    gap: 20px;
+
+    margin-top: 20px;
+}
+
+.categoria {
+    background: #1E1E1E;
+
+    border: 1px solid rgba(253, 230, 138, 0.10);
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    color: #F9FAFB;
+
+    transition: all 0.3s ease;
+
+    box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.20);
+}
+
+.categoria:hover {
+    transform: translateY(-5px);
+
+    background: #242424;
+
+    border-color: #FDE68A;
+
+    box-shadow:
+        0 10px 25px rgba(253, 230, 138, 0.12);
+}
+
+.categoria h3 {
+    color: #FDE68A;
+
+    margin-bottom: 8px;
+
+    font-size: 19px;
+}
+
+.categoria p {
+    color: #D1D5DB;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+
+button,
+.btn {
+    border: none;
+
+    background: #FDE68A;
+
     color: #121212;
 
     padding: 10px 18px;
 
     border-radius: 8px;
 
-    font-weight: bold;
-
-    transition: all 0.25s ease;
-}
-
-.menu .btn-sair:hover {
-    background: #FEF3C7;
-    color: #121212;
-
-    transform: translateY(-2px);
-}
-
-
-/* =========================================
-   CONTAINER PRINCIPAL
-========================================= */
-
-.container {
-    width: 88%;
-    max-width: 1400px;
-
-    margin: 0 auto;
-
-    padding: 45px 0 70px;
-}
-
-
-/* =========================================
-   BOAS-VINDAS
-========================================= */
-
-.boas-vindas {
-    background: #1E1E1E;
-
-    padding: 30px;
-
-    border-radius: 16px;
-
-    margin-bottom: 45px;
-
-    border-left: 5px solid #FDE68A;
-
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-}
-
-.boas-vindas h1 {
-    color: var(--texto);
-
-    font-size: 30px;
-    margin-bottom: 10px;
-}
-
-.boas-vindas p {
-    color: #D1D5DB;
-    opacity: 0.8;
-}
-
-
-/* =========================================
-   TÍTULO DA SEÇÃO
-========================================= */
-
-.titulo-secao {
-    margin-bottom: 20px;
-}
-
-.titulo-secao h2 {
-    color: var(--botao);
-
-    font-size: 28px;
-
-    margin-bottom: 8px;
-
     font-weight: 700;
-}
 
-.titulo-secao p {
-    color: #D1D5DB;
-
-    font-size: 15px;
-
-    opacity: 0.75;
-}
-
-
-/* =========================================
-   CATEGORIAS
-========================================= */
-
-.categorias {
-    display: flex;
-
-    align-items: stretch;
-
-    gap: 16px;
-
-    width: 100%;
-
-    display: flex;
-    align-items: stretch;
-
-    gap: 15px;
-
-    overflow-x: auto;
-
-    padding: 10px 4px 18px;
-
-    scrollbar-width: thin;
-    scrollbar-color: #555 #121212;
-}
-
-
-/* =========================================
-   CARD DA CATEGORIA
-========================================= */
-
-.card-categoria {
-    flex: 0 0 auto;
-
-    min-width: 180px;
-
-    min-height: 95px;
-
-    background: #1E1E1E;
-
-    color: var(--texto);
+    cursor: pointer;
 
     text-decoration: none;
 
-    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
 
-    border-radius: 14px;
+button:hover,
+.btn:hover {
+    background: #FEF3C7;
 
-    padding: 18px 22px;
+    transform: translateY(-2px);
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 10px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.20);
-
-    transition:
-        transform 0.25s ease,
-        background 0.25s ease,
-        border-color 0.25s ease,
-        box-shadow 0.25s ease;
+    box-shadow:
+        0 5px 15px rgba(253, 230, 138, 0.20);
 }
 
 
-/* BRILHO DO CARD */
-
-.card-categoria::before {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 3px;
-
-    background: #FDE68A;
-
-    transform: scaleX(0);
-
-    transform-origin: left;
-
-    transition: transform 0.25s ease;
-}
-
-
-/* =========================================
-   HOVER DA CATEGORIA
-========================================= */
-
-.card-categoria:hover {
-    background: #252525;
-
-    color: #FDE68A;
-
-    border-color: var(--botao);
-
-    transform: translateY(-5px);
-
-    box-shadow: 0 10px 25px rgba(253, 230, 138, 0.12);
-}
-
-.card-categoria:hover::before {
-    transform: scaleX(1);
-}
-
-
-/* =========================================
-   ÍCONE
-========================================= */
-
-.icone {
-    font-size: 30px;
-
-    line-height: 1;
-
-    flex-shrink: 0;
-}
-
-
-/* =========================================
-   TÍTULO
-========================================= */
-
-.card-categoria h3 {
-    color: inherit;
-
-    font-size: 16px;
-
-    font-weight: 600;
-
-    margin: 0;
-
-    white-space: nowrap;
-}
-
-
-/* DESCRIÇÃO OCULTA */
-
-.card-categoria p {
-    display: none;
-}
-
-
-/* =========================================
+/* =========================
    SCROLLBAR
-========================================= */
+========================= */
 
-.categorias::-webkit-scrollbar {
-    height: 7px;
+::-webkit-scrollbar {
+    width: 8px;
 }
 
-.categorias::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: #121212;
-
-    border-radius: 10px;
 }
 
-.categorias::-webkit-scrollbar-thumb {
-    background: #444;
-
-    border-radius: 10px;
-}
-
-.categorias::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb {
     background: #FDE68A;
+
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #FEF3C7;
 }
 
 
-/* =========================================
-   EFEITO DE FOCO
-========================================= */
+/* =========================
+   FOOTER
+========================= */
 
-.card-categoria:focus {
-    outline: 2px solid #FDE68A;
+footer {
+    margin-top: 60px;
 
-    outline-offset: 3px;
+    padding: 25px;
+
+    text-align: center;
+
+    background: #1E1E1E;
+
+    border-top: 1px solid rgba(253, 230, 138, 0.12);
+
+    color: #9CA3AF;
+
+    font-size: 14px;
+}
+
+footer strong {
+    color: #FDE68A;
 }
 
 
-/* =========================================
+/* =========================
    RESPONSIVIDADE
-========================================= */
+========================= */
 
 @media (max-width: 900px) {
 
     .navbar {
-        padding: 18px 5%;
+        padding: 12px 25px;
     }
 
     .menu {
         gap: 18px;
     }
 
-    .container {
-        width: 90%;
+    .logo h2 {
+        font-size: 21px;
     }
 
-    .card-categoria {
-        min-width: 165px;
+    .logo-icone {
+        width: 43px;
+        height: 43px;
+
+        font-size: 25px;
     }
 }
 
@@ -396,114 +488,63 @@ body {
     .navbar {
         flex-direction: column;
 
-        gap: 18px;
+        gap: 15px;
+
+        padding: 15px 20px;
     }
 
     .menu {
-        width: 100%;
+        flex-wrap: wrap;
 
         justify-content: center;
 
-        flex-wrap: wrap;
+        gap: 15px;
     }
 
     .container {
         width: 92%;
 
-        padding-top: 30px;
+        margin-top: 25px;
     }
 
-    .boas-vindas {
-        padding: 22px;
+    .welcome-card {
+        padding: 25px;
     }
 
-    .boas-vindas h1 {
-        font-size: 25px;
-    }
-
-    .titulo-secao h2 {
+    .welcome-card h1 {
         font-size: 26px;
-    }
-
-    .card-categoria {
-        min-width: 150px;
-
-        min-height: 80px;
-
-        padding: 15px 18px;
-    }
-
-    .icone {
-        font-size: 25px;
-    }
-
-    .card-categoria h3 {
-        font-size: 15px;
     }
 }
 
 
 @media (max-width: 450px) {
 
+    .logo h2 {
+        font-size: 19px;
+
+        padding: 7px 10px;
+    }
+
+    .logo-icone {
+        width: 40px;
+        height: 40px;
+
+        font-size: 22px;
+    }
+
     .menu {
-        gap: 12px;
+        gap: 10px;
     }
 
     .menu a {
-        font-size: 14px;
+        font-size: 13px;
     }
 
-    .menu .btn-sair {
-        padding: 8px 14px;
+    .menu .sair {
+        padding: 8px 13px;
     }
 
-    .container {
-        width: 94%;
+    .welcome-card {
+        padding: 20px;
     }
-
-    .titulo-secao h2 {
-        font-size: 23px;
-    }
-
-    .card-categoria {
-        min-width: 140px;
-    }
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-html,
-body {
-    min-height: 100%;
-}
-
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-}
-
-.footer {
-    width: 100%;
-    margin-top: auto;
-    padding: 18px 20px;
-    box-sizing: border-box;
-    text-align: center;
-
-    background: #121212;
-    color: #f9fafb;
-
-    border-top: 1px solid #333;
-}
-
-.footer p {
-    margin: 0;
-    font-size: 14px;
-}
-
-.footer strong {
-    color: #fde68a;
 }
