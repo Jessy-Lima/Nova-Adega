@@ -195,7 +195,9 @@ def finalizar_venda(
         # SUBTOTAL
         # ----------------------------------------------------
 
-        subtotal = produto.preco * quantidade
+        preco = float(produto.preco)
+
+        subtotal = preco * quantidade
 
         total_bruto += subtotal
 
@@ -203,7 +205,7 @@ def finalizar_venda(
             {
                 "produto": produto,
                 "quantidade": quantidade,
-                "preco": produto.preco,
+                "preco": preco,
                 "produto_nome": produto.nome,
             }
         )
