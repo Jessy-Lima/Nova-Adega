@@ -21,7 +21,7 @@
 
     <link
         rel="stylesheet"
-        href="/static/CSS/home.css"
+        href="/static/CSS/home.css?v=2"
     >
 
 
@@ -45,8 +45,6 @@
 
     <nav class="navbar">
 
-        <!-- LOGO -->
-
         <div class="logo">
 
             <a href="/">
@@ -56,12 +54,10 @@
         </div>
 
 
-        <!-- MENU -->
-
         <div class="menu">
 
             <a href="/pdv/">
-                PDV
+                Home
             </a>
 
             <a href="/movimentacoes/">
@@ -95,10 +91,14 @@
 
 
     <!-- =========================
-         CONTEÚDO DA PÁGINA
+         ÁREA PRINCIPAL
     ========================= -->
 
-    {% block content %}{% endblock %}
+    <div class="page-wrapper">
+
+        {% block content %}{% endblock %}
+
+    </div>
 
 
     <!-- =========================
@@ -117,6 +117,8 @@
 
     {% endblock %}
 
+
+    
 
     <!-- =========================
          JAVASCRIPT

@@ -15,18 +15,22 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-<<<<<<< HEAD
-    background: #111111;
-    color: #f9fafb;
-=======
     background: #121212;
-    color: #F9FAFB;
+    color: #121212;
 
->>>>>>> 30c9e60754f7652351136c65b60e083982b349b1
     min-height: 100vh;
 
     display: flex;
     flex-direction: column;
+}
+
+
+/* =========================
+   ESTRUTURA DA PÁGINA
+========================= */
+
+body > main {
+    flex: 1 0 auto;
 }
 
 
@@ -370,24 +374,28 @@ button:hover,
    FOOTER
 ========================= */
 
-footer {
-    margin-top: 40px;
+.footer {
+    width: 100%;
 
-    padding: 24px;
+    margin-top: auto;
+
+    padding: 25px;
 
     text-align: center;
 
-    background: #1c1c1c;
+    background: #1E1E1E;
 
-    border-top: 1px solid #303030;
+    border-top: 1px solid rgba(253, 230, 138, 0.12);
 
-    color: #8f969f;
+    color: #9CA3AF;
 
     font-size: 14px;
+
+    flex-shrink: 0;
 }
 
-footer strong {
-    color: #f8e58c;
+.footer strong {
+    color: #FDE68A;
 }
 
 
@@ -411,33 +419,6 @@ footer strong {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #f8e58c;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    margin-top: auto;
-
-    padding: 25px;
-
-    text-align: center;
-
-    background: #1E1E1E;
-
-    border-top: 1px solid rgba(253, 230, 138, 0.12);
-
-    color: #9CA3AF;
-
-    font-size: 14px;
-
-    width: 100%;
-}
-
-footer strong {
-    color: #FDE68A;
 }
 
 
