@@ -26,6 +26,7 @@ templates = Jinja2Templates(
     directory="app/templates"
 )
 
+DESCONTO_ASSOCIADO = 10.0
 
 # ============================================================
 # TELA DO PDV
@@ -65,8 +66,9 @@ def tela_pdv(
             "usuario": usuario,
             "produtos": produtos,
             "clientes": clientes,
+            "desconto_associado": DESCONTO_ASSOCIADO,
         }
-    )
+)
 
 
 # ============================================================
@@ -211,10 +213,17 @@ def finalizar_venda(
         )
 
     # --------------------------------------------------------
-    # SEM DESCONTO
-    # --------------------------------------------------------
+# DESCONTO DE ASSOCIADO - 10%
+# --------------------------------------------------------
 
-    total_liquido = total_bruto
+    desconto_percentual = 0.0
+
+    if cliente and cliente.is_associado:
+        desconto_percentual = 10.0
+
+    desconto_valor = total_bruto * (desconto_percentual / 100)
+
+    total_liquido = total_bruto - desconto_valor
 
     # --------------------------------------------------------
     # CRIAR VENDA
