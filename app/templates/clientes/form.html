@@ -1,196 +1,271 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends "base.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block title %}
+    Clientes — Nova Adega
+{% endblock %}
 
-    <title>
-        {{ "Editar cliente" if editando else "Novo cliente" }} — Nova Adega
-    </title>
 
-    <link rel="stylesheet" href="/static/CSS/clientes.css">
-</head>
+{% block styles %}
 
-<body>
+<link
+    rel="stylesheet"
+    href="/static/CSS/clientes.css"
+>
 
-    <!-- =========================================
-         BARRA SUPERIOR
-         ========================================= -->
+{% endblock %}
 
-    <header class="topbar">
 
-        <a href="/" class="logo">
-            🍷 <span>Nova Adega</span>
-        </a>
+{% block content %}
 
-        <nav class="menu">
+<!-- =========================================
+     CONTEÚDO
+     ========================================= -->
 
-            <a href="/pdv/">
-                PDV
-            </a>
+<main class="conteudo">
 
-            <a href="/movimentacoes/">
-                Histórico
-            </a>
+    <div class="cabecalho-pagina">
 
-            <a href="/produtos/">
-                Produtos
-            </a>
+        <div>
 
-            <a href="/categorias/">
-                Categorias
-            </a>
+            <h1>Clientes</h1>
 
-            <a href="/clientes/" class="ativo">
-                Clientes
-            </a>
-
-            <a href="/auth/logout" class="btn-sair">
-                Sair
-            </a>
-
-        </nav>
-
-    </header>
-
-
-    <!-- =========================================
-         CONTEÚDO
-         ========================================= -->
-
-    <main class="form-container">
-
-        <div class="form-card">
-
-            <div class="form-cabecalho">
-
-                <a href="/clientes" class="voltar">
-                    ← Voltar para clientes
-                </a>
-
-                <h1>
-                    {{ "Editar cliente" if editando else "Novo cliente" }}
-                </h1>
-
-                <p>
-                    {{ "Atualize os dados do cliente." if editando
-                    else "Cadastre um novo cliente no sistema." }}
-                </p>
-
-            </div>
-
-
-            <!-- =========================================
-                 ERROS
-                 ========================================= -->
-
-            {% if erro %}
-
-            <div class="mensagem erro">
-                {{ erro }}
-            </div>
-
-            {% endif %}
-
-
-            <!-- =========================================
-                 FORMULÁRIO
-                 ========================================= -->
-
-            <form action="{{ '/clientes/' + editando.id|string + '/editar' if editando else '/clientes/novo' }}"
-                method="post" class="cliente-form">
-
-                <!-- NOME -->
-
-                <div class="form-grupo">
-
-                    <label for="nome">
-                        Nome completo
-                    </label>
-
-                    <input type="text" id="nome" name="nome" placeholder="Digite o nome completo"
-                        value="{{ editando.nome if editando else (valores.nome if valores else '') }}" required
-                        autofocus>
-
-                </div>
-
-
-                <!-- TELEFONE -->
-
-                <div class="form-grupo">
-
-                    <label for="telefone">
-                        Telefone
-                        <span>(opcional)</span>
-                    </label>
-
-                    <input type="text" id="telefone" name="telefone" placeholder="Ex: (11) 99999-9999"
-                        value="{{ editando.telefone if editando else (valores.telefone if valores else '') }}">
-
-                </div>
-
-                <!-- ASSOCIADO -->
-
-                <div class="form-grupo associado-grupo">
-
-                    <label>
-                        Tipo de cliente
-                    </label>
-
-                    <label class="associado-checkbox">
-
-                        <input type="checkbox" name="is_associado" value="true" {% if editando and editando.is_associado
-                            %} checked {% endif %}>
-
-                        <span>
-                            Cliente associado
-                        </span>
-
-                    </label>
-
-                    <small>
-                        Associados recebem 10% de desconto nas compras.
-                    </small>
-
-                </div>
-
-
-                <!-- CPF -->
-
-                <div class="form-grupo">
-
-                    <label for="cpf">
-                        CPF
-                        <span>(opcional)</span>
-                    </label>
-
-                    <input type="text" id="cpf" name="cpf" placeholder="Ex: 000.000.000-00"
-                        value="{{ editando.cpf if editando else (valores.cpf if valores else '') }}">
-
-                </div>
-
-
-                <!-- BOTÕES -->
-
-                <div class="form-acoes">
-
-                    <a href="/clientes" class="btn-cancelar">
-                        Cancelar
-                    </a>
-
-                    <button type="submit" class="btn-salvar">
-                        {{ "Salvar alterações" if editando else "Cadastrar cliente" }}
-                    </button>
-
-                </div>
-
-            </form>
+            <p>
+                Gerencie os clientes cadastrados no sistema.
+            </p>
 
         </div>
 
-    </main>
 
-</body>
+        <a href="/clientes/novo" class="btn-novo">
+            + Novo cliente
+        </a>
 
-</html>
+    </div>
+
+
+    <!-- =========================================
+         MENSAGENS
+         ========================================= -->
+
+    {% if request.query_params.get('criado') == 'ok' %}
+
+        <div class="mensagem sucesso">
+            Cliente cadastrado com sucesso!
+        </div>
+
+    {% endif %}
+
+
+    {% if request.query_params.get('editado') == 'ok' %}
+
+        <div class="mensagem sucesso">
+            Cliente atualizado com sucesso!
+        </div>
+
+    {% endif %}
+
+
+    <!-- =========================================
+         BUSCA
+         ========================================= -->
+
+    <section class="filtros">
+
+        <form method="get" action="/clientes">
+
+            <div class="campo-busca">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    name="busca"
+                    placeholder="Buscar por nome..."
+                    value="{{ busca }}"
+                >
+
+            </div>
+
+
+            <button type="submit" class="btn-filtrar">
+                Buscar
+            </button>
+
+
+            {% if busca %}
+
+                <a href="/clientes" class="btn-limpar">
+                    Limpar
+                </a>
+
+            {% endif %}
+
+        </form>
+
+    </section>
+
+
+    <!-- =========================================
+         TABELA
+         ========================================= -->
+
+    <section class="tabela-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Nome</th>
+
+                    <th>Telefone</th>
+
+                    <th>CPF</th>
+
+                    <th>Status</th>
+
+                    <th>Ações</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for c in clientes %}
+
+                <tr>
+
+                    <td>
+
+                        <div class="cliente-nome">
+
+                            <div class="avatar">
+                                {{ c.nome[0]|upper }}
+                            </div>
+
+                            <strong>
+                                {{ c.nome }}
+                            </strong>
+
+                        </div>
+
+                    </td>
+
+
+                    <td>
+                        {{ c.telefone or "—" }}
+                    </td>
+
+
+                    <td>
+                        {{ c.cpf or "—" }}
+                    </td>
+
+
+                    <td>
+
+                        {% if c.ativo %}
+
+                            <span class="status ativo">
+
+                                <span></span>
+
+                                Ativo
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="status inativo">
+
+                                <span></span>
+
+                                Inativo
+
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="acoes">
+
+                            <a
+                                href="/clientes/{{ c.id }}/editar"
+                                class="btn-editar"
+                            >
+                                Editar
+                            </a>
+
+
+                            <form
+                                action="/clientes/{{ c.id }}/toggle-ativo"
+                                method="post"
+                            >
+
+                                <button
+                                    type="submit"
+                                    class="btn-status"
+                                >
+                                    {{ "Desativar" if c.ativo else "Ativar" }}
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+
+                {% if not clientes %}
+
+                <tr>
+
+                    <td colspan="5" class="nenhum">
+
+                        <div class="nenhum-icone">
+                            👥
+                        </div>
+
+                        <strong>
+                            Nenhum cliente encontrado
+                        </strong>
+
+                        <span>
+                            Cadastre um cliente para começar.
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                {% endif %}
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+
+    <!-- =========================================
+         VOLTAR
+         ========================================= -->
+
+    <a href="/" class="voltar">
+        ← Voltar para o início
+    </a>
+
+</main>
+
+{% endblock %}

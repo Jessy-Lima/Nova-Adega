@@ -1,11 +1,21 @@
 from sqlalchemy import Column, Integer, Float, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
+
 from app.database import Base
 
 
+# ============================================================
+# VENDA
+# ============================================================
+
 class Venda(Base):
+
     __tablename__ = "vendas"
+
+    # --------------------------------------------------------
+    # ID
+    # --------------------------------------------------------
 
     id = Column(
         Integer,
@@ -13,46 +23,61 @@ class Venda(Base):
         index=True
     )
 
-    # Cliente pode ser NULL — venda para "balcão" sem identificação
+    # --------------------------------------------------------
+    # CLIENTE
+    # --------------------------------------------------------
+    # Pode ficar NULL quando a venda não tiver cliente.
+
     cliente_id = Column(
         Integer,
-        ForeignKey("clientes.id", ondelete="SET NULL"),
+        ForeignKey(
+            "clientes.id",
+            ondelete="SET NULL"
+        ),
         nullable=True
     )
 
-    # Usuário (operador/admin) que registrou a venda
+    # --------------------------------------------------------
+    # USUÁRIO
+    # --------------------------------------------------------
+
     usuario_id = Column(
         Integer,
-        ForeignKey("usuarios.id", ondelete="SET NULL"),
+        ForeignKey(
+            "usuarios.id",
+            ondelete="SET NULL"
+        ),
         nullable=True
     )
 
-    # Percentual de desconto aplicado ao associado
-    desconto_percentual = Column(
-        Float,
-        nullable=False,
-        default=0.0
-    )
+    # --------------------------------------------------------
+    # TOTAL DA VENDA
+    # --------------------------------------------------------
 
-    # Valor total da venda antes do desconto
     total_bruto = Column(
         Float,
         nullable=False,
         default=0.0
     )
 
-    # Valor final da venda após o desconto
     total_liquido = Column(
         Float,
         nullable=False,
         default=0.0
     )
 
-    # Observação opcional do operador
+    # --------------------------------------------------------
+    # OBSERVAÇÃO
+    # --------------------------------------------------------
+
     observacao = Column(
         String(255),
         nullable=True
     )
+
+    # --------------------------------------------------------
+    # DATA DA VENDA
+    # --------------------------------------------------------
 
     criado_em = Column(
         DateTime,
@@ -60,7 +85,7 @@ class Venda(Base):
     )
 
     # ========================================================
-    # Relacionamentos
+    # RELACIONAMENTOS
     # ========================================================
 
     cliente = relationship(
@@ -79,17 +104,30 @@ class Venda(Base):
         cascade="all, delete-orphan"
     )
 
-    @property
-    def desconto_valor(self) -> float:
-        """Valor monetário do desconto."""
-        return self.total_bruto - self.total_liquido
+    # ========================================================
+    # REPRESENTAÇÃO
+    # ========================================================
 
     def __repr__(self):
-        return f"<Venda id={self.id} total={self.total_liquido}>"
 
+        return (
+            f"<Venda "
+            f"id={self.id} "
+            f"total={self.total_liquido}>"
+        )
+
+
+# ============================================================
+# ITEM DA VENDA
+# ============================================================
 
 class ItemVenda(Base):
+
     __tablename__ = "itens_venda"
+
+    # --------------------------------------------------------
+    # ID
+    # --------------------------------------------------------
 
     id = Column(
         Integer,
@@ -97,36 +135,63 @@ class ItemVenda(Base):
         index=True
     )
 
+    # --------------------------------------------------------
+    # VENDA
+    # --------------------------------------------------------
+
     venda_id = Column(
         Integer,
-        ForeignKey("vendas.id", ondelete="CASCADE"),
+        ForeignKey(
+            "vendas.id",
+            ondelete="CASCADE"
+        ),
         nullable=False
     )
 
+    # --------------------------------------------------------
+    # PRODUTO
+    # --------------------------------------------------------
+
     produto_id = Column(
         Integer,
-        ForeignKey("produtos.id", ondelete="SET NULL"),
+        ForeignKey(
+            "produtos.id",
+            ondelete="SET NULL"
+        ),
         nullable=True
     )
+
+    # --------------------------------------------------------
+    # NOME DO PRODUTO
+    # --------------------------------------------------------
+    # Guardamos o nome para preservar o histórico da venda.
 
     produto_nome = Column(
         String(150),
         nullable=False
     )
 
+    # --------------------------------------------------------
+    # QUANTIDADE
+    # --------------------------------------------------------
+
     quantidade = Column(
         Integer,
         nullable=False
     )
+
+    # --------------------------------------------------------
+    # PREÇO UNITÁRIO
+    # --------------------------------------------------------
 
     preco_unitario = Column(
         Float,
         nullable=False
     )
 
-    @property
-    def subtotal(self) -> float:
-        return self.quantidade * self.preco_unitario
+    # ========================================================
+    # RELACIONAMENTOS
+    # ========================================================
 
     venda = relationship(
         "Venda",
@@ -137,3 +202,28 @@ class ItemVenda(Base):
         "Produto",
         backref="itens_venda"
     )
+
+    # ========================================================
+    # SUBTOTAL
+    # ========================================================
+
+    @property
+    def subtotal(self):
+
+        return (
+            self.quantidade *
+            self.preco_unitario
+        )
+
+    # ========================================================
+    # REPRESENTAÇÃO
+    # ========================================================
+
+    def __repr__(self):
+
+        return (
+            f"<ItemVenda "
+            f"id={self.id} "
+            f"produto={self.produto_nome} "
+            f"quantidade={self.quantidade}>"
+        )
