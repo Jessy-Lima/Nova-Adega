@@ -42,8 +42,15 @@ def listar_movimentacoes(
     if produto_id:
         query = query.filter(Movimentacao.produto_id == produto_id)
 
-    if tipo in ("entrada", "saida", "cancelamento", "ajuste"):
-        query = query.filter(Movimentacao.tipo == tipo)
+    if tipo == "entrada":
+        query = query.filter(
+            Movimentacao.tipo == TipoMovimentacao.ENTRADA
+        )
+
+    elif tipo == "saida":
+        query = query.filter(
+            Movimentacao.tipo == TipoMovimentacao.SAIDA
+        )
 
     movimentacoes = query.limit(200).all()  # limita para não sobrecarregar
     produtos      = db.query(Produto).filter(Produto.ativo == True).all()
