@@ -10,13 +10,23 @@
 
 html {
     scroll-behavior: smooth;
+    min-height: 100%;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+<<<<<<< HEAD
     background: #111111;
     color: #f9fafb;
+=======
+    background: #121212;
+    color: #F9FAFB;
+
+>>>>>>> 30c9e60754f7652351136c65b60e083982b349b1
     min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -405,7 +415,38 @@ footer strong {
 
 
 /* =========================
+<<<<<<< HEAD
    RESPONSIVO
+=======
+   FOOTER
+========================= */
+
+footer {
+    margin-top: auto;
+
+    padding: 25px;
+
+    text-align: center;
+
+    background: #1E1E1E;
+
+    border-top: 1px solid rgba(253, 230, 138, 0.12);
+
+    color: #9CA3AF;
+
+    font-size: 14px;
+
+    width: 100%;
+}
+
+footer strong {
+    color: #FDE68A;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+>>>>>>> 30c9e60754f7652351136c65b60e083982b349b1
 ========================= */
 
 @media (max-width: 900px) {
