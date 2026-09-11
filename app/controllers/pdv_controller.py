@@ -220,13 +220,37 @@ def finalizar_venda(
     # CRIAR VENDA
     # --------------------------------------------------------
 
+
+    # Descobre o ID do usuário logado
+    if isinstance(usuario, dict):
+
+        usuario_id = usuario.get("id")
+
+    else:
+
+        usuario_id = usuario.id
+
+
     venda = Venda(
-        cliente_id=cliente_id or None,
-        usuario_id=usuario.get("id"),
-        total_bruto=round(total_bruto, 2),
-        total_liquido=round(total_liquido, 2),
-        observacao=observacao.strip() or None
-    )
+
+    cliente_id=cliente_id or None,
+
+    usuario_id=usuario_id,
+
+    total_bruto=round(total_bruto, 2),
+
+    total_liquido=round(total_liquido, 2),
+
+    observacao=observacao.strip() or None
+
+)
+    # venda = Venda(
+    #     cliente_id=cliente_id or None,
+    #     usuario_id=usuario.get("id"),
+    #     total_bruto=round(total_bruto, 2),
+    #     total_liquido=round(total_liquido, 2),
+    #     observacao=observacao.strip() or None
+    # )
 
     db.add(venda)
 

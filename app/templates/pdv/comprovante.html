@@ -1,109 +1,168 @@
 {% extends "base.html" %}
 
-
 {% block title %}
-
 Comprovante #{{ venda.id }} — Nova Adega
-
 {% endblock %}
-
 
 {% block styles %}
 
-<!-- <link rel="stylesheet" href="/static/CSS/pdv.css"> -->
+<style>
+
+    .comprovante-container {
+        width: 100%;
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 0 20px 50px;
+    }
+
+    .cupom {
+        background: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 14px;
+        padding: 30px;
+        color: #f9fafb;
+    }
+
+    .titulo {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: #fde68a;
+        margin-bottom: 5px;
+    }
+
+    .subtitulo {
+        text-align: center;
+        color: #aaa;
+        font-size: 13px;
+        margin-bottom: 20px;
+    }
+
+    .linha-sep {
+        border: none;
+        border-top: 1px dashed #555;
+        margin: 18px 0;
+    }
+
+    .cliente {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        font-size: 14px;
+    }
+
+    .cliente span:first-child {
+        color: #aaa;
+    }
+
+    .item {
+        margin-bottom: 15px;
+    }
+
+    .item-linha {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        font-size: 14px;
+    }
+
+    .item-nome {
+        font-weight: 600;
+    }
+
+    .item-subtotal {
+        font-weight: 600;
+        white-space: nowrap;
+    }
+
+    .item-desc {
+        color: #999;
+        font-size: 12px;
+        margin-top: 4px;
+    }
+
+    .total-linha {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        margin-bottom: 8px;
+        color: #bbb;
+    }
+
+    .total-final {
+        display: flex;
+        justify-content: space-between;
+        font-size: 21px;
+        font-weight: 800;
+        color: #fde68a;
+        margin-top: 15px;
+    }
+
+    .observacao {
+        margin-top: 15px;
+        padding: 12px;
+        background: #252525;
+        border-radius: 8px;
+        font-size: 13px;
+        color: #bbb;
+    }
+
+    .botoes {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn {
+        display: block;
+        text-align: center;
+        padding: 13px;
+        border-radius: 8px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .btn-nova {
+        background: #fde68a;
+        color: #111;
+    }
+
+    .btn-hist {
+        background: #2a2a2a;
+        color: #fff;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+    }
+
+</style>
 
 {% endblock %}
 
 
 {% block content %}
 
+<main class="comprovante-container">
 
-<main class="pdv-container">
+    <div class="cupom">
 
+        <!-- CABEÇALHO -->
 
-    <!-- CABEÇALHO -->
-
-    <div class="pdv-page-header">
-
-
-        <div>
-
-            <h1>
-                🧾 Comprovante de venda
-            </h1>
-
-            <p>
-
-                Venda #{{ venda.id }}
-
-                •
-
-                {{ venda.criado_em.strftime('%d/%m/%Y %H:%M') }}
-
-            </p>
-
+        <div class="titulo">
+            🍷 Nova Adega
         </div>
 
+        <div class="subtitulo">
 
-        <div class="pdv-page-actions">
+            Venda #{{ venda.id }}
 
+            <br>
 
-            <a
-                href="/pdv"
-                class="btn btn-primary"
-            >
-
-                + Nova venda
-
-            </a>
-
-
-            <a
-                href="/pdv/historico"
-                class="btn btn-secondary"
-            >
-
-                Ver histórico
-
-            </a>
-
-
-        </div>
-
-
-    </div>
-
-
-    <!-- CUPOM -->
-
-    <section class="cupom">
-
-
-        <!-- CABEÇALHO DO CUPOM -->
-
-        <div class="cupom-header">
-
-
-            <div class="cupom-titulo">
-
-                AAPM SENAI
-
-            </div>
-
-
-            <div class="cupom-subtitulo">
-
-                Comprovante da venda #{{ venda.id }}
-
-            </div>
-
-
-            <div class="cupom-data">
-
+            {% if venda.criado_em %}
                 {{ venda.criado_em.strftime('%d/%m/%Y %H:%M') }}
-
-            </div>
-
+            {% endif %}
 
         </div>
 
@@ -113,77 +172,23 @@ Comprovante #{{ venda.id }} — Nova Adega
 
         <!-- CLIENTE -->
 
-        {% if venda.cliente %}
+        <div class="cliente">
 
-
-        <div class="cupom-info">
-
+            <span>Cliente</span>
 
             <span>
 
-                Cliente
+                {% if venda.cliente %}
+
+                    {{ venda.cliente.nome }}
+
+                {% else %}
+
+                    Sem identificação
+
+                {% endif %}
 
             </span>
-
-
-            <strong>
-
-                {{ venda.cliente.nome }}
-
-            </strong>
-
-
-        </div>
-
-
-        {% if venda.cliente.is_associado %}
-
-
-        <div class="cupom-info desconto-positivo">
-
-
-            <span>
-
-                Associado
-
-            </span>
-
-
-            <strong>
-
-                ✓ {{ venda.desconto_percentual|int }}% de desconto
-
-            </strong>
-
-
-        </div>
-
-
-        {% endif %}
-
-
-        <hr class="linha-sep">
-
-
-        {% else %}
-
-
-        <div class="cupom-info">
-
-
-            <span>
-
-                Cliente
-
-            </span>
-
-
-            <strong>
-
-                Balcão
-
-            </strong>
-
 
         </div>
 
@@ -191,61 +196,37 @@ Comprovante #{{ venda.id }} — Nova Adega
         <hr class="linha-sep">
 
 
-        {% endif %}
-
-
-        <!-- ITENS -->
-
-        <div class="cupom-section-title">
-
-            Produtos
-
-        </div>
-
+        <!-- PRODUTOS -->
 
         {% for item in venda.itens %}
 
+        <div class="item">
 
-        <div class="cupom-item">
+            <div class="item-linha">
 
-
-            <div class="cupom-item-topo">
-
-
-                <strong>
-
+                <span class="item-nome">
                     {{ item.produto_nome }}
+                </span>
 
-                </strong>
-
-
-                <strong>
+                <span class="item-subtotal">
 
                     R$
                     {{ "%.2f"|format(item.subtotal) }}
 
-                </strong>
-
+                </span>
 
             </div>
 
 
-            <div class="cupom-item-desc">
-
+            <div class="item-desc">
 
                 {{ item.quantidade }}
-
                 ×
-
-                R$
-                {{ "%.2f"|format(item.preco_unitario) }}
-
+                R$ {{ "%.2f"|format(item.preco_unitario) }}
 
             </div>
 
-
         </div>
-
 
         {% endfor %}
 
@@ -253,74 +234,32 @@ Comprovante #{{ venda.id }} — Nova Adega
         <hr class="linha-sep">
 
 
-        <!-- TOTAIS -->
+        <!-- SUBTOTAL -->
 
-        <div class="cupom-total-linha">
-
+        <div class="total-linha">
 
             <span>
-
                 Subtotal
-
             </span>
-
 
             <span>
-
-                R$
-                {{ "%.2f"|format(venda.total_bruto) }}
-
+                R$ {{ "%.2f"|format(venda.total_bruto) }}
             </span>
-
 
         </div>
 
 
-        {% if venda.desconto_valor > 0 %}
+        <!-- TOTAL -->
 
-
-        <div class="cupom-total-linha desconto-positivo">
-
+        <div class="total-final">
 
             <span>
-
-                Desconto
-                ({{ venda.desconto_percentual|int }}%)
-
-            </span>
-
-
-            <span>
-
-                − R$
-                {{ "%.2f"|format(venda.desconto_valor) }}
-
-            </span>
-
-
-        </div>
-
-
-        {% endif %}
-
-
-        <div class="cupom-total-final">
-
-
-            <span>
-
                 TOTAL
-
             </span>
 
-
-            <strong>
-
-                R$
-                {{ "%.2f"|format(venda.total_liquido) }}
-
-            </strong>
-
+            <span>
+                R$ {{ "%.2f"|format(venda.total_liquido) }}
+            </span>
 
         </div>
 
@@ -329,37 +268,42 @@ Comprovante #{{ venda.id }} — Nova Adega
 
         {% if venda.observacao %}
 
+        <div class="observacao">
 
-        <hr class="linha-sep">
+            <strong>Observação:</strong>
 
+            <br>
 
-        <div class="cupom-observacao">
-
-
-            <strong>
-
-                Observação:
-
-            </strong>
-
-
-            <p>
-
-                {{ venda.observacao }}
-
-            </p>
-
+            {{ venda.observacao }}
 
         </div>
 
-
         {% endif %}
 
+    </div>
 
-    </section>
 
+    <!-- BOTÕES -->
+
+    <div class="botoes">
+
+        <a
+            href="/pdv/"
+            class="btn btn-nova"
+        >
+            + Nova venda
+        </a>
+
+
+        <a
+            href="/movimentacoes/"
+            class="btn btn-hist"
+        >
+            Ver histórico
+        </a>
+
+    </div>
 
 </main>
-
 
 {% endblock %}
