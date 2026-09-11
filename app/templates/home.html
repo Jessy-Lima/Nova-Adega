@@ -1,170 +1,84 @@
 {% extends "base.html" %}
 
 {% block title %}
-Nova Adega - Início
+Nova Adega - Categorias
 {% endblock %}
-
 
 {% block styles %}
 
-<link
-    rel="stylesheet"
-    href="/static/CSS/home.css"
->
+<link rel="stylesheet" href="/static/CSS/home.css">
 
 {% endblock %}
-
 
 {% block content %}
 
 <main class="container">
 
-
-    <!-- =========================
-         CATEGORIAS
-    ========================== -->
-
     <section class="secao-categorias">
 
-
-        <!-- TÍTULO -->
-
         <div class="titulo-secao">
-
-            <h2>
-                Categorias
-            </h2>
+            <h2>Categorias</h2>
 
             <p>
                 Escolha uma categoria para visualizar os produtos.
             </p>
-
         </div>
-
-
-        <!-- CATEGORIAS -->
 
         <div class="categorias">
 
+            <a href="/produtos/categoria/cerveja" class="card-categoria">
+                <div class="icone">🍺</div>
 
-            <!-- CERVEJAS -->
-
-            <a
-                href="/produtos/categoria/cerveja"
-                class="card-categoria"
-            >
-
-                <div class="icone">
-                    🍺
-                </div>
-
-                <h3>
-                    Cervejas
-                </h3>
+                <h3>Cervejas</h3>
 
                 <p>
                     Veja todas as cervejas disponíveis.
                 </p>
-
             </a>
 
+            <a href="/produtos/categoria/destilados" class="card-categoria">
+                <div class="icone">🥃</div>
 
-
-            <!-- DESTILADOS -->
-
-            <a
-                href="/produtos/categoria/destilados"
-                class="card-categoria"
-            >
-
-                <div class="icone">
-                    🥃
-                </div>
-
-                <h3>
-                    Destilados
-                </h3>
+                <h3>Destilados</h3>
 
                 <p>
                     Whisky, vodka, gin e muito mais.
                 </p>
-
             </a>
 
+            <a href="/produtos/categoria/vinhos" class="card-categoria">
+                <div class="icone">🍷</div>
 
-
-            <!-- VINHOS -->
-
-            <a
-                href="/produtos/categoria/vinhos"
-                class="card-categoria"
-            >
-
-                <div class="icone">
-                    🍷
-                </div>
-
-                <h3>
-                    Vinhos
-                </h3>
+                <h3>Vinhos</h3>
 
                 <p>
                     Vinhos tintos, brancos e rosés.
                 </p>
-
             </a>
 
+            <a href="/produtos/categoria/refrigerantes" class="card-categoria">
+                <div class="icone">🥤</div>
 
-
-            <!-- REFRIGERANTES -->
-
-            <a
-                href="/produtos/categoria/refrigerantes"
-                class="card-categoria"
-            >
-
-                <div class="icone">
-                    🥤
-                </div>
-
-                <h3>
-                    Refrigerantes
-                </h3>
+                <h3>Refrigerantes</h3>
 
                 <p>
                     Bebidas sem álcool.
                 </p>
-
             </a>
 
+            <a href="/produtos/categoria/outros" class="card-categoria">
+                <div class="icone">🛒</div>
 
-
-            <!-- OUTROS -->
-
-            <a
-                href="/produtos/categoria/outros"
-                class="card-categoria"
-            >
-
-                <div class="icone">
-                    🛒
-                </div>
-
-                <h3>
-                    Outros
-                </h3>
+                <h3>Outros</h3>
 
                 <p>
                     Outros produtos disponíveis.
                 </p>
-
             </a>
-
 
         </div>
 
     </section>
-
 
 </main>
 
