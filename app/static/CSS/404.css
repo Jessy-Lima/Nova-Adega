@@ -1,0 +1,156 @@
+/* =========================================
+   PÁGINA DE ERRO 404 - NOVA ADEGA
+   ========================================= */
+
+.container {
+    min-height: 75vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 40px 20px;
+}
+
+
+/* ÍCONE */
+
+.icone {
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 20px;
+
+    border-radius: 50%;
+
+    background: rgba(253, 230, 138, 0.10);
+
+    border: 1px solid rgba(253, 230, 138, 0.25);
+
+    color: #FDE68A;
+
+    font-size: 32px;
+
+    transition: 0.3s ease;
+}
+
+.icone:hover {
+    transform: translateY(-3px);
+
+    background: rgba(253, 230, 138, 0.15);
+
+    box-shadow: 0 8px 25px rgba(253, 230, 138, 0.10);
+}
+
+
+/* NÚMERO 404 */
+
+.container h1 {
+    margin: 0;
+
+    color: #FDE68A;
+
+    font-size: 90px;
+    font-weight: 800;
+
+    line-height: 1;
+
+    letter-spacing: 3px;
+}
+
+
+/* TÍTULO */
+
+.container h2 {
+    margin-top: 15px;
+    margin-bottom: 12px;
+
+    color: #F9FAFB;
+
+    font-size: 28px;
+    font-weight: 700;
+}
+
+
+/* TEXTO */
+
+.container p {
+    max-width: 480px;
+
+    margin: 0 auto 30px;
+
+    color: #BDBDBD;
+
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+
+/* BOTÃO */
+
+.btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 13px 24px;
+
+    border-radius: 10px;
+
+    background: #FDE68A;
+    color: #121212;
+
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    transition: all 0.25s ease;
+}
+
+.btn:hover {
+    background: #FEF3C7;
+
+    color: #121212;
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 22px rgba(253, 230, 138, 0.18);
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 30px 20px;
+    }
+
+    .container h1 {
+        font-size: 70px;
+    }
+
+    .container h2 {
+        font-size: 23px;
+    }
+
+    .container p {
+        font-size: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 250px;
+    }
+}
