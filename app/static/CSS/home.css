@@ -26,6 +26,15 @@ body {
 
 
 /* =========================
+   ESTRUTURA DA PÁGINA
+========================= */
+
+body > main {
+    flex: 1 0 auto;
+}
+
+
+/* =========================
    CONTAINER
 ========================= */
 
@@ -365,24 +374,28 @@ button:hover,
    FOOTER
 ========================= */
 
-footer {
-    margin-top: 40px;
+.footer {
+    width: 100%;
 
-    padding: 24px;
+    margin-top: auto;
+
+    padding: 25px;
 
     text-align: center;
 
-    background: #1c1c1c;
+    background: #1E1E1E;
 
-    border-top: 1px solid #303030;
+    border-top: 1px solid rgba(253, 230, 138, 0.12);
 
-    color: #8f969f;
+    color: #9CA3AF;
 
     font-size: 14px;
+
+    flex-shrink: 0;
 }
 
-footer strong {
-    color: #f8e58c;
+.footer strong {
+    color: #FDE68A;
 }
 
 
@@ -410,38 +423,7 @@ footer strong {
 
 
 /* =========================
-<<<<<<< HEAD
-   RESPONSIVO
-=======
-   FOOTER
-========================= */
-
-footer {
-    margin-top: auto;
-
-    padding: 25px;
-
-    text-align: center;
-
-    background: #1E1E1E;
-
-    border-top: 1px solid rgba(253, 230, 138, 0.12);
-
-    color: #9CA3AF;
-
-    font-size: 14px;
-
-    width: 100%;
-}
-
-footer strong {
-    color: #FDE68A;
-}
-
-
-/* =========================
    RESPONSIVIDADE
-
 ========================= */
 
 @media (max-width: 900px) {
