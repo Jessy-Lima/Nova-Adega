@@ -15,14 +15,9 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-<<<<<<< HEAD
-    background: #111111;
-    color: #f9fafb;
-=======
     background: #121212;
-    color: #F9FAFB;
+    color: #121212;
 
->>>>>>> 30c9e60754f7652351136c65b60e083982b349b1
     min-height: 100vh;
 
     display: flex;
