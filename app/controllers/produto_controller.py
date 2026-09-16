@@ -150,6 +150,89 @@ async def criar_produto(
 
     return RedirectResponse(url="/produtos?criado=ok", status_code=302)
 
+# ============================================================
+# PRODUTOS POR CATEGORIA
+# ============================================================
+
+@router.get("/categoria/{categoria_nome}")
+def produtos_por_categoria(
+    categoria_nome: str,
+    request: Request,
+    pagina: int = 1,
+    por_pagina: int = 3,
+    db: Session = Depends(get_db),
+    usuario = Depends(get_usuario_logado)
+):
+    # Procura a categoria pelo nome
+    categoria = db.query(Categoria).filter(
+        Categoria.nome.ilike(categoria_nome),
+        Categoria.ativo == True
+    ).first()
+
+    # Se a categoria não existir, volta para a página de produtos
+    if not categoria:
+        return RedirectResponse(
+            url="/produtos/",
+            status_code=302
+        )
+
+    # Busca somente os produtos dessa categoria
+    query = db.query(Produto).filter(
+        Produto.ativo == True,
+        Produto.categoria_id == categoria.id
+    )
+
+    # Ordena pelo nome
+    query = query.order_by(Produto.nome)
+
+    # Paginação
+    total_produtos = query.count()
+
+    pagina = max(pagina, 1)
+    por_pagina = max(por_pagina, 1)
+
+    total_paginas = (
+        math.ceil(total_produtos / por_pagina)
+        if total_produtos
+        else 1
+    )
+
+    offset = (pagina - 1) * por_pagina
+
+    produtos = (
+        query
+        .offset(offset)
+        .limit(por_pagina)
+        .all()
+    )
+
+    # Categorias para manter o filtro da página de produtos
+    categorias = db.query(Categoria).filter(
+        Categoria.ativo == True
+    ).all()
+
+    return templates.TemplateResponse(
+        request,
+        "produtos/index.html",
+        {
+            "request": request,
+            "usuario": usuario,
+
+            "produtos": produtos,
+            "categorias": categorias,
+
+            "busca": "",
+            "categoria_id": categoria.id,
+
+            "pagina": pagina,
+            "por_pagina": por_pagina,
+            "total_produtos": total_produtos,
+            "total_paginas": total_paginas,
+
+            # Nome da categoria para mostrar na tela
+            "categoria_selecionada": categoria.nome
+        }
+    )
 
 # ============================================================
 # DETALHE
