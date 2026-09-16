@@ -2,16 +2,13 @@
 
 
 {% block title %}
-    Clientes — Nova Adega
+Clientes — Nova Adega
 {% endblock %}
 
 
 {% block styles %}
 
-<link
-    rel="stylesheet"
-    href="/static/CSS/clientes.css"
->
+<link rel="stylesheet" href="/static/CSS/clientes.css">
 
 {% endblock %}
 
@@ -49,18 +46,18 @@
 
     {% if request.query_params.get('criado') == 'ok' %}
 
-        <div class="mensagem sucesso">
-            Cliente cadastrado com sucesso!
-        </div>
+    <div class="mensagem sucesso">
+        Cliente cadastrado com sucesso!
+    </div>
 
     {% endif %}
 
 
     {% if request.query_params.get('editado') == 'ok' %}
 
-        <div class="mensagem sucesso">
-            Cliente atualizado com sucesso!
-        </div>
+    <div class="mensagem sucesso">
+        Cliente atualizado com sucesso!
+    </div>
 
     {% endif %}
 
@@ -77,12 +74,7 @@
 
                 <span>🔍</span>
 
-                <input
-                    type="text"
-                    name="busca"
-                    placeholder="Buscar por nome..."
-                    value="{{ busca }}"
-                >
+                <input type="text" name="busca" placeholder="Buscar por nome..." value="{{ busca }}">
 
             </div>
 
@@ -92,9 +84,9 @@
 
             {% if busca %}
 
-                <a href="/clientes" class="btn-limpar">
-                    Limpar
-                </a>
+            <a href="/clientes" class="btn-limpar">
+                Limpar
+            </a>
 
             {% endif %}
 
@@ -167,23 +159,23 @@
 
                         {% if c.ativo %}
 
-                            <span class="status ativo">
+                        <span class="status ativo">
 
-                                <span></span>
+                            <span></span>
 
-                                Ativo
+                            Ativo
 
-                            </span>
+                        </span>
 
                         {% else %}
 
-                            <span class="status inativo">
+                        <span class="status inativo">
 
-                                <span></span>
+                            <span></span>
 
-                                Inativo
+                            Inativo
 
-                            </span>
+                        </span>
 
                         {% endif %}
 
@@ -194,23 +186,14 @@
 
                         <div class="acoes">
 
-                            <a
-                                href="/clientes/{{ c.id }}/editar"
-                                class="btn-editar"
-                            >
+                            <a href="/clientes/{{ c.id }}/editar" class="btn-editar">
                                 Editar
                             </a>
 
 
-                            <form
-                                action="/clientes/{{ c.id }}/toggle-ativo"
-                                method="post"
-                            >
+                            <form action="/clientes/{{ c.id }}/toggle-ativo" method="post">
 
-                                <button
-                                    type="submit"
-                                    class="btn-status"
-                                >
+                                <button type="submit" class="btn-status">
                                     {{ "Desativar" if c.ativo else "Ativar" }}
                                 </button>
 
@@ -255,6 +238,53 @@
 
     </section>
 
+
+    <!-- =========================================
+     PAGINAÇÃO
+     ========================================= -->
+
+    {% if total_clientes > 0 %}
+
+    <div class="paginacao">
+
+        <div class="info-paginacao">
+
+            <p>
+                Total de clientes: {{ total_clientes }}
+            </p>
+
+            <p>
+                Página {{ pagina }} de {{ total_paginas }}
+            </p>
+
+        </div>
+
+
+        <div class="botoes-paginacao">
+
+            {% if pagina > 1 %}
+
+            <a href="/clientes?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}{% if busca %}&busca={{ busca }}{% endif %}"
+                class="btn-pagina">
+                ← Anterior
+            </a>
+
+            {% endif %}
+
+
+            {% if pagina < total_paginas %} <a
+                href="/clientes?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}{% if busca %}&busca={{ busca }}{% endif %}"
+                class="btn-pagina">
+                Próxima →
+                </a>
+
+                {% endif %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
 
     <!-- =========================================
          VOLTAR

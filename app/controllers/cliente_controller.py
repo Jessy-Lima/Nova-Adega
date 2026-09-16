@@ -27,9 +27,15 @@ templates = Jinja2Templates(
 def listar_clientes(
     request: Request,
     busca: str = "",
+    pagina: int = 1,
+    por_pagina: int = 3,
     db: Session = Depends(get_db),
     admin=Depends(get_admin)
 ):
+
+    # Evita página inválida
+    if pagina < 1:
+        pagina = 1
 
     query = db.query(Cliente)
 
@@ -40,9 +46,25 @@ def listar_clientes(
             Cliente.telefone.ilike(f"%{busca}%")
         )
 
+    # Total de clientes encontrados
+    total_clientes = query.count()
+
+    # Total de páginas
+    total_paginas = max(
+        1,
+        (total_clientes + por_pagina - 1) // por_pagina
+    )
+
+    # Evita ultrapassar a última página
+    if pagina > total_paginas:
+        pagina = total_paginas
+
+    # Clientes da página atual
     clientes = (
         query
         .order_by(Cliente.nome)
+        .offset((pagina - 1) * por_pagina)
+        .limit(por_pagina)
         .all()
     )
 
@@ -54,6 +76,10 @@ def listar_clientes(
             "usuario": admin,
             "clientes": clientes,
             "busca": busca,
+            "pagina": pagina,
+            "por_pagina": por_pagina,
+            "total_clientes": total_clientes,
+            "total_paginas": total_paginas,
         }
     )
 
