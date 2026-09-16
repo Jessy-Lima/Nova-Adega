@@ -1084,3 +1084,49 @@ body {
     }
 
 }
+
+
+/* =========================================
+   EFEITO DOURADO NO MENU
+========================================= */
+
+.navbar a {
+    color: #F9FAFB;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.25s ease;
+}
+
+.navbar a:hover {
+    color: #FDE68A;
+
+    text-shadow:
+        0 0 5px rgba(253, 230, 138, 0.8),
+        0 0 12px rgba(253, 230, 138, 0.6),
+        0 0 20px rgba(253, 230, 138, 0.4);
+
+    transform: translateY(-1px);
+}
+
+.navbar a::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    width: 0;
+    height: 2px;
+
+    background: #FDE68A;
+
+    box-shadow:
+        0 0 5px #FDE68A,
+        0 0 10px rgba(253, 230, 138, 0.7);
+
+    border-radius: 10px;
+    transform: translateX(-50%);
+    transition: width 0.25s ease;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
