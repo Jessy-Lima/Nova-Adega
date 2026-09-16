@@ -16,7 +16,10 @@ PDV — Nova Adega
 
 <main class="pdv-container">
 
-    <!-- ALERTAS -->
+    <!-- =====================================================
+         ALERTAS
+    ====================================================== -->
+
     {% if erro %}
     <div class="alerta">
 
@@ -33,6 +36,18 @@ PDV — Nova Adega
 
             Quantidade inválida.
 
+        {% elif erro == 'json' %}
+
+            Não foi possível processar os produtos da venda.
+
+        {% elif erro == 'produto_inexistente' %}
+
+            O produto selecionado não existe mais.
+
+        {% elif erro == 'salvar' %}
+
+            Não foi possível salvar a venda. Tente novamente.
+
         {% else %}
 
             Ocorreu um erro. Tente novamente.
@@ -43,28 +58,40 @@ PDV — Nova Adega
     {% endif %}
 
 
-    <!-- TÍTULO -->
+    <!-- =====================================================
+         TÍTULO
+    ====================================================== -->
+
     <div class="pdv-titulo">
 
         <div>
+
             <h1>🏪 Ponto de Venda</h1>
 
             <p>
                 Selecione os produtos e finalize a venda.
             </p>
+
         </div>
 
     </div>
 
 
-    <!-- LAYOUT PRINCIPAL -->
+    <!-- =====================================================
+         LAYOUT PRINCIPAL
+    ====================================================== -->
+
     <div class="pdv-layout">
 
 
-        <!-- PRODUTOS -->
+        <!-- =================================================
+             PRODUTOS
+        ================================================== -->
+
         <section class="produtos-col">
 
             <!-- BUSCA -->
+
             <div class="produtos-header">
 
                 <input
@@ -79,6 +106,7 @@ PDV — Nova Adega
 
 
             <!-- GRADE DE PRODUTOS -->
+
             <div
                 class="produtos-grid"
                 id="grade-produtos"
@@ -96,18 +124,25 @@ PDV — Nova Adega
                     onclick="adicionarAoCarrinho(this)"
                 >
 
+                    {% if p.imagem_url %}
+
                     <img
                         src="{{ p.imagem_url }}"
                         alt="{{ p.nome }}"
                     >
 
+                    {% endif %}
+
+
                     <div class="produto-card-nome">
                         {{ p.nome }}
                     </div>
 
+
                     <div class="produto-card-preco">
                         R$ {{ "%.2f"|format(p.preco) }}
                     </div>
+
 
                     <div class="produto-card-estoque">
                         Estoque: {{ p.estoque_atual }}
@@ -131,17 +166,24 @@ PDV — Nova Adega
         </section>
 
 
-        <!-- CARRINHO -->
+        <!-- =================================================
+             CARRINHO
+        ================================================== -->
+
         <aside class="carrinho-col">
 
 
             <!-- CABEÇALHO -->
+
             <div class="carrinho-header">
                 🛒 Carrinho
             </div>
 
 
-            <!-- CLIENTE -->
+            <!-- =================================================
+                 CLIENTE
+            ================================================== -->
+
             <div class="cliente-section">
 
                 <label for="select-cliente">
@@ -156,15 +198,17 @@ PDV — Nova Adega
                 >
 
                     <!-- SEM CLIENTE -->
+
                     <option
                         value="0"
                         data-associado="false"
                     >
-                        Sem identificação (sem desconto)
+                        Sem identificação
                     </option>
 
 
                     <!-- CLIENTES -->
+
                     {% for c in clientes %}
 
                     <option
@@ -186,6 +230,7 @@ PDV — Nova Adega
 
 
                 <!-- DESCONTO ASSOCIADO -->
+
                 <div
                     class="desconto-badge"
                     id="badge-desconto"
@@ -200,7 +245,10 @@ PDV — Nova Adega
             </div>
 
 
-            <!-- ITENS DO CARRINHO -->
+            <!-- =================================================
+                 ITENS DO CARRINHO
+            ================================================== -->
+
             <div
                 class="carrinho-itens"
                 id="lista-carrinho"
@@ -222,11 +270,15 @@ PDV — Nova Adega
             </div>
 
 
-            <!-- RODAPÉ -->
+            <!-- =================================================
+                 RODAPÉ DO CARRINHO
+            ================================================== -->
+
             <div class="carrinho-footer">
 
 
                 <!-- TOTAIS -->
+
                 <div
                     class="totais"
                     id="totais"
@@ -234,9 +286,12 @@ PDV — Nova Adega
                 >
 
                     <!-- SUBTOTAL -->
+
                     <div class="total-linha">
 
-                        <span>Subtotal</span>
+                        <span>
+                            Subtotal
+                        </span>
 
                         <span id="val-subtotal">
                             R$ 0,00
@@ -246,6 +301,7 @@ PDV — Nova Adega
 
 
                     <!-- DESCONTO -->
+
                     <div
                         class="total-linha desconto"
                         id="linha-desconto"
@@ -264,9 +320,12 @@ PDV — Nova Adega
 
 
                     <!-- TOTAL FINAL -->
+
                     <div class="total-linha final">
 
-                        <span>Total</span>
+                        <span>
+                            Total
+                        </span>
 
                         <span id="val-total">
                             R$ 0,00
@@ -278,6 +337,7 @@ PDV — Nova Adega
 
 
                 <!-- OBSERVAÇÃO -->
+
                 <textarea
                     class="obs-input"
                     id="obs-input"
@@ -286,7 +346,10 @@ PDV — Nova Adega
                 ></textarea>
 
 
-                <!-- FORMULÁRIO -->
+                <!-- =================================================
+                     FORMULÁRIO
+                ================================================== -->
+
                 <form
                     id="form-venda"
                     action="/pdv/finalizar"
@@ -299,6 +362,7 @@ PDV — Nova Adega
                         id="input-carrinho"
                     >
 
+
                     <input
                         type="hidden"
                         name="cliente_id"
@@ -306,19 +370,24 @@ PDV — Nova Adega
                         value="0"
                     >
 
+
                     <input
                         type="hidden"
                         name="observacao"
                         id="input-obs"
                     >
 
-                    <!-- VALOR DO DESCONTO PARA O JAVASCRIPT -->
+
+                    <!-- VALOR DO DESCONTO -->
+
                     <input
                         type="hidden"
                         id="config-desconto"
                         value="{{ desconto_associado|default(0) }}"
                     >
 
+
+                    <!-- BOTÃO -->
 
                     <button
                         class="btn-finalizar"
@@ -343,338 +412,225 @@ PDV — Nova Adega
 {% endblock %}
 
 
+
 {% block scripts %}
 
 <script>
 
-let carrinho = [];
+    /* =====================================================
+       VARIÁVEIS
+    ====================================================== */
 
-let clienteAtual = {
-    id: 0,
-    associado: false
-};
-
-
-/* =========================================
-   CONFIGURAÇÃO DO DESCONTO
-========================================= */
-
-/*
-    O valor vem do Python/Jinja através
-    de um campo hidden no HTML.
-
-    Dessa forma o Jinja não fica misturado
-    diretamente com o JavaScript.
-*/
-
-const DESCONTO_PCT = Number(
-    document.getElementById('config-desconto').value
-);
+    let carrinho = [];
 
 
-/* =========================================
-   ADICIONAR PRODUTO
-========================================= */
-
-function adicionarAoCarrinho(card) {
-
-    const id = parseInt(card.dataset.id);
-    const nome = card.dataset.nome;
-    const preco = parseFloat(card.dataset.preco);
-    const estoque = parseInt(card.dataset.estoque);
+    let clienteAtual = {
+        id: 0,
+        associado: false
+    };
 
 
-    const existente =
-        carrinho.find(
-            item => item.produto_id === id
-        );
+    /* =====================================================
+       CONFIGURAÇÃO DO DESCONTO
+    ====================================================== */
+
+    const elementoDesconto =
+        document.getElementById('config-desconto');
+
+    const DESCONTO_PCT =
+        elementoDesconto
+            ? Number(elementoDesconto.value) || 0
+            : 0;
 
 
-    if (existente) {
+    /* =====================================================
+       ADICIONAR PRODUTO
+    ====================================================== */
 
-        if (existente.quantidade < existente.estoque_max) {
+    function adicionarAoCarrinho(card) {
 
-            existente.quantidade++;
+        const id =
+            parseInt(card.dataset.id);
 
-        } else {
+        const nome =
+            card.dataset.nome;
 
-            alert(
-                `Estoque máximo atingido: ${existente.estoque_max} unidade(s).`
-            );
+        const preco =
+            parseFloat(card.dataset.preco);
+
+        const estoque =
+            parseInt(card.dataset.estoque);
+
+
+        if (!id || estoque <= 0) {
+
+            alert('Produto sem estoque.');
 
             return;
         }
 
-    } else {
 
-        carrinho.push({
-            produto_id: id,
-            nome: nome,
-            preco: preco,
-            quantidade: 1,
-            estoque_max: estoque
-        });
-
-    }
-
-    renderizarCarrinho();
-
-}
+        const existente =
+            carrinho.find(
+                item => item.produto_id === id
+            );
 
 
-/* =========================================
-   ALTERAR QUANTIDADE
-========================================= */
+        if (existente) {
 
-function alterarQtd(produtoId, delta) {
+            if (
+                existente.quantidade <
+                existente.estoque_max
+            ) {
 
-    const item =
-        carrinho.find(
-            item => item.produto_id === produtoId
-        );
+                existente.quantidade++;
+
+            } else {
+
+                alert(
+                    `Estoque máximo atingido: ${existente.estoque_max} unidade(s).`
+                );
+
+                return;
+            }
+
+        } else {
+
+            carrinho.push({
+
+                produto_id: id,
+
+                nome: nome,
+
+                preco: preco,
+
+                quantidade: 1,
+
+                estoque_max: estoque
+
+            });
+
+        }
 
 
-    if (!item) {
-        return;
-    }
-
-
-    item.quantidade += delta;
-
-
-    if (item.quantidade <= 0) {
-
-        removerItem(produtoId);
-
-        return;
-    }
-
-
-    if (item.quantidade > item.estoque_max) {
-
-        item.quantidade = item.estoque_max;
+        renderizarCarrinho();
 
     }
 
 
-    renderizarCarrinho();
+    /* =====================================================
+       ALTERAR QUANTIDADE
+    ====================================================== */
 
-}
+    function alterarQtd(produtoId, delta) {
 
-
-/* =========================================
-   REMOVER ITEM
-========================================= */
-
-function removerItem(produtoId) {
-
-    carrinho =
-        carrinho.filter(
-            item => item.produto_id !== produtoId
-        );
-
-    renderizarCarrinho();
-
-}
+        const item =
+            carrinho.find(
+                item => item.produto_id === produtoId
+            );
 
 
-/* =========================================
-   CLIENTE
-========================================= */
-
-function atualizarCliente(select) {
-
-    const option =
-        select.options[select.selectedIndex];
+        if (!item) {
+            return;
+        }
 
 
-    clienteAtual.id =
-        parseInt(option.value);
+        item.quantidade += delta;
 
 
-    clienteAtual.associado =
-        option.dataset.associado === 'true';
+        if (item.quantidade <= 0) {
+
+            removerItem(produtoId);
+
+            return;
+        }
 
 
-    const badge =
-        document.getElementById(
-            'badge-desconto'
-        );
+        if (
+            item.quantidade >
+            item.estoque_max
+        ) {
+
+            item.quantidade =
+                item.estoque_max;
+
+        }
 
 
-    badge.style.display =
-        clienteAtual.associado
-            ? 'inline-flex'
-            : 'none';
+        renderizarCarrinho();
 
-
-    renderizarTotais();
-
-}
-
-
-/* =========================================
-   RENDERIZAR CARRINHO
-========================================= */
-
-function renderizarCarrinho() {
-
-    const lista =
-        document.getElementById(
-            'lista-carrinho'
-        );
-
-
-
-    const totais =
-        document.getElementById(
-            'totais'
-        );
-
-
-    const btnFinal =
-        document.getElementById(
-            'btn-finalizar'
-        );
-
-
-    if (carrinho.length === 0) {
-
-        lista.innerHTML = `
-            <div
-                class="carrinho-vazio"
-                id="msg-vazio"
-            >
-
-                <span class="carrinho-vazio-icon">
-                    🛒
-                </span>
-
-                Clique nos produtos para adicionar
-
-            </div>
-        `;
-
-
-        totais.style.display = 'none';
-
-        btnFinal.disabled = true;
-
-        return;
     }
 
 
-    totais.style.display = 'block';
+    /* =====================================================
+       REMOVER ITEM
+    ====================================================== */
 
-    btnFinal.disabled = false;
+    function removerItem(produtoId) {
 
-    lista.innerHTML = '';
-
-
-    carrinho.forEach(item => {
-
-        const subtotal =
-            item.preco * item.quantidade;
-
-
-        const div =
-            document.createElement('div');
+        carrinho =
+            carrinho.filter(
+                item =>
+                    item.produto_id !== produtoId
+            );
 
 
-        div.className =
-            'item-carrinho';
+        renderizarCarrinho();
+
+    }
 
 
-        div.innerHTML = `
+    /* =====================================================
+       CLIENTE
+    ====================================================== */
 
-            <div class="item-info">
+    function atualizarCliente(select) {
 
-                <div class="item-nome">
-                    ${item.nome}
-                </div>
-
-                <div class="item-preco-unit">
-
-                    R$ ${item.preco
-                        .toFixed(2)
-                        .replace('.', ',')}
-
-                    / un.
-
-                </div>
-
-            </div>
+        const option =
+            select.options[
+                select.selectedIndex
+            ];
 
 
-            <div class="item-qty-ctrl">
-
-                <button
-                    type="button"
-                    class="qty-btn"
-                    onclick="alterarQtd(${item.produto_id}, -1)"
-                >
-                    −
-                </button>
+        clienteAtual.id =
+            parseInt(option.value) || 0;
 
 
-                <span class="qty-value">
-                    ${item.quantidade}
-                </span>
+        clienteAtual.associado =
+            option.dataset.associado === 'true';
 
 
-                <button
-                    type="button"
-                    class="qty-btn"
-                    onclick="alterarQtd(${item.produto_id}, 1)"
-                >
-                    +
-                </button>
-
-            </div>
+        const badge =
+            document.getElementById(
+                'badge-desconto'
+            );
 
 
-            <div class="item-subtotal">
+        if (badge) {
 
-                R$ ${subtotal
-                    .toFixed(2)
-                    .replace('.', ',')}
+            badge.style.display =
+                clienteAtual.associado
+                    ? 'inline-flex'
+                    : 'none';
 
-            </div>
-
-
-            <button
-                type="button"
-                class="item-remover"
-                onclick="removerItem(${item.produto_id})"
-                title="Remover"
-            >
-                ×
-            </button>
-
-        `;
+        }
 
 
-        lista.appendChild(div);
+        renderizarTotais();
 
-    });
-
-
-    renderizarTotais();
-
-}
+    }
 
 
-/* =========================================
-   CALCULAR TOTAIS
-========================================= */
+    /* =====================================================
+       CALCULAR SUBTOTAL
+    ====================================================== */
 
-function renderizarTotais() {
+    function calcularSubtotal() {
 
-    const subtotal =
-        carrinho.reduce(
-            (acumulador, item) => {
+        return carrinho.reduce(
+            (total, item) => {
 
-                return acumulador +
+                return total +
                     (
                         item.preco *
                         item.quantidade
@@ -684,162 +640,389 @@ function renderizarTotais() {
             0
         );
 
-
-    const descontoValor =
-        clienteAtual.associado
-            ? subtotal * (DESCONTO_PCT / 100)
-            : 0;
-
-
-    const total =
-        subtotal - descontoValor;
-
-
-    const formatar =
-        valor =>
-            'R$ ' +
-            valor
-                .toFixed(2)
-                .replace('.', ',');
-
-
-    /* SUBTOTAL */
-
-    document.getElementById(
-        'val-subtotal'
-    ).textContent =
-        formatar(subtotal);
-
-
-    /* TOTAL */
-
-    document.getElementById(
-        'val-total'
-    ).textContent =
-        formatar(total);
-
-
-    const linhaDesconto =
-        document.getElementById(
-            'linha-desconto'
-        );
-
-
-    const labelDesconto =
-        document.getElementById(
-            'label-desconto'
-        );
-
-
-    const valorDesconto =
-        document.getElementById(
-            'val-desconto'
-        );
-
-
-    /* MOSTRAR DESCONTO */
-
-    if (
-        clienteAtual.associado &&
-        descontoValor > 0
-    ) {
-
-        linhaDesconto.style.display =
-            'flex';
-
-
-        labelDesconto.textContent =
-            `Desconto (${DESCONTO_PCT}%)`;
-
-
-        valorDesconto.textContent =
-            `− ${formatar(descontoValor)}`;
-
-    }
-
-    else {
-
-        linhaDesconto.style.display =
-            'none';
-
-    }
-
-}
-
-
-/* =========================================
-   FINALIZAR VENDA
-========================================= */
-
-function finalizarVenda() {
-
-    if (carrinho.length === 0) {
-        return;
     }
 
 
-    document.getElementById(
-        'input-carrinho'
-    ).value =
+    /* =====================================================
+       CALCULAR DESCONTO
+    ====================================================== */
 
-        JSON.stringify(
-            carrinho.map(
-                item => ({
-                    produto_id: item.produto_id,
-                    nome: item.nome,
-                    preco: item.preco,
-                    quantidade: item.quantidade
-                })
-            )
-        );
+    function calcularDesconto(subtotal) {
+
+        if (!clienteAtual.associado) {
+            return 0;
+        }
 
 
-    document.getElementById(
-        'input-cliente-id'
-    ).value =
-        clienteAtual.id;
+        return subtotal *
+            (DESCONTO_PCT / 100);
+
+    }
 
 
-    document.getElementById(
-        'input-obs'
-    ).value =
-        document.getElementById(
-            'obs-input'
-        ).value;
+    /* =====================================================
+       RENDERIZAR TOTAIS
+    ====================================================== */
+
+    function renderizarTotais() {
+
+        const subtotal =
+            calcularSubtotal();
 
 
-    document.getElementById(
-        'form-venda'
-    ).submit();
-
-}
+        const desconto =
+            calcularDesconto(subtotal);
 
 
-/* =========================================
-   BUSCAR PRODUTOS
-========================================= */
-
-document
-    .getElementById('busca-produto')
-    .addEventListener(
-        'input',
-        function () {
-
-            const termo =
-                this.value
-                    .toLowerCase()
-                    .trim();
+        const total =
+            subtotal - desconto;
 
 
-            document
-                .querySelectorAll(
-                    '.produto-card'
+        const formatar =
+            valor =>
+                'R$ ' +
+                valor
+                    .toFixed(2)
+                    .replace('.', ',');
+
+
+        const elementoSubtotal =
+            document.getElementById(
+                'val-subtotal'
+            );
+
+
+        const elementoDesconto =
+            document.getElementById(
+                'val-desconto'
+            );
+
+
+        const elementoTotal =
+            document.getElementById(
+                'val-total'
+            );
+
+
+        const linhaDesconto =
+            document.getElementById(
+                'linha-desconto'
+            );
+
+
+        const labelDesconto =
+            document.getElementById(
+                'label-desconto'
+            );
+
+
+        if (elementoSubtotal) {
+
+            elementoSubtotal.textContent =
+                formatar(subtotal);
+
+        }
+
+
+        if (elementoDesconto) {
+
+            elementoDesconto.textContent =
+                '− ' +
+                formatar(desconto);
+
+        }
+
+
+        if (elementoTotal) {
+
+            elementoTotal.textContent =
+                formatar(total);
+
+        }
+
+
+        if (linhaDesconto) {
+
+            linhaDesconto.style.display =
+                (
+                    clienteAtual.associado &&
+                    desconto > 0
                 )
-                .forEach(
-                    card => {
+                    ? 'flex'
+                    : 'none';
+
+        }
+
+
+        if (labelDesconto) {
+
+            labelDesconto.textContent =
+                `Desconto (${DESCONTO_PCT}%)`;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       RENDERIZAR CARRINHO
+    ====================================================== */
+
+    function renderizarCarrinho() {
+
+        const lista =
+            document.getElementById(
+                'lista-carrinho'
+            );
+
+
+        const msgVazio =
+            document.getElementById(
+                'msg-vazio'
+            );
+
+
+        const totais =
+            document.getElementById(
+                'totais'
+            );
+
+
+        const botaoFinalizar =
+            document.getElementById(
+                'btn-finalizar'
+            );
+
+
+        if (!lista) {
+            return;
+        }
+
+
+        /* ---------------------------------------------
+           CARRINHO VAZIO
+        --------------------------------------------- */
+
+        if (carrinho.length === 0) {
+
+            lista.innerHTML = '';
+
+            lista.appendChild(
+                criarMensagemVazia()
+            );
+
+
+            if (totais) {
+                totais.style.display = 'none';
+            }
+
+
+            if (botaoFinalizar) {
+                botaoFinalizar.disabled = true;
+            }
+
+
+            return;
+        }
+
+
+        /* ---------------------------------------------
+           CARRINHO COM PRODUTOS
+        --------------------------------------------- */
+
+        lista.innerHTML = '';
+
+
+        carrinho.forEach(item => {
+
+            const linha =
+                document.createElement('div');
+
+            linha.className =
+                'carrinho-item';
+
+
+            const subtotal =
+                item.preco *
+                item.quantidade;
+
+
+            linha.innerHTML = `
+
+                <div class="carrinho-item-info">
+
+                    <div class="carrinho-item-nome">
+                        ${escaparHTML(item.nome)}
+                    </div>
+
+                    <div class="carrinho-item-preco">
+                        R$ ${formatarNumero(item.preco)}
+                    </div>
+
+                </div>
+
+
+                <div class="carrinho-item-controles">
+
+                    <button
+                        type="button"
+                        class="btn-qtd"
+                        onclick="alterarQtd(${item.produto_id}, -1)"
+                    >
+                        −
+                    </button>
+
+
+                    <span class="quantidade">
+                        ${item.quantidade}
+                    </span>
+
+
+                    <button
+                        type="button"
+                        class="btn-qtd"
+                        onclick="alterarQtd(${item.produto_id}, 1)"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+
+                <div class="carrinho-item-subtotal">
+                    R$ ${formatarNumero(subtotal)}
+                </div>
+
+
+                <button
+                    type="button"
+                    class="btn-remover"
+                    onclick="removerItem(${item.produto_id})"
+                    title="Remover produto"
+                >
+                    🗑️
+                </button>
+
+            `;
+
+
+            lista.appendChild(linha);
+
+        });
+
+
+        if (totais) {
+            totais.style.display = 'block';
+        }
+
+
+        if (botaoFinalizar) {
+            botaoFinalizar.disabled = false;
+        }
+
+
+        renderizarTotais();
+
+    }
+
+
+    /* =====================================================
+       CRIAR MENSAGEM DE CARRINHO VAZIO
+    ====================================================== */
+
+    function criarMensagemVazia() {
+
+        const div =
+            document.createElement('div');
+
+
+        div.className =
+            'carrinho-vazio';
+
+
+        div.id =
+            'msg-vazio';
+
+
+        div.innerHTML = `
+
+            <span class="carrinho-vazio-icon">
+                🛒
+            </span>
+
+            Clique nos produtos para adicionar
+
+        `;
+
+
+        return div;
+
+    }
+
+
+    /* =====================================================
+       FORMATAR NÚMERO
+    ====================================================== */
+
+    function formatarNumero(valor) {
+
+        return Number(valor)
+            .toFixed(2)
+            .replace('.', ',');
+
+    }
+
+
+    /* =====================================================
+       ESCAPAR HTML
+       Evita inserir nomes de produtos diretamente
+       no HTML sem tratamento.
+    ====================================================== */
+
+    function escaparHTML(texto) {
+
+        const div =
+            document.createElement('div');
+
+        div.textContent =
+            texto ?? '';
+
+        return div.innerHTML;
+
+    }
+
+
+    /* =====================================================
+       BUSCA DE PRODUTOS
+    ====================================================== */
+
+    const campoBusca =
+        document.getElementById(
+            'busca-produto'
+        );
+
+
+    if (campoBusca) {
+
+        campoBusca.addEventListener(
+            'input',
+            function () {
+
+                const termo =
+                    this.value
+                        .toLowerCase()
+                        .trim();
+
+
+                document
+                    .querySelectorAll(
+                        '.produto-card'
+                    )
+                    .forEach(card => {
 
                         const nome =
-                            card.dataset.nomeLower || '';
+                            card.dataset.nomeLower ||
+                            '';
 
 
                         card.style.display =
@@ -847,12 +1030,120 @@ document
                                 ? ''
                                 : 'none';
 
-                    }
+                    });
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       FINALIZAR VENDA
+    ====================================================== */
+
+    function finalizarVenda() {
+
+        if (carrinho.length === 0) {
+
+            alert(
+                'Adicione pelo menos um produto ao carrinho.'
+            );
+
+            return;
+        }
+
+
+        /* ---------------------------------------------
+           CARRINHO
+        --------------------------------------------- */
+
+        document.getElementById(
+            'input-carrinho'
+        ).value =
+            JSON.stringify(
+
+                carrinho.map(item => ({
+
+                    produto_id:
+                        item.produto_id,
+
+                    nome:
+                        item.nome,
+
+                    preco:
+                        item.preco,
+
+                    quantidade:
+                        item.quantidade
+
+                }))
+
+            );
+
+
+        /* ---------------------------------------------
+           CLIENTE
+        --------------------------------------------- */
+
+        document.getElementById(
+            'input-cliente-id'
+        ).value =
+            clienteAtual.id;
+
+
+
+        /* ---------------------------------------------
+           OBSERVAÇÃO
+        --------------------------------------------- */
+
+        document.getElementById(
+            'input-obs'
+        ).value =
+            document.getElementById(
+                'obs-input'
+            ).value.trim();
+
+
+        /* ---------------------------------------------
+           ENVIA FORMULÁRIO
+        --------------------------------------------- */
+
+        document.getElementById(
+            'form-venda'
+        ).submit();
+
+    }
+
+    /* =====================================================
+       INICIALIZAÇÃO
+    ====================================================== */
+
+    document.addEventListener(
+        'DOMContentLoaded',
+        function () {
+
+            const selectCliente =
+                document.getElementById(
+                    'select-cliente'
                 );
+
+
+            if (selectCliente) {
+
+                atualizarCliente(
+                    selectCliente
+                );
+
+            }
+
+
+            renderizarCarrinho();
 
         }
     );
 
 </script>
+
 
 {% endblock %}
