@@ -251,6 +251,47 @@ Categorias — Nova Adega
     </section>
 
 
+    <!-- PAGINAÇÃO -->
+
+    {% if total_categorias > 0 %}
+
+    <div class="paginacao">
+
+        <span>
+            Página {{ pagina }} de {{ total_paginas }}
+        </span>
+
+
+        <div>
+
+            {% if pagina > 1 %}
+
+            <a
+                href="/categorias?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}"
+            >
+                ← Anterior
+            </a>
+
+            {% endif %}
+
+
+            {% if pagina < total_paginas %}
+
+            <a
+                href="/categorias?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}"
+            >
+                Próxima →
+            </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    {% endif %}
+
+
     <!-- VOLTAR -->
 
     <div class="voltar">
