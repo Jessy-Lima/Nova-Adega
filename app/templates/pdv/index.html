@@ -1093,6 +1093,332 @@ PDV — Nova Adega
 
 
 
+<<<<<<< HEAD
+    const totais =
+        document.getElementById(
+            'totais'
+        );
+
+
+    const btnFinal =
+        document.getElementById(
+            'btn-finalizar'
+        );
+
+
+    if (carrinho.length === 0) {
+
+        lista.innerHTML = `
+            <div
+                class="carrinho-vazio"
+                id="msg-vazio"
+            >
+
+                <span class="carrinho-vazio-icon">
+                    🛒
+                </span>
+
+                Clique nos produtos para adicionar
+
+            </div>
+        `;
+
+
+        totais.style.display = 'none';
+
+        btnFinal.disabled = true;
+
+        return;
+    }
+
+
+    totais.style.display = 'block';
+
+    btnFinal.disabled = false;
+
+    lista.innerHTML = '';
+
+
+    carrinho.forEach(item => {
+
+        const subtotal =
+            item.preco * item.quantidade;
+
+
+        const div =
+            document.createElement('div');
+
+
+        div.className =
+            'item-carrinho';
+
+
+        div.innerHTML = `
+
+            <div class="item-info">
+
+                <div class="item-nome">
+                    ${item.nome}
+                </div>
+
+                <div class="item-preco-unit">
+
+                    R$ ${item.preco
+                        .toFixed(2)
+                        .replace('.', ',')}
+
+                    / un.
+
+                </div>
+
+            </div>
+
+
+            <div class="item-qty-ctrl">
+
+                <button
+                    type="button"
+                    class="qty-btn"
+                    onclick="alterarQtd(${item.produto_id}, -1)"
+                >
+                    −
+                </button>
+
+
+                <span class="qty-value">
+                    ${item.quantidade}
+                </span>
+
+
+                <button
+                    type="button"
+                    class="qty-btn"
+                    onclick="alterarQtd(${item.produto_id}, 1)"
+                >
+                    +
+                </button>
+
+            </div>
+
+
+            <div class="item-subtotal">
+
+                R$ ${subtotal
+                    .toFixed(2)
+                    .replace('.', ',')}
+
+            </div>
+
+
+            <button
+                type="button"
+                class="item-remover"
+                onclick="removerItem(${item.produto_id})"
+                title="Remover"
+            >
+                ×
+            </button>
+
+        `;
+
+
+        lista.appendChild(div);
+
+    });
+
+
+    renderizarTotais();
+
+}
+
+
+/* =========================================
+   CALCULAR TOTAIS
+========================================= */
+
+function renderizarTotais() {
+
+    const subtotal =
+        carrinho.reduce(
+            (acumulador, item) => {
+
+                return acumulador +
+                    (
+                        item.preco *
+                        item.quantidade
+                    );
+
+            },
+            0
+        );
+
+
+    const descontoValor =
+        clienteAtual.associado
+            ? subtotal * (DESCONTO_PCT / 100)
+            : 0;
+
+
+    const total =
+        subtotal - descontoValor;
+
+
+    const formatar =
+        valor =>
+            'R$ ' +
+            valor
+                .toFixed(2)
+                .replace('.', ',');
+
+
+    /* SUBTOTAL */
+
+    document.getElementById(
+        'val-subtotal'
+    ).textContent =
+        formatar(subtotal);
+
+
+    /* TOTAL */
+
+    document.getElementById(
+        'val-total'
+    ).textContent =
+        formatar(total);
+
+
+    const linhaDesconto =
+        document.getElementById(
+            'linha-desconto'
+        );
+
+
+    const labelDesconto =
+        document.getElementById(
+            'label-desconto'
+        );
+
+
+    const valorDesconto =
+        document.getElementById(
+            'val-desconto'
+        );
+
+
+    /* MOSTRAR DESCONTO */
+
+    if (
+        clienteAtual.associado &&
+        descontoValor > 0
+    ) {
+
+        linhaDesconto.style.display =
+            'flex';
+
+
+        labelDesconto.textContent =
+            `Desconto (${DESCONTO_PCT}%)`;
+
+
+        valorDesconto.textContent =
+            `− ${formatar(descontoValor)}`;
+
+    }
+
+    else {
+
+        linhaDesconto.style.display =
+            'none';
+
+    }
+
+}
+
+
+/* =========================================
+   FINALIZAR VENDA
+========================================= */
+
+function finalizarVenda() {
+
+    if (carrinho.length === 0) {
+        return;
+    }
+
+
+    document.getElementById(
+        'input-carrinho'
+    ).value =
+
+        JSON.stringify(
+            carrinho.map(
+                item => ({
+                    produto_id: item.produto_id,
+                    nome: item.nome,
+                    preco: item.preco,
+                    quantidade: item.quantidade
+                })
+            )
+        );
+
+
+    document.getElementById(
+        'input-cliente-id'
+    ).value =
+        clienteAtual.id;
+
+
+    document.getElementById(
+        'input-obs'
+    ).value =
+        document.getElementById(
+            'obs-input'
+        ).value;
+
+
+    document.getElementById(
+        'form-venda'
+    ).submit();
+
+}
+
+
+/* =========================================
+   BUSCAR PRODUTOS
+========================================= */
+
+document
+    .getElementById('busca-produto')
+    .addEventListener(
+        'input',
+        function () {
+
+            const termo =
+                this.value
+                    .toLowerCase()
+                    .trim();
+
+
+            document
+                .querySelectorAll(
+                    '.produto-card'
+                )
+                .forEach(
+                    card => {
+
+                        const nome =
+                            card.dataset.nomeLower || '';
+
+
+                        card.style.display =
+                            nome.includes(termo)
+                                ? ''
+                                : 'none';
+
+                    }
+                );
+
+=======
         /* ---------------------------------------------
            OBSERVAÇÃO
         --------------------------------------------- */
@@ -1140,10 +1466,15 @@ PDV — Nova Adega
 
             renderizarCarrinho();
 
+>>>>>>> 63fddedd578e3388149b7f71fba3679af75d2fcf
         }
     );
 
 </script>
 
+<<<<<<< HEAD
+{% endblock %}
+=======
 
 {% endblock %}
+>>>>>>> 63fddedd578e3388149b7f71fba3679af75d2fcf
