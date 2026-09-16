@@ -158,12 +158,10 @@ body {
 
 .conteudo {
     width: 100%;
-
-    max-width: 1100px;
-
+    max-width: 1200px;
     margin: 0 auto;
-
-    padding: 45px 25px 60px;
+    padding: 40px 30px 60px;
+    box-sizing: border-box;
 }
 
 
