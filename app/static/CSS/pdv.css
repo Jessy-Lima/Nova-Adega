@@ -2,15 +2,6 @@
    PDV — NOVA ADEGA
    ========================================================= */
 
-/* CORES DO PROJETO
-
-   Fundo:       #121212
-   Cards:       #1E1E1E
-   Botões:      #FDE68A
-   Destaques:   #FEF3C7
-   Textos:      #F9FAFB
-*/
-
 
 /* =========================================================
    CONTAINER PRINCIPAL
@@ -34,22 +25,21 @@
     margin-bottom: 25px;
 }
 
-
 .pdv-titulo h1 {
     color: #F9FAFB;
 
     font-size: 32px;
-
     font-weight: 700;
 
-    margin-bottom: 8px;
+    margin: 0 0 8px;
 }
-
 
 .pdv-titulo p {
     color: #A1A1AA;
 
     font-size: 15px;
+
+    margin: 0;
 }
 
 
@@ -60,7 +50,8 @@
 .pdv-layout {
     display: grid;
 
-    grid-template-columns: minmax(0, 1fr) 440px;
+    grid-template-columns:
+        minmax(0, 1fr) 440px;
 
     gap: 25px;
 
@@ -84,7 +75,6 @@
     min-height: 650px;
 
     display: flex;
-
     flex-direction: column;
 
     box-shadow:
@@ -93,22 +83,34 @@
 
 
 /* =========================================================
-   BUSCA
+   CABEÇALHO DOS PRODUTOS
    ========================================================= */
 
 .produtos-header {
     padding: 20px;
 
     border-bottom: 1px solid #333333;
+
+    position: relative;
 }
 
+
+/* =========================================================
+   CAMPO DE BUSCA
+   ========================================================= */
 
 .busca-input {
     width: 100%;
 
+    box-sizing: border-box;
+
+    display: block;
+
     padding: 14px 16px;
 
-    background: #121212;
+    background: #121212 !important;
+
+    background-image: none !important;
 
     border: 1px solid #444444;
 
@@ -116,20 +118,83 @@
 
     color: #F9FAFB;
 
+    font-family: Arial, Helvetica, sans-serif;
+
     font-size: 14px;
+
+    line-height: 1.4;
 
     outline: none;
 
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    -moz-appearance: none;
+
     transition:
-        border 0.2s,
-        box-shadow 0.2s;
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
+
+/* =========================================================
+   REMOVE ÍCONES NATIVOS DO INPUT
+   ========================================================= */
+
+.busca-input::-webkit-search-decoration,
+.busca-input::-webkit-search-cancel-button,
+.busca-input::-webkit-search-results-button,
+.busca-input::-webkit-search-results-decoration {
+    display: none !important;
+
+    appearance: none !important;
+    -webkit-appearance: none !important;
+}
+
+
+/* Firefox */
+
+.busca-input::-moz-search-clear,
+.busca-input::-moz-search-decoration {
+    display: none !important;
+}
+
+
+/* Remove possíveis pseudo-elementos */
+
+.busca-input::before,
+.busca-input::after {
+    content: none !important;
+
+    display: none !important;
+}
+
+
+/* Remove possíveis pseudo-elementos do container */
+
+.produtos-header::before,
+.produtos-header::after {
+    content: none !important;
+
+    display: none !important;
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+   ========================================================= */
 
 .busca-input::placeholder {
     color: #9CA3AF;
+
+    opacity: 1;
 }
 
+
+/* =========================================================
+   FOCO DO CAMPO
+   ========================================================= */
 
 .busca-input:focus {
     border-color: #FDE68A;
@@ -175,10 +240,10 @@
     cursor: pointer;
 
     transition:
-        transform 0.2s,
-        border-color 0.2s,
-        background 0.2s,
-        box-shadow 0.2s;
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
 
     min-height: 180px;
 }
@@ -196,6 +261,10 @@
 }
 
 
+/* =========================================================
+   IMAGEM DO PRODUTO
+   ========================================================= */
+
 .produto-card img {
     width: 100%;
 
@@ -211,6 +280,10 @@
 }
 
 
+/* =========================================================
+   NOME DO PRODUTO
+   ========================================================= */
+
 .produto-card-nome {
     color: #F9FAFB;
 
@@ -222,6 +295,10 @@
 }
 
 
+/* =========================================================
+   PREÇO
+   ========================================================= */
+
 .produto-card-preco {
     color: #FDE68A;
 
@@ -230,6 +307,10 @@
     font-weight: 700;
 }
 
+
+/* =========================================================
+   ESTOQUE
+   ========================================================= */
 
 .produto-card-estoque {
     color: #9CA3AF;
@@ -240,7 +321,9 @@
 }
 
 
-/* PRODUTO SEM ESTOQUE */
+/* =========================================================
+   PRODUTO SEM ESTOQUE
+   ========================================================= */
 
 .produto-card.sem-estoque {
     opacity: 0.45;
@@ -251,7 +334,9 @@
 }
 
 
-/* SEM PRODUTOS */
+/* =========================================================
+   SEM PRODUTOS
+   ========================================================= */
 
 .sem-produtos {
     grid-column: 1 / -1;
@@ -289,6 +374,10 @@
         0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
+
+/* =========================================================
+   CABEÇALHO DO CARRINHO
+   ========================================================= */
 
 .carrinho-header {
     padding: 20px;
@@ -331,8 +420,14 @@
 }
 
 
+/* =========================================================
+   SELECT DO CLIENTE
+   ========================================================= */
+
 .cliente-select {
     width: 100%;
+
+    box-sizing: border-box;
 
     padding: 12px;
 
@@ -352,8 +447,15 @@
 
 .cliente-select:focus {
     border-color: #FDE68A;
+
+    box-shadow:
+        0 0 0 3px rgba(253, 230, 138, 0.08);
 }
 
+
+/* =========================================================
+   DESCONTO
+   ========================================================= */
 
 .desconto-badge {
     margin-top: 10px;
@@ -385,7 +487,11 @@
 }
 
 
-.item-carrinho {
+/* =========================================================
+   ITEM DO CARRINHO
+   ========================================================= */
+
+.carrinho-item {
     display: flex;
 
     align-items: center;
@@ -398,28 +504,38 @@
 }
 
 
-.item-carrinho:hover {
+.carrinho-item:hover {
     background: #242424;
 }
 
 
-.item-info {
+/* =========================================================
+   INFORMAÇÕES DO ITEM
+   ========================================================= */
+
+.carrinho-item-info {
     flex: 1;
 
     min-width: 0;
 }
 
 
-.item-nome {
+.carrinho-item-nome {
     color: #F9FAFB;
 
     font-size: 14px;
 
     font-weight: 600;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
 }
 
 
-.item-preco-unit {
+.carrinho-item-preco {
     color: #9CA3AF;
 
     font-size: 12px;
@@ -428,7 +544,11 @@
 }
 
 
-.item-qty-ctrl {
+/* =========================================================
+   CONTROLES DE QUANTIDADE
+   ========================================================= */
+
+.carrinho-item-controles {
     display: flex;
 
     align-items: center;
@@ -437,10 +557,16 @@
 }
 
 
-.qty-btn {
+.btn-qtd {
     width: 28px;
 
     height: 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 
     border: none;
 
@@ -453,17 +579,28 @@
     font-size: 16px;
 
     cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.15s ease;
 }
 
 
-.qty-btn:hover {
+.btn-qtd:hover {
     background: #FDE68A;
 
     color: #121212;
+
+    transform: scale(1.05);
 }
 
 
-.qty-value {
+/* =========================================================
+   QUANTIDADE
+   ========================================================= */
+
+.quantidade {
     color: #F9FAFB;
 
     font-weight: 700;
@@ -474,7 +611,11 @@
 }
 
 
-.item-subtotal {
+/* =========================================================
+   SUBTOTAL DO ITEM
+   ========================================================= */
+
+.carrinho-item-subtotal {
     color: #FDE68A;
 
     font-weight: 700;
@@ -487,7 +628,11 @@
 }
 
 
-.item-remover {
+/* =========================================================
+   BOTÃO REMOVER
+   ========================================================= */
+
+.btn-remover {
     border: none;
 
     background: transparent;
@@ -501,11 +646,17 @@
     padding: 4px 7px;
 
     border-radius: 6px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.15s ease;
 }
 
 
-.item-remover:hover {
+.btn-remover:hover {
     background: rgba(239, 68, 68, 0.15);
+
+    transform: scale(1.05);
 }
 
 
@@ -599,6 +750,8 @@
 .obs-input {
     width: 100%;
 
+    box-sizing: border-box;
+
     background: #121212;
 
     color: #F9FAFB;
@@ -626,6 +779,9 @@
 
 .obs-input:focus {
     border-color: #FDE68A;
+
+    box-shadow:
+        0 0 0 3px rgba(253, 230, 138, 0.08);
 }
 
 
@@ -653,8 +809,9 @@
     cursor: pointer;
 
     transition:
-        transform 0.15s,
-        opacity 0.15s;
+        transform 0.15s ease,
+        background 0.15s ease,
+        opacity 0.15s ease;
 }
 
 
@@ -698,7 +855,7 @@
 
 
 /* =========================================================
-   RESPONSIVO
+   RESPONSIVO — TABLET
    ========================================================= */
 
 @media (max-width: 1050px) {
@@ -707,19 +864,20 @@
         grid-template-columns: 1fr;
     }
 
-
     .produtos-col,
     .carrinho-col {
         min-height: auto;
     }
 
-
     .produtos-col {
         min-height: 500px;
     }
-
 }
 
+
+/* =========================================================
+   RESPONSIVO — CELULAR
+   ========================================================= */
 
 @media (max-width: 650px) {
 
@@ -727,11 +885,9 @@
         padding: 25px 15px;
     }
 
-
     .pdv-titulo h1 {
         font-size: 26px;
     }
-
 
     .produtos-grid {
         grid-template-columns:
@@ -742,9 +898,51 @@
         gap: 12px;
     }
 
-
-    .item-carrinho {
+    .carrinho-item {
         padding: 12px;
     }
 
+    .carrinho-item-subtotal {
+        min-width: auto;
+    }
+
+    .carrinho-item-controles {
+        gap: 4px;
+    }
+
+    .btn-qtd {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+
+/* =========================================================
+   PROTEÇÃO EXTRA CONTRA ÍCONE NO CAMPO DE BUSCA
+   ========================================================= */
+
+#busca-produto {
+    background-image: none !important;
+
+    appearance: none !important;
+
+    -webkit-appearance: none !important;
+
+    -moz-appearance: none !important;
+}
+
+#busca-produto::-webkit-search-decoration,
+#busca-produto::-webkit-search-cancel-button,
+#busca-produto::-webkit-search-results-button,
+#busca-produto::-webkit-search-results-decoration {
+    display: none !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    appearance: none !important;
+    -webkit-appearance: none !important;
 }
