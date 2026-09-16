@@ -1,79 +1,338 @@
 {% extends "base.html" %}
 
-{% block title %}
-Nova Adega - Categorias
-{% endblock %}
-
-{% block styles %}
-
-<link rel="stylesheet" href="/static/CSS/home.css">
-
-{% endblock %}
+{% block title %}Nova Adega - Início{% endblock %}
 
 {% block content %}
 
-<main class="container">
+<main class="home-container">
 
-    <section class="secao-categorias">
+    <!-- =========================
+         CABEÇALHO / BOAS-VINDAS
+    ========================== -->
+    <section class="boas-vindas">
 
-        <div class="titulo-secao">
-            <h2>Categorias</h2>
+        <div class="boas-vindas-texto">
+            <span class="subtitulo">PAINEL PRINCIPAL</span>
+
+            <h1>
+                Olá, {{ usuario.nome }}! 👋
+            </h1>
 
             <p>
-                Escolha uma categoria para visualizar os produtos.
+                Bem-vindo ao painel da <strong>Nova Adega</strong>.
+                Aqui você pode acompanhar seu estoque, clientes e vendas.
             </p>
         </div>
+
+        <a href="/pdv/" class="btn-nova-venda">
+            🛒 Iniciar nova venda
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         CARDS DE RESUMO
+    ========================== -->
+    <section class="resumo">
+
+        <div class="card-resumo">
+            <div class="card-icone">📦</div>
+
+            <div class="card-info">
+                <span>Produtos</span>
+                <strong>Estoque</strong>
+                <a href="/produtos/">Gerenciar →</a>
+            </div>
+        </div>
+
+
+        <div class="card-resumo">
+            <div class="card-icone">👥</div>
+
+            <div class="card-info">
+                <span>Clientes</span>
+                <strong>Associados</strong>
+                <a href="/clientes/">Ver clientes →</a>
+            </div>
+        </div>
+
+
+        <div class="card-resumo">
+            <div class="card-icone">💰</div>
+
+            <div class="card-info">
+                <span>Vendas</span>
+                <strong>PDV</strong>
+                <a href="/pdv/">Abrir PDV →</a>
+            </div>
+        </div>
+
+
+        <div class="card-resumo">
+            <div class="card-icone">📋</div>
+
+            <div class="card-info">
+                <span>Histórico</span>
+                <strong>Movimentações</strong>
+                <a href="/movimentacoes/">Consultar →</a>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CATEGORIAS
+    ========================== -->
+    <section class="secao">
+
+        <div class="titulo-secao">
+            <div>
+                <span class="label-secao">CATÁLOGO</span>
+                <h2>Categorias</h2>
+
+                <p>
+                    Encontre rapidamente os produtos por categoria.
+                </p>
+            </div>
+
+            <a href="/categorias/" class="link-ver-tudo">
+                Ver todas →
+            </a>
+        </div>
+
 
         <div class="categorias">
 
             <a href="/produtos/categoria/cerveja" class="card-categoria">
-                <div class="icone">🍺</div>
 
-                <h3>Cervejas</h3>
+                <div class="icone-categoria">🍺</div>
 
-                <p>
-                    Veja todas as cervejas disponíveis.
-                </p>
+                <div>
+                    <h3>Cervejas</h3>
+                    <p>
+                        Veja todas as cervejas disponíveis.
+                    </p>
+                </div>
+
+                <span class="seta">→</span>
+
             </a>
+
 
             <a href="/produtos/categoria/destilados" class="card-categoria">
-                <div class="icone">🥃</div>
 
-                <h3>Destilados</h3>
+                <div class="icone-categoria">🥃</div>
 
-                <p>
-                    Whisky, vodka, gin e muito mais.
-                </p>
+                <div>
+                    <h3>Destilados</h3>
+                    <p>
+                        Whisky, vodka, gin e muito mais.
+                    </p>
+                </div>
+
+                <span class="seta">→</span>
+
             </a>
+
 
             <a href="/produtos/categoria/vinhos" class="card-categoria">
-                <div class="icone">🍷</div>
 
-                <h3>Vinhos</h3>
+                <div class="icone-categoria">🍷</div>
 
-                <p>
-                    Vinhos tintos, brancos e rosés.
-                </p>
+                <div>
+                    <h3>Vinhos</h3>
+                    <p>
+                        Tintos, brancos e rosés.
+                    </p>
+                </div>
+
+                <span class="seta">→</span>
+
             </a>
+
 
             <a href="/produtos/categoria/refrigerantes" class="card-categoria">
-                <div class="icone">🥤</div>
 
-                <h3>Refrigerantes</h3>
+                <div class="icone-categoria">🥤</div>
 
-                <p>
-                    Bebidas sem álcool.
-                </p>
+                <div>
+                    <h3>Refrigerantes</h3>
+                    <p>
+                        Bebidas sem álcool.
+                    </p>
+                </div>
+
+                <span class="seta">→</span>
+
             </a>
 
-            <a href="/produtos/categoria/outros" class="card-categoria">
-                <div class="icone">🛒</div>
 
-                <h3>Outros</h3>
+            <a href="/produtos/categoria/outros" class="card-categoria">
+
+                <div class="icone-categoria">🛒</div>
+
+                <div>
+                    <h3>Outros</h3>
+                    <p>
+                        Outros produtos disponíveis.
+                    </p>
+                </div>
+
+                <span class="seta">→</span>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ÁREA INFERIOR
+    ========================== -->
+    <section class="area-inferior">
+
+
+        <!-- ESTOQUE -->
+        <div class="painel">
+
+            <div class="painel-cabecalho">
+
+                <div>
+                    <span class="label-secao">ATENÇÃO</span>
+                    <h2>Estoque</h2>
+                </div>
+
+                <span class="icone-painel">⚠️</span>
+
+            </div>
+
+            <div class="painel-conteudo">
+
+                <div class="estoque-status">
+                    <div class="status-icone">
+                        📦
+                    </div>
+
+                    <div>
+                        <strong>Confira seu estoque</strong>
+
+                        <p>
+                            Verifique produtos com estoque baixo
+                            para evitar falta de mercadorias.
+                        </p>
+                    </div>
+                </div>
+
+                <a href="/produtos/" class="btn-painel">
+                    Ver estoque →
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ASSOCIADOS -->
+        <div class="painel painel-associados">
+
+            <div class="painel-cabecalho">
+
+                <div>
+                    <span class="label-secao">BENEFÍCIO</span>
+                    <h2>Clientes associados</h2>
+                </div>
+
+                <span class="icone-painel">⭐</span>
+
+            </div>
+
+            <div class="painel-conteudo">
+
+                <div class="desconto">
+
+                    <strong>10%</strong>
+
+                    <div>
+                        <span>DESCONTO</span>
+
+                        <p>
+                            Clientes associados recebem
+                            desconto especial nas compras.
+                        </p>
+                    </div>
+
+                </div>
+
+                <a href="/clientes/" class="btn-painel">
+                    Ver associados →
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ACESSOS RÁPIDOS
+    ========================== -->
+    <section class="acessos-rapidos">
+
+        <div class="titulo-secao">
+            <div>
+                <span class="label-secao">ATALHOS</span>
+                <h2>Acessos rápidos</h2>
 
                 <p>
-                    Outros produtos disponíveis.
+                    Acesse as principais áreas do sistema.
                 </p>
+            </div>
+        </div>
+
+
+        <div class="atalhos">
+
+            <a href="/pdv/" class="atalho">
+                <span>🛒</span>
+                <div>
+                    <strong>PDV</strong>
+                    <small>Realizar uma venda</small>
+                </div>
+                <b>→</b>
+            </a>
+
+
+            <a href="/produtos/" class="atalho">
+                <span>📦</span>
+                <div>
+                    <strong>Produtos</strong>
+                    <small>Gerenciar estoque</small>
+                </div>
+                <b>→</b>
+            </a>
+
+
+            <a href="/clientes/" class="atalho">
+                <span>👥</span>
+                <div>
+                    <strong>Clientes</strong>
+                    <small>Gerenciar clientes</small>
+                </div>
+                <b>→</b>
+            </a>
+
+
+            <a href="/movimentacoes/" class="atalho">
+                <span>📋</span>
+                <div>
+                    <strong>Movimentações</strong>
+                    <small>Consultar histórico</small>
+                </div>
+                <b>→</b>
             </a>
 
         </div>

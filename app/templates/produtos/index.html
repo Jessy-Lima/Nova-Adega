@@ -7,10 +7,7 @@ Produtos — Nova Adega
 
 {% block styles %}
 
-<link
-    rel="stylesheet"
-    href="/static/CSS/produtos.css"
->
+<link rel="stylesheet" href="/static/CSS/produtos.css">
 
 {% endblock %}
 
@@ -28,11 +25,19 @@ Produtos — Nova Adega
         <div>
 
             <h1>
+                {% if categoria_selecionada %}
+                {{ categoria_selecionada }}
+                {% else %}
                 Produtos
+                {% endif %}
             </h1>
 
             <p>
+                {% if categoria_selecionada %}
+                Produtos disponíveis nesta categoria.
+                {% else %}
                 Gerencie os produtos disponíveis no sistema.
+                {% endif %}
             </p>
 
         </div>
@@ -40,10 +45,7 @@ Produtos — Nova Adega
 
         {% if usuario.role == 'admin' %}
 
-        <a
-            href="/produtos/novo"
-            class="btn-novo"
-        >
+        <a href="/produtos/novo" class="btn-novo">
             + Novo produto
         </a>
 
@@ -76,11 +78,7 @@ Produtos — Nova Adega
 
     <!-- FILTROS -->
 
-    <form
-        method="get"
-        action="/produtos/"
-        class="filtros"
-    >
+    <form method="get" action="/produtos/" class="filtros">
 
 
         <!-- BUSCA -->
@@ -91,13 +89,7 @@ Produtos — Nova Adega
                 Buscar produto
             </label>
 
-            <input
-                type="text"
-                id="busca"
-                name="busca"
-                placeholder="Buscar por nome..."
-                value="{{ busca }}"
-            >
+            <input type="text" id="busca" name="busca" placeholder="Buscar por nome..." value="{{ busca }}">
 
         </div>
 
@@ -111,10 +103,7 @@ Produtos — Nova Adega
                 Categoria
             </label>
 
-            <select
-                name="categoria_id"
-                id="categoria_id"
-            >
+            <select name="categoria_id" id="categoria_id">
 
                 <option value="0">
                     Todas as categorias
@@ -123,10 +112,7 @@ Produtos — Nova Adega
 
                 {% for c in categorias %}
 
-                <option
-                    value="{{ c.id }}"
-                    {{ 'selected' if categoria_id == c.id else '' }}
-                >
+                <option value="{{ c.id }}" {{ 'selected' if categoria_id==c.id else '' }}>
 
                     {{ c.nome }}
 
@@ -144,20 +130,14 @@ Produtos — Nova Adega
 
         <div class="acoes-filtro">
 
-            <button
-                type="submit"
-                class="btn-filtrar"
-            >
+            <button type="submit" class="btn-filtrar">
                 Filtrar
             </button>
 
 
             {% if busca or categoria_id %}
 
-            <a
-                href="/produtos/"
-                class="btn-limpar"
-            >
+            <a href="/produtos/" class="btn-limpar">
                 Limpar
             </a>
 
@@ -223,11 +203,7 @@ Produtos — Nova Adega
 
                     <td>
 
-                        <img
-                            src="{{ p.imagem_url }}"
-                            alt="{{ p.nome }}"
-                            class="produto-imagem"
-                        >
+                        <img src="{{ p.imagem_url }}" alt="{{ p.nome }}" class="produto-imagem">
 
                     </td>
 
@@ -237,10 +213,7 @@ Produtos — Nova Adega
 
                     <td>
 
-                        <a
-                            href="/produtos/{{ p.id }}"
-                            class="link-produto"
-                        >
+                        <a href="/produtos/{{ p.id }}" class="link-produto">
 
                             {{ p.nome }}
 
@@ -293,26 +266,16 @@ Produtos — Nova Adega
                         {% if usuario.role == 'admin' %}
 
 
-                        <a
-                            href="/produtos/{{ p.id }}/editar"
-                            class="btn-editar"
-                        >
+                        <a href="/produtos/{{ p.id }}/editar" class="btn-editar">
                             Editar
                         </a>
 
 
 
-                        <form
-                            action="/produtos/{{ p.id }}/desativar"
-                            method="post"
-                            class="form-desativar"
-                            onsubmit="return confirm('Desativar {{ p.nome }}?')"
-                        >
+                        <form action="/produtos/{{ p.id }}/desativar" method="post" class="form-desativar"
+                            onsubmit="return confirm('Desativar {{ p.nome }}?')">
 
-                            <button
-                                type="submit"
-                                class="btn-desativar"
-                            >
+                            <button type="submit" class="btn-desativar">
                                 Desativar
                             </button>
 
@@ -341,10 +304,7 @@ Produtos — Nova Adega
 
                 <tr>
 
-                    <td
-                        colspan="6"
-                        class="tabela-vazia"
-                    >
+                    <td colspan="6" class="tabela-vazia">
 
                         Nenhum produto encontrado.
 
@@ -390,10 +350,8 @@ Produtos — Nova Adega
 
             {% if pagina > 1 %}
 
-            <a
-                href="/produtos/?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}&busca={{ busca }}&categoria_id={{ categoria_id }}"
-                class="btn-pagina"
-            >
+            <a href="/produtos/?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}&busca={{ busca }}&categoria_id={{ categoria_id }}"
+                class="btn-pagina">
 
                 ← Anterior
 
@@ -403,18 +361,15 @@ Produtos — Nova Adega
 
 
 
-            {% if pagina < total_paginas %}
-
-            <a
+            {% if pagina < total_paginas %} <a
                 href="/produtos/?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}&busca={{ busca }}&categoria_id={{ categoria_id }}"
-                class="btn-pagina"
-            >
+                class="btn-pagina">
 
                 Próxima →
 
-            </a>
+                </a>
 
-            {% endif %}
+                {% endif %}
 
 
         </div>

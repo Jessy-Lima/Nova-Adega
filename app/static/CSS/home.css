@@ -1,481 +1,1086 @@
-/* =========================
-   RESET
-========================= */
+/* =========================================================
+   NOVA ADEGA - HOME
+   ========================================================= */
+
+
+/* =========================================================
+   CONFIGURAÇÕES GERAIS
+   ========================================================= */
 
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
     min-height: 100%;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #121212;
-    color: #121212;
+    margin: 0;
+    padding: 0;
 
     min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #121212;
+    color: #f9fafb;
 
     display: flex;
     flex-direction: column;
 }
 
 
-/* =========================
-   ESTRUTURA DA PÁGINA
-========================= */
-
-body > main {
-    flex: 1 0 auto;
-}
-
-
-/* =========================
-   CONTAINER
-========================= */
-
-.container {
-    width: 100%;
-    max-width: 1200px;
-
-    margin: 0 auto;
-
-    padding: 45px 40px;
-}
-
-
-/* =========================
-   SEÇÃO CATEGORIAS
-========================= */
-
-.secao-categorias {
-    width: 100%;
-}
-
-
-/* =========================
-   TÍTULO
-========================= */
-
-.titulo-secao {
-    margin-bottom: 30px;
-}
-
-.titulo-secao h2 {
-    color: #f8e58c;
-
-    font-size: 28px;
-    font-weight: 700;
-
-    margin-bottom: 6px;
-}
-
-.titulo-secao p {
-    color: #aeb4bd;
-
-    font-size: 15px;
-}
-
-
-/* =========================
-   GRID
-========================= */
-
-.categorias {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 18px;
-}
-
-
-/* =========================
-   CARD
-========================= */
-
-.card-categoria {
-    position: relative;
-
-    display: block;
-
-    min-height: 170px;
-
-    padding: 25px;
-
-    background: #181818;
-
-    border: 1px solid #2d2d2d;
-
-    border-radius: 10px;
-
-    text-decoration: none !important;
-
-    color: #ffffff !important;
-
-    transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-
-/* Remove azul padrão do navegador */
-
-.card-categoria:link,
-.card-categoria:visited,
-.card-categoria:hover,
-.card-categoria:active {
-    text-decoration: none !important;
-}
-
-
-/* =========================
-   HOVER
-========================= */
-
-.card-categoria:hover {
-    transform: translateY(-3px);
-
-    background: #1e1e1e;
-
-    border-color: #f8e58c;
-
-    box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.35);
-}
-
-
-/* =========================
-   ÍCONE
-========================= */
-
-.card-categoria .icone {
-    width: 46px;
-    height: 46px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-bottom: 18px;
-
-    background: #262626;
-
-    border-radius: 10px;
-
-    font-size: 24px;
-}
-
-
-/* =========================
-   TÍTULO DO CARD
-========================= */
-
-.card-categoria h3 {
-    color: #f8e58c;
-
-    font-size: 19px;
-
-    font-weight: 700;
-
-    margin-bottom: 8px;
-}
-
-
-/* =========================
-   DESCRIÇÃO
-========================= */
-
-.card-categoria p {
-    color: #9ca3af;
-
-    font-size: 14px;
-
-    line-height: 1.5;
-}
-
-
-/* =========================
+/* =========================================================
    NAVBAR
-========================= */
+   ========================================================= */
 
 .navbar {
     width: 100%;
 
-    min-height: 76px;
+    min-height: 70px;
+
+    padding: 0 40px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    padding: 0 40px;
+    background: #0b0b0b;
 
-    background: #1c1c1c;
+    border-bottom: 1px solid #292929;
 
-    border-bottom: 1px solid #303030;
+    flex-shrink: 0;
 }
 
 
-/* =========================
-   LOGO
-========================= */
+/* LOGO */
 
 .logo a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    color: #ffffff;
 
-    color: #ffffff !important;
+    text-decoration: none;
 
-    text-decoration: none !important;
-}
+    font-size: 22px;
+    font-weight: 700;
 
-.logo-icone {
-    width: 40px;
-    height: 40px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #f8e58c;
-
-    border-radius: 50%;
-
-    font-size: 21px;
-}
-
-.logo h2 {
-    padding: 0;
-
-    background: transparent;
-
-    border-radius: 0;
-
-    color: #ffffff !important;
-
-    font-size: 18px;
+    letter-spacing: 0.5px;
 }
 
 
-/* =========================
-   MENU
-========================= */
+/* MENU */
 
 .menu {
     display: flex;
     align-items: center;
 
-    gap: 34px;
+    gap: 8px;
 }
 
 .menu a {
-    position: relative;
+    color: #d4d4d4;
 
-    padding: 27px 0;
+    text-decoration: none;
 
-    color: #aeb4bd;
+    padding: 10px 14px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.menu a:hover {
+    background: #242424;
+    color: #ffffff;
+}
+
+
+/* BOTÃO SAIR */
+
+.menu .btn-sair {
+    margin-left: 8px;
+
+    border: 1px solid #444;
+
+    color: #ffffff;
+}
+
+.menu .btn-sair:hover {
+    background: #ffffff;
+    color: #111111;
+}
+
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+   ========================================================= */
+
+.home-container {
+    width: 100%;
+    max-width: 1250px;
+
+    margin: 0 auto;
+
+    padding: 45px 30px 60px;
+
+    flex: 1;
+}
+
+
+/* =========================================================
+   BOAS-VINDAS
+   ========================================================= */
+
+.boas-vindas {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding: 35px;
+
+    margin-bottom: 35px;
+
+    background: #1b1b1b;
+
+    border: 1px solid #303030;
+
+    border-radius: 18px;
+}
+
+
+.boas-vindas-texto {
+    max-width: 720px;
+}
+
+
+.subtitulo {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #bdbdbd;
+}
+
+
+.boas-vindas h1 {
+    margin: 0 0 12px;
+
+    font-size: 36px;
+
+    line-height: 1.2;
+
+    color: #ffffff;
+}
+
+
+.boas-vindas p {
+    margin: 0;
+
+    color: #a7a7a7;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+}
+
+
+.boas-vindas strong {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   BOTÃO NOVA VENDA
+   ========================================================= */
+
+.btn-nova-venda {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 190px;
+
+    padding: 14px 22px;
+
+    background: #ffffff;
+
+    color: #111111;
+
+    border-radius: 10px;
 
     text-decoration: none;
 
     font-size: 15px;
-    font-weight: 600;
-
-    transition: color 0.2s ease;
-}
-
-.menu a:hover {
-    color: #ffffff;
-}
-
-.menu a::after {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    bottom: 0;
-
-    width: 0;
-    height: 2px;
-
-    background: #f8e58c;
-
-    transition: width 0.2s ease;
-}
-
-.menu a:hover::after {
-    width: 100%;
-}
-
-
-/* =========================
-   SAIR
-========================= */
-
-.menu .sair {
-    color: #f8e58c !important;
-
-    background: transparent;
-
-    padding: 10px 0;
-}
-
-.menu .sair::after {
-    display: none;
-}
-
-.menu .sair:hover {
-    color: #fff !important;
-}
-
-
-/* =========================
-   BOTÕES
-========================= */
-
-button,
-.btn {
-    border: none;
-
-    background: #f8e58c;
-
-    color: #171717;
-
-    padding: 10px 18px;
-
-    border-radius: 8px;
-
     font-weight: 700;
 
-    cursor: pointer;
+    white-space: nowrap;
 
-    text-decoration: none;
-
-    transition: 0.2s ease;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
 }
 
-button:hover,
-.btn:hover {
-    background: #fff0a8;
+.btn-nova-venda:hover {
+    background: #e5e5e5;
 
     transform: translateY(-2px);
 }
 
 
-/* =========================
+/* =========================================================
+   CARDS DE RESUMO
+   ========================================================= */
+
+.resumo {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 45px;
+}
+
+
+.card-resumo {
+    min-height: 135px;
+
+    padding: 22px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 16px;
+
+    background: #1b1b1b;
+
+    border: 1px solid #303030;
+
+    border-radius: 14px;
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.card-resumo:hover {
+    transform: translateY(-3px);
+
+    background: #202020;
+
+    border-color: #4a4a4a;
+}
+
+
+/* ÍCONE */
+
+.card-icone {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #292929;
+
+    border-radius: 10px;
+
+    font-size: 21px;
+}
+
+
+/* INFORMAÇÕES */
+
+.card-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.card-info span {
+    color: #929292;
+
+    font-size: 13px;
+}
+
+.card-info strong {
+    color: #ffffff;
+
+    font-size: 16px;
+}
+
+.card-info a {
+    margin-top: 5px;
+
+    color: #bdbdbd;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    transition: color 0.2s ease;
+}
+
+.card-info a:hover {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   SEÇÕES
+   ========================================================= */
+
+.secao {
+    margin-bottom: 45px;
+}
+
+
+.titulo-secao {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+
+.label-secao {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #777777;
+}
+
+
+.titulo-secao h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 25px;
+}
+
+
+.titulo-secao p {
+    margin: 7px 0 0;
+
+    color: #888888;
+
+    font-size: 14px;
+}
+
+
+.link-ver-tudo {
+    color: #bdbdbd;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    white-space: nowrap;
+
+    transition: color 0.2s ease;
+}
+
+.link-ver-tudo:hover {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   CATEGORIAS
+   ========================================================= */
+
+.categorias {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 15px;
+}
+
+
+.card-categoria {
+    position: relative;
+
+    min-height: 180px;
+
+    padding: 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    text-decoration: none;
+
+    background: #1b1b1b;
+
+    border: 1px solid #303030;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.card-categoria:hover {
+    transform: translateY(-4px);
+
+    background: #222222;
+
+    border-color: #505050;
+}
+
+
+/* ÍCONE DA CATEGORIA */
+
+.icone-categoria {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #292929;
+
+    border-radius: 12px;
+
+    font-size: 25px;
+
+    margin-bottom: 20px;
+}
+
+
+/* TEXTO */
+
+.card-categoria h3 {
+    margin: 0 0 7px;
+
+    color: #ffffff;
+
+    font-size: 17px;
+}
+
+
+.card-categoria p {
+    margin: 0;
+
+    color: #8f8f8f;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* SETA */
+
+.card-categoria .seta {
+    position: absolute;
+
+    right: 18px;
+    bottom: 17px;
+
+    color: #777777;
+
+    font-size: 18px;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.card-categoria:hover .seta {
+    color: #ffffff;
+
+    transform: translateX(4px);
+}
+
+
+/* =========================================================
+   ÁREA INFERIOR
+   ========================================================= */
+
+.area-inferior {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+
+    margin-bottom: 45px;
+}
+
+
+/* =========================================================
+   PAINÉIS
+   ========================================================= */
+
+.painel {
+    background: #1b1b1b;
+
+    border: 1px solid #303030;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+}
+
+
+.painel-cabecalho {
+    padding: 22px 24px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: 1px solid #303030;
+}
+
+
+.painel-cabecalho h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+}
+
+
+.icone-painel {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #292929;
+
+    border-radius: 10px;
+
+    font-size: 20px;
+}
+
+
+/* CONTEÚDO */
+
+.painel-conteudo {
+    padding: 23px 24px;
+}
+
+
+/* =========================================================
+   ESTOQUE
+   ========================================================= */
+
+.estoque-status {
+    display: flex;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+
+.status-icone {
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #292929;
+
+    border-radius: 10px;
+
+    font-size: 19px;
+}
+
+
+.estoque-status strong {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #ffffff;
+
+    font-size: 15px;
+}
+
+
+.estoque-status p {
+    margin: 0;
+
+    color: #888888;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   ASSOCIADOS
+   ========================================================= */
+
+.painel-associados {
+    background:
+        linear-gradient(
+            145deg,
+            #1f1f1f,
+            #171717
+        );
+}
+
+
+.desconto {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin-bottom: 20px;
+}
+
+
+.desconto > strong {
+    color: #ffffff;
+
+    font-size: 48px;
+
+    line-height: 1;
+}
+
+
+.desconto span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #aaaaaa;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+.desconto p {
+    margin: 0;
+
+    color: #888888;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   BOTÃO DOS PAINÉIS
+   ========================================================= */
+
+.btn-painel {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 10px 15px;
+
+    color: #ffffff;
+
+    border: 1px solid #444444;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.btn-painel:hover {
+    background: #ffffff;
+
+    color: #111111;
+
+    border-color: #ffffff;
+}
+
+
+/* =========================================================
+   ACESSOS RÁPIDOS
+   ========================================================= */
+
+.acessos-rapidos {
+    margin-bottom: 20px;
+}
+
+
+.atalhos {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 14px;
+}
+
+
+.atalho {
+    min-height: 80px;
+
+    padding: 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    text-decoration: none;
+
+    background: #1b1b1b;
+
+    border: 1px solid #303030;
+
+    border-radius: 12px;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.atalho:hover {
+    transform: translateY(-2px);
+
+    background: #222222;
+
+    border-color: #4a4a4a;
+}
+
+
+.atalho > span {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: #292929;
+
+    border-radius: 9px;
+
+    font-size: 18px;
+}
+
+
+.atalho > div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    flex: 1;
+}
+
+
+.atalho strong {
+    color: #ffffff;
+
+    font-size: 14px;
+}
+
+
+.atalho small {
+    color: #777777;
+
+    font-size: 11px;
+}
+
+
+.atalho b {
+    color: #777777;
+
+    font-size: 17px;
+
+    font-weight: normal;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.atalho:hover b {
+    color: #ffffff;
+
+    transform: translateX(3px);
+}
+
+
+/* =========================================================
    FOOTER
-========================= */
+   ========================================================= */
 
 .footer {
     width: 100%;
 
     margin-top: auto;
 
-    padding: 25px;
+    padding: 25px 20px;
 
     text-align: center;
 
-    background: #1E1E1E;
+    background: #0b0b0b;
 
-    border-top: 1px solid rgba(253, 230, 138, 0.12);
+    border-top: 1px solid #292929;
 
-    color: #9CA3AF;
-
-    font-size: 14px;
+    color: #777777;
 
     flex-shrink: 0;
 }
 
+
+.footer p {
+    margin: 0;
+
+    font-size: 13px;
+}
+
+
 .footer strong {
-    color: #FDE68A;
+    color: #dddddd;
 }
 
 
-/* =========================
-   SCROLLBAR
-========================= */
-
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #111111;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #3b3b3b;
-
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #f8e58c;
-}
-
-
-/* =========================
+/* =========================================================
    RESPONSIVIDADE
-========================= */
+   ========================================================= */
 
-@media (max-width: 900px) {
 
-    .container {
-        padding: 35px 25px;
-    }
+/* TABLETS */
 
-    .categorias {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
+@media (max-width: 1050px) {
 
     .navbar {
         padding: 0 25px;
     }
 
-    .menu {
-        gap: 20px;
+
+    .resumo {
+        grid-template-columns: repeat(2, 1fr);
     }
+
+
+    .categorias {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+
+    .atalhos {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
 }
 
 
-@media (max-width: 600px) {
+/* TABLETS PEQUENOS */
+
+@media (max-width: 800px) {
 
     .navbar {
         min-height: auto;
 
+        padding: 18px 20px;
+
         flex-direction: column;
 
         gap: 15px;
-
-        padding: 18px;
     }
 
+
     .menu {
-        flex-wrap: wrap;
+        width: 100%;
 
         justify-content: center;
 
-        gap: 15px;
+        flex-wrap: wrap;
     }
 
-    .menu a {
-        padding: 8px 0;
+
+    .boas-vindas {
+        flex-direction: column;
+
+        align-items: flex-start;
     }
+
+
+    .btn-nova-venda {
+        width: 100%;
+    }
+
+
+    .area-inferior {
+        grid-template-columns: 1fr;
+    }
+
+
+    .categorias {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* CELULARES */
+
+@media (max-width: 550px) {
+
+    .home-container {
+        padding: 25px 15px 45px;
+    }
+
+
+    .navbar {
+        padding: 15px;
+    }
+
+
+    .logo a {
+        font-size: 19px;
+    }
+
+
+    .menu {
+        gap: 4px;
+    }
+
+
+    .menu a {
+        padding: 8px 9px;
+
+        font-size: 12px;
+    }
+
+
+    .menu .btn-sair {
+        margin-left: 0;
+    }
+
+
+    .boas-vindas {
+        padding: 25px 20px;
+
+        border-radius: 14px;
+    }
+
+
+    .boas-vindas h1 {
+        font-size: 28px;
+    }
+
+
+    .boas-vindas p {
+        font-size: 14px;
+    }
+
+
+    .resumo {
+        grid-template-columns: 1fr;
+    }
+
+
+    .card-resumo {
+        min-height: auto;
+    }
+
 
     .categorias {
         grid-template-columns: 1fr;
     }
 
-    .container {
-        padding: 25px 18px;
+
+    .card-categoria {
+        min-height: 150px;
     }
+
+
+    .titulo-secao {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .area-inferior {
+        grid-template-columns: 1fr;
+    }
+
+
+    .atalhos {
+        grid-template-columns: 1fr;
+    }
+
+
+    .desconto > strong {
+        font-size: 40px;
+    }
+
 }
