@@ -1,0 +1,798 @@
+/* =========================================================
+   NOVA ADEGA
+   FORMULÁRIO DE CLIENTES
+   CSS EXCLUSIVO DA TELA DE CADASTRO/EDIÇÃO
+========================================================= */
+
+
+/* =========================================================
+   PÁGINA
+========================================================= */
+
+.cliente-form-page {
+
+    width: 100%;
+
+    min-height: calc(100vh - 68px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    padding: 48px 20px 70px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #181818 0%,
+            #111111 48%,
+            #0b0b0b 100%
+        );
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.cliente-form-card {
+
+    width: 100%;
+
+    max-width: 680px;
+
+    background: #1E1E1E;
+
+    border: 1px solid rgba(253, 230, 138, 0.16);
+
+    border-radius: 18px;
+
+    padding: 34px 34px 30px;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.40);
+
+    position: relative;
+
+}
+
+
+/* detalhe dourado superior */
+
+.cliente-form-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: 25px;
+
+    right: 25px;
+
+    height: 3px;
+
+    background: #FDE68A;
+
+    border-radius: 0 0 5px 5px;
+
+}
+
+
+/* =========================================================
+   BOTÃO VOLTAR
+========================================================= */
+
+.cliente-form-voltar {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    margin-bottom: 30px;
+
+    color: #9CA3AF;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    transition: 0.2s ease;
+
+}
+
+
+.cliente-form-voltar:hover {
+
+    color: #FDE68A;
+
+    transform: translateX(-2px);
+
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.cliente-form-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 42px;
+
+}
+
+
+/* =========================================================
+   ÍCONE
+========================================================= */
+
+.cliente-form-icon {
+
+    width: 52px;
+
+    height: 52px;
+
+    min-width: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(253, 230, 138, 0.08);
+
+    border: 1px solid rgba(253, 230, 138, 0.18);
+
+    border-radius: 14px;
+
+    font-size: 23px;
+
+}
+
+
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+.cliente-form-header h1 {
+
+    margin: 0;
+
+    color: #F9FAFB;
+
+    font-size: 27px;
+
+    line-height: 1.2;
+
+    font-weight: 700;
+
+}
+
+
+.cliente-form-header p {
+
+    margin: 7px 0 0;
+
+    color: #929292;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
+
+.cliente-form-box {
+
+    width: 100%;
+
+}
+
+
+/* =========================================================
+   TÍTULO DA SEÇÃO
+========================================================= */
+
+.cliente-section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.cliente-section-line {
+
+    width: 3px;
+
+    height: 42px;
+
+    flex-shrink: 0;
+
+    background: #FDE68A;
+
+    border-radius: 5px;
+
+}
+
+
+.cliente-section-title h2 {
+
+    margin: 0;
+
+    color: #F9FAFB;
+
+    font-size: 19px;
+
+    line-height: 1.3;
+
+    font-weight: 700;
+
+}
+
+
+.cliente-section-title p {
+
+    margin: 5px 0 0;
+
+    color: #8A8A8A;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================================
+   CAMPOS
+========================================================= */
+
+.cliente-field {
+
+    width: 100%;
+
+    margin-bottom: 28px;
+
+}
+
+
+.cliente-field label {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-bottom: 10px;
+
+    color: #F1F1F1;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+}
+
+
+.cliente-required {
+
+    color: #FDE68A;
+
+    font-size: 14px;
+
+}
+
+
+.cliente-optional {
+
+    color: #6F6F6F;
+
+    font-size: 11px;
+
+    font-weight: 400;
+
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.cliente-field input {
+
+    width: 100%;
+
+    height: 50px;
+
+    padding: 0 16px;
+
+    box-sizing: border-box;
+
+    background: #242424;
+
+    border: 1px solid #393939;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    color: #F9FAFB;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.cliente-field input::placeholder {
+
+    color: #666666;
+
+}
+
+
+.cliente-field input:hover {
+
+    border-color: #4A4A4A;
+
+}
+
+
+.cliente-field input:focus {
+
+    background: #272727;
+
+    border-color: #FDE68A;
+
+    box-shadow:
+        0 0 0 3px rgba(253, 230, 138, 0.08);
+
+}
+
+
+/* =========================================================
+   CLIENTE ASSOCIADO
+========================================================= */
+
+.cliente-associated {
+
+    width: 100%;
+
+    min-height: 82px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 18px 20px;
+
+    margin-top: 5px;
+
+    margin-bottom: 34px;
+
+    box-sizing: border-box;
+
+    background: rgba(253, 230, 138, 0.035);
+
+    border: 1px solid rgba(253, 230, 138, 0.14);
+
+    border-radius: 12px;
+
+}
+
+
+/* =========================================================
+   TEXTO DO ASSOCIADO
+========================================================= */
+
+.cliente-associated-info {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+}
+
+
+.cliente-associated-icon {
+
+    width: 40px;
+
+    height: 40px;
+
+    min-width: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(253, 230, 138, 0.10);
+
+    border-radius: 10px;
+
+    font-size: 17px;
+
+}
+
+
+.cliente-associated-info strong {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #F9FAFB;
+
+    font-size: 14px;
+
+    line-height: 1.3;
+
+}
+
+
+.cliente-associated-info p {
+
+    margin: 0;
+
+    max-width: 430px;
+
+    color: #858585;
+
+    font-size: 12px;
+
+    line-height: 1.55;
+
+}
+
+
+/* =========================================================
+   SWITCH
+========================================================= */
+
+.cliente-switch {
+
+    position: relative;
+
+    width: 48px;
+
+    height: 26px;
+
+    min-width: 48px;
+
+    display: block;
+
+    cursor: pointer;
+
+}
+
+
+.cliente-switch input {
+
+    position: absolute;
+
+    opacity: 0;
+
+    width: 0;
+
+    height: 0;
+
+}
+
+
+.cliente-slider {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: #333333;
+
+    border: 1px solid #484848;
+
+    border-radius: 30px;
+
+    transition: 0.25s ease;
+
+}
+
+
+.cliente-slider::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 20px;
+
+    height: 20px;
+
+    left: 2px;
+
+    top: 2px;
+
+    background: #AAAAAA;
+
+    border-radius: 50%;
+
+    transition: 0.25s ease;
+
+}
+
+
+.cliente-switch input:checked + .cliente-slider {
+
+    background: #FDE68A;
+
+    border-color: #FDE68A;
+
+}
+
+
+.cliente-switch input:checked + .cliente-slider::before {
+
+    transform: translateX(22px);
+
+    background: #1E1E1E;
+
+}
+
+
+/* =========================================================
+   ÁREA DOS BOTÕES
+========================================================= */
+
+.cliente-form-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #303030;
+
+}
+
+
+/* =========================================================
+   CANCELAR
+========================================================= */
+
+.cliente-btn-cancel {
+
+    height: 44px;
+
+    padding: 0 20px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #242424;
+
+    border: 1px solid #3A3A3A;
+
+    border-radius: 9px;
+
+    color: #BDBDBD;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+
+}
+
+
+.cliente-btn-cancel:hover {
+
+    background: #2C2C2C;
+
+    border-color: #505050;
+
+    color: #FFFFFF;
+
+}
+
+
+/* =========================================================
+   SALVAR
+========================================================= */
+
+.cliente-btn-save {
+
+    height: 44px;
+
+    min-width: 175px;
+
+    padding: 0 22px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    background: #FDE68A;
+
+    border: none;
+
+    border-radius: 9px;
+
+    color: #111111;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.cliente-btn-save:hover {
+
+    background: #FEF3C7;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(253, 230, 138, 0.13);
+
+}
+
+
+.cliente-btn-save:active {
+
+    transform: translateY(0);
+
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .cliente-form-page {
+
+        padding: 30px 15px 50px;
+
+    }
+
+
+    .cliente-form-card {
+
+        padding: 30px 22px 25px;
+
+    }
+
+
+    .cliente-form-header {
+
+        margin-bottom: 35px;
+
+    }
+
+
+    .cliente-form-header h1 {
+
+        font-size: 24px;
+
+    }
+
+
+    .cliente-associated {
+
+        align-items: flex-start;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .cliente-form-header {
+
+        align-items: flex-start;
+
+    }
+
+
+    .cliente-form-icon {
+
+        width: 45px;
+
+        height: 45px;
+
+        min-width: 45px;
+
+        font-size: 20px;
+
+    }
+
+
+    .cliente-associated-info {
+
+        align-items: flex-start;
+
+    }
+
+
+    .cliente-form-actions {
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+
+    }
+
+
+    .cliente-btn-cancel,
+    .cliente-btn-save {
+
+        width: 100%;
+
+    }
+
+}
