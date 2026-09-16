@@ -13,6 +13,7 @@ router = APIRouter(
     tags=["Clientes"]
 )
 
+
 templates = Jinja2Templates(
     directory="app/templates"
 )
@@ -29,9 +30,11 @@ def listar_clientes(
     db: Session = Depends(get_db),
     admin=Depends(get_admin)
 ):
+
     query = db.query(Cliente)
 
     if busca:
+
         query = query.filter(
             Cliente.nome.ilike(f"%{busca}%") |
             Cliente.telefone.ilike(f"%{busca}%")
@@ -64,6 +67,7 @@ def form_novo(
     request: Request,
     admin=Depends(get_admin)
 ):
+
     return templates.TemplateResponse(
         request,
         "clientes/form.html",
@@ -82,10 +86,15 @@ def form_novo(
 @router.post("/novo")
 def criar(
     request: Request,
+
     nome: str = Form(...),
+
     telefone: str = Form(""),
+
     is_associado: bool = Form(False),
+
     db: Session = Depends(get_db),
+
     admin=Depends(get_admin)
 ):
 
@@ -93,10 +102,14 @@ def criar(
         nome=nome.strip(),
         telefone=telefone.strip() or None,
         is_associado=is_associado,
+        ativo=True
     )
 
     db.add(cliente)
+
     db.commit()
+
+    db.refresh(cliente)
 
     return RedirectResponse(
         url="/clientes?criado=ok",
@@ -111,10 +124,14 @@ def criar(
 @router.get("/{cliente_id}/editar")
 def form_editar(
     cliente_id: int,
+
     request: Request,
+
     db: Session = Depends(get_db),
+
     admin=Depends(get_admin)
 ):
+
     editando = (
         db.query(Cliente)
         .filter(Cliente.id == cliente_id)
@@ -122,6 +139,7 @@ def form_editar(
     )
 
     if not editando:
+
         return RedirectResponse(
             url="/clientes",
             status_code=302
@@ -145,12 +163,18 @@ def form_editar(
 @router.post("/{cliente_id}/editar")
 def editar(
     cliente_id: int,
+
     nome: str = Form(...),
+
     telefone: str = Form(""),
+
     is_associado: bool = Form(False),
+
     db: Session = Depends(get_db),
+
     admin=Depends(get_admin)
 ):
+
     editando = (
         db.query(Cliente)
         .filter(Cliente.id == cliente_id)
@@ -158,16 +182,24 @@ def editar(
     )
 
     if not editando:
+
         return RedirectResponse(
             url="/clientes",
             status_code=302
         )
 
     editando.nome = nome.strip()
-    editando.telefone = telefone.strip() or None
+
+    editando.telefone = (
+        telefone.strip()
+        or None
+    )
+
     editando.is_associado = is_associado
 
     db.commit()
+
+    db.refresh(editando)
 
     return RedirectResponse(
         url="/clientes?editado=ok",
@@ -182,9 +214,12 @@ def editar(
 @router.post("/{cliente_id}/toggle-ativo")
 def toggle_ativo(
     cliente_id: int,
+
     db: Session = Depends(get_db),
+
     admin=Depends(get_admin)
 ):
+
     cliente = (
         db.query(Cliente)
         .filter(Cliente.id == cliente_id)
@@ -192,7 +227,9 @@ def toggle_ativo(
     )
 
     if cliente:
+
         cliente.ativo = not cliente.ativo
+
         db.commit()
 
     return RedirectResponse(

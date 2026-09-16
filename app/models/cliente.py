@@ -1,18 +1,57 @@
 from sqlalchemy import Column, Integer, String, Boolean, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
+
 from app.database import Base
 
 
 class Cliente(Base):
+
     __tablename__ = "clientes"
 
-    id = Column(Integer, primary_key=True, index=True)
-    nome = Column(String(150), nullable=False, index=True)
-    telefone = Column(String(20), nullable=True)
-    is_associado = Column(Boolean, default=False, nullable=False)
-    ativo = Column(Boolean, default=True)
-    criado_em = Column(DateTime, server_default=func.now())
-    vendas = relationship("Venda", back_populates="cliente")
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    nome = Column(
+        String(150),
+        nullable=False,
+        index=True
+    )
+
+    telefone = Column(
+        String(20),
+        nullable=True
+    )
+
+    is_associado = Column(
+        Boolean,
+        default=False,
+        nullable=False
+    )
+
+    ativo = Column(
+        Boolean,
+        default=True
+    )
+
+    criado_em = Column(
+        DateTime,
+        server_default=func.now()
+    )
+
+    vendas = relationship(
+        "Venda",
+        back_populates="cliente"
+    )
+
     def __repr__(self):
-        return f"<Cliente id={self.id} nome={self.nome} associado={self.is_associado}>"
+
+        return (
+            f"<Cliente "
+            f"id={self.id} "
+            f"nome={self.nome} "
+            f"associado={self.is_associado}>"
+        )

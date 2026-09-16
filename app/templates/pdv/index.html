@@ -1093,6 +1093,7 @@ PDV — Nova Adega
 
 
 
+<<<<<<< HEAD
     const totais =
         document.getElementById(
             'totais'
@@ -1417,9 +1418,63 @@ document
                     }
                 );
 
+=======
+        /* ---------------------------------------------
+           OBSERVAÇÃO
+        --------------------------------------------- */
+
+        document.getElementById(
+            'input-obs'
+        ).value =
+            document.getElementById(
+                'obs-input'
+            ).value.trim();
+
+
+        /* ---------------------------------------------
+           ENVIA FORMULÁRIO
+        --------------------------------------------- */
+
+        document.getElementById(
+            'form-venda'
+        ).submit();
+
+    }
+
+    /* =====================================================
+       INICIALIZAÇÃO
+    ====================================================== */
+
+    document.addEventListener(
+        'DOMContentLoaded',
+        function () {
+
+            const selectCliente =
+                document.getElementById(
+                    'select-cliente'
+                );
+
+
+            if (selectCliente) {
+
+                atualizarCliente(
+                    selectCliente
+                );
+
+            }
+
+
+            renderizarCarrinho();
+
+>>>>>>> 63fddedd578e3388149b7f71fba3679af75d2fcf
         }
     );
 
 </script>
 
+<<<<<<< HEAD
 {% endblock %}
+=======
+
+{% endblock %}
+>>>>>>> 63fddedd578e3388149b7f71fba3679af75d2fcf
