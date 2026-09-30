@@ -18,7 +18,6 @@ templates = Jinja2Templates(
     directory="app/templates"
 )
 
-
 # ============================================================
 # LISTAR CLIENTES
 # ============================================================
@@ -28,38 +27,40 @@ def listar_clientes(
     request: Request,
     busca: str = "",
     pagina: int = 1,
-    por_pagina: int = 3,
+    por_pagina: int = 10,
     db: Session = Depends(get_db),
     admin=Depends(get_admin)
 ):
 
-    # Evita página inválida
+    # Garante que a página nunca seja menor que 1
     if pagina < 1:
         pagina = 1
 
+    # Busca todos os clientes
     query = db.query(Cliente)
 
+    # Filtra por nome ou telefone
     if busca:
-
         query = query.filter(
             Cliente.nome.ilike(f"%{busca}%") |
             Cliente.telefone.ilike(f"%{busca}%")
         )
 
-    # Total de clientes encontrados
+    # Conta o total de clientes encontrados
     total_clientes = query.count()
 
-    # Total de páginas
+    # Calcula o total de páginas
     total_paginas = max(
         1,
         (total_clientes + por_pagina - 1) // por_pagina
     )
 
-    # Evita ultrapassar a última página
+    # Se a página informada não existir,
+    # volta para a última página
     if pagina > total_paginas:
         pagina = total_paginas
 
-    # Clientes da página atual
+    # Busca os clientes da página atual
     clientes = (
         query
         .order_by(Cliente.nome)
@@ -68,6 +69,7 @@ def listar_clientes(
         .all()
     )
 
+    # Envia os dados para a página
     return templates.TemplateResponse(
         request,
         "clientes/index.html",
