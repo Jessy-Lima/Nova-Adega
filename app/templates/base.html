@@ -7,27 +7,28 @@
 
     <title>{% block title %}Nova Adega{% endblock %}</title>
 
+<<<<<<< HEAD
+=======
+    <!-- CSS principal compartilhado por todas as páginas -->
+>>>>>>> 2560896 (Refactor CSS styles for clientes, home, and movimentacoes; update base HTML structure and remove unused home file)
     <link rel="stylesheet" href="/static/CSS/home.css?v=3">
 
+    <!-- CSS específico da página -->
     {% block styles %}{% endblock %}
+<<<<<<< HEAD
 
     <link rel="stylesheet" href="/static/CSS/voltar.css?v=1">
     
+=======
+>>>>>>> 2560896 (Refactor CSS styles for clientes, home, and movimentacoes; update base HTML structure and remove unused home file)
 </head>
 
-
 <body>
-
-
-    <!-- =========================
-         NAVBAR
-    ========================= -->
-
+    <!-- Menu compartilhado por todas as páginas -->
     {% block navbar %}
-
-    <nav class="navbar">
-
+    <header class="navbar">
         <div class="logo">
+<<<<<<< HEAD
 
             <a href="/">
                 🍷 Nova Adega
@@ -62,40 +63,38 @@
                 Sair
             </a>
 
+=======
+            <a href="/pdv/">
+                <span class="logo-icone" aria-hidden="true">🍷</span>
+                <h2>Nova Adega</h2>
+            </a>
+>>>>>>> 2560896 (Refactor CSS styles for clientes, home, and movimentacoes; update base HTML structure and remove unused home file)
         </div>
 
-    </nav>
-
+        <nav class="menu" aria-label="Menu principal">
+            <a href="/pdv/" class="{% if request.path.startswith('/pdv') %}active{% endif %}">Home</a>
+            <a href="/movimentacoes/" class="{% if request.path.startswith('/movimentacoes') %}active{% endif %}">Histórico</a>
+            <a href="/produtos/" class="{% if request.path.startswith('/produtos') %}active{% endif %}">Produtos</a>
+            <a href="/categorias/" class="{% if request.path.startswith('/categorias') %}active{% endif %}">Categorias</a>
+            <a href="/clientes/" class="{% if request.path.startswith('/clientes') %}active{% endif %}">Clientes</a>
+            <a href="/auth/logout" class="btn-sair">Sair</a>
+        </nav>
+    </header>
     {% endblock %}
 
-
-    <!-- =========================
-         ÁREA PRINCIPAL
-    ========================= -->
-
-    <div class="page-wrapper">
-
+    <!-- Conteúdo específico de cada página -->
+    <main class="page-wrapper">
         {% block content %}{% endblock %}
+    </main>
 
-    </div>
-
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
-
+    <!-- Rodapé compartilhado -->
     {% block footer %}
-
     <footer class="footer">
-
-        <p>
-            © 2026 <strong>AdegaPremium</strong> · @novaadega
-        </p>
-
+        <p>© 2026 <strong>AdegaPremium</strong> · @novaadega</p>
     </footer>
-
     {% endblock %}
 
+<<<<<<< HEAD
 
 
 
@@ -103,9 +102,10 @@
          JAVASCRIPT
     ========================= -->
 
+=======
+    <!-- JavaScript específico da página -->
+>>>>>>> 2560896 (Refactor CSS styles for clientes, home, and movimentacoes; update base HTML structure and remove unused home file)
     {% block scripts %}{% endblock %}
-
-
 </body>
 
 </html>
