@@ -386,25 +386,9 @@
    VOLTAR
 ========================================================= */
 
-.voltar {
-    margin-top: 25px;
-}
-
-
-.voltar a {
-    color: #a1a1aa;
-
-    text-decoration: none;
-
-    font-size: 14px;
-
-    transition: color 0.2s;
-}
-
-
-.voltar a:hover {
-    color: #FDE68A ;
-}
+/* ============================================================
+   VOLTAR AO INÍCIO
+   ============================================================ */
 
 
 /* =========================================================
@@ -1047,4 +1031,42 @@
     .paginacao > div a {
         min-width: 100px;
     }
+}
+
+/* =========================================================
+   BOTÃO VOLTAR - PADRÃO
+========================================================= */
+
+/* =========================================================
+   BOTÃO VOLTAR - PADRÃO
+========================================================= */
+
+.voltar {
+    margin-top: 24px !important;
+}
+
+.voltar a,
+a.voltar {
+    display: inline-flex !important;
+    align-items: center !important;
+
+    color: #9CA3AF !important;
+
+    font-size: 14px !important;
+    font-weight: 500 !important;
+
+    line-height: 20px !important;
+
+    text-decoration: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    transition: color 0.2s ease, transform 0.2s ease !important;
+}
+
+.voltar a:hover,
+a.voltar:hover {
+    color: #FDE68A !important;
+    transform: translateX(-3px) !important;
 }
