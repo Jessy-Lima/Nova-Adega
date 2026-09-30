@@ -616,3 +616,108 @@
         flex-direction: column;
     }
 }
+
+/* ============================================================
+   PAGINAÇÃO
+   ============================================================ */
+
+.paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 25px;
+    padding: 15px 0;
+}
+
+/* Botões Anterior e Próxima */
+.paginacao a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 40px;
+    height: 40px;
+    padding: 0 15px;
+
+    border: 1px solid rgba(253, 230, 138, 0.25);
+    border-radius: 10px;
+
+    background: #1E1E1E;
+    color: #FDE68A;
+
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+/* Efeito ao passar o mouse */
+.paginacao a:hover {
+    background: #FDE68A;
+    color: #121212;
+    border-color: #FDE68A;
+
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(253, 230, 138, 0.15);
+}
+
+/* Página atual */
+.paginacao .pagina-atual {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 40px;
+    height: 40px;
+    padding: 0 12px;
+
+    border-radius: 10px;
+
+    background: #FDE68A;
+    color: #121212;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    box-shadow: 0 4px 12px rgba(253, 230, 138, 0.12);
+}
+
+/* Texto "Página X de Y" */
+.paginacao span {
+    color: #9CA3AF;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* ============================================================
+   PAGINAÇÃO NO CELULAR
+   ============================================================ */
+
+@media (max-width: 600px) {
+
+    .paginacao {
+        gap: 6px;
+        margin-top: 20px;
+        padding: 10px 0;
+    }
+
+    .paginacao a {
+        min-width: 36px;
+        height: 36px;
+        padding: 0 10px;
+        font-size: 13px;
+    }
+
+    .paginacao .pagina-atual {
+        min-width: 36px;
+        height: 36px;
+        padding: 0 10px;
+        font-size: 13px;
+    }
+
+    .paginacao span {
+        font-size: 12px;
+    }
+}
