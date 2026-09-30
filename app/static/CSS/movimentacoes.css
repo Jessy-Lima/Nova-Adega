@@ -39,9 +39,9 @@ body {
 
     align-items: center;
 
-    padding: 18px 6%;
+   padding: 0 25px;
 
-    min-height: 80px;
+    min-height: 70px;
 
     border-bottom: 1px solid #333;
 }
