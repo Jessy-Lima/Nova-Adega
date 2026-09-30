@@ -1,62 +1,44 @@
 /* =========================================================
    NOVA ADEGA
-   PÁGINA DE CLIENTES
-   ========================================================= */
-
-
-/* =========================================================
-   CONTEÚDO
+   LISTA DE CLIENTES
    ========================================================= */
 
 .conteudo {
-
     width: 100%;
     max-width: 1200px;
-
     min-height: calc(100vh - 70px - 69px);
 
     margin: 0 auto;
-
-    padding: 45px 30px 50px;
+    padding: 40px 30px 50px;
 
     box-sizing: border-box;
 }
 
 
 /* =========================================================
-   CABEÇALHO DA PÁGINA
+   CABEÇALHO
    ========================================================= */
 
 .cabecalho-pagina {
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     gap: 25px;
 
-    margin-bottom: 32px;
+    margin-bottom: 30px;
 }
 
-
 .cabecalho-pagina h1 {
-
     margin: 0;
 
     color: #F9FAFB;
 
     font-size: 30px;
-
     font-weight: 700;
-
-    letter-spacing: -0.5px;
 }
 
-
 .cabecalho-pagina p {
-
     margin: 8px 0 0;
 
     color: #9CA3AF;
@@ -70,44 +52,29 @@
    ========================================================= */
 
 .btn-novo {
-
     width: 150px;
-
     height: 44px;
 
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
 
     flex-shrink: 0;
 
-    padding: 0 18px;
-
     border-radius: 9px;
 
     background: #FDE68A;
-
     color: #1E1E1E;
 
     text-decoration: none;
 
     font-size: 14px;
-
     font-weight: 700;
 
-    box-sizing: border-box;
-
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
+    transition: 0.2s ease;
 }
 
-
 .btn-novo:hover {
-
     background: #FEF3C7;
 
     transform: translateY(-2px);
@@ -118,45 +85,13 @@
 
 
 /* =========================================================
-   MENSAGENS
-   ========================================================= */
-
-.mensagem {
-
-    width: 100%;
-
-    padding: 14px 18px;
-
-    margin-bottom: 22px;
-
-    border-radius: 10px;
-
-    font-size: 14px;
-
-    box-sizing: border-box;
-}
-
-
-.mensagem.sucesso {
-
-    background: rgba(253, 230, 138, 0.08);
-
-    border: 1px solid rgba(253, 230, 138, 0.20);
-
-    color: #FDE68A;
-}
-
-
-/* =========================================================
    FILTROS
    ========================================================= */
 
 .filtros {
-
     width: 100%;
 
     margin-bottom: 25px;
-
     padding: 18px;
 
     background: #1E1E1E;
@@ -168,11 +103,8 @@
     box-sizing: border-box;
 }
 
-
 .filtros form {
-
     display: flex;
-
     align-items: center;
 
     gap: 12px;
@@ -184,13 +116,11 @@
    ========================================================= */
 
 .campo-busca {
-
     flex: 1;
 
     height: 44px;
 
     display: flex;
-
     align-items: center;
 
     gap: 10px;
@@ -204,44 +134,24 @@
     border-radius: 9px;
 
     box-sizing: border-box;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
 }
-
-
-.campo-busca:hover {
-
-    border-color: #454545;
-}
-
 
 .campo-busca:focus-within {
-
     border-color: #FDE68A;
 
     box-shadow:
         0 0 0 3px rgba(253, 230, 138, 0.07);
 }
 
-
 .campo-busca span {
-
     font-size: 15px;
-
-    opacity: 0.65;
 }
 
-
 .campo-busca input {
-
     width: 100%;
-
     height: 100%;
 
     border: none;
-
     outline: none;
 
     background: transparent;
@@ -251,85 +161,79 @@
     font-size: 14px;
 }
 
-
 .campo-busca input::placeholder {
-
     color: #777777;
 }
 
 
 /* =========================================================
-   BOTÕES DE BUSCA
+   BOTÃO BUSCAR
    ========================================================= */
 
-.btn-filtrar,
-.btn-limpar {
-
+.btn-filtrar {
     width: 120px;
-
     height: 44px;
 
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
 
     flex-shrink: 0;
 
+    border: none;
     border-radius: 9px;
 
-    box-sizing: border-box;
+    background: #FDE68A;
+    color: #1E1E1E;
 
     font-size: 14px;
-
-    font-weight: 600;
-
-    text-decoration: none;
+    font-weight: 700;
 
     cursor: pointer;
-}
-
-
-.btn-filtrar {
-
-    border: none;
-
-    background: #FDE68A;
-
-    color: #1E1E1E;
 
     transition: 0.2s ease;
 }
 
-
 .btn-filtrar:hover {
-
     background: #FEF3C7;
 
     transform: translateY(-1px);
 }
 
 
+/* =========================================================
+   BOTÃO LIMPAR
+   ========================================================= */
+
 .btn-limpar {
+    width: 120px;
+    height: 44px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
 
     border: 1px solid #3A3A3A;
+    border-radius: 9px;
 
     background: #242424;
-
     color: #D1D5DB;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    box-sizing: border-box;
 
     transition: 0.2s ease;
 }
 
-
 .btn-limpar:hover {
-
     border-color: #FDE68A;
-
     color: #FDE68A;
-
-    background: rgba(253, 230, 138, 0.05);
 }
 
 
@@ -338,7 +242,6 @@
    ========================================================= */
 
 .tabela-container {
-
     width: 100%;
 
     overflow-x: auto;
@@ -353,11 +256,8 @@
         0 12px 35px rgba(0, 0, 0, 0.20);
 }
 
-
 .tabela-container table {
-
     width: 100%;
-
     min-width: 850px;
 
     border-collapse: collapse;
@@ -369,13 +269,10 @@
    ========================================================= */
 
 .tabela-container thead {
-
     background: #232323;
 }
 
-
 .tabela-container th {
-
     height: 54px;
 
     padding: 0 20px;
@@ -385,7 +282,6 @@
     text-align: left;
 
     font-size: 12px;
-
     font-weight: 700;
 
     text-transform: uppercase;
@@ -397,11 +293,10 @@
 
 
 /* =========================================================
-   LINHAS
+   CÉLULAS
    ========================================================= */
 
 .tabela-container td {
-
     height: 70px;
 
     padding: 12px 20px;
@@ -413,22 +308,15 @@
     border-bottom: 1px solid #2B2B2B;
 }
 
-
 .tabela-container tbody tr {
-
-    transition:
-        background 0.2s ease;
+    transition: 0.2s ease;
 }
 
-
 .tabela-container tbody tr:hover {
-
     background: rgba(253, 230, 138, 0.035);
 }
 
-
 .tabela-container tbody tr:last-child td {
-
     border-bottom: none;
 }
 
@@ -438,21 +326,16 @@
    ========================================================= */
 
 .cliente-nome {
-
     display: flex;
-
     align-items: center;
 
     gap: 12px;
 }
 
-
 .cliente-nome strong {
-
     color: #F9FAFB;
 
     font-size: 14px;
-
     font-weight: 600;
 }
 
@@ -462,17 +345,13 @@
    ========================================================= */
 
 .avatar {
-
     width: 38px;
-
     height: 38px;
 
     min-width: 38px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border-radius: 50%;
@@ -484,7 +363,6 @@
     color: #FDE68A;
 
     font-size: 14px;
-
     font-weight: 700;
 }
 
@@ -494,9 +372,7 @@
    ========================================================= */
 
 .status {
-
     display: inline-flex;
-
     align-items: center;
 
     gap: 7px;
@@ -506,47 +382,36 @@
     border-radius: 20px;
 
     font-size: 12px;
-
     font-weight: 600;
 }
 
-
 .status > span {
-
     width: 7px;
-
     height: 7px;
 
     border-radius: 50%;
 }
 
-
 .status.ativo {
-
     color: #FDE68A;
 
     background: rgba(253, 230, 138, 0.08);
 }
 
-
 .status.ativo > span {
-
     background: #FDE68A;
 
-    box-shadow: 0 0 7px rgba(253, 230, 138, 0.45);
+    box-shadow:
+        0 0 7px rgba(253, 230, 138, 0.45);
 }
 
-
 .status.inativo {
-
     color: #9CA3AF;
 
     background: rgba(156, 163, 175, 0.08);
 }
 
-
 .status.inativo > span {
-
     background: #6B7280;
 }
 
@@ -556,26 +421,23 @@
    ========================================================= */
 
 .acoes {
-
     display: flex;
-
     align-items: center;
 
     gap: 8px;
 }
 
+.acoes form {
+    margin: 0;
+}
 
 .btn-editar,
 .btn-status {
-
     width: 110px;
-
     height: 40px;
 
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
 
     padding: 0 12px;
@@ -585,43 +447,30 @@
     box-sizing: border-box;
 
     font-size: 12px;
-
     font-weight: 600;
 
     text-decoration: none;
 
     cursor: pointer;
 
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
+    transition: 0.2s ease;
 }
 
-
 .btn-editar {
+    border: 1px solid rgba(253, 230, 138, 0.18);
 
     background: rgba(253, 230, 138, 0.08);
-
-    border: 1px solid rgba(253, 230, 138, 0.18);
 
     color: #FDE68A;
 }
 
-
 .btn-editar:hover {
-
     background: rgba(253, 230, 138, 0.14);
 
     border-color: rgba(253, 230, 138, 0.35);
-
-    transform: translateY(-1px);
 }
 
-
 .btn-status {
-
     border: 1px solid #3A3A3A;
 
     background: #242424;
@@ -629,60 +478,10 @@
     color: #D1D5DB;
 }
 
-
 .btn-status:hover {
-
     border-color: #FDE68A;
 
     color: #FDE68A;
-
-    transform: translateY(-1px);
-}
-
-
-.acoes form {
-
-    margin: 0;
-}
-
-
-/* =========================================================
-   NENHUM CLIENTE
-   ========================================================= */
-
-.nenhum {
-
-    height: 260px;
-
-    text-align: center !important;
-}
-
-
-.nenhum-icone {
-
-    margin-bottom: 12px;
-
-    font-size: 32px;
-}
-
-
-.nenhum strong {
-
-    display: block;
-
-    margin-bottom: 6px;
-
-    color: #F9FAFB;
-
-    font-size: 15px;
-}
-
-
-.nenhum span {
-
-    color: #777777;
-
-    font-size: 13px;
 }
 
 
@@ -691,11 +490,8 @@
    ========================================================= */
 
 .paginacao {
-
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     gap: 20px;
@@ -703,19 +499,14 @@
     margin-top: 22px;
 }
 
-
 .info-paginacao {
-
     display: flex;
-
     align-items: center;
 
     gap: 20px;
 }
 
-
 .info-paginacao p {
-
     margin: 0;
 
     color: #777777;
@@ -723,56 +514,41 @@
     font-size: 12px;
 }
 
-
 .botoes-paginacao {
-
     display: flex;
-
     align-items: center;
 
     gap: 8px;
 }
 
-
 .btn-pagina {
-
     min-width: 110px;
-
     height: 40px;
 
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
 
     padding: 0 14px;
 
     border: 1px solid #3A3A3A;
-
     border-radius: 8px;
 
     background: #242424;
-
     color: #D1D5DB;
 
     text-decoration: none;
 
     font-size: 12px;
-
     font-weight: 600;
 
     transition: 0.2s ease;
 }
 
-
 .btn-pagina:hover {
-
     border-color: #FDE68A;
 
     color: #FDE68A;
-
-    background: rgba(253, 230, 138, 0.05);
 }
 
 
@@ -781,9 +557,7 @@
    ========================================================= */
 
 .conteudo > .voltar {
-
     display: inline-flex;
-
     align-items: center;
 
     margin-top: 25px;
@@ -797,12 +571,8 @@
     transition: 0.2s ease;
 }
 
-
 .conteudo > .voltar:hover {
-
     color: #FDE68A;
-
-    transform: translateX(-2px);
 }
 
 
@@ -813,48 +583,34 @@
 @media (max-width: 800px) {
 
     .conteudo {
-
         padding: 30px 20px 40px;
     }
 
-
     .cabecalho-pagina {
-
         align-items: flex-start;
 
         flex-direction: column;
     }
 
-
     .btn-novo {
-
         width: 100%;
     }
 
-
     .filtros form {
-
         flex-wrap: wrap;
     }
 
-
     .campo-busca {
-
         width: 100%;
-
         flex: none;
     }
 
-
     .btn-filtrar,
     .btn-limpar {
-
         flex: 1;
     }
 
-
     .paginacao {
-
         align-items: flex-start;
 
         flex-direction: column;

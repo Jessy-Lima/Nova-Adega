@@ -54,7 +54,9 @@ body {
 }
 
 
-/* LOGO */
+/* =========================================================
+   LOGO
+   ========================================================= */
 
 .logo a {
     color: #ffffff;
@@ -65,10 +67,18 @@ body {
     font-weight: 700;
 
     letter-spacing: 0.5px;
+
+    transition: color 0.25s ease;
+}
+
+.logo a:hover {
+    color: #ffffff;
 }
 
 
-/* MENU */
+/* =========================================================
+   MENU
+   ========================================================= */
 
 .menu {
     display: flex;
@@ -78,6 +88,8 @@ body {
 }
 
 .menu a {
+    position: relative;
+
     color: #d4d4d4;
 
     text-decoration: none;
@@ -89,29 +101,99 @@ body {
     font-size: 14px;
 
     transition:
-        background 0.2s ease,
-        color 0.2s ease;
-}
-
-.menu a:hover {
-    background: #242424;
-    color: #ffffff;
+        color 0.25s ease,
+        text-shadow 0.25s ease,
+        transform 0.25s ease,
+        background 0.25s ease;
 }
 
 
-/* BOTÃO SAIR */
+/* =========================================================
+   EFEITO DOURADO DOS LINKS
+   ========================================================= */
+
+.menu a:not(.btn-sair):hover {
+    color: #FDE68A;
+
+    text-shadow:
+        0 0 5px rgba(253, 230, 138, 0.8),
+        0 0 12px rgba(253, 230, 138, 0.6),
+        0 0 20px rgba(253, 230, 138, 0.4);
+
+    transform: translateY(-1px);
+
+    background: transparent;
+}
+
+
+/* =========================================================
+   LINHA DOURADA ABAIXO DO MENU
+   ========================================================= */
+
+.menu a:not(.btn-sair)::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    bottom: -4px;
+
+    width: 0;
+    height: 2px;
+
+    background: #FDE68A;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 0 5px #FDE68A,
+        0 0 10px rgba(253, 230, 138, 0.7);
+
+    transform: translateX(-50%);
+
+    transition: width 0.25s ease;
+}
+
+.menu a:not(.btn-sair):hover::after {
+    width: 75%;
+}
+
+
+/* =========================================================
+   BOTÃO SAIR
+   ========================================================= */
 
 .menu .btn-sair {
     margin-left: 8px;
 
-    border: 1px solid #444;
+    border: 1px solid #444444;
 
     color: #ffffff;
+
+    text-shadow: none;
+
+    transform: none;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .menu .btn-sair:hover {
     background: #ffffff;
+
     color: #111111;
+
+    border-color: #ffffff;
+
+    text-shadow: none;
+
+    transform: none;
+}
+
+.menu .btn-sair::after {
+    display: none;
 }
 
 
@@ -287,7 +369,9 @@ body {
 }
 
 
-/* ÍCONE */
+/* =========================================================
+   ÍCONE DOS CARDS
+   ========================================================= */
 
 .card-icone {
     width: 45px;
@@ -308,7 +392,9 @@ body {
 }
 
 
-/* INFORMAÇÕES */
+/* =========================================================
+   INFORMAÇÕES DOS CARDS
+   ========================================================= */
 
 .card-info {
     display: flex;
@@ -430,16 +516,20 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    CARDS DE CATEGORIA
-========================= */
+   ========================================================= */
 
 .card-categoria {
+    position: relative;
+
     width: 100%;
     height: 190px;
 
     display: flex;
+
     flex-direction: column;
+
     justify-content: flex-start;
 
     padding: 24px;
@@ -459,11 +549,22 @@ body {
         border-color 0.2s ease,
         background 0.2s ease,
         box-shadow 0.2s ease;
-
-    box-sizing: border-box;
 }
 
-/* ÍCONE DA CATEGORIA */
+.card-categoria:hover {
+    transform: translateY(-3px);
+
+    background: #202020;
+
+    border-color: #4a4a4a;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   ÍCONE DA CATEGORIA
+   ========================================================= */
 
 .icone-categoria {
     width: 52px;
@@ -484,7 +585,9 @@ body {
 }
 
 
-/* TEXTO */
+/* =========================================================
+   TEXTO DA CATEGORIA
+   ========================================================= */
 
 .card-categoria h3 {
     margin: 0 0 7px;
@@ -506,7 +609,9 @@ body {
 }
 
 
-/* SETA */
+/* =========================================================
+   SETA DA CATEGORIA
+   ========================================================= */
 
 .card-categoria .seta {
     position: absolute;
@@ -598,7 +703,9 @@ body {
 }
 
 
-/* CONTEÚDO */
+/* =========================================================
+   CONTEÚDO DOS PAINÉIS
+   ========================================================= */
 
 .painel-conteudo {
     padding: 23px 24px;
@@ -719,7 +826,7 @@ body {
 
 
 /* =========================================================
-   BOTÃO DOS PAINÉIS
+   BOTÕES DOS PAINÉIS
    ========================================================= */
 
 .btn-painel {
@@ -910,7 +1017,9 @@ body {
    ========================================================= */
 
 
-/* TABLETS */
+/* =========================================================
+   TABLETS
+   ========================================================= */
 
 @media (max-width: 1050px) {
 
@@ -936,7 +1045,9 @@ body {
 }
 
 
-/* TABLETS PEQUENOS */
+/* =========================================================
+   TABLETS PEQUENOS
+   ========================================================= */
 
 @media (max-width: 800px) {
 
@@ -984,7 +1095,9 @@ body {
 }
 
 
-/* CELULARES */
+/* =========================================================
+   CELULARES
+   ========================================================= */
 
 @media (max-width: 550px) {
 
@@ -1054,6 +1167,7 @@ body {
 
     .card-categoria {
         min-height: 150px;
+        height: auto;
     }
 
 
@@ -1078,50 +1192,9 @@ body {
         font-size: 40px;
     }
 
-}
 
+    .menu a:not(.btn-sair)::after {
+        bottom: -2px;
+    }
 
-/* =========================================
-   EFEITO DOURADO NO MENU
-========================================= */
-
-.navbar a {
-    color: #F9FAFB;
-    text-decoration: none;
-    position: relative;
-    transition: all 0.25s ease;
-}
-
-.navbar a:hover {
-    color: #FDE68A;
-
-    text-shadow:
-        0 0 5px rgba(253, 230, 138, 0.8),
-        0 0 12px rgba(253, 230, 138, 0.6),
-        0 0 20px rgba(253, 230, 138, 0.4);
-
-    transform: translateY(-1px);
-}
-
-.navbar a::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: -7px;
-    width: 0;
-    height: 2px;
-
-    background: #FDE68A;
-
-    box-shadow:
-        0 0 5px #FDE68A,
-        0 0 10px rgba(253, 230, 138, 0.7);
-
-    border-radius: 10px;
-    transform: translateX(-50%);
-    transition: width 0.25s ease;
-}
-
-.navbar a:hover::after {
-    width: 100%;
 }

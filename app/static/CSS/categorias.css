@@ -759,7 +759,8 @@
 ========================================================= */
 
 .container:has(.form-categoria) {
-    min-height: calc(100vh - 150px);
+    min-height: calc(100vh - 70px - 69px);
+
 
     display: flex;
 
