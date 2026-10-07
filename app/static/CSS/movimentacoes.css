@@ -49,13 +49,19 @@
 ========================================= */
 
 .btn-nova {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    padding: 0 20px;
     background-color: #f8e58c;
     color: #121212;
-    text-decoration: none;
-    padding: 13px 20px;
+    border: 1px solid #f8e58c;
     border-radius: 10px;
+    text-decoration: none;
     font-weight: bold;
     white-space: nowrap;
+    cursor: pointer;
     transition: 0.3s;
 }
 
@@ -117,10 +123,11 @@
 }
 
 .acoes-filtro button {
+    height: 42px;
+    padding: 0 22px;
     background-color: #f8e58c;
     color: #121212;
-    border: none;
-    padding: 13px 22px;
+    border: 1px solid #f8e58c;
     border-radius: 9px;
     font-size: 15px;
     font-weight: bold;
@@ -134,10 +141,15 @@
 }
 
 .btn-limpar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 42px;
+    padding: 0 15px;
     color: #f8e58c;
     text-decoration: none;
-    padding: 13px 15px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .btn-limpar:hover {
@@ -379,10 +391,11 @@ tbody tr:last-child td {
 
 .btn-registrar {
     flex: 1;
+    height: 42px;
     background-color: #f8e58c;
     color: #121212;
-    border: none;
-    padding: 14px 20px;
+    border: 1px solid #f8e58c;
+    padding: 0 20px;
     border-radius: 10px;
     font-size: 16px;
     font-weight: bold;
@@ -396,15 +409,17 @@ tbody tr:last-child td {
 }
 
 .btn-cancelar {
-    display: flex;
+    height: 42px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 25px;
+    padding: 0 25px;
     background-color: transparent;
     border: 1px solid #444;
     border-radius: 10px;
     color: #F9FAFB;
     text-decoration: none;
+    cursor: pointer;
     transition: 0.3s;
 }
 

@@ -606,7 +606,7 @@
 
 .cliente-btn-cancel {
 
-    height: 44px;
+    height: 42px;
 
     padding: 0 20px;
 
@@ -652,7 +652,7 @@
 
 .cliente-btn-save {
 
-    height: 44px;
+    height: 42px;
 
     min-width: 175px;
 
@@ -668,7 +668,7 @@
 
     background: #FDE68A;
 
-    border: none;
+    border: 1px solid #FDE68A;
 
     border-radius: 9px;
 
@@ -747,6 +747,7 @@
 
     }
 
+
 }
 
 
@@ -797,17 +798,21 @@
 
 }
 
+
 /* =========================================================
    BOTÃO VOLTAR - PADRÃO
 ========================================================= */
 
 .cliente-form-voltar {
+
     display: inline-flex !important;
+
     align-items: center !important;
 
     color: #9CA3AF !important;
 
     font-size: 14px !important;
+
     font-weight: 500 !important;
 
     line-height: 20px !important;
@@ -815,12 +820,18 @@
     text-decoration: none !important;
 
     margin: 0 0 24px 0 !important;
+
     padding: 0 !important;
 
     transition: color 0.2s ease, transform 0.2s ease !important;
+
 }
 
+
 .cliente-form-voltar:hover {
+
     color: #FDE68A !important;
+
     transform: translateX(-3px) !important;
+
 }

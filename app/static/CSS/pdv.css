@@ -796,13 +796,21 @@
 .btn-finalizar {
     width: 100%;
 
-    padding: 15px;
+    height: 46px;
+
+    padding: 0 20px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
 
     background: #FDE68A;
 
     color: #121212;
 
-    border: none;
+    border: 1px solid #FDE68A;
 
     border-radius: 10px;
 
@@ -823,6 +831,8 @@
     transform: translateY(-2px);
 
     background: #FEF3C7;
+
+    border-color: #FEF3C7;
 }
 
 
@@ -830,6 +840,8 @@
     background: #333333;
 
     color: #777777;
+
+    border-color: #333333;
 
     cursor: not-allowed;
 }
