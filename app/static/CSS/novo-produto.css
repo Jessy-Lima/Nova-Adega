@@ -365,3 +365,33 @@ main.container > a:hover {
         margin-top: 10px;
     }
 }
+
+/* =========================================================
+   BOTÃO VOLTAR - PADRÃO
+========================================================= */
+
+main.container > a {
+    display: inline-flex !important;
+    align-items: center !important;
+
+    color: #9CA3AF !important;
+
+    font-size: 14px !important;
+    font-weight: 500 !important;
+
+    line-height: 20px !important;
+
+    text-decoration: none !important;
+
+    margin-top: 24px !important;
+    padding: 0 !important;
+
+    transition: color 0.2s ease, transform 0.2s ease !important;
+}
+
+main.container > a:hover {
+    color: #FDE68A !important;
+    transform: translateX(-3px) !important;
+
+    text-decoration: none !important;
+}

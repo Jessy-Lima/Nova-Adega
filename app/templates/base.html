@@ -9,24 +9,17 @@
 
     <link rel="stylesheet" href="/static/CSS/home.css?v=3">
 
+    <!-- CSS específico da página -->
     {% block styles %}{% endblock %}
 
-    <link rel="stylesheet" href="/static/CSS/padrao.css?v=1">
+    <link rel="stylesheet" href="/static/CSS/voltar.css?v=1">
     
 </head>
 
-
 <body>
-
-
-    <!-- =========================
-         NAVBAR
-    ========================= -->
-
+    <!-- Menu compartilhado por todas as páginas -->
     {% block navbar %}
-
-    <nav class="navbar">
-
+    <header class="navbar">
         <div class="logo">
 
             <a href="/">
@@ -63,39 +56,22 @@
             </a>
 
         </div>
-
-    </nav>
-
+    </header>
     {% endblock %}
 
-
-    <!-- =========================
-         ÁREA PRINCIPAL
-    ========================= -->
-
-    <div class="page-wrapper">
-
+    <!-- Conteúdo específico de cada página -->
+    <main class="page-wrapper">
         {% block content %}{% endblock %}
+    </main>
 
-    </div>
-
-
-    <!-- =========================
-         FOOTER
-    ========================= -->
-
+    <!-- Rodapé compartilhado -->
     {% block footer %}
-
     <footer class="footer">
-
-        <p>
-            © 2026 <strong>AdegaPremium</strong> · @novaadega
-        </p>
-
+        <p>© 2026 <strong>AdegaPremium</strong> · @novaadega</p>
     </footer>
-
     {% endblock %}
 
+<<<<<<< HEAD
 
 
 
@@ -103,9 +79,10 @@
          JAVASCRIPT
     ========================= -->
 
+=======
+    <!-- JavaScript específico da página -->
+>>>>>>> 2560896 (Refactor CSS styles for clientes, home, and movimentacoes; update base HTML structure and remove unused home file)
     {% block scripts %}{% endblock %}
-
-
 </body>
 
 </html>

@@ -237,6 +237,40 @@ PDV — Nova Adega
             <div class="carrinho-footer">
 
 
+                <!-- =================================================
+                     DESCONTO MANUAL
+                ================================================== -->
+
+                <div class="desconto-manual" id="desconto-manual" style="display:none">
+
+                    <div class="desconto-manual-titulo">
+                        Desconto manual
+                    </div>
+
+                    <div class="desconto-manual-controles">
+
+                        <select id="tipo-desconto" onchange="atualizarDescontoManual()">
+                            <option value="percentual">%</option>
+                            <option value="valor">R$</option>
+                        </select>
+
+                        <input
+                            type="number"
+                            id="valor-desconto-manual"
+                            min="0"
+                            step="0.01"
+                            value="0"
+                            placeholder="0,00"
+                            oninput="atualizarDescontoManual()"
+                        >
+
+                    </div>
+
+                    <small id="erro-desconto" class="erro-campo"></small>
+
+                </div>
+
+
                 <!-- TOTAIS -->
 
                 <div class="totais" id="totais" style="display:none">
@@ -308,9 +342,15 @@ PDV — Nova Adega
                     <input type="hidden" name="observacao" id="input-obs">
 
 
-                    <!-- VALOR DO DESCONTO -->
+                    <!-- VALOR DO DESCONTO DO ASSOCIADO -->
 
                     <input type="hidden" id="config-desconto" value="{{ desconto_associado|default(0) }}">
+
+                    <!-- VALOR DO DESCONTO MANUAL -->
+
+                    <input type="hidden" name="desconto_manual" id="input-desconto-manual" value="0">
+
+                    <input type="hidden" name="tipo_desconto" id="input-tipo-desconto" value="percentual">
 
 
                     <!-- BOTÃO -->
@@ -359,6 +399,16 @@ PDV — Nova Adega
         elementoDesconto
             ? Number(elementoDesconto.value) || 0
             : 0;
+
+
+    /* =====================================================
+       DESCONTO MANUAL
+    ===================================================== */
+
+    let descontoManual = {
+        tipo: 'percentual',
+        valor: 0
+    };
 
 
     /* =====================================================
@@ -567,16 +617,205 @@ PDV — Nova Adega
 
     function calcularDesconto(subtotal) {
 
-        if (!clienteAtual.associado) {
-            return 0;
+        let descontoAssociado = 0;
+        let descontoManualCalculado = 0;
+
+
+        /* DESCONTO DO ASSOCIADO */
+
+        if (clienteAtual.associado) {
+
+            descontoAssociado =
+                subtotal * (DESCONTO_PCT / 100);
+
         }
 
 
-        return subtotal *
-            (DESCONTO_PCT / 100);
+        /* DESCONTO MANUAL */
+
+        if (descontoManual.valor > 0) {
+
+            if (descontoManual.tipo === 'percentual') {
+
+                descontoManualCalculado =
+                    subtotal * (descontoManual.valor / 100);
+
+            } else {
+
+                descontoManualCalculado =
+                    descontoManual.valor;
+
+            }
+
+        }
+
+
+        /* O DESCONTO TOTAL NUNCA PODE PASSAR DO SUBTOTAL */
+
+        const descontoTotal =
+            Math.min(
+                subtotal,
+                descontoAssociado + descontoManualCalculado
+            );
+
+
+        return {
+            associado: descontoAssociado,
+            manual: descontoManualCalculado,
+            total: descontoTotal
+        };
 
     }
 
+
+    /* =====================================================
+       ATUALIZAR DESCONTO MANUAL
+    ===================================================== */
+
+    function atualizarDescontoManual() {
+
+        const tipo =
+            document.getElementById('tipo-desconto');
+
+        const campo =
+            document.getElementById('valor-desconto-manual');
+
+        const erro =
+            document.getElementById('erro-desconto');
+
+        const inputManual =
+            document.getElementById('input-desconto-manual');
+
+        const inputTipo =
+            document.getElementById('input-tipo-desconto');
+
+
+        if (!tipo || !campo) {
+            return;
+        }
+
+
+        descontoManual.tipo =
+            tipo.value === 'valor'
+                ? 'valor'
+                : 'percentual';
+
+
+        descontoManual.valor =
+            Math.max(
+                0,
+                Number(campo.value) || 0
+            );
+
+
+        const subtotal =
+            calcularSubtotal();
+
+
+        let valorManual =
+            descontoManual.valor;
+
+
+        if (descontoManual.tipo === 'percentual') {
+
+            if (valorManual > 100) {
+
+                valorManual = 100;
+
+                campo.value = 100;
+
+                descontoManual.valor = 100;
+
+            }
+
+            valorManual =
+                subtotal * (valorManual / 100);
+
+        }
+
+
+        const descontoAssociado =
+            clienteAtual.associado
+                ? subtotal * (DESCONTO_PCT / 100)
+                : 0;
+
+
+        if (
+            descontoAssociado + valorManual > subtotal &&
+            subtotal > 0
+        ) {
+
+            if (erro) {
+
+                erro.textContent =
+                    'O desconto não pode ser maior que o subtotal.';
+
+            }
+
+            const limite =
+                Math.max(
+                    0,
+                    subtotal - descontoAssociado
+                );
+
+
+            if (descontoManual.tipo === 'percentual') {
+
+                const percentualMaximo =
+                    subtotal > 0
+                        ? (limite / subtotal) * 100
+                        : 0;
+
+                descontoManual.valor =
+                    Math.max(
+                        0,
+                        percentualMaximo
+                    );
+
+                campo.value =
+                    percentualMaximo.toFixed(2);
+
+            } else {
+
+                descontoManual.valor =
+                    limite;
+
+                campo.value =
+                    limite.toFixed(2);
+
+            }
+
+        } else {
+
+            if (erro) {
+                erro.textContent = '';
+            }
+
+        }
+
+
+        if (inputManual) {
+
+            const descontoAtual =
+                descontoManual.tipo === 'percentual'
+                    ? subtotal * (descontoManual.valor / 100)
+                    : descontoManual.valor;
+
+            inputManual.value =
+                descontoAtual.toFixed(2);
+
+        }
+
+
+        if (inputTipo) {
+            inputTipo.value =
+                descontoManual.tipo;
+        }
+
+
+        renderizarTotais();
+
+    }
 
     /* =====================================================
        FORMATAR NÚMERO
@@ -619,11 +858,14 @@ PDV — Nova Adega
         const subtotal =
             calcularSubtotal();
 
-        const desconto =
+        const descontos =
             calcularDesconto(subtotal);
 
+        const desconto =
+            descontos.total;
+
         const total =
-            subtotal - desconto;
+            Math.max(0, subtotal - desconto);
 
 
         const formatar =
@@ -704,8 +946,46 @@ PDV — Nova Adega
 
         if (labelDesconto) {
 
-            labelDesconto.textContent =
-                `Desconto (${DESCONTO_PCT}%)`;
+            if (descontos.manual > 0 && descontos.associado > 0) {
+
+                labelDesconto.textContent =
+                    `Desconto (associado + manual)`;
+
+            } else if (descontos.manual > 0) {
+
+                if (descontoManual.tipo === 'percentual') {
+
+                    labelDesconto.textContent =
+                        `Desconto (${descontoManual.valor.toFixed(2).replace('.', ',')}%)`;
+
+                } else {
+
+                    labelDesconto.textContent =
+                        'Desconto manual';
+
+                }
+
+            } else {
+
+                labelDesconto.textContent =
+                    `Desconto (${DESCONTO_PCT}%)`;
+
+            }
+
+        }
+
+
+        /* MOSTRA O CAMPO DE DESCONTO MANUAL QUANDO HÁ PRODUTOS */
+
+        const campoManual =
+            document.getElementById('desconto-manual');
+
+        if (campoManual) {
+
+            campoManual.style.display =
+                subtotal > 0
+                    ? 'block'
+                    : 'none';
 
         }
 
@@ -795,6 +1075,24 @@ PDV — Nova Adega
 
             if (botaoFinalizar) {
                 botaoFinalizar.disabled = true;
+            }
+
+
+            descontoManual.valor = 0;
+
+            const campoDesconto =
+                document.getElementById('valor-desconto-manual');
+
+            if (campoDesconto) {
+                campoDesconto.value = 0;
+            }
+
+
+            const campoManual =
+                document.getElementById('desconto-manual');
+
+            if (campoManual) {
+                campoManual.style.display = 'none';
             }
 
 
@@ -1054,6 +1352,42 @@ PDV — Nova Adega
             campoObservacao
                 ? campoObservacao.value.trim()
                 : '';
+
+
+        /* -------------------------------------------------
+           DESCONTO MANUAL
+        ------------------------------------------------- */
+
+        const inputDescontoManual =
+            document.getElementById('input-desconto-manual');
+
+        const inputTipoDesconto =
+            document.getElementById('input-tipo-desconto');
+
+        const subtotal =
+            calcularSubtotal();
+
+        const descontoCalculado =
+            descontoManual.tipo === 'percentual'
+                ? subtotal * (descontoManual.valor / 100)
+                : descontoManual.valor;
+
+
+        if (inputDescontoManual) {
+
+            inputDescontoManual.value =
+                Math.min(
+                    descontoCalculado,
+                    subtotal
+                ).toFixed(2);
+
+        }
+
+
+        if (inputTipoDesconto) {
+            inputTipoDesconto.value =
+                descontoManual.tipo;
+        }
 
 
         /* -------------------------------------------------

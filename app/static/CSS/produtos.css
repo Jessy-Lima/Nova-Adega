@@ -18,9 +18,15 @@
     box-sizing: border-box;
 }
 
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+========================================================= */
+
 .container {
     width: 100%;
     max-width: 1200px;
+    min-height: calc(100vh - 70px - 69px);
     margin: 0 auto;
     padding: 40px 30px 60px;
     box-sizing: border-box;
@@ -669,6 +675,7 @@
 @media (max-width: 850px) {
 
     .container {
+        min-height: calc(100vh - 70px - 69px);
         padding: 25px 18px 40px;
     }
 
@@ -716,4 +723,39 @@
     .btn-pagina {
         flex: 1;
     }
+}
+
+
+/* =========================================================
+   BOTÃO VOLTAR - PADRÃO
+========================================================= */
+
+.voltar-pagina {
+    margin-top: 24px !important;
+}
+
+.voltar-pagina a {
+    display: inline-flex !important;
+    align-items: center !important;
+
+    color: #9CA3AF !important;
+
+    font-size: 14px !important;
+    font-weight: 500 !important;
+
+    line-height: 20px !important;
+
+    text-decoration: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    transition: color 0.2s ease, transform 0.2s ease !important;
+}
+
+.voltar-pagina a:hover {
+    color: #FDE68A !important;
+    transform: translateX(-3px) !important;
+
+    text-decoration: none !important;
 }
