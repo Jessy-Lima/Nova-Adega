@@ -1,228 +1,266 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-{% block title %}
-Comprovante #{{ venda.id }} — Nova Adega
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-{% block styles %}
+    <title>Comprovante - Venda #{{ venda.id }}</title>
 
-<style>
+    <style>
+        body {
+            margin: 0;
+            padding: 30px;
+            background: #121212;
+            color: #F9FAFB;
+            font-family: Arial, sans-serif;
+        }
 
-    .comprovante-container {
-        width: 100%;
-        max-width: 500px;
-        margin: 40px auto;
-        padding: 0 20px 50px;
-    }
+        .comprovante {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #1E1E1E;
+            border: 1px solid rgba(253, 230, 138, 0.15);
+            border-radius: 18px;
+            padding: 30px;
+            box-sizing: border-box;
+        }
 
-    .cupom {
-        background: #1e1e1e;
-        border: 1px solid #333;
-        border-radius: 14px;
-        padding: 30px;
-        color: #f9fafb;
-    }
+        h1 {
+            text-align: center;
+            color: #FDE68A;
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
 
-    .titulo {
-        text-align: center;
-        font-size: 24px;
-        font-weight: 700;
-        color: #fde68a;
-        margin-bottom: 5px;
-    }
+        h2 {
+            color: #FDE68A;
+            font-size: 18px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
 
-    .subtitulo {
-        text-align: center;
-        color: #aaa;
-        font-size: 13px;
-        margin-bottom: 20px;
-    }
+        .informacoes {
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
 
-    .linha-sep {
-        border: none;
-        border-top: 1px dashed #555;
-        margin: 18px 0;
-    }
+        .informacoes strong {
+            color: #FDE68A;
+        }
 
-    .cliente {
-        display: flex;
-        justify-content: space-between;
-        gap: 20px;
-        font-size: 14px;
-    }
+        .item {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(253, 230, 138, 0.10);
+        }
 
-    .cliente span:first-child {
-        color: #aaa;
-    }
+        .item:last-child {
+            border-bottom: none;
+        }
 
-    .item {
-        margin-bottom: 15px;
-    }
+        .item-nome {
+            flex: 1;
+        }
 
-    .item-linha {
-        display: flex;
-        justify-content: space-between;
-        gap: 15px;
-        font-size: 14px;
-    }
+        .item-valor {
+            white-space: nowrap;
+        }
 
-    .item-nome {
-        font-weight: 600;
-    }
+        .totais {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(253, 230, 138, 0.15);
+        }
 
-    .item-subtotal {
-        font-weight: 600;
-        white-space: nowrap;
-    }
+        .total-linha {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin: 10px 0;
+        }
 
-    .item-desc {
-        color: #999;
-        font-size: 12px;
-        margin-top: 4px;
-    }
+        .desconto {
+            color: #86EFAC;
+        }
 
-    .total-linha {
-        display: flex;
-        justify-content: space-between;
-        font-size: 14px;
-        margin-bottom: 8px;
-        color: #bbb;
-    }
+        .total-final {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
 
-    .total-final {
-        display: flex;
-        justify-content: space-between;
-        font-size: 21px;
-        font-weight: 800;
-        color: #fde68a;
-        margin-top: 15px;
-    }
+            margin-top: 18px;
+            padding-top: 18px;
 
-    .observacao {
-        margin-top: 15px;
-        padding: 12px;
-        background: #252525;
-        border-radius: 8px;
-        font-size: 13px;
-        color: #bbb;
-    }
+            border-top: 1px solid rgba(253, 230, 138, 0.20);
 
-    .botoes {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
+            color: #FDE68A;
+            font-size: 22px;
+            font-weight: bold;
+        }
 
-    .btn {
-        display: block;
-        text-align: center;
-        padding: 13px;
-        border-radius: 8px;
-        font-weight: 700;
-        text-decoration: none;
-    }
+        .pagamentos {
+            margin-top: 30px;
+            padding: 20px;
 
-    .btn-nova {
-        background: #fde68a;
-        color: #111;
-    }
+            background: #121212;
+            border-radius: 14px;
 
-    .btn-hist {
-        background: #2a2a2a;
-        color: #fff;
-    }
+            border: 1px solid rgba(253, 230, 138, 0.10);
+        }
 
-    .btn:hover {
-        opacity: 0.9;
-    }
+        .pagamento {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
 
-</style>
+            padding: 10px 0;
 
-{% endblock %}
+            border-bottom: 1px solid rgba(253, 230, 138, 0.08);
+        }
 
+        .pagamento:last-child {
+            border-bottom: none;
+        }
 
-{% block content %}
+        .forma-pagamento {
+            text-transform: capitalize;
+        }
 
-<main class="comprovante-container">
+        .observacao {
+            margin-top: 25px;
+            padding: 15px;
 
-    <div class="cupom">
+            background: #121212;
+            border-radius: 12px;
 
-        <!-- CABEÇALHO -->
+            border: 1px solid rgba(253, 230, 138, 0.10);
+        }
 
-        <div class="titulo">
-            🍷 Nova Adega
-        </div>
+        .botoes {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
 
-        <div class="subtitulo">
+            margin-top: 30px;
+        }
 
-            Venda #{{ venda.id }}
+        .botao {
+            display: inline-block;
 
-            <br>
+            padding: 12px 20px;
 
-            {% if venda.criado_em %}
-                {{ venda.criado_em.strftime('%d/%m/%Y %H:%M') }}
-            {% endif %}
+            border-radius: 10px;
 
-        </div>
+            text-decoration: none;
 
+            background: #FDE68A;
+            color: #121212;
 
-        <hr class="linha-sep">
+            font-weight: bold;
 
+            transition: 0.2s;
+        }
 
-        <!-- CLIENTE -->
+        .botao:hover {
+            transform: translateY(-2px);
+            background: #FEF3C7;
+        }
 
-        <div class="cliente">
+        @media (max-width: 600px) {
 
-            <span>Cliente</span>
+            body {
+                padding: 15px;
+            }
 
-            <span>
+            .comprovante {
+                padding: 20px;
+            }
+
+            .item,
+            .total-linha,
+            .total-final,
+            .pagamento {
+                font-size: 14px;
+            }
+
+            .total-final {
+                font-size: 19px;
+            }
+
+            .botoes {
+                flex-direction: column;
+            }
+
+            .botao {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="comprovante">
+
+        <h1>Comprovante de Venda</h1>
+
+        <!-- ====================================================
+             INFORMAÇÕES DA VENDA
+        ===================================================== -->
+
+        <div class="informacoes">
+
+            <div>
+                <strong>Venda:</strong>
+                #{{ venda.id }}
+            </div>
+
+            <div>
+                <strong>Data:</strong>
+                {{ venda.criado_em.strftime("%d/%m/%Y %H:%M") if venda.criado_em else "-" }}
+            </div>
+
+            <div>
+                <strong>Cliente:</strong>
 
                 {% if venda.cliente %}
-
                     {{ venda.cliente.nome }}
-
                 {% else %}
-
-                    Sem identificação
-
+                    Cliente não informado
                 {% endif %}
 
-            </span>
+            </div>
 
         </div>
 
 
-        <hr class="linha-sep">
+        <!-- ====================================================
+             ITENS DA VENDA
+        ===================================================== -->
 
-
-        <!-- PRODUTOS -->
+        <h2>Itens da venda</h2>
 
         {% for item in venda.itens %}
 
         <div class="item">
 
-            <div class="item-linha">
+            <div class="item-nome">
 
-                <span class="item-nome">
-                    {{ item.produto_nome }}
-                </span>
+                <strong>{{ item.produto_nome }}</strong>
 
-                <span class="item-subtotal">
+                <br>
 
-                    R$
-                    {{ "%.2f"|format(item.subtotal) }}
-
-                </span>
+                {{ item.quantidade }} x
+                R$ {{ "%.2f"|format(item.preco_unitario) }}
 
             </div>
 
+            <div class="item-valor">
 
-            <div class="item-desc">
-
-                {{ item.quantidade }}
-                ×
-                R$ {{ "%.2f"|format(item.preco_unitario) }}
+                R$ {{ "%.2f"|format(item.subtotal) }}
 
             </div>
 
@@ -231,40 +269,131 @@ Comprovante #{{ venda.id }} — Nova Adega
         {% endfor %}
 
 
-        <hr class="linha-sep">
+        <!-- ====================================================
+             TOTAIS
+        ===================================================== -->
+
+        <div class="totais">
+
+            <div class="total-linha">
+
+                <span>Subtotal</span>
+
+                <span>
+                    R$ {{ "%.2f"|format(venda.total_bruto) }}
+                </span>
+
+            </div>
 
 
-        <!-- SUBTOTAL -->
+            {% if venda.desconto and venda.desconto > 0 %}
 
-        <div class="total-linha">
+            <div class="total-linha desconto">
 
-            <span>
-                Subtotal
-            </span>
+                <span>Desconto</span>
 
-            <span>
-                R$ {{ "%.2f"|format(venda.total_bruto) }}
-            </span>
+                <span>
+                    - R$ {{ "%.2f"|format(venda.desconto) }}
+                </span>
+
+            </div>
+
+            {% endif %}
+
+
+            <div class="total-final">
+
+                <span>TOTAL</span>
+
+                <span>
+                    R$ {{ "%.2f"|format(venda.total_liquido) }}
+                </span>
+
+            </div>
 
         </div>
 
 
-        <!-- TOTAL -->
+        <!-- ====================================================
+             PAGAMENTOS
+        ===================================================== -->
 
-        <div class="total-final">
+        <div class="pagamentos">
 
-            <span>
-                TOTAL
-            </span>
+            <h2>Forma de pagamento</h2>
 
-            <span>
-                R$ {{ "%.2f"|format(venda.total_liquido) }}
-            </span>
+
+            {% if venda.forma_pagamento_1 %}
+
+            <div class="pagamento">
+
+                <span class="forma-pagamento">
+
+                    {% if venda.forma_pagamento_1 == "dinheiro" %}
+                        Dinheiro
+
+                    {% elif venda.forma_pagamento_1 == "pix" %}
+                        PIX
+
+                    {% elif venda.forma_pagamento_1 == "cartao_credito" %}
+                        Cartão de crédito
+
+                    {% elif venda.forma_pagamento_1 == "cartao_debito" %}
+                        Cartão de débito
+
+                    {% else %}
+                        {{ venda.forma_pagamento_1 }}
+                    {% endif %}
+
+                </span>
+
+                <strong>
+                    R$ {{ "%.2f"|format(venda.valor_pagamento_1) }}
+                </strong>
+
+            </div>
+
+            {% endif %}
+
+
+            {% if venda.forma_pagamento_2 and venda.valor_pagamento_2 > 0 %}
+
+            <div class="pagamento">
+
+                <span class="forma-pagamento">
+
+                    {% if venda.forma_pagamento_2 == "dinheiro" %}
+                        Dinheiro
+
+                    {% elif venda.forma_pagamento_2 == "pix" %}
+                        PIX
+
+                    {% elif venda.forma_pagamento_2 == "cartao_credito" %}
+                        Cartão de crédito
+
+                    {% elif venda.forma_pagamento_2 == "cartao_debito" %}
+                        Cartão de débito
+
+                    {% else %}
+                        {{ venda.forma_pagamento_2 }}
+                    {% endif %}
+
+                </span>
+
+                <strong>
+                    R$ {{ "%.2f"|format(venda.valor_pagamento_2) }}
+                </strong>
+
+            </div>
+
+            {% endif %}
 
         </div>
 
 
-        <!-- OBSERVAÇÃO -->
+        <!-- ====================================================
+             OBSERVAÇÃO
+        ===================================================== -->
 
         {% if venda.observacao %}
 
@@ -280,30 +409,25 @@ Comprovante #{{ venda.id }} — Nova Adega
 
         {% endif %}
 
-    </div>
 
+        <!-- ====================================================
+             BOTÕES
+        ===================================================== -->
 
-    <!-- BOTÕES -->
+        <div class="botoes">
 
-    <div class="botoes">
+            <a href="/pdv/" class="botao">
+                Voltar para o PDV
+            </a>
 
-        <a
-            href="/pdv/"
-            class="btn btn-nova"
-        >
-            + Nova venda
-        </a>
+            <a href="/pdv/historico" class="botao">
+                Histórico de vendas
+            </a>
 
-
-        <a
-            href="/movimentacoes/"
-            class="btn btn-hist"
-        >
-            Ver histórico
-        </a>
+        </div>
 
     </div>
 
-</main>
+</body>
 
-{% endblock %}
+</html>
