@@ -203,7 +203,9 @@ body {
 
 .home-container {
     width: 100%;
-    max-width: 1250px;
+    max-width: 1200px;
+
+    min-height: calc(100vh - 70px - 69px);
 
     margin: 0 auto;
 
@@ -535,13 +537,11 @@ body {
     padding: 24px;
 
     background: #181818;
-
     border: 1px solid #2d2d2d;
 
     border-radius: 12px;
 
     text-decoration: none !important;
-
     color: #ffffff !important;
 
     transition:
@@ -950,6 +950,16 @@ body {
     font-size: 14px;
 }
 
+/* Item da página atual */
+
+.menu a.active {
+    color: #ffffff;
+}
+
+.menu a.active::after {
+    width: 100%;
+}
+
 
 .atalho small {
     color: #777777;
@@ -983,7 +993,6 @@ body {
 
 .footer {
     width: 100%;
-
     margin-top: auto;
 
     padding: 25px 20px;
@@ -1057,7 +1066,6 @@ body {
         padding: 18px 20px;
 
         flex-direction: column;
-
         gap: 15px;
     }
 

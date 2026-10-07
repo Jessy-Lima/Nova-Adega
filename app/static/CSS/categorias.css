@@ -3,13 +3,20 @@
 ========================================================= */
 
 
-/* CONTAINER */
+/* =========================================================
+   CONTAINER PRINCIPAL
+========================================================= */
 
 .container {
     width: 100%;
     max-width: 1200px;
+
+    min-height: calc(100vh - 70px - 69px);
+
     margin: 0 auto;
+
     padding: 40px 30px 60px;
+
     box-sizing: border-box;
 }
 
@@ -60,11 +67,15 @@
 
     justify-content: center;
 
-    padding: 11px 18px;
+    height: 42px;
 
-    background: #FDE68A ;
+    padding: 0 18px;
+
+    background: #FDE68A;
 
     color: #1e293b;
+
+    border: 1px solid #FDE68A;
 
     border-radius: 8px;
 
@@ -73,6 +84,8 @@
     font-size: 14px;
 
     font-weight: 700;
+
+    cursor: pointer;
 
     transition:
         transform 0.2s,
@@ -297,7 +310,9 @@
 }
 
 
-/* EDITAR */
+/* =========================================================
+   BOTÃO EDITAR
+========================================================= */
 
 .btn-editar {
     display: inline-flex;
@@ -306,7 +321,9 @@
 
     justify-content: center;
 
-    padding: 8px 13px;
+    height: 40px;
+
+    padding: 0 13px;
 
     background: #2a2a30;
 
@@ -335,14 +352,18 @@
 }
 
 
-/* ATIVAR / DESATIVAR */
+/* =========================================================
+   ATIVAR / DESATIVAR
+========================================================= */
 
 .btn-status {
-    padding: 8px 13px;
+    height: 40px;
+
+    padding: 0 13px;
 
     background: transparent;
 
-    color: #FDE68A ;
+    color: #FDE68A;
 
     border: 1px solid rgba(250, 204, 21, 0.4);
 
@@ -386,19 +407,57 @@
    VOLTAR
 ========================================================= */
 
-/* ============================================================
-   VOLTAR AO INÍCIO
-   ============================================================ */
+.voltar {
+    margin-top: 24px !important;
+}
+
+
+.voltar a,
+a.voltar {
+    display: inline-flex !important;
+
+    align-items: center !important;
+
+    color: #9CA3AF !important;
+
+    font-size: 14px !important;
+
+    font-weight: 500 !important;
+
+    line-height: 20px !important;
+
+    text-decoration: none !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease !important;
+}
+
+
+.voltar a:hover,
+a.voltar:hover {
+    color: #FDE68A !important;
+
+    transform: translateX(-3px) !important;
+
+    text-decoration: none !important;
+}
 
 
 /* =========================================================
-   RESPONSIVIDADE
+   RESPONSIVIDADE DA LISTA
 ========================================================= */
 
 @media (max-width: 768px) {
 
     .container {
-        padding: 25px 15px;
+        min-height: auto;
+
+        padding: 25px 15px 40px;
     }
 
 
@@ -425,12 +484,14 @@
 
 }
 
+
 /* =========================================================
    FORMULÁRIO DE CATEGORIA
 ========================================================= */
 
 .form-categoria {
     width: 100%;
+
     max-width: 700px;
 
     background: #1f1f22;
@@ -445,11 +506,14 @@
 }
 
 
-/* TÍTULO */
+/* =========================================================
+   TÍTULO DO FORMULÁRIO
+========================================================= */
 
 .form-titulo {
     margin-bottom: 28px;
 }
+
 
 .form-titulo h1 {
     margin: 0 0 8px 0;
@@ -458,6 +522,7 @@
 
     color: #f8fafc;
 }
+
 
 .form-titulo p {
     margin: 0;
@@ -470,7 +535,9 @@
 }
 
 
-/* FORMULÁRIO */
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
 
 .categoria-form {
     display: flex;
@@ -481,7 +548,9 @@
 }
 
 
-/* CAMPO */
+/* =========================================================
+   CAMPO
+========================================================= */
 
 .form-grupo {
     display: flex;
@@ -491,6 +560,7 @@
     gap: 8px;
 }
 
+
 .form-grupo label {
     color: #e4e4e7;
 
@@ -498,6 +568,7 @@
 
     font-weight: 600;
 }
+
 
 .form-grupo input {
     width: 100%;
@@ -519,18 +590,23 @@
     outline: none;
 }
 
+
 .form-grupo input::placeholder {
     color: #71717a;
 }
 
+
 .form-grupo input:focus {
     border-color: #FDE68A;
 
-    box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.10);
+    box-shadow:
+        0 0 0 3px rgba(253, 230, 138, 0.10);
 }
 
 
-/* BOTÕES */
+/* =========================================================
+   BOTÕES DO FORMULÁRIO
+========================================================= */
 
 .form-botoes {
     display: flex;
@@ -542,14 +618,17 @@
     margin-top: 5px;
 }
 
+
 .btn-salvar {
-    padding: 11px 18px;
+    height: 42px;
+
+    padding: 0 18px;
 
     background: #FDE68A;
 
     color: #1e293b;
 
-    border: none;
+    border: 1px solid #FDE68A;
 
     border-radius: 8px;
 
@@ -562,6 +641,7 @@
     transition: 0.2s;
 }
 
+
 .btn-salvar:hover {
     transform: translateY(-1px);
 
@@ -570,13 +650,15 @@
 
 
 .btn-cancelar {
+    height: 42px;
+
     display: inline-flex;
 
     align-items: center;
 
     justify-content: center;
 
-    padding: 10px 17px;
+    padding: 0 17px;
 
     background: #2a2a30;
 
@@ -592,8 +674,11 @@
 
     font-weight: 600;
 
+    cursor: pointer;
+
     transition: 0.2s;
 }
+
 
 .btn-cancelar:hover {
     background: #3f3f46;
@@ -602,7 +687,9 @@
 }
 
 
-/* PRODUTOS VINCULADOS */
+/* =========================================================
+   PRODUTOS VINCULADOS
+========================================================= */
 
 .produtos-vinculados {
     width: 100%;
@@ -622,6 +709,7 @@
     border-radius: 12px;
 }
 
+
 .titulo-vinculados h2 {
     margin: 0 0 6px 0;
 
@@ -629,6 +717,7 @@
 
     font-size: 20px;
 }
+
 
 .titulo-vinculados p {
     margin: 0 0 20px 0;
@@ -638,6 +727,7 @@
     font-size: 14px;
 }
 
+
 .lista-produtos {
     display: flex;
 
@@ -645,6 +735,7 @@
 
     gap: 10px;
 }
+
 
 .produto-vinculado {
     display: flex;
@@ -668,11 +759,13 @@
     text-decoration: none;
 }
 
+
 .produto-vinculado:hover {
     background: #29292e;
 
     border-color: #4a4a52;
 }
+
 
 .produto-vinculado strong {
     display: block;
@@ -682,17 +775,20 @@
     color: #f8fafc;
 }
 
+
 .produto-vinculado span {
     color: #a1a1aa;
 
     font-size: 13px;
 }
 
+
 .produto-vinculado .ver-produto {
     color: #FDE68A;
 
     font-weight: 600;
 }
+
 
 .sem-produtos {
     margin: 0;
@@ -711,7 +807,9 @@
 }
 
 
-/* RESPONSIVO */
+/* =========================================================
+   RESPONSIVIDADE DO FORMULÁRIO
+========================================================= */
 
 @media (max-width: 768px) {
 
@@ -719,15 +817,18 @@
         padding: 22px;
     }
 
+
     .form-titulo h1 {
         font-size: 26px;
     }
+
 
     .form-botoes {
         flex-direction: column;
 
         align-items: stretch;
     }
+
 
     .btn-salvar,
     .btn-cancelar {
@@ -738,13 +839,13 @@
 
 }
 
+
 /* =========================================================
    CENTRALIZAÇÃO DA TELA DE NOVA CATEGORIA
 ========================================================= */
 
 .container:has(.form-categoria) {
     min-height: calc(100vh - 70px - 69px);
-
 
     display: flex;
 
@@ -758,8 +859,9 @@
 }
 
 
-/* Mantém o "Voltar para categorias" alinhado
-   com o card */
+/* =========================================================
+   FORMULÁRIO CENTRALIZADO
+========================================================= */
 
 .container:has(.form-categoria) .form-categoria {
     width: 100%;
@@ -768,7 +870,9 @@
 }
 
 
-/* O link voltar fica na mesma largura do card */
+/* =========================================================
+   LINK VOLTAR DO FORMULÁRIO
+========================================================= */
 
 .container:has(.form-categoria) .voltar {
     width: 100%;
@@ -780,7 +884,7 @@
 
 
 /* =========================================================
-   RESPONSIVIDADE
+   RESPONSIVIDADE DO FORMULÁRIO CENTRALIZADO
 ========================================================= */
 
 @media (max-width: 768px) {
@@ -793,9 +897,11 @@
         padding-bottom: 35px;
     }
 
+
     .container:has(.form-categoria) .form-categoria {
         max-width: 100%;
     }
+
 
     .container:has(.form-categoria) .voltar {
         max-width: 100%;
@@ -803,147 +909,54 @@
 
 }
 
-/* ============================================================
-   PAGINAÇÃO
-   ============================================================ */
-
-.paginacao {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-
-    margin-top: 24px;
-    padding: 10px 0 5px;
-}
-
-/* Texto: Página 2 de 4 */
-.paginacao-info {
-    color: #9CA3AF;
-    font-size: 14px;
-    font-weight: 500;
-    margin-right: 8px;
-}
-
-/* Links da paginação */
-.paginacao a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 42px;
-    height: 38px;
-    padding: 0 14px;
-
-    background: #1E1E1E;
-    color: #FDE68A;
-
-    border: 1px solid rgba(253, 230, 138, 0.25);
-    border-radius: 9px;
-
-    text-decoration: none;
-
-    font-size: 13px;
-    font-weight: 600;
-
-    transition: all 0.2s ease;
-}
-
-/* Quando passar o mouse */
-.paginacao a:hover {
-    background: #FDE68A;
-    color: #121212;
-
-    border-color: #FDE68A;
-
-    transform: translateY(-2px);
-
-    box-shadow: 0 5px 15px rgba(253, 230, 138, 0.12);
-}
-
-/* Página atual */
-.paginacao .pagina-atual {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    min-width: 38px;
-    height: 38px;
-    padding: 0 12px;
-
-    background: #FDE68A;
-    color: #121212;
-
-    border-radius: 9px;
-
-    font-size: 13px;
-    font-weight: 700;
-}
-
-/* Celular */
-@media (max-width: 600px) {
-
-    .paginacao {
-        flex-wrap: wrap;
-        gap: 7px;
-        margin-top: 20px;
-    }
-
-    .paginacao-info {
-        width: 100%;
-        text-align: center;
-        margin-right: 0;
-        margin-bottom: 4px;
-    }
-
-    .paginacao a {
-        min-width: 38px;
-        height: 36px;
-        padding: 0 11px;
-        font-size: 12px;
-    }
-
-    .paginacao .pagina-atual {
-        min-width: 36px;
-        height: 36px;
-    }
-}
 
 /* =========================================================
-   PAGINAÇÃO — CATEGORIAS
+   PAGINAÇÃO
 ========================================================= */
 
 .paginacao {
     width: 100%;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
+    gap: 10px;
+
     margin-top: 20px;
+
     padding: 14px 18px;
 
     box-sizing: border-box;
 
     background: #1E1E1E;
+
     border: 1px solid rgba(253, 230, 138, 0.15);
+
     border-radius: 12px;
 }
 
 
-/* TEXTO "PÁGINA 2 DE 4" */
+/* =========================================================
+   INFORMAÇÃO DA PAGINAÇÃO
+========================================================= */
 
 .paginacao > span {
     color: #9CA3AF !important;
 
     font-size: 14px !important;
+
     font-weight: 500;
 
     line-height: 1.4;
 }
 
 
-/* ÁREA DOS BOTÕES */
+/* =========================================================
+   ÁREA DOS BOTÕES
+========================================================= */
 
 .paginacao > div {
     display: flex;
@@ -954,15 +967,18 @@
 }
 
 
-/* BOTÕES */
+/* =========================================================
+   BOTÕES DA PAGINAÇÃO
+========================================================= */
 
 .paginacao > div a {
     display: inline-flex;
 
     align-items: center;
+
     justify-content: center;
 
-    height: 38px;
+    height: 40px;
 
     min-width: 105px;
 
@@ -993,7 +1009,9 @@
 }
 
 
-/* HOVER */
+/* =========================================================
+   HOVER DA PAGINAÇÃO
+========================================================= */
 
 .paginacao > div a:hover {
     background: #FDE68A !important;
@@ -1004,11 +1022,43 @@
 
     transform: translateY(-2px);
 
-    box-shadow: 0 5px 15px rgba(253, 230, 138, 0.15);
+    box-shadow:
+        0 5px 15px rgba(253, 230, 138, 0.15);
 }
 
 
-/* CELULAR */
+/* =========================================================
+   PÁGINA ATUAL
+========================================================= */
+
+.paginacao .pagina-atual {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 40px;
+
+    height: 40px;
+
+    padding: 0 12px;
+
+    background: #FDE68A;
+
+    color: #121212;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   PAGINAÇÃO EM TELAS MENORES
+========================================================= */
 
 @media (max-width: 600px) {
 
@@ -1022,51 +1072,28 @@
         text-align: center;
     }
 
+
+    .paginacao > span {
+        width: 100%;
+    }
+
+
     .paginacao > div {
         width: 100%;
 
         justify-content: center;
     }
 
+
     .paginacao > div a {
         min-width: 100px;
     }
-}
 
-/* =========================================================
-   BOTÃO VOLTAR - PADRÃO
-========================================================= */
 
-/* =========================================================
-   BOTÃO VOLTAR - PADRÃO
-========================================================= */
+    .paginacao .pagina-atual {
+        min-width: 36px;
 
-.voltar {
-    margin-top: 24px !important;
-}
+        height: 36px;
+    }
 
-.voltar a,
-a.voltar {
-    display: inline-flex !important;
-    align-items: center !important;
-
-    color: #9CA3AF !important;
-
-    font-size: 14px !important;
-    font-weight: 500 !important;
-
-    line-height: 20px !important;
-
-    text-decoration: none !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    transition: color 0.2s ease, transform 0.2s ease !important;
-}
-
-.voltar a:hover,
-a.voltar:hover {
-    color: #FDE68A !important;
-    transform: translateX(-3px) !important;
 }
