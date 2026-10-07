@@ -4,140 +4,18 @@
    (reset, body, navbar, menu e rodapé vêm do home.css)
 ========================================= */
 
-<<<<<<< HEAD
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-
-/* =========================================
-   CORPO
-========================================= */
-
-body {
-    font-family: Arial, sans-serif;
-
-    background-color: #121212;
-
-    color: #F9FAFB;
-
-    min-height: 100vh;
-}
-
-
-/* =========================================
-   NAVBAR
-========================================= */
-
-.navbar {
-    width: 100%;
-
-    background-color: #1E1E1E;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-   padding: 0 25px;
-
-    min-height: 70px;
-
-    border-bottom: 1px solid #333;
-}
-
-
-/* LOGO */
-
-.logo h2 {
-    color: #FDE68A;
-
-    font-size: 24px;
-
-    margin: 0;
-}
-
-
-/* MENU */
-
-.menu {
-    display: flex;
-
-    align-items: center;
-
-    gap: 28px;
-}
-
-
-/* LINKS */
-
-.menu a {
-    color: #F9FAFB;
-
-    text-decoration: none;
-
-    font-size: 16px;
-
-    transition: 0.3s;
-
-    padding: 5px 0;
-}
-
-
-/* HOVER E PÁGINA ATUAL */
-
-.menu a:hover,
-.menu a.ativo {
-    color: #FDE68A;
-}
-
-
-/* BOTÃO SAIR */
-
-.menu .btn-sair {
-    background-color: #FDE68A;
-
-    color: #121212;
-
-    padding: 12px 22px;
-
-    border-radius: 10px;
-
-    font-weight: bold;
-
-    transition: 0.3s;
-}
-
-
-.menu .btn-sair:hover {
-    background-color: #FEF3C7;
-
-    color: #121212;
-}
-
-=======
->>>>>>> 2560896 (Refactor CSS styles for clientes, home, and movimentacoes; update base HTML structure and remove unused home file)
 
 /* =========================================
    CONTAINER PRINCIPAL
 ========================================= */
 
 .container {
-<<<<<<< HEAD
     width: 100%;
     max-width: 1200px;
+    min-height: calc(100vh - 70px - 69px);
     margin: 0 auto;
     padding: 40px 30px 60px;
     box-sizing: border-box;
-=======
-    width: 90%;
-    max-width: 1500px;
-    margin: 0 auto;
-    padding: 55px 0;
->>>>>>> 2560896 (Refactor CSS styles for clientes, home, and movimentacoes; update base HTML structure and remove unused home file)
 }
 
 
@@ -588,38 +466,6 @@ tbody tr:last-child td {
 
 }
 
-<<<<<<< HEAD
-/* =========================================================
-   BOTÃO VOLTAR - PADRÃO
-========================================================= */
-
-.voltar {
-    margin-top: 24px !important;
-}
-
-.voltar a {
-    display: inline-flex !important;
-    align-items: center !important;
-
-    color: #9CA3AF !important;
-
-    font-size: 14px !important;
-    font-weight: 500 !important;
-
-    line-height: 20px !important;
-
-    text-decoration: none !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    transition: color 0.2s ease, transform 0.2s ease !important;
-}
-
-.voltar a:hover {
-    color: #FDE68A !important;
-    transform: translateX(-3px) !important;
-=======
 
 @media (max-width: 500px) {
 
@@ -632,5 +478,4 @@ tbody tr:last-child td {
         text-align: center;
     }
 
->>>>>>> 2560896 (Refactor CSS styles for clientes, home, and movimentacoes; update base HTML structure and remove unused home file)
 }

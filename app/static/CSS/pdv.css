@@ -11,9 +11,13 @@
     width: 100%;
     max-width: 1500px;
 
+    min-height: calc(100vh - 70px - 69px);
+
     margin: 0 auto;
 
     padding: 35px 40px 50px;
+
+    box-sizing: border-box;
 }
 
 

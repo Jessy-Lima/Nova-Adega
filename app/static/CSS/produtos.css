@@ -18,9 +18,15 @@
     box-sizing: border-box;
 }
 
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+========================================================= */
+
 .container {
     width: 100%;
     max-width: 1200px;
+    min-height: calc(100vh - 70px - 69px);
     margin: 0 auto;
     padding: 40px 30px 60px;
     box-sizing: border-box;
@@ -669,6 +675,7 @@
 @media (max-width: 850px) {
 
     .container {
+        min-height: calc(100vh - 70px - 69px);
         padding: 25px 18px 40px;
     }
 
@@ -717,6 +724,7 @@
         flex: 1;
     }
 }
+
 
 /* =========================================================
    BOTÃO VOLTAR - PADRÃO
