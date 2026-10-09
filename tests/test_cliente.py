@@ -1,3 +1,4 @@
+
 from app.models.cliente import Cliente
 
 
@@ -20,7 +21,10 @@ def test_listar_clientes_pagina_invalida(cliente):
     assert resposta.status_code == 200
 
 
-def test_listar_clientes_pagina_alta(cliente, db_session_test):
+def test_listar_clientes_pagina_alta(
+    cliente,
+    db_session_test
+):
     db_session_test.add_all([
         Cliente(nome="Ana"),
         Cliente(nome="Bruno"),
@@ -32,10 +36,17 @@ def test_listar_clientes_pagina_alta(cliente, db_session_test):
 
     resposta = cliente.get(
         "/clientes/",
-        params={"pagina": 999}
+        params={
+            "pagina": 999,
+            "por_pagina": 2
+        }
     )
 
     assert resposta.status_code == 200
+    assert "Carlos" in resposta.text
+    assert "Daniel" in resposta.text
+    assert "Ana" not in resposta.text
+    assert "Bruno" not in resposta.text
 
 
 # ============================================================
@@ -187,9 +198,7 @@ def test_criar_cliente_sem_telefone(
     cliente_db = (
         db_session_test
         .query(Cliente)
-        .filter_by(
-            nome="Cliente Sem Telefone"
-        )
+        .filter_by(nome="Cliente Sem Telefone")
         .first()
     )
 

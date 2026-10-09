@@ -1,3 +1,4 @@
+
 from app.models.produto import Produto
 from app.models.categoria import Categoria
 
@@ -36,12 +37,25 @@ def test_listar_produtos_com_filtro_categoria(
 
     db_session_test.add(categoria)
     db_session_test.commit()
+    db_session_test.refresh(categoria)
+
+    produto = Produto(
+        nome="Vinho da Categoria",
+        preco=50.00,
+        estoque_atual=10,
+        categoria_id=categoria.id,
+        ativo=True
+    )
+
+    db_session_test.add(produto)
+    db_session_test.commit()
 
     resposta = cliente.get(
-        "/produtos/?categoria_id=1"
+        f"/produtos/?categoria_id={categoria.id}"
     )
 
     assert resposta.status_code == 200
+    assert produto.nome in resposta.text
 
 
 # ============================================================
@@ -133,26 +147,42 @@ def test_criar_produto_duplicado(
             "nome": "Vinho Tinto",
             "preco": "60.00",
             "estoque_atual": "5"
-        }
+        },
+        follow_redirects=False
     )
 
-    assert resposta.status_code in [200, 400]
+    assert resposta.status_code == 400
+    assert "Já existe um produto com este nome." in resposta.text
 
 
-def test_criar_produto_com_preco_zero(cliente):
+def test_criar_produto_com_preco_zero(
+    cliente,
+    db_session_test
+):
     resposta = cliente.post(
         "/produtos/novo",
         data={
             "nome": "Produto Teste",
             "preco": "0",
             "estoque_atual": "10"
-        }
+        },
+        follow_redirects=False
     )
 
-    assert resposta.status_code in [200, 302, 400]
+    assert resposta.status_code == 302
+
+    produto = db_session_test.query(Produto).filter(
+        Produto.nome == "Produto Teste"
+    ).first()
+
+    assert produto is not None
+    assert produto.preco == 0
 
 
-def test_criar_produto_com_estoque_zero(cliente):
+def test_criar_produto_com_estoque_zero(
+    cliente,
+    db_session_test
+):
     resposta = cliente.post(
         "/produtos/novo",
         data={
@@ -163,7 +193,14 @@ def test_criar_produto_com_estoque_zero(cliente):
         follow_redirects=False
     )
 
-    assert resposta.status_code in [200, 302, 400]
+    assert resposta.status_code == 302
+
+    produto = db_session_test.query(Produto).filter(
+        Produto.nome == "Produto Sem Estoque"
+    ).first()
+
+    assert produto is not None
+    assert produto.estoque_atual == 0
 
 
 # ============================================================
@@ -191,10 +228,13 @@ def test_detalhes_produto(
     assert resposta.status_code == 200
 
 
-def test_detalhes_produto_inexistente(cliente):
-    resposta = cliente.get("/produtos/99999")
 
-    assert resposta.status_code in [200, 302, 404]
+def test_editar_produto_inexistente(cliente):
+    resposta = cliente.get(
+        "/produtos/99999/editar"
+    )
+
+    assert resposta.status_code == 200
 
 
 # ============================================================
@@ -255,12 +295,14 @@ def test_editar_produto(
     assert produto.estoque_atual == 20
 
 
+
 def test_editar_produto_inexistente(cliente):
     resposta = cliente.get(
         "/produtos/99999/editar"
     )
 
-    assert resposta.status_code in [200, 302, 404]
+    assert resposta.status_code == 200
+
 
 # ============================================================
 # ATIVAÇÃO / DESATIVAÇÃO
@@ -302,6 +344,7 @@ def test_produto_pode_ser_criado_inativo(
 
     assert produto.id is not None
     assert produto.ativo is False
+
 
 # ============================================================
 # PROPRIEDADE DE ESTOQUE BAIXO
