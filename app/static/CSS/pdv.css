@@ -1219,3 +1219,29 @@ main.pdv-container #busca-produto:focus {
 .btn-paginacao {
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
+
+
+/* Diminuir a barra de busca */
+#busca-produto {
+    width: 220px;
+    max-width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+
+/* Diminuir a barra de busca do PDV */
+.produtos-header {
+    display: flex !important;
+    justify-content: flex-start !important;
+    width: 100%;
+}
+
+#busca-produto {
+    width: 180px !important;
+    min-width: 0 !important;
+    max-width: 180px !important;
+    flex: 0 1 180px !important;
+    box-sizing: border-box !important;
+}
