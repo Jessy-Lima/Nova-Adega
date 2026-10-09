@@ -9,7 +9,7 @@ from fastapi import APIRouter, Depends, Request, Form
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
-
+from math import ceil
 from app.database import get_db
 from app.models.venda import Venda, ItemVenda
 from app.models.produto import Produto
@@ -442,17 +442,34 @@ def detalhe_venda(
     )
 
 
+
 @router.get("/historico")
 def historico_vendas(
     request: Request,
+    pagina: int = 1,
     db: Session = Depends(get_db),
     usuario=Depends(get_usuario_logado)
 ):
+    por_pagina = 10
 
+    # Garante que a página seja válida
+    pagina = max(1, pagina)
+
+    # Conta todas as vendas registradas
+    total_vendas = db.query(Venda).count()
+
+    # Calcula quantas páginas existem
+    total_paginas = max(1, ceil(total_vendas / por_pagina))
+
+    # Se a página solicitada for maior que a última, ajusta
+    pagina = min(pagina, total_paginas)
+
+    # Busca somente as vendas da página atual
     vendas = (
         db.query(Venda)
         .order_by(Venda.criado_em.desc())
-        .limit(100)
+        .offset((pagina - 1) * por_pagina)
+        .limit(por_pagina)
         .all()
     )
 
@@ -462,6 +479,9 @@ def historico_vendas(
         {
             "request": request,
             "usuario": usuario,
-            "vendas": vendas
+            "vendas": vendas,
+            "pagina": pagina,
+            "total_paginas": total_paginas,
+            "total_vendas": total_vendas
         }
     )
