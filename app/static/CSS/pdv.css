@@ -1,693 +1,435 @@
+
 /* =========================================================
    PDV — NOVA ADEGA
-   ========================================================= */
+   Tema preto e amarelo
+========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+:root {
+    --pdv-preto: #121212;
+    --pdv-card: #1E1E1E;
+    --pdv-campo: #171717;
+    --pdv-borda: #383838;
+    --pdv-amarelo: #FDE68A;
+    --pdv-amarelo-hover: #FEF3C7;
+    --pdv-texto: #F9FAFB;
+    --pdv-secundario: #A1A1AA;
+}
 
 
 /* =========================================================
    CONTAINER PRINCIPAL
-   ========================================================= */
+========================================================= */
 
 .pdv-container {
     width: 100%;
     max-width: 1500px;
-
     min-height: calc(100vh - 70px - 69px);
-
     margin: 0 auto;
-
     padding: 35px 40px 50px;
-
     box-sizing: border-box;
 }
 
 
 /* =========================================================
-   TÍTULO
-   ========================================================= */
+   TÍTULO DO PDV
+========================================================= */
 
 .pdv-titulo {
     margin-bottom: 25px;
 }
 
-.pdv-titulo h1 {
+.pdv-titulo h1,
+.pdv-page-header h1 {
     color: #F9FAFB;
-
     font-size: 32px;
     font-weight: 700;
-
     margin: 0 0 8px;
 }
 
-.pdv-titulo p {
+.pdv-titulo p,
+.pdv-page-header p {
     color: #A1A1AA;
-
     font-size: 15px;
-
     margin: 0;
 }
 
 
 /* =========================================================
    LAYOUT PRINCIPAL
-   ========================================================= */
+========================================================= */
 
 .pdv-layout {
     display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr) 440px;
-
+    grid-template-columns: minmax(0, 1fr) 440px;
     gap: 25px;
-
     align-items: stretch;
 }
 
 
 /* =========================================================
-   CARD DE PRODUTOS
-   ========================================================= */
+   CARD DE PRODUTOS E CARRINHO
+========================================================= */
 
-.produtos-col {
+.produtos-col,
+.carrinho-col {
     background: #1E1E1E;
-
     border: 1px solid #333333;
-
     border-radius: 16px;
-
     overflow: hidden;
-
     min-height: 650px;
-
     display: flex;
     flex-direction: column;
-
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 
 /* =========================================================
    CABEÇALHO DOS PRODUTOS
-   ========================================================= */
+========================================================= */
 
 .produtos-header {
     padding: 20px;
-
     border-bottom: 1px solid #333333;
-
     position: relative;
 }
 
 
 /* =========================================================
-   CAMPO DE BUSCA
-   ========================================================= */
+   CAMPO DE BUSCA — CORRIGIDO
+   Amarelo-claro com texto escuro
+========================================================= */
 
-.busca-input {
+main.pdv-container #busca-produto {
+    display: block;
     width: 100%;
-
     box-sizing: border-box;
 
-    display: block;
-
-    padding: 14px 16px;
-
-    background: #121212 !important;
-
+    background: #FFE58A !important;
+    background-color: #FFE58A !important;
     background-image: none !important;
 
-    border: 1px solid #444444;
+    color: #111111 !important;
+    -webkit-text-fill-color: #111111 !important;
 
-    border-radius: 10px;
+    border: 1px solid #F5C518 !important;
+    border-radius: 10px !important;
 
-    color: #F9FAFB;
+    padding: 14px 16px !important;
 
     font-family: Arial, Helvetica, sans-serif;
-
     font-size: 14px;
-
     line-height: 1.4;
 
-    outline: none;
+    outline: none !important;
+    box-shadow: none !important;
 
-    appearance: none;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
 
-    -webkit-appearance: none;
-
-    -moz-appearance: none;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
 }
 
+main.pdv-container #busca-produto::placeholder {
+    color: #555555 !important;
+    -webkit-text-fill-color: #555555 !important;
+    opacity: 1 !important;
+}
 
-/* =========================================================
-   REMOVE ÍCONES NATIVOS DO INPUT
-   ========================================================= */
+main.pdv-container #busca-produto:focus {
+    background: #FFE58A !important;
+    background-color: #FFE58A !important;
+    color: #111111 !important;
+    -webkit-text-fill-color: #111111 !important;
 
-.busca-input::-webkit-search-decoration,
-.busca-input::-webkit-search-cancel-button,
-.busca-input::-webkit-search-results-button,
-.busca-input::-webkit-search-results-decoration {
+    border-color: #F5C518 !important;
+    outline: 2px solid #F5C518 !important;
+    outline-offset: 1px;
+
+    box-shadow: none !important;
+}
+
+/* Remove ícones nativos do campo de busca */
+
+#busca-produto::-webkit-search-decoration,
+#busca-produto::-webkit-search-cancel-button,
+#busca-produto::-webkit-search-results-button,
+#busca-produto::-webkit-search-results-decoration {
     display: none !important;
-
     appearance: none !important;
     -webkit-appearance: none !important;
 }
 
 
-/* Firefox */
-
-.busca-input::-moz-search-clear,
-.busca-input::-moz-search-decoration {
-    display: none !important;
-}
-
-
-/* Remove possíveis pseudo-elementos */
-
-.busca-input::before,
-.busca-input::after {
-    content: none !important;
-
-    display: none !important;
-}
-
-
-/* Remove possíveis pseudo-elementos do container */
-
-.produtos-header::before,
-.produtos-header::after {
-    content: none !important;
-
-    display: none !important;
-}
-
-
-/* =========================================================
-   PLACEHOLDER
-   ========================================================= */
-
-.busca-input::placeholder {
-    color: #9CA3AF;
-
-    opacity: 1;
-}
-
-
-/* =========================================================
-   FOCO DO CAMPO
-   ========================================================= */
-
-.busca-input:focus {
-    border-color: #FDE68A;
-
-    box-shadow:
-        0 0 0 3px rgba(253, 230, 138, 0.12);
-}
-
-
 /* =========================================================
    GRADE DE PRODUTOS
-   ========================================================= */
+========================================================= */
 
 .produtos-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(auto-fill, minmax(170px, 1fr));
-
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
     gap: 16px;
-
     padding: 20px;
-
     overflow-y: auto;
-
     flex: 1;
 }
 
 
 /* =========================================================
-   PRODUTO
-   ========================================================= */
+   CARTÃO DO PRODUTO
+========================================================= */
 
 .produto-card {
     background: #242424;
-
     border: 1px solid #383838;
-
     border-radius: 12px;
-
     padding: 14px;
-
     cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
-
     min-height: 180px;
-}
 
+    transition: transform 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+}
 
 .produto-card:hover {
     transform: translateY(-3px);
-
     background: #292929;
-
     border-color: #FDE68A;
-
-    box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
-
-
-/* =========================================================
-   IMAGEM DO PRODUTO
-   ========================================================= */
 
 .produto-card img {
     width: 100%;
-
     height: 100px;
-
     object-fit: cover;
-
     border-radius: 8px;
-
     margin-bottom: 12px;
-
     background: #121212;
 }
 
-
-/* =========================================================
-   NOME DO PRODUTO
-   ========================================================= */
-
 .produto-card-nome {
     color: #F9FAFB;
-
     font-size: 14px;
-
     font-weight: 600;
-
     margin-bottom: 8px;
 }
 
-
-/* =========================================================
-   PREÇO
-   ========================================================= */
-
 .produto-card-preco {
     color: #FDE68A;
-
     font-size: 17px;
-
     font-weight: 700;
 }
 
-
-/* =========================================================
-   ESTOQUE
-   ========================================================= */
-
 .produto-card-estoque {
     color: #9CA3AF;
-
     font-size: 12px;
-
     margin-top: 5px;
 }
 
-
-/* =========================================================
-   PRODUTO SEM ESTOQUE
-   ========================================================= */
-
 .produto-card.sem-estoque {
     opacity: 0.45;
-
     cursor: not-allowed;
-
     pointer-events: none;
 }
 
-
-/* =========================================================
-   SEM PRODUTOS
-   ========================================================= */
-
 .sem-produtos {
     grid-column: 1 / -1;
-
     color: #9CA3AF;
-
     text-align: center;
-
     padding: 60px 20px;
-
     font-size: 15px;
 }
 
 
 /* =========================================================
-   CARRINHO
-   ========================================================= */
-
-.carrinho-col {
-    background: #1E1E1E;
-
-    border: 1px solid #333333;
-
-    border-radius: 16px;
-
-    overflow: hidden;
-
-    min-height: 650px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.25);
-}
-
-
-/* =========================================================
    CABEÇALHO DO CARRINHO
-   ========================================================= */
+========================================================= */
 
 .carrinho-header {
     padding: 20px;
-
     color: #F9FAFB;
-
     font-size: 18px;
-
     font-weight: 700;
-
     border-bottom: 1px solid #333333;
 }
 
 
 /* =========================================================
    CLIENTE
-   ========================================================= */
+========================================================= */
 
 .cliente-section {
     padding: 18px 20px;
-
     border-bottom: 1px solid #333333;
 }
 
-
 .cliente-section label {
     display: block;
-
     color: #FDE68A;
-
     font-size: 12px;
-
     font-weight: 700;
-
     text-transform: uppercase;
-
     letter-spacing: 1px;
-
     margin-bottom: 8px;
 }
 
-
-/* =========================================================
-   SELECT DO CLIENTE
-   ========================================================= */
-
 .cliente-select {
     width: 100%;
-
     box-sizing: border-box;
-
     padding: 12px;
-
     background: #121212;
-
     color: #F9FAFB;
-
     border: 1px solid #444444;
-
     border-radius: 10px;
-
     outline: none;
-
     cursor: pointer;
 }
 
-
 .cliente-select:focus {
     border-color: #FDE68A;
-
-    box-shadow:
-        0 0 0 3px rgba(253, 230, 138, 0.08);
+    box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.08);
 }
-
-
-/* =========================================================
-   DESCONTO
-   ========================================================= */
 
 .desconto-badge {
     margin-top: 10px;
-
     padding: 7px 10px;
-
     background: #FEF3C7;
-
     color: #121212;
-
     border-radius: 8px;
-
     font-size: 12px;
-
     font-weight: 700;
 }
 
 
 /* =========================================================
    ITENS DO CARRINHO
-   ========================================================= */
+========================================================= */
 
 .carrinho-itens {
     flex: 1;
-
     overflow-y: auto;
-
     padding: 8px 0;
 }
 
-
-/* =========================================================
-   ITEM DO CARRINHO
-   ========================================================= */
-
 .carrinho-item {
     display: flex;
-
     align-items: center;
-
     gap: 10px;
-
     padding: 14px 20px;
-
     border-bottom: 1px solid #333333;
 }
-
 
 .carrinho-item:hover {
     background: #242424;
 }
 
-
-/* =========================================================
-   INFORMAÇÕES DO ITEM
-   ========================================================= */
-
 .carrinho-item-info {
     flex: 1;
-
     min-width: 0;
 }
 
-
 .carrinho-item-nome {
     color: #F9FAFB;
-
     font-size: 14px;
-
     font-weight: 600;
-
     overflow: hidden;
-
     text-overflow: ellipsis;
-
     white-space: nowrap;
 }
 
-
 .carrinho-item-preco {
     color: #9CA3AF;
-
     font-size: 12px;
-
     margin-top: 4px;
 }
 
-
-/* =========================================================
-   CONTROLES DE QUANTIDADE
-   ========================================================= */
-
 .carrinho-item-controles {
     display: flex;
-
     align-items: center;
-
     gap: 7px;
 }
 
-
 .btn-qtd {
     width: 28px;
-
     height: 28px;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border: none;
-
     border-radius: 7px;
-
     background: #333333;
-
     color: #F9FAFB;
-
     font-size: 16px;
-
     cursor: pointer;
 
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.15s ease;
+    transition: background 0.2s ease,
+                color 0.2s ease,
+                transform 0.15s ease;
 }
-
 
 .btn-qtd:hover {
     background: #FDE68A;
-
     color: #121212;
-
     transform: scale(1.05);
 }
 
-
-/* =========================================================
-   QUANTIDADE
-   ========================================================= */
-
 .quantidade {
     color: #F9FAFB;
-
     font-weight: 700;
-
     min-width: 18px;
-
     text-align: center;
 }
 
-
-/* =========================================================
-   SUBTOTAL DO ITEM
-   ========================================================= */
-
 .carrinho-item-subtotal {
     color: #FDE68A;
-
     font-weight: 700;
-
     font-size: 14px;
-
     min-width: 75px;
-
     text-align: right;
 }
 
-
-/* =========================================================
-   BOTÃO REMOVER
-   ========================================================= */
-
 .btn-remover {
     border: none;
-
     background: transparent;
-
     color: #EF4444;
-
     font-size: 20px;
-
     cursor: pointer;
-
     padding: 4px 7px;
-
     border-radius: 6px;
-
-    transition:
-        background 0.2s ease,
-        transform 0.15s ease;
+    transition: background 0.2s ease,
+                transform 0.15s ease;
 }
-
 
 .btn-remover:hover {
     background: rgba(239, 68, 68, 0.15);
-
     transform: scale(1.05);
 }
 
 
 /* =========================================================
    CARRINHO VAZIO
-   ========================================================= */
+========================================================= */
 
 .carrinho-vazio {
     height: 100%;
-
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
-
     color: #9CA3AF;
-
     gap: 12px;
-
     text-align: center;
-
     padding: 30px;
 }
-
 
 .carrinho-vazio-icon {
     font-size: 45px;
@@ -696,571 +438,17 @@
 
 /* =========================================================
    RODAPÉ DO CARRINHO
-   ========================================================= */
+========================================================= */
 
 .carrinho-footer {
+    background: var(--pdv-card);
+    color: var(--pdv-texto);
     padding: 20px;
-
-    border-top: 1px solid #333333;
-}
-
-
-/* =========================================================
-   TOTAIS
-   ========================================================= */
-
-.totais {
-    margin-bottom: 16px;
-}
-
-
-.total-linha {
-    display: flex;
-
-    justify-content: space-between;
-
-    color: #A1A1AA;
-
-    font-size: 14px;
-
-    margin-bottom: 10px;
-}
-
-
-.total-linha.desconto {
-    color: #FDE68A;
-}
-
-
-.total-linha.final {
-    border-top: 1px solid #444444;
-
-    padding-top: 14px;
-
-    margin-top: 14px;
-
-    color: #F9FAFB;
-
-    font-size: 20px;
-
-    font-weight: 800;
-}
-
-
-/* =========================================================
-   OBSERVAÇÃO
-   ========================================================= */
-
-.obs-input {
-    width: 100%;
-
+    border-top: 1px solid var(--pdv-borda);
     box-sizing: border-box;
-
-    background: #121212;
-
-    color: #F9FAFB;
-
-    border: 1px solid #444444;
-
-    border-radius: 10px;
-
-    padding: 12px;
-
-    resize: vertical;
-
-    outline: none;
-
-    margin-bottom: 12px;
-
-    font-family: inherit;
+    line-height: 1.6;
 }
 
-
-.obs-input::placeholder {
-    color: #9CA3AF;
-}
-
-
-.obs-input:focus {
-    border-color: #FDE68A;
-
-    box-shadow:
-        0 0 0 3px rgba(253, 230, 138, 0.08);
-}
-
-
-/* =========================================================
-   BOTÃO FINALIZAR
-   ========================================================= */
-
-.btn-finalizar {
-    width: 100%;
-
-    height: 46px;
-
-    padding: 0 20px;
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    background: #FDE68A;
-
-    color: #121212;
-
-    border: 1px solid #FDE68A;
-
-    border-radius: 10px;
-
-    font-size: 16px;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        background 0.15s ease,
-        opacity 0.15s ease;
-}
-
-
-.btn-finalizar:hover:not(:disabled) {
-    transform: translateY(-2px);
-
-    background: #FEF3C7;
-
-    border-color: #FEF3C7;
-}
-
-
-.btn-finalizar:disabled {
-    background: #333333;
-
-    color: #777777;
-
-    border-color: #333333;
-
-    cursor: not-allowed;
-}
-
-
-/* =========================================================
-   ALERTAS
-   ========================================================= */
-
-.alerta {
-    background: #FEF3C7;
-
-    color: #121212;
-
-    border-left: 4px solid #FDE68A;
-
-    padding: 14px 18px;
-
-    border-radius: 10px;
-
-    margin-bottom: 20px;
-
-    font-size: 14px;
-
-    font-weight: 500;
-}
-
-
-/* =========================================================
-   RESPONSIVO — TABLET
-   ========================================================= */
-
-@media (max-width: 1050px) {
-
-    .pdv-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .produtos-col,
-    .carrinho-col {
-        min-height: auto;
-    }
-
-    .produtos-col {
-        min-height: 500px;
-    }
-}
-
-
-/* =========================================================
-   RESPONSIVO — CELULAR
-   ========================================================= */
-
-@media (max-width: 650px) {
-
-    .pdv-container {
-        padding: 25px 15px;
-    }
-
-    .pdv-titulo h1 {
-        font-size: 26px;
-    }
-
-    .produtos-grid {
-        grid-template-columns:
-            repeat(auto-fill, minmax(140px, 1fr));
-
-        padding: 14px;
-
-        gap: 12px;
-    }
-
-    .carrinho-item {
-        padding: 12px;
-    }
-
-    .carrinho-item-subtotal {
-        min-width: auto;
-    }
-
-    .carrinho-item-controles {
-        gap: 4px;
-    }
-
-    .btn-qtd {
-        width: 26px;
-        height: 26px;
-    }
-}
-
-
-/* =========================================================
-   PROTEÇÃO EXTRA CONTRA ÍCONE NO CAMPO DE BUSCA
-   ========================================================= */
-
-#busca-produto {
-    background-image: none !important;
-
-    appearance: none !important;
-
-    -webkit-appearance: none !important;
-
-    -moz-appearance: none !important;
-}
-
-#busca-produto::-webkit-search-decoration,
-#busca-produto::-webkit-search-cancel-button,
-#busca-produto::-webkit-search-results-button,
-#busca-produto::-webkit-search-results-decoration {
-    display: none !important;
-
-    width: 0 !important;
-    height: 0 !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-
-    appearance: none !important;
-    -webkit-appearance: none !important;
-}
-
-/* =========================================================
-   HISTÓRICO DE VENDAS
-   ========================================================= */
-
-.pdv-page-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 20px;
-
-    margin-bottom: 25px;
-}
-
-.pdv-page-header h1 {
-    margin: 0 0 8px;
-
-    color: #F9FAFB;
-
-    font-size: 32px;
-    font-weight: 700;
-}
-
-.pdv-page-header p {
-    margin: 0;
-
-    color: #A1A1AA;
-
-    font-size: 15px;
-}
-
-
-/* =========================================================
-   AÇÕES DO HISTÓRICO
-   ========================================================= */
-
-.pdv-page-actions {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-}
-
-
-/* =========================================================
-   BOTÃO DO HISTÓRICO
-   ========================================================= */
-
-.pdv-page-actions .btn {
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    min-height: 42px;
-
-    padding: 0 18px;
-
-    border-radius: 10px;
-
-    text-decoration: none;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.15s ease;
-}
-
-.pdv-page-actions .btn-primary {
-    background: #FDE68A;
-
-    color: #121212;
-
-    border: 1px solid #FDE68A;
-}
-
-.pdv-page-actions .btn-primary:hover {
-    background: #FEF3C7;
-
-    border-color: #FEF3C7;
-
-    transform: translateY(-2px);
-}
-
-
-/* =========================================================
-   CONTAINER DA TABELA
-   ========================================================= */
-
-.pdv-table-container {
-    width: 100%;
-
-    overflow-x: auto;
-
-    background: #1E1E1E;
-
-    border: 1px solid #333333;
-
-    border-radius: 16px;
-
-    box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.25);
-}
-
-
-/* =========================================================
-   TABELA
-   ========================================================= */
-
-.pdv-table {
-    width: 100%;
-
-    border-collapse: collapse;
-
-    color: #F9FAFB;
-
-    font-size: 14px;
-}
-
-
-/* =========================================================
-   CABEÇALHO DA TABELA
-   ========================================================= */
-
-.pdv-table thead {
-    background: #242424;
-}
-
-.pdv-table th {
-    padding: 16px 18px;
-
-    color: #FDE68A;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    text-align: left;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.6px;
-
-    border-bottom: 1px solid #333333;
-
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   LINHAS
-   ========================================================= */
-
-.pdv-table td {
-    padding: 16px 18px;
-
-    border-bottom: 1px solid #333333;
-
-    color: #D4D4D8;
-
-    vertical-align: middle;
-}
-
-.pdv-table tbody tr {
-    transition:
-        background 0.2s ease;
-}
-
-.pdv-table tbody tr:hover {
-    background: #242424;
-}
-
-.pdv-table tbody tr:last-child td {
-    border-bottom: none;
-}
-
-
-/* =========================================================
-   NÚMERO DA VENDA
-   ========================================================= */
-
-.venda-id {
-    color: #FDE68A;
-
-    font-weight: 700;
-
-    text-decoration: none;
-
-    transition:
-        color 0.2s ease;
-}
-
-.venda-id:hover {
-    color: #FEF3C7;
-
-    text-decoration: underline;
-}
-
-
-/* =========================================================
-   DESCONTO
-   ========================================================= */
-
-.desconto-positivo {
-    color: #FDE68A;
-
-    font-weight: 700;
-}
-
-.sem-desconto {
-    color: #71717A;
-}
-
-
-/* =========================================================
-   TOTAL
-   ========================================================= */
-
-.valor-total {
-    color: #FDE68A !important;
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   HISTÓRICO VAZIO
-   ========================================================= */
-
-.pdv-table td[colspan] {
-    padding: 50px 20px;
-
-    color: #9CA3AF;
-
-    text-align: center;
-
-    font-size: 15px;
-}
-
-
-/* =========================================================
-   RESPONSIVO — HISTÓRICO
-   ========================================================= */
-
-@media (max-width: 750px) {
-
-    .pdv-page-header {
-        flex-direction: column;
-
-        align-items: flex-start;
-    }
-
-    .pdv-page-header h1 {
-        font-size: 26px;
-    }
-
-    .pdv-page-actions {
-        width: 100%;
-    }
-
-    .pdv-page-actions .btn {
-        width: 100%;
-    }
-
-    .pdv-table {
-        min-width: 750px;
-    }
-
-    .pdv-table th,
-    .pdv-table td {
-        padding: 13px 14px;
-    }
-}
-
-
-/* =========================================
-   CARRINHO — CAMPOS DE DESCONTO E PAGAMENTO
-========================================= */
-
-.carrinho-footer {
-    background-color: #1E1E1E;
-    color: #F9FAFB;
-    padding: 20px;
-    border-top: 1px solid #333333;
-}
-
-/* Rótulos dos campos */
 .carrinho-footer label {
     display: block;
     color: #FDE68A;
@@ -1269,7 +457,6 @@
     margin: 12px 0 7px;
 }
 
-/* Campos de texto, números e seletores */
 .carrinho-footer input:not([type="checkbox"]):not([type="hidden"]),
 .carrinho-footer select,
 .carrinho-footer textarea {
@@ -1284,7 +471,6 @@
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Ao clicar nos campos */
 .carrinho-footer input:focus,
 .carrinho-footer select:focus,
 .carrinho-footer textarea:focus {
@@ -1292,13 +478,11 @@
     box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.12);
 }
 
-/* Opções dos seletores */
 .carrinho-footer select option {
-    background-color: #1E1E1E;
+    background: #1E1E1E;
     color: #F9FAFB;
 }
 
-/* Caixa de seleção */
 .carrinho-footer input[type="checkbox"] {
     accent-color: #FDE68A;
     width: 16px;
@@ -1306,12 +490,6 @@
     cursor: pointer;
 }
 
-/* Texto de resumo e pagamento */
-.carrinho-footer {
-    line-height: 1.6;
-}
-
-/* Destaque dos valores */
 .carrinho-footer strong,
 .carrinho-footer .valor,
 .carrinho-footer .total-valor {
@@ -1319,61 +497,11 @@
     font-weight: 700;
 }
 
-/* Botão de finalizar venda */
-.carrinho-footer .btn-finalizar {
-    width: 100%;
-    margin-top: 16px;
-    padding: 14px;
-    background-color: #FDE68A;
-    color: #121212;
-    border: none;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 0.2s, transform 0.2s;
-}
 
-.carrinho-footer .btn-finalizar:hover:not(:disabled) {
-    background-color: #FEF3C7;
-    transform: translateY(-1px);
-}
+/* =========================================================
+   DESCONTO MANUAL
+========================================================= */
 
-/* Botão desativado */
-.carrinho-footer .btn-finalizar:disabled {
-    background-color: #383838;
-    color: #999999;
-    cursor: not-allowed;
-    transform: none;
-}
-
-
-/* =====================================================
-   NOVA ADEGA — ESTILO DO DESCONTO E PAGAMENTO
-   Tema preto e amarelo
-===================================================== */
-
-:root {
-    --pdv-preto: #121212;
-    --pdv-card: #1E1E1E;
-    --pdv-campo: #171717;
-    --pdv-borda: #383838;
-    --pdv-amarelo: #FDE68A;
-    --pdv-amarelo-hover: #FEF3C7;
-    --pdv-texto: #F9FAFB;
-    --pdv-secundario: #A1A1AA;
-}
-
-/* Rodapé do carrinho */
-.carrinho-footer {
-    background: var(--pdv-card);
-    color: var(--pdv-texto);
-    padding: 20px;
-    border-top: 1px solid var(--pdv-borda);
-    box-sizing: border-box;
-}
-
-/* Desconto manual */
 .desconto-manual {
     margin-bottom: 22px;
     padding: 16px;
@@ -1390,14 +518,17 @@
     margin-bottom: 12px;
 }
 
-/* Controles do desconto */
 .desconto-manual-controles {
     display: grid;
     grid-template-columns: 85px minmax(0, 1fr);
     gap: 10px;
 }
 
-/* Área de pagamento */
+
+/* =========================================================
+   PAGAMENTO
+========================================================= */
+
 .pagamento-section {
     margin-bottom: 20px;
     padding: 16px;
@@ -1418,14 +549,12 @@
     margin-bottom: 8px;
 }
 
-/* Campos de pagamento alinhados */
 .pagamento-controles {
     display: grid;
     grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     gap: 10px;
 }
 
-/* Estilo comum dos campos */
 .carrinho-footer .desconto-manual select,
 .carrinho-footer .desconto-manual input,
 .carrinho-footer .pagamento-controles select,
@@ -1436,20 +565,22 @@
     min-height: 44px;
     box-sizing: border-box;
     padding: 10px 12px;
+
     background-color: var(--pdv-campo) !important;
     color: var(--pdv-texto) !important;
     border: 1px solid #454545 !important;
     border-radius: 8px;
+
     font-family: inherit;
     font-size: 14px;
     outline: none;
     box-shadow: none;
     accent-color: var(--pdv-amarelo);
     color-scheme: dark;
+
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Destaque ao selecionar um campo */
 .carrinho-footer .desconto-manual select:focus,
 .carrinho-footer .desconto-manual input:focus,
 .carrinho-footer .pagamento-controles select:focus,
@@ -1458,13 +589,6 @@
     box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.12);
 }
 
-/* Opções dos seletores */
-.carrinho-footer select option {
-    background: var(--pdv-card);
-    color: var(--pdv-texto);
-}
-
-/* Checkbox da segunda forma de pagamento */
 .segunda-forma-check {
     display: flex;
     align-items: center;
@@ -1485,7 +609,11 @@
     cursor: pointer;
 }
 
-/* Resumo do pagamento */
+
+/* =========================================================
+   RESUMO DO PAGAMENTO
+========================================================= */
+
 .pagamento-resumo {
     margin-top: 18px;
     padding-top: 12px;
@@ -1520,7 +648,6 @@
     color: var(--pdv-amarelo);
 }
 
-/* Mensagens de erro */
 .erro-campo {
     display: block;
     color: #FCA5A5;
@@ -1528,9 +655,14 @@
     margin-top: 8px;
 }
 
-/* Subtotal e total */
+
+/* =========================================================
+   TOTAIS
+========================================================= */
+
 .totais {
     margin-top: 18px;
+    margin-bottom: 16px;
     padding-top: 4px;
 }
 
@@ -1551,7 +683,7 @@
 .total-linha.final {
     padding-top: 16px;
     margin-top: 16px;
-    border-top: 1px solid #444;
+    border-top: 1px solid #444444;
     color: var(--pdv-texto);
     font-size: 23px;
     font-weight: 800;
@@ -1562,18 +694,25 @@
     text-align: right;
 }
 
-/* Observação */
+
+/* =========================================================
+   OBSERVAÇÃO
+========================================================= */
+
 .carrinho-footer .obs-input {
     display: block;
     width: 100%;
     min-height: 72px;
     box-sizing: border-box;
+
     background: var(--pdv-campo) !important;
     color: var(--pdv-texto) !important;
     border: 1px solid #454545;
     border-radius: 10px;
+
     padding: 13px;
     margin: 18px 0 14px;
+
     font-family: inherit;
     font-size: 14px;
     resize: vertical;
@@ -1589,22 +728,30 @@
     box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.12);
 }
 
-/* Botão de finalizar */
+
+/* =========================================================
+   BOTÃO FINALIZAR VENDA
+========================================================= */
+
 .carrinho-footer .btn-finalizar {
     display: flex;
     align-items: center;
     justify-content: center;
+
     width: 100%;
     min-height: 50px;
     padding: 13px 18px;
     margin-top: 4px;
+
     background: var(--pdv-amarelo);
     color: var(--pdv-preto);
     border: 1px solid var(--pdv-amarelo);
     border-radius: 10px;
+
     font-size: 15px;
     font-weight: 800;
     cursor: pointer;
+
     transition: background 0.2s, transform 0.2s;
 }
 
@@ -1615,37 +762,178 @@
 }
 
 .carrinho-footer .btn-finalizar:disabled {
-    background: #333;
-    color: #888;
-    border-color: #333;
+    background: #333333;
+    color: #888888;
+    border-color: #333333;
     cursor: not-allowed;
     transform: none;
 }
 
-/* Ajustes para telas menores */
-@media (max-width: 480px) {
-    .carrinho-footer {
-        padding: 14px;
-    }
 
-    .desconto-manual,
-    .pagamento-section {
-        padding: 12px;
-    }
+/* =========================================================
+   ALERTAS
+========================================================= */
 
-    .pagamento-controles {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .total-linha.final {
-        font-size: 20px;
-    }
+.alerta {
+    background: #FEF3C7;
+    color: #121212;
+    border-left: 4px solid #FDE68A;
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 
-/* =========================================
-   PAGINAÇÃO DO HISTÓRICO DE VENDAS
-========================================= */
+/* =========================================================
+   HISTÓRICO DE VENDAS — CABEÇALHO
+========================================================= */
+
+.pdv-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+
+/* =========================================================
+   AÇÕES DO HISTÓRICO
+========================================================= */
+
+.pdv-page-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pdv-page-actions .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 18px;
+
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+
+    transition: background 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.15s ease;
+}
+
+.pdv-page-actions .btn-primary {
+    background: #FDE68A;
+    color: #121212;
+    border: 1px solid #FDE68A;
+}
+
+.pdv-page-actions .btn-primary:hover {
+    background: #FEF3C7;
+    border-color: #FEF3C7;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   TABELA DO HISTÓRICO
+========================================================= */
+
+.pdv-table-container {
+    width: 100%;
+    overflow-x: auto;
+    background: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.pdv-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #F9FAFB;
+    font-size: 14px;
+}
+
+.pdv-table thead {
+    background: #242424;
+}
+
+.pdv-table th {
+    padding: 16px 18px;
+    color: #FDE68A;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    border-bottom: 1px solid #333333;
+    white-space: nowrap;
+}
+
+.pdv-table td {
+    padding: 16px 18px;
+    border-bottom: 1px solid #333333;
+    color: #D4D4D8;
+    vertical-align: middle;
+}
+
+.pdv-table tbody tr {
+    transition: background 0.2s;
+}
+
+.pdv-table tbody tr:hover {
+    background: #242424;
+}
+
+.pdv-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.venda-id {
+    color: #FDE68A;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.venda-id:hover {
+    color: #FEF3C7;
+    text-decoration: underline;
+}
+
+.desconto-positivo {
+    color: #FDE68A;
+    font-weight: 700;
+}
+
+.sem-desconto {
+    color: #71717A;
+}
+
+.valor-total {
+    color: #FDE68A !important;
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.pdv-table td[colspan] {
+    padding: 50px 20px;
+    color: #9CA3AF;
+    text-align: center;
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   PAGINAÇÃO DO HISTÓRICO
+========================================================= */
 
 .paginacao-vendas {
     display: flex;
@@ -1683,14 +971,17 @@
     justify-content: center;
     min-height: 40px;
     padding: 9px 15px;
+
     background: #292929;
     color: #F9FAFB;
     border: 1px solid #454545;
     border-radius: 8px;
+
     font-size: 13px;
     font-weight: 700;
     text-decoration: none;
     box-sizing: border-box;
+
     transition: 0.2s ease;
 }
 
@@ -1715,6 +1006,126 @@
     cursor: not-allowed;
 }
 
+
+/* =========================================================
+   RESPONSIVO — TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+    .pdv-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .produtos-col,
+    .carrinho-col {
+        min-height: auto;
+    }
+
+    .produtos-col {
+        min-height: 500px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVO — HISTÓRICO
+========================================================= */
+
+@media (max-width: 750px) {
+    .pdv-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pdv-page-header h1 {
+        font-size: 26px;
+    }
+
+    .pdv-page-actions {
+        width: 100%;
+    }
+
+    .pdv-page-actions .btn {
+        width: 100%;
+    }
+
+    .pdv-table {
+        min-width: 750px;
+    }
+
+    .pdv-table th,
+    .pdv-table td {
+        padding: 13px 14px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVO — CELULAR
+========================================================= */
+
+@media (max-width: 650px) {
+    .pdv-container {
+        padding: 25px 15px;
+    }
+
+    .pdv-titulo h1 {
+        font-size: 26px;
+    }
+
+    .produtos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        padding: 14px;
+        gap: 12px;
+    }
+
+    .carrinho-item {
+        padding: 12px;
+    }
+
+    .carrinho-item-subtotal {
+        min-width: auto;
+    }
+
+    .carrinho-item-controles {
+        gap: 4px;
+    }
+
+    .btn-qtd {
+        width: 26px;
+        height: 26px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVO — CARRINHO
+========================================================= */
+
+@media (max-width: 480px) {
+    .carrinho-footer {
+        padding: 14px;
+    }
+
+    .desconto-manual,
+    .pagamento-section {
+        padding: 12px;
+    }
+
+    .pagamento-controles {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .total-linha.final {
+        font-size: 20px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVO — PAGINAÇÃO
+========================================================= */
+
 @media (max-width: 520px) {
     .paginacao-vendas {
         flex-direction: column;
@@ -1730,3 +1141,13 @@
         flex: 1;
     }
 }
+
+
+#busca-produto {
+    background: #ffe58a !important;
+    background-color: #ffe58a !important;
+    color: #111111 !important;
+    border: 3px solid red !important;
+}
+
+
