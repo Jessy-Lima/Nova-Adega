@@ -1151,3 +1151,71 @@ main.pdv-container #busca-produto:focus {
 }
 
 
+
+/* =========================================
+   PAGINAÇÃO DOS PRODUTOS DO PDV
+========================================= */
+
+
+/* PAGINAÇÃO DOS PRODUTOS */
+
+.paginacao-produtos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    margin: 20px 0;
+    padding: 16px 10px;
+    box-sizing: border-box;
+}
+
+.paginacao-info {
+    color: #555;
+    font-size: 14px;
+    text-align: center;
+}
+
+.paginacao-botoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-paginacao {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background-color: #252525;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.btn-paginacao:hover {
+    background-color: #444;
+}
+
+
+/* PAGINAÇÃO AMARELA AO CLICAR */
+
+.btn-paginacao:active {
+    background-color: #FFD54F;
+    color: #252525;
+    transform: scale(0.96);
+}
+
+/* Efeito amarelo ao passar o mouse */
+.btn-paginacao:hover {
+    background-color: #FFE082;
+    color: #252525;
+}
+
+/* Transição suave */
+.btn-paginacao {
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
