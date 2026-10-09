@@ -228,28 +228,21 @@
    QUANTIDADE DE PRODUTOS
 ========================================================= */
 
+
+
 .quantidade-produtos {
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
     min-width: 32px;
-
     height: 26px;
-
     padding: 0 9px;
-
-    background: #2a2a30;
-
+    background: #FFF5E9 !important;
+    border: 1px solid #E5C6A5 !important;
     border-radius: 999px;
-
-    color: #d4d4d8;
-
+    color: #765000 !important;
     font-size: 12px;
-
-    font-weight: 600;
+    font-weight: 700;
 }
 
 
@@ -314,79 +307,57 @@
    BOTÃO EDITAR
 ========================================================= */
 
+
 .btn-editar {
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
     height: 40px;
-
     padding: 0 13px;
-
-    background: #2a2a30;
-
-    color: #d4d4d8;
-
-    border: 1px solid #3f3f46;
-
+    background: #FFF5E9;
+    color: #765000;
+    border: 1px solid #E5C6A5;
     border-radius: 7px;
-
     text-decoration: none;
-
     font-size: 13px;
-
     font-weight: 600;
-
-    transition:
-        background 0.2s,
-        transform 0.2s;
+    transition: background 0.2s, transform 0.2s;
 }
-
 
 .btn-editar:hover {
-    background: #3f3f46;
-
+    background: #FFE4C4;
+    border-color: #C49A58;
     transform: translateY(-1px);
 }
-
 
 /* =========================================================
    ATIVAR / DESATIVAR
 ========================================================= */
 
+
+/* BOTÃO ATIVAR / DESATIVAR — TOM ROSADO ESCURO */
 .btn-status {
     height: 40px;
-
     padding: 0 13px;
-
-    background: transparent;
-
-    color: #FDE68A;
-
-    border: 1px solid rgba(250, 204, 21, 0.4);
-
+    background: #2B2025;
+    color: #F0B6C5;
+    border: 1px solid #68404D;
     border-radius: 7px;
-
     font-size: 13px;
-
     font-weight: 600;
-
     cursor: pointer;
-
     transition:
         background 0.2s,
-        transform 0.2s;
+        transform 0.2s,
+        border-color 0.2s;
 }
-
 
 .btn-status:hover {
-    background: rgba(250, 204, 21, 0.1);
-
+    background: #3B2830;
+    color: #FFD6E0;
+    border-color: #A45D72;
     transform: translateY(-1px);
 }
-
 
 /* =========================================================
    SEM RESULTADOS
@@ -1096,4 +1067,90 @@ a.voltar:hover {
         height: 36px;
     }
 
+}
+
+
+/* Estoque na página de Categorias */
+.estoque {
+    display: inline-block;
+    background: #27272A;
+    color: #F9FAFB;
+    border: 1px solid #3F3F46;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   TEMA CLARO — CRIAR / EDITAR CATEGORIA
+========================================================= */
+
+html[data-tema="claro"] .container:has(.form-categoria) {
+    color: #29251F;
+}
+
+/* Caixa do formulário */
+html[data-tema="claro"] .form-categoria {
+    background: #FFFFFF !important;
+    border: 1px solid #E5D5C5 !important;
+    box-shadow: 0 8px 24px rgba(65, 45, 25, 0.06);
+}
+
+/* Título e descrição */
+html[data-tema="claro"] .form-titulo h1 {
+    color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .form-titulo p {
+    color: #625548 !important;
+}
+
+/* Texto dos campos */
+html[data-tema="claro"] .form-grupo label {
+    color: #5C5146 !important;
+}
+
+/* Campos de texto */
+html[data-tema="claro"] .form-grupo input {
+    background: #FFFFFF !important;
+    color: #29251F !important;
+    border: 1px solid #E5D5C5 !important;
+}
+
+html[data-tema="claro"] .form-grupo input::placeholder {
+    color: #82766A !important;
+}
+
+html[data-tema="claro"] .form-grupo input:focus {
+    border-color: #C49A58 !important;
+    box-shadow: 0 0 0 3px rgba(196, 154, 88, 0.12) !important;
+}
+
+/* Botão Salvar */
+html[data-tema="claro"] .btn-salvar {
+    background: #FDE68A !important;
+    color: #5C3514 !important;
+    border-color: #E5C06A !important;
+}
+
+/* Botão Cancelar */
+html[data-tema="claro"] .btn-cancelar {
+    background: #FFF5E9 !important;
+    color: #765000 !important;
+    border-color: #E5C6A5 !important;
+}
+
+html[data-tema="claro"] .btn-cancelar:hover {
+    background: #FFE4C4 !important;
+    border-color: #C49A58 !important;
+}
+
+/* Link Voltar */
+html[data-tema="claro"] .container:has(.form-categoria) .voltar a {
+    color: #765000 !important;
+}
+
+html[data-tema="claro"] .container:has(.form-categoria) .voltar a:hover {
+    color: #5C3514 !important;
 }

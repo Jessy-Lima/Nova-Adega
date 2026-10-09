@@ -4,12 +4,13 @@
 # ============================================================
 
 import json
+from math import ceil
 
 from fastapi import APIRouter, Depends, Request, Form
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
-from math import ceil
+
 from app.database import get_db
 from app.models.venda import Venda, ItemVenda
 from app.models.produto import Produto
@@ -27,30 +28,54 @@ templates = Jinja2Templates(
 )
 
 DESCONTO_ASSOCIADO = 10.0
+PRODUTOS_POR_PAGINA = 8
 
+
+# ============================================================
+# TELA DO PDV
+# ============================================================
 
 @router.get("/")
 def tela_pdv(
     request: Request,
+    pagina: int = 1,
     db: Session = Depends(get_db),
     usuario=Depends(get_usuario_logado)
 ):
-
-    produtos = (
+    # Produtos ativos que possuem estoque
+    consulta_produtos = (
         db.query(Produto)
         .filter(
             Produto.ativo == True,
             Produto.estoque_atual > 0
         )
+    )
+
+    # Total de produtos disponíveis
+    total_produtos = consulta_produtos.count()
+
+    # Total de páginas
+    total_paginas = max(
+        1,
+        ceil(total_produtos / PRODUTOS_POR_PAGINA)
+    )
+
+    # Garante uma página válida
+    pagina = max(1, min(pagina, total_paginas))
+
+    # Busca apenas os produtos da página atual
+    produtos = (
+        consulta_produtos
         .order_by(Produto.nome)
+        .offset((pagina - 1) * PRODUTOS_POR_PAGINA)
+        .limit(PRODUTOS_POR_PAGINA)
         .all()
     )
 
+    # Clientes ativos
     clientes = (
         db.query(Cliente)
-        .filter(
-            Cliente.ativo == True
-        )
+        .filter(Cliente.ativo == True)
         .order_by(Cliente.nome)
         .all()
     )
@@ -64,9 +89,17 @@ def tela_pdv(
             "produtos": produtos,
             "clientes": clientes,
             "desconto_associado": DESCONTO_ASSOCIADO,
+            "pagina": pagina,
+            "total_paginas": total_paginas,
+            "total_produtos": total_produtos,
+            "produtos_por_pagina": PRODUTOS_POR_PAGINA,
         }
     )
 
+
+# ============================================================
+# FINALIZAR VENDA
+# ============================================================
 
 @router.post("/finalizar")
 def finalizar_venda(
@@ -74,30 +107,18 @@ def finalizar_venda(
     carrinho_json: str = Form(...),
     cliente_id: int = Form(0),
     observacao: str = Form(""),
-
-    # Desconto enviado pelo formulário
     desconto_manual: float = Form(0.0),
     tipo_desconto: str = Form(""),
-
-    # Primeiro pagamento
     forma_pagamento_1: str = Form(""),
     valor_pagamento_1: float = Form(0.0),
-
-    # Segundo pagamento
     forma_pagamento_2: str = Form(""),
     valor_pagamento_2: float = Form(0.0),
-
     db: Session = Depends(get_db),
     usuario=Depends(get_usuario_logado)
 ):
-
-    # ============================================================
-    # LER CARRINHO
-    # ============================================================
-
+    # Ler carrinho
     try:
         itens = json.loads(carrinho_json)
-
     except (json.JSONDecodeError, ValueError):
         return RedirectResponse(
             url="/pdv/?erro=json",
@@ -110,10 +131,7 @@ def finalizar_venda(
             status_code=303
         )
 
-    # ============================================================
-    # BUSCAR CLIENTE
-    # ============================================================
-
+    # Buscar cliente
     cliente = None
 
     if cliente_id:
@@ -129,15 +147,11 @@ def finalizar_venda(
         if not cliente:
             cliente_id = 0
 
-    # ============================================================
-    # VALIDAR PRODUTOS E CALCULAR SUBTOTAL
-    # ============================================================
-
+    # Validar produtos e calcular subtotal
     total_bruto = 0.0
     itens_validados = []
 
     for item in itens:
-
         produto_id = item.get("produto_id")
 
         try:
@@ -176,9 +190,7 @@ def finalizar_venda(
             )
 
         preco = float(produto.preco)
-
         subtotal = preco * quantidade
-
         total_bruto += subtotal
 
         itens_validados.append({
@@ -188,21 +200,15 @@ def finalizar_venda(
             "produto_nome": produto.nome,
         })
 
-    # ============================================================
-    # DESCONTO DE ASSOCIADO
-    # ============================================================
-
+    # Desconto de associado
     desconto_associado = 0.0
 
     if cliente and cliente.is_associado:
-        desconto_associado = total_bruto * (
-            DESCONTO_ASSOCIADO / 100
+        desconto_associado = (
+            total_bruto * DESCONTO_ASSOCIADO / 100
         )
 
-    # ============================================================
-    # DESCONTO MANUAL
-    # ============================================================
-
+    # Validar desconto manual
     try:
         desconto_manual = float(desconto_manual or 0)
     except (ValueError, TypeError):
@@ -211,15 +217,12 @@ def finalizar_venda(
             status_code=303
         )
 
-    # Não permite desconto negativo
     if desconto_manual < 0:
         return RedirectResponse(
             url="/pdv/?erro=desconto",
             status_code=303
         )
 
-    # O desconto manual não pode ser maior que o valor
-    # que ainda pode ser descontado depois do desconto de associado.
     limite_desconto_manual = max(
         0.0,
         total_bruto - desconto_associado
@@ -231,36 +234,17 @@ def finalizar_venda(
             status_code=303
         )
 
-    # ============================================================
-    # CALCULAR DESCONTO TOTAL E TOTAL DA VENDA
-    # ============================================================
-
-    desconto_total = (
-        desconto_associado + desconto_manual
-    )
-
-    total_liquido = total_bruto - desconto_total
-
-    if total_liquido < 0:
-        total_liquido = 0.0
+    # Calcular total
+    desconto_total = desconto_associado + desconto_manual
+    total_liquido = max(0.0, total_bruto - desconto_total)
 
     total_liquido = round(total_liquido, 2)
     desconto_total = round(desconto_total, 2)
     total_bruto = round(total_bruto, 2)
 
-    # ============================================================
-    # VALIDAR PRIMEIRO PAGAMENTO
-    # ============================================================
-
+    # Validar valores dos pagamentos
     try:
         valor_pagamento_1 = float(valor_pagamento_1 or 0)
-    except (ValueError, TypeError):
-        return RedirectResponse(
-            url="/pdv/?erro=pagamento",
-            status_code=303
-        )
-
-    try:
         valor_pagamento_2 = float(valor_pagamento_2 or 0)
     except (ValueError, TypeError):
         return RedirectResponse(
@@ -271,29 +255,17 @@ def finalizar_venda(
     forma_pagamento_1 = (forma_pagamento_1 or "").strip()
     forma_pagamento_2 = (forma_pagamento_2 or "").strip()
 
-    # Valores negativos não são permitidos
     if valor_pagamento_1 < 0 or valor_pagamento_2 < 0:
         return RedirectResponse(
             url="/pdv/?erro=pagamento",
             status_code=303
         )
 
-    # O primeiro pagamento precisa existir
-    if valor_pagamento_1 <= 0:
+    if valor_pagamento_1 <= 0 or not forma_pagamento_1:
         return RedirectResponse(
             url="/pdv/?erro=pagamento_1",
             status_code=303
         )
-
-    if not forma_pagamento_1:
-        return RedirectResponse(
-            url="/pdv/?erro=pagamento_1",
-            status_code=303
-        )
-
-    # ============================================================
-    # VALIDAR SEGUNDO PAGAMENTO
-    # ============================================================
 
     if valor_pagamento_2 > 0 and not forma_pagamento_2:
         return RedirectResponse(
@@ -304,16 +276,10 @@ def finalizar_venda(
     if valor_pagamento_2 == 0:
         forma_pagamento_2 = None
 
-    # ============================================================
-    # VALIDAR TOTAL DOS PAGAMENTOS
-    # ============================================================
-
-    total_pago = (
-        valor_pagamento_1 +
-        valor_pagamento_2
+    total_pago = round(
+        valor_pagamento_1 + valor_pagamento_2,
+        2
     )
-
-    total_pago = round(total_pago, 2)
 
     if abs(total_pago - total_liquido) > 0.01:
         return RedirectResponse(
@@ -321,54 +287,32 @@ def finalizar_venda(
             status_code=303
         )
 
-    # ============================================================
-    # USUÁRIO LOGADO
-    # ============================================================
-
+    # Identificar usuário logado
     if isinstance(usuario, dict):
         usuario_id = usuario.get("id")
     else:
         usuario_id = usuario.id
 
-    # ============================================================
-    # CRIAR VENDA
-    # ============================================================
-
+    # Criar venda
     venda = Venda(
         cliente_id=cliente_id or None,
         usuario_id=usuario_id,
-
         total_bruto=total_bruto,
         total_liquido=total_liquido,
-
         desconto=desconto_total,
         tipo_desconto=tipo_desconto or None,
-
         forma_pagamento_1=forma_pagamento_1,
-        valor_pagamento_1=round(
-            valor_pagamento_1,
-            2
-        ),
-
+        valor_pagamento_1=round(valor_pagamento_1, 2),
         forma_pagamento_2=forma_pagamento_2,
-        valor_pagamento_2=round(
-            valor_pagamento_2,
-            2
-        ),
-
+        valor_pagamento_2=round(valor_pagamento_2, 2),
         observacao=observacao.strip() or None
     )
 
     db.add(venda)
-
     db.flush()
 
-    # ============================================================
-    # CRIAR ITENS DA VENDA E BAIXAR ESTOQUE
-    # ============================================================
-
+    # Criar itens e baixar estoque
     for item in itens_validados:
-
         item_venda = ItemVenda(
             venda_id=venda.id,
             produto_id=item["produto"].id,
@@ -378,21 +322,13 @@ def finalizar_venda(
         )
 
         db.add(item_venda)
-
         item["produto"].estoque_atual -= item["quantidade"]
 
-    # ============================================================
-    # SALVAR NO BANCO
-    # ============================================================
-
+    # Salvar no banco
     try:
-
         db.commit()
-
     except Exception as erro:
-
         db.rollback()
-
         print("ERRO AO FINALIZAR VENDA:")
         print(erro)
 
@@ -401,15 +337,16 @@ def finalizar_venda(
             status_code=303
         )
 
-    # ============================================================
-    # IR PARA O COMPROVANTE
-    # ============================================================
-
+    # Abrir comprovante
     return RedirectResponse(
         url=f"/pdv/venda/{venda.id}?sucesso=ok",
         status_code=303
     )
 
+
+# ============================================================
+# DETALHE DA VENDA / COMPROVANTE
+# ============================================================
 
 @router.get("/venda/{venda_id}")
 def detalhe_venda(
@@ -418,7 +355,6 @@ def detalhe_venda(
     db: Session = Depends(get_db),
     usuario=Depends(get_usuario_logado)
 ):
-
     venda = (
         db.query(Venda)
         .filter(Venda.id == venda_id)
@@ -442,6 +378,9 @@ def detalhe_venda(
     )
 
 
+# ============================================================
+# HISTÓRICO DE VENDAS
+# ============================================================
 
 @router.get("/historico")
 def historico_vendas(
@@ -451,20 +390,17 @@ def historico_vendas(
     usuario=Depends(get_usuario_logado)
 ):
     por_pagina = 10
-
-    # Garante que a página seja válida
     pagina = max(1, pagina)
 
-    # Conta todas as vendas registradas
     total_vendas = db.query(Venda).count()
 
-    # Calcula quantas páginas existem
-    total_paginas = max(1, ceil(total_vendas / por_pagina))
+    total_paginas = max(
+        1,
+        ceil(total_vendas / por_pagina)
+    )
 
-    # Se a página solicitada for maior que a última, ajusta
     pagina = min(pagina, total_paginas)
 
-    # Busca somente as vendas da página atual
     vendas = (
         db.query(Venda)
         .order_by(Venda.criado_em.desc())
@@ -485,3 +421,4 @@ def historico_vendas(
             "total_vendas": total_vendas
         }
     )
+

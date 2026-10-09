@@ -835,3 +835,209 @@
     transform: translateX(-3px) !important;
 
 }
+
+
+/* =========================================================
+   AJUSTES EXCLUSIVOS DO MODO CLARO — FORMULÁRIO DE CLIENTE
+========================================================= */
+
+html[data-tema="claro"] .cliente-form-page {
+    background: #F7F6F2 !important;
+    color: #29251F !important;
+}
+
+html[data-tema="claro"] .cliente-form-card {
+    background: #FFFFFF !important;
+    border-color: #E5D5C5 !important;
+    box-shadow: 0 12px 32px rgba(65, 45, 25, 0.08) !important;
+}
+
+html[data-tema="claro"] .cliente-form-voltar {
+    color: #765000 !important;
+}
+
+html[data-tema="claro"] .cliente-form-voltar:hover {
+    color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .cliente-form-header h1,
+html[data-tema="claro"] .cliente-section-title h2 {
+    color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .cliente-form-header p,
+html[data-tema="claro"] .cliente-section-title p {
+    color: #625548 !important;
+}
+
+html[data-tema="claro"] .cliente-form-icon {
+    background: #FFF5E9 !important;
+    border-color: #E5D5C5 !important;
+}
+
+html[data-tema="claro"] .cliente-section-line {
+    background: #C49A58 !important;
+}
+
+/* Rótulos e campos */
+html[data-tema="claro"] .cliente-field label {
+    color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .cliente-required {
+    color: #A66A00 !important;
+}
+
+html[data-tema="claro"] .cliente-optional {
+    color: #82766A !important;
+}
+
+html[data-tema="claro"] .cliente-field input {
+    background: #FFFFFF !important;
+    color: #29251F !important;
+    border-color: #E5D5C5 !important;
+    box-shadow: none;
+}
+
+html[data-tema="claro"] .cliente-field input::placeholder {
+    color: #82766A !important;
+    opacity: 1;
+}
+
+html[data-tema="claro"] .cliente-field input:hover {
+    border-color: #CDB69D !important;
+}
+
+html[data-tema="claro"] .cliente-field input:focus {
+    background: #FFFFFF !important;
+    border-color: #C49A58 !important;
+    box-shadow: 0 0 0 3px rgba(196, 154, 88, 0.12) !important;
+}
+
+/* Cartão de cliente associado */
+html[data-tema="claro"] .cliente-associated {
+    background: #FFFAF4 !important;
+    border-color: #E5D5C5 !important;
+}
+
+html[data-tema="claro"] .cliente-associated-icon {
+    background: #FFF0D8 !important;
+}
+
+html[data-tema="claro"] .cliente-associated-info strong {
+    color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .cliente-associated-info p {
+    color: #625548 !important;
+}
+
+/* Interruptor de associado */
+html[data-tema="claro"] .cliente-slider {
+    background: #E8DED2 !important;
+    border-color: #D8C8B7 !important;
+}
+
+html[data-tema="claro"] .cliente-slider::before {
+    background: #FFFFFF !important;
+}
+
+html[data-tema="claro"] .cliente-switch input:checked + .cliente-slider {
+    background: #C49A58 !important;
+    border-color: #C49A58 !important;
+}
+
+html[data-tema="claro"] .cliente-switch input:checked + .cliente-slider::before {
+    background: #FFFFFF !important;
+}
+
+/* Rodapé dos botões */
+html[data-tema="claro"] .cliente-form-actions {
+    border-top-color: #E5D5C5 !important;
+}
+
+html[data-tema="claro"] .cliente-btn-cancel {
+    background: #FFFFFF !important;
+    border-color: #D8C8B7 !important;
+    color: #5C5146 !important;
+}
+
+html[data-tema="claro"] .cliente-btn-cancel:hover {
+    background: #FFF5E9 !important;
+    border-color: #C49A58 !important;
+    color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .cliente-btn-save {
+    background: #FDE68A !important;
+    border-color: #E5C65A !important;
+    color: #29251F !important;
+}
+
+html[data-tema="claro"] .cliente-btn-save:hover {
+    background: #FBE7A0 !important;
+    border-color: #C49A58 !important;
+}
+
+/* CORREÇÃO DO MODO CLARO — CADASTRO DE CLIENTE */
+html[data-tema="claro"] body .page-wrapper .cliente-form-page {
+background: #F7F6F2 !important;
+color: #29251F !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-form-card {
+background: #FFFFFF !important;
+border: 1px solid #E5D5C5 !important;
+color: #29251F !important;
+box-shadow: 0 12px 32px rgba(65, 45, 25, 0.08) !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-form-header h1,
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-section-title h2,
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-field label,
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-associated-info strong {
+color: #5C3514 !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-form-header p,
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-section-title p,
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-associated-info p {
+color: #625548 !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-field input {
+background: #FFFFFF !important;
+color: #29251F !important;
+border: 1px solid #E5D5C5 !important;
+box-shadow: none !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-field input::placeholder {
+color: #82766A !important;
+opacity: 1 !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-associated {
+background: #FFFAF4 !important;
+border: 1px solid #E5D5C5 !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-form-actions {
+border-top-color: #E5D5C5 !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-btn-cancel {
+background: #FFFFFF !important;
+color: #5C5146 !important;
+border: 1px solid #D8C8B7 !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-btn-save {
+background: #FDE68A !important;
+color: #29251F !important;
+border: 1px solid #E5C65A !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .cliente-form-page .cliente-form-voltar {
+color: #765000 !important;
+}
