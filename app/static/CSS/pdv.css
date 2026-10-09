@@ -1247,3 +1247,486 @@
         padding: 13px 14px;
     }
 }
+
+
+/* =========================================
+   CARRINHO — CAMPOS DE DESCONTO E PAGAMENTO
+========================================= */
+
+.carrinho-footer {
+    background-color: #1E1E1E;
+    color: #F9FAFB;
+    padding: 20px;
+    border-top: 1px solid #333333;
+}
+
+/* Rótulos dos campos */
+.carrinho-footer label {
+    display: block;
+    color: #FDE68A;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 12px 0 7px;
+}
+
+/* Campos de texto, números e seletores */
+.carrinho-footer input:not([type="checkbox"]):not([type="hidden"]),
+.carrinho-footer select,
+.carrinho-footer textarea {
+    background-color: #151515;
+    color: #F9FAFB;
+    border: 1px solid #444444;
+    border-radius: 8px;
+    padding: 11px 12px;
+    font: inherit;
+    max-width: 100%;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Ao clicar nos campos */
+.carrinho-footer input:focus,
+.carrinho-footer select:focus,
+.carrinho-footer textarea:focus {
+    border-color: #FDE68A;
+    box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.12);
+}
+
+/* Opções dos seletores */
+.carrinho-footer select option {
+    background-color: #1E1E1E;
+    color: #F9FAFB;
+}
+
+/* Caixa de seleção */
+.carrinho-footer input[type="checkbox"] {
+    accent-color: #FDE68A;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* Texto de resumo e pagamento */
+.carrinho-footer {
+    line-height: 1.6;
+}
+
+/* Destaque dos valores */
+.carrinho-footer strong,
+.carrinho-footer .valor,
+.carrinho-footer .total-valor {
+    color: #FDE68A;
+    font-weight: 700;
+}
+
+/* Botão de finalizar venda */
+.carrinho-footer .btn-finalizar {
+    width: 100%;
+    margin-top: 16px;
+    padding: 14px;
+    background-color: #FDE68A;
+    color: #121212;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.carrinho-footer .btn-finalizar:hover:not(:disabled) {
+    background-color: #FEF3C7;
+    transform: translateY(-1px);
+}
+
+/* Botão desativado */
+.carrinho-footer .btn-finalizar:disabled {
+    background-color: #383838;
+    color: #999999;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* =====================================================
+   NOVA ADEGA — ESTILO DO DESCONTO E PAGAMENTO
+   Tema preto e amarelo
+===================================================== */
+
+:root {
+    --pdv-preto: #121212;
+    --pdv-card: #1E1E1E;
+    --pdv-campo: #171717;
+    --pdv-borda: #383838;
+    --pdv-amarelo: #FDE68A;
+    --pdv-amarelo-hover: #FEF3C7;
+    --pdv-texto: #F9FAFB;
+    --pdv-secundario: #A1A1AA;
+}
+
+/* Rodapé do carrinho */
+.carrinho-footer {
+    background: var(--pdv-card);
+    color: var(--pdv-texto);
+    padding: 20px;
+    border-top: 1px solid var(--pdv-borda);
+    box-sizing: border-box;
+}
+
+/* Desconto manual */
+.desconto-manual {
+    margin-bottom: 22px;
+    padding: 16px;
+    background: #181818;
+    border: 1px solid var(--pdv-borda);
+    border-radius: 12px;
+}
+
+.desconto-manual-titulo,
+.pagamento-titulo {
+    color: var(--pdv-amarelo);
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+/* Controles do desconto */
+.desconto-manual-controles {
+    display: grid;
+    grid-template-columns: 85px minmax(0, 1fr);
+    gap: 10px;
+}
+
+/* Área de pagamento */
+.pagamento-section {
+    margin-bottom: 20px;
+    padding: 16px;
+    background: #181818;
+    border: 1px solid var(--pdv-borda);
+    border-radius: 12px;
+}
+
+.pagamento-bloco {
+    margin-bottom: 16px;
+}
+
+.pagamento-bloco > label {
+    display: block;
+    color: var(--pdv-secundario);
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* Campos de pagamento alinhados */
+.pagamento-controles {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 10px;
+}
+
+/* Estilo comum dos campos */
+.carrinho-footer .desconto-manual select,
+.carrinho-footer .desconto-manual input,
+.carrinho-footer .pagamento-controles select,
+.carrinho-footer .pagamento-controles input {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+    box-sizing: border-box;
+    padding: 10px 12px;
+    background-color: var(--pdv-campo) !important;
+    color: var(--pdv-texto) !important;
+    border: 1px solid #454545 !important;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    box-shadow: none;
+    accent-color: var(--pdv-amarelo);
+    color-scheme: dark;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Destaque ao selecionar um campo */
+.carrinho-footer .desconto-manual select:focus,
+.carrinho-footer .desconto-manual input:focus,
+.carrinho-footer .pagamento-controles select:focus,
+.carrinho-footer .pagamento-controles input:focus {
+    border-color: var(--pdv-amarelo) !important;
+    box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.12);
+}
+
+/* Opções dos seletores */
+.carrinho-footer select option {
+    background: var(--pdv-card);
+    color: var(--pdv-texto);
+}
+
+/* Checkbox da segunda forma de pagamento */
+.segunda-forma-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0 18px;
+    color: var(--pdv-texto);
+    font-size: 13px;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.segunda-forma-check input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+    margin: 0;
+    accent-color: var(--pdv-amarelo);
+    cursor: pointer;
+}
+
+/* Resumo do pagamento */
+.pagamento-resumo {
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px solid var(--pdv-borda);
+}
+
+.pagamento-linha {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 10px 0;
+    color: var(--pdv-secundario);
+    font-size: 13px;
+}
+
+.pagamento-linha strong {
+    color: var(--pdv-texto);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: right;
+}
+
+.pagamento-linha.saldo {
+    padding: 10px;
+    background: #222015;
+    border: 1px solid #514725;
+    border-radius: 8px;
+}
+
+.pagamento-linha.saldo strong {
+    color: var(--pdv-amarelo);
+}
+
+/* Mensagens de erro */
+.erro-campo {
+    display: block;
+    color: #FCA5A5;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+/* Subtotal e total */
+.totais {
+    margin-top: 18px;
+    padding-top: 4px;
+}
+
+.total-linha {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--pdv-secundario);
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.total-linha.desconto {
+    color: var(--pdv-amarelo);
+}
+
+.total-linha.final {
+    padding-top: 16px;
+    margin-top: 16px;
+    border-top: 1px solid #444;
+    color: var(--pdv-texto);
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.total-linha.final span:last-child {
+    color: var(--pdv-amarelo);
+    text-align: right;
+}
+
+/* Observação */
+.carrinho-footer .obs-input {
+    display: block;
+    width: 100%;
+    min-height: 72px;
+    box-sizing: border-box;
+    background: var(--pdv-campo) !important;
+    color: var(--pdv-texto) !important;
+    border: 1px solid #454545;
+    border-radius: 10px;
+    padding: 13px;
+    margin: 18px 0 14px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: vertical;
+}
+
+.carrinho-footer .obs-input::placeholder {
+    color: #929292;
+}
+
+.carrinho-footer .obs-input:focus {
+    border-color: var(--pdv-amarelo);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.12);
+}
+
+/* Botão de finalizar */
+.carrinho-footer .btn-finalizar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 50px;
+    padding: 13px 18px;
+    margin-top: 4px;
+    background: var(--pdv-amarelo);
+    color: var(--pdv-preto);
+    border: 1px solid var(--pdv-amarelo);
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.carrinho-footer .btn-finalizar:hover:not(:disabled) {
+    background: var(--pdv-amarelo-hover);
+    border-color: var(--pdv-amarelo-hover);
+    transform: translateY(-1px);
+}
+
+.carrinho-footer .btn-finalizar:disabled {
+    background: #333;
+    color: #888;
+    border-color: #333;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 480px) {
+    .carrinho-footer {
+        padding: 14px;
+    }
+
+    .desconto-manual,
+    .pagamento-section {
+        padding: 12px;
+    }
+
+    .pagamento-controles {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .total-linha.final {
+        font-size: 20px;
+    }
+}
+
+
+/* =========================================
+   PAGINAÇÃO DO HISTÓRICO DE VENDAS
+========================================= */
+
+.paginacao-vendas {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 22px;
+    padding: 18px 20px;
+    background: #1E1E1E;
+    border: 1px solid #383838;
+    border-radius: 12px;
+}
+
+.paginacao-info {
+    color: #FDE68A;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.paginacao-total {
+    color: #A1A1AA;
+    font-weight: 400;
+}
+
+.paginacao-botoes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.paginacao-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 9px 15px;
+    background: #292929;
+    color: #F9FAFB;
+    border: 1px solid #454545;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: 0.2s ease;
+}
+
+.paginacao-btn:hover:not(.desabilitado) {
+    border-color: #FDE68A;
+    color: #FDE68A;
+}
+
+.paginacao-btn.proxima {
+    background: #FDE68A;
+    color: #121212;
+    border-color: #FDE68A;
+}
+
+.paginacao-btn.proxima:hover {
+    background: #FEF3C7;
+    color: #121212;
+}
+
+.paginacao-btn.desabilitado {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+@media (max-width: 520px) {
+    .paginacao-vendas {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 15px;
+    }
+
+    .paginacao-botoes {
+        width: 100%;
+    }
+
+    .paginacao-btn {
+        flex: 1;
+    }
+}
