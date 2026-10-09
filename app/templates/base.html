@@ -1,87 +1,338 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
 
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>{% block title %}Nova Adega{% endblock %}</title>
 
-    <link rel="stylesheet" href="/static/CSS/home.css?v=3">
+    <script>
+        try {
+            document.documentElement.dataset.tema =
+                localStorage.getItem("tema-nova-adega") || "escuro";
+        } catch (erro) {
+            document.documentElement.dataset.tema = "escuro";
+        }
+    </script>
 
-    <!-- CSS específico da página -->
+    <link rel="stylesheet" href="/static/CSS/home.css?v=8">
     {% block styles %}{% endblock %}
+    <link rel="stylesheet" href="/static/CSS/voltar.css?v=2">
 
-    <link rel="stylesheet" href="/static/CSS/voltar.css?v=1">
-    
+    <style>
+        .botao-tema {
+            width: 34px;
+            height: 34px;
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--borda, #444);
+            border-radius: 50%;
+            background: transparent;
+            color: inherit;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .botao-tema:hover {
+            background: var(--card-hover, #333);
+            border-color: #E6BD42;
+        }
+
+        /* PALETA DO TEMA CLARO */
+        html[data-tema="claro"] {
+            color-scheme: light;
+            --fundo: #F7F6F2;
+            --branco: #FFFFFF;
+            --bisque: #FFE4C4;
+            --texto: #29251F;
+            --marrom: #8A5700;
+            --marrom-escuro: #5C3514;
+            --borda-clara: #E5D5C5;
+            --hover-claro: #FFF5E9;
+        }
+
+        html[data-tema="claro"] body,
+        html[data-tema="claro"] main.page-wrapper {
+            background: var(--fundo) !important;
+            color: var(--texto) !important;
+        }
+
+        /* MENU E RODAPÉ */
+        html[data-tema="claro"] .navbar,
+        html[data-tema="claro"] .footer {
+            background: var(--branco) !important;
+            color: var(--texto) !important;
+            border-color: var(--borda-clara) !important;
+        }
+
+        html[data-tema="claro"] .navbar a,
+        html[data-tema="claro"] .footer p,
+        html[data-tema="claro"] .footer strong {
+            color: var(--texto) !important;
+        }
+
+        html[data-tema="claro"] .menu a:not(.btn-sair):hover {
+            color: var(--marrom) !important;
+        }
+
+        html[data-tema="claro"] .botao-tema {
+            color: var(--texto) !important;
+            border-color: var(--borda-clara) !important;
+        }
+
+        /* TÍTULOS E TEXTOS */
+        html[data-tema="claro"] main.page-wrapper h1,
+        html[data-tema="claro"] main.page-wrapper h2,
+        html[data-tema="claro"] main.page-wrapper h3,
+        html[data-tema="claro"] main.page-wrapper h4 {
+            color: var(--marrom-escuro) !important;
+        }
+
+        html[data-tema="claro"] main.page-wrapper p,
+        html[data-tema="claro"] main.page-wrapper label,
+        html[data-tema="claro"] main.page-wrapper small,
+        html[data-tema="claro"] main.page-wrapper li {
+            color: var(--texto) !important;
+        }
+
+        /* PAINÉIS, CARTÕES E FORMULÁRIOS */
+        html[data-tema="claro"] main.page-wrapper .card,
+        html[data-tema="claro"] main.page-wrapper .painel,
+        html[data-tema="claro"] main.page-wrapper .container-card,
+        html[data-tema="claro"] main.page-wrapper .conteudo-card,
+        html[data-tema="claro"] main.page-wrapper .form-container,
+        html[data-tema="claro"] main.page-wrapper .tabela-container,
+        html[data-tema="claro"] main.page-wrapper .card-body,
+        html[data-tema="claro"] main.page-wrapper .modal-content,
+        html[data-tema="claro"] main.page-wrapper form,
+        html[data-tema="claro"] main.page-wrapper .form-card,
+        html[data-tema="claro"] main.page-wrapper .formulario,
+        html[data-tema="claro"] main.page-wrapper .formulario-container,
+        html[data-tema="claro"] main.page-wrapper .cadastro-container,
+        html[data-tema="claro"] main.page-wrapper .cadastro-card,
+        html[data-tema="claro"] main.page-wrapper .cliente-form,
+        html[data-tema="claro"] main.page-wrapper .cliente-form-container,
+        html[data-tema="claro"] main.page-wrapper .form-section,
+        html[data-tema="claro"] main.page-wrapper .form-group {
+            background-color: var(--branco) !important;
+            color: var(--texto) !important;
+            border-color: var(--borda-clara) !important;
+        }
+
+        /* TABELAS */
+        html[data-tema="claro"] main.page-wrapper table {
+            background: var(--branco) !important;
+            color: var(--texto) !important;
+            border-color: var(--borda-clara) !important;
+        }
+
+        html[data-tema="claro"] main.page-wrapper thead,
+        html[data-tema="claro"] main.page-wrapper th {
+            background: var(--bisque) !important;
+            color: var(--marrom-escuro) !important;
+            border-color: var(--borda-clara) !important;
+        }
+
+        html[data-tema="claro"] main.page-wrapper th * {
+            color: var(--marrom-escuro) !important;
+        }
+
+        html[data-tema="claro"] main.page-wrapper tbody tr,
+        html[data-tema="claro"] main.page-wrapper td {
+            background: var(--branco) !important;
+            color: var(--texto) !important;
+            border-color: var(--borda-clara) !important;
+        }
+
+        html[data-tema="claro"] main.page-wrapper tbody tr:hover td {
+            background: var(--hover-claro) !important;
+        }
+
+        /* NOMES DE CLIENTES, PRODUTOS E CATEGORIAS */
+        html[data-tema="claro"] main.page-wrapper .produto-nome,
+        html[data-tema="claro"] main.page-wrapper .nome-produto,
+        html[data-tema="claro"] main.page-wrapper .nome-cliente,
+        html[data-tema="claro"] main.page-wrapper .cliente-nome,
+        html[data-tema="claro"] main.page-wrapper .nome-categoria,
+        html[data-tema="claro"] main.page-wrapper .produto-card-nome,
+        html[data-tema="claro"] main.page-wrapper td a {
+            color: var(--marrom) !important;
+            font-weight: 600 !important;
+        }
+
+        /* CAMPOS DE TEXTO, BUSCA E CADASTRO */
+        html[data-tema="claro"] main.page-wrapper input,
+        html[data-tema="claro"] main.page-wrapper select,
+        html[data-tema="claro"] main.page-wrapper textarea {
+            background-color: #FFFFFF !important;
+            background-image: none !important;
+            color: #29251F !important;
+            border: 1px solid #E5D5C5 !important;
+            box-shadow: none !important;
+            outline-color: #D8B995;
+            color-scheme: light;
+        }
+
+        html[data-tema="claro"] main.page-wrapper input::placeholder,
+        html[data-tema="claro"] main.page-wrapper textarea::placeholder {
+            color: #82766A !important;
+            opacity: 1;
+        }
+
+        /* ÁREAS DE BUSCA DE CLIENTES */
+        html[data-tema="claro"] main.page-wrapper .search-box,
+        html[data-tema="claro"] main.page-wrapper .input-group,
+        html[data-tema="claro"] main.page-wrapper .input-group-text,
+        html[data-tema="claro"] main.page-wrapper .busca-container,
+        html[data-tema="claro"] main.page-wrapper .barra-busca,
+        html[data-tema="claro"] main.page-wrapper .filtro-container {
+            background: #FFFFFF !important;
+            color: #29251F !important;
+            border-color: #E5D5C5 !important;
+            box-shadow: none !important;
+        }
+
+        html[data-tema="claro"] main.page-wrapper form label {
+            color: var(--marrom-escuro) !important;
+        }
+
+        /* ESTOQUE — PADRÃO VISUAL CLARO */
+        html[data-tema="claro"] main.page-wrapper .estoque,
+        html[data-tema="claro"] main.page-wrapper .produto-card-estoque,
+        html[data-tema="claro"] main.page-wrapper .estoque-quantidade,
+        html[data-tema="claro"] main.page-wrapper .badge-estoque,
+        html[data-tema="claro"] main.page-wrapper .quantidade-estoque,
+        html[data-tema="claro"] main.page-wrapper .estoque-badge,
+        html[data-tema="claro"] main.page-wrapper .badge {
+            background: var(--bisque) !important;
+            color: var(--marrom-escuro) !important;
+            border: 1px solid #E5C6A5 !important;
+            border-radius: 8px;
+            font-weight: 600 !important;
+        }
+
+        /* BOTÕES SECUNDÁRIOS */
+        html[data-tema="claro"] main.page-wrapper .btn-dark,
+        html[data-tema="claro"] main.page-wrapper .btn-secondary {
+            background: var(--bisque) !important;
+            color: var(--marrom-escuro) !important;
+            border: 1px solid #E5C6A5 !important;
+        }
+
+        html[data-tema="claro"] main.page-wrapper button,
+        html[data-tema="claro"] main.page-wrapper .btn,
+        html[data-tema="claro"] main.page-wrapper .botao {
+            border-color: #D8B995;
+        }
+
+        /* PAGINAÇÃO */
+        html[data-tema="claro"] main.page-wrapper .paginacao,
+        html[data-tema="claro"] main.page-wrapper .pagination,
+        html[data-tema="claro"] main.page-wrapper .paginacao-container {
+            background: var(--branco) !important;
+            color: var(--texto) !important;
+            border-color: var(--borda-clara) !important;
+            box-shadow: none !important;
+        }
+
+        html[data-tema="claro"] main.page-wrapper hr {
+            border-color: var(--borda-clara) !important;
+        }
+
+        html[data-tema="claro"] main.page-wrapper .text-muted,
+        html[data-tema="claro"] main.page-wrapper .texto-secundario {
+            color: #625548 !important;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Menu compartilhado por todas as páginas -->
     {% block navbar %}
     <header class="navbar">
         <div class="logo">
-
-            <a href="/">
-                🍷 Nova Adega
-            </a>
-
+            <a href="/">🍷 Nova Adega</a>
         </div>
 
-
         <div class="menu">
+            <a href="/pdv/">PDV</a>
+            <a href="/pdv/historico/">Histórico</a>
+            <a href="/produtos/">Produtos</a>
+            <a href="/categorias/">Categorias</a>
+            <a href="/clientes/">Clientes</a>
 
-            <a href="/pdv/">
-                PDV
-            </a>
+            <button
+                type="button"
+                id="alternar-tema"
+                class="botao-tema"
+                aria-label="Ativar modo claro"
+                title="Alternar modo claro/escuro"
+            >☀️</button>
 
-            <a href="/pdv/historico/">
-                Histórico
-            </a>
-
-            <a href="/produtos/">
-                Produtos
-            </a>
-
-            <a href="/categorias/">
-                Categorias
-            </a>
-
-            <a href="/clientes/">
-                Clientes
-            </a>
-
-            <a href="/auth/logout" class="btn-sair">
-                Sair
-            </a>
-
+            <a href="/auth/logout" class="btn-sair">Sair</a>
         </div>
     </header>
     {% endblock %}
 
-    <!-- Conteúdo específico de cada página -->
     <main class="page-wrapper">
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Rodapé compartilhado -->
     {% block footer %}
     <footer class="footer">
         <p>© 2026 <strong>AdegaPremium</strong> · @novaadega</p>
     </footer>
     {% endblock %}
 
-
-
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
-
-
-    <!-- JavaScript específico da página -->
-
     {% block scripts %}{% endblock %}
-</body>
 
+    <script>
+        (() => {
+            const botao = document.getElementById("alternar-tema");
+            const raiz = document.documentElement;
+
+            if (!botao) return;
+
+            function aplicarTema(tema) {
+                raiz.dataset.tema = tema;
+
+                const modoClaro = tema === "claro";
+
+                botao.textContent = modoClaro ? "🌙" : "☀️";
+                botao.setAttribute(
+                    "aria-label",
+                    modoClaro ? "Ativar modo escuro" : "Ativar modo claro"
+                );
+                botao.title = modoClaro
+                    ? "Ativar modo escuro"
+                    : "Ativar modo claro";
+            }
+
+            let temaAtual = "escuro";
+
+            try {
+                temaAtual =
+                    localStorage.getItem("tema-nova-adega") || "escuro";
+            } catch (erro) {
+                // A alternância continua funcionando sem localStorage.
+            }
+
+            aplicarTema(temaAtual);
+
+            botao.addEventListener("click", () => {
+                const novoTema =
+                    raiz.dataset.tema === "escuro" ? "claro" : "escuro";
+
+                aplicarTema(novoTema);
+
+                try {
+                    localStorage.setItem("tema-nova-adega", novoTema);
+                } catch (erro) {
+                    // A alternância permanece ativa na página atual.
+                }
+            });
+        })();
+    </script>
+</body>
 </html>

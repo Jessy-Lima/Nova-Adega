@@ -310,3 +310,65 @@
     }
 
 }
+
+
+/* =========================================================
+   TEMA CLARO — PÁGINA DE LOGIN
+========================================================= */
+
+html[data-tema="claro"] .login-page {
+    background-color: #F8F3ED !important;
+    color: #29251F !important;
+}
+
+html[data-tema="claro"] .login-card {
+    background-color: #FFFFFF !important;
+    border: 1px solid #E5D5C5 !important;
+    box-shadow: 0 15px 40px rgba(65, 45, 25, 0.10) !important;
+}
+
+html[data-tema="claro"] .login-card h1 {
+    color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .login-card > p {
+    color: #8A5700 !important;
+}
+
+html[data-tema="claro"] .login-card label {
+    color: #5C5146 !important;
+}
+
+html[data-tema="claro"] .login-card .input-group i {
+    color: #9A6B35 !important;
+}
+
+html[data-tema="claro"] .login-card .input-group input {
+    background-color: #FFFFFF !important;
+    color: #29251F !important;
+    border: 1px solid #D8C8B7 !important;
+}
+
+html[data-tema="claro"] .login-card .input-group input::placeholder {
+    color: #82766A !important;
+    opacity: 1;
+}
+
+html[data-tema="claro"] .login-card .input-group input:focus {
+    border-color: #C49A58 !important;
+    box-shadow: 0 0 0 3px rgba(196, 154, 88, 0.15) !important;
+}
+
+html[data-tema="claro"] .login-card .login-footer {
+    color: #625548 !important;
+}
+
+html[data-tema="claro"] .login-card button {
+    background-color: #FDE68A !important;
+    color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .login-card button:hover {
+    background-color: #F9D96A !important;
+}
+

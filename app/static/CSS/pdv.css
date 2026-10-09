@@ -1245,3 +1245,371 @@ main.pdv-container #busca-produto:focus {
     flex: 0 1 180px !important;
     box-sizing: border-box !important;
 }
+
+/* ==========================================
+   NOVA ADEGA — MODO CLARO DO PDV
+   Afeta somente o tema claro.
+   O modo escuro permanece inalterado.
+========================================== */
+
+html[data-tema="claro"] {
+    --pdv-preto: #F5F5F2;
+    --pdv-card: #FFFFFF;
+    --pdv-campo: #FFFFFF;
+    --pdv-borda: #DEDEDA;
+    --pdv-amarelo: #8A6100;
+    --pdv-amarelo-hover: #704D00;
+    --pdv-texto: #252525;
+    --pdv-secundario: #666666;
+}
+
+/* Fundo e título */
+html[data-tema="claro"] .pdv-container {
+    color: #252525;
+}
+
+html[data-tema="claro"] .pdv-titulo h1,
+html[data-tema="claro"] .pdv-page-header h1 {
+    color: #252525 !important;
+}
+
+html[data-tema="claro"] .pdv-titulo p,
+html[data-tema="claro"] .pdv-page-header p {
+    color: #666666 !important;
+}
+
+/* Painéis principais */
+html[data-tema="claro"] .produtos-col,
+html[data-tema="claro"] .carrinho-col {
+    background: #FFFFFF !important;
+    color: #252525 !important;
+    border-color: #DEDEDA !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Cabeçalhos e divisórias */
+html[data-tema="claro"] .produtos-header,
+html[data-tema="claro"] .carrinho-header,
+html[data-tema="claro"] .cliente-section {
+    background: #FFFFFF !important;
+    color: #252525 !important;
+    border-color: #E5E5E0 !important;
+}
+
+html[data-tema="claro"] .carrinho-header {
+    color: #252525 !important;
+}
+
+/* Cartões dos produtos */
+html[data-tema="claro"] .produto-card {
+    background: #FFFFFF !important;
+    color: #252525 !important;
+    border: 1px solid #E0E0DA !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.035);
+}
+
+html[data-tema="claro"] .produto-card:hover {
+    background: #FAF8F0 !important;
+    border-color: #C6A044 !important;
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.08);
+}
+
+html[data-tema="claro"] .produto-card-nome {
+    color: #252525 !important;
+}
+
+html[data-tema="claro"] .produto-card-preco {
+    color: #8A6100 !important;
+}
+
+html[data-tema="claro"] .produto-card-estoque {
+    color: #666666 !important;
+}
+
+html[data-tema="claro"] .produto-card img {
+    background: #F3F3F0;
+}
+
+/* Pesquisa */
+html[data-tema="claro"] main.pdv-container #busca-produto,
+html[data-tema="claro"] #busca-produto {
+    background: #FFF4C7 !important;
+    background-color: #FFF4C7 !important;
+    color: #252525 !important;
+    -webkit-text-fill-color: #252525 !important;
+    border: 1px solid #D8B84E !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+html[data-tema="claro"] #busca-produto::placeholder {
+    color: #6B6250 !important;
+    -webkit-text-fill-color: #6B6250 !important;
+}
+
+html[data-tema="claro"] #busca-produto:focus {
+    border-color: #A87500 !important;
+    outline: 2px solid rgba(168, 117, 0, 0.18) !important;
+    outline-offset: 1px;
+}
+
+/* Cliente */
+html[data-tema="claro"] .cliente-section label,
+html[data-tema="claro"] .carrinho-footer label {
+    color: #795600 !important;
+}
+
+html[data-tema="claro"] .cliente-select {
+    background: #FFFFFF !important;
+    color: #252525 !important;
+    border-color: #D0D0CA !important;
+    color-scheme: light;
+}
+
+html[data-tema="claro"] .cliente-select option,
+html[data-tema="claro"] .carrinho-footer select option {
+    background: #FFFFFF !important;
+    color: #252525 !important;
+}
+
+/* Área inferior do carrinho */
+html[data-tema="claro"] .carrinho-footer {
+    background: #FFFFFF !important;
+    color: #252525 !important;
+    border-color: #E5E5E0 !important;
+}
+
+html[data-tema="claro"] .carrinho-footer input:not([type="checkbox"]):not([type="hidden"]),
+html[data-tema="claro"] .carrinho-footer select,
+html[data-tema="claro"] .carrinho-footer textarea,
+html[data-tema="claro"] .carrinho-footer .obs-input {
+    background: #FFFFFF !important;
+    color: #252525 !important;
+    border-color: #D0D0CA !important;
+    -webkit-text-fill-color: #252525 !important;
+    color-scheme: light;
+}
+
+html[data-tema="claro"] .carrinho-footer input::placeholder,
+html[data-tema="claro"] .carrinho-footer textarea::placeholder,
+html[data-tema="claro"] .carrinho-footer .obs-input::placeholder {
+    color: #777777 !important;
+    -webkit-text-fill-color: #777777 !important;
+}
+
+html[data-tema="claro"] .carrinho-footer input:focus,
+html[data-tema="claro"] .carrinho-footer select:focus,
+html[data-tema="claro"] .carrinho-footer textarea:focus {
+    border-color: #B38A25 !important;
+    box-shadow: 0 0 0 3px rgba(179, 138, 37, 0.12) !important;
+}
+
+/* Desconto e pagamento */
+html[data-tema="claro"] .desconto-manual,
+html[data-tema="claro"] .pagamento-section {
+    background: #FAFAF7 !important;
+    border-color: #DEDEDA !important;
+}
+
+html[data-tema="claro"] .desconto-manual-titulo,
+html[data-tema="claro"] .pagamento-titulo {
+    color: #795600 !important;
+}
+
+html[data-tema="claro"] .pagamento-bloco > label,
+html[data-tema="claro"] .pagamento-linha {
+    color: #666666 !important;
+}
+
+html[data-tema="claro"] .carrinho-footer .desconto-manual select,
+html[data-tema="claro"] .carrinho-footer .desconto-manual input,
+html[data-tema="claro"] .carrinho-footer .pagamento-controles select,
+html[data-tema="claro"] .carrinho-footer .pagamento-controles input {
+    background: #FFFFFF !important;
+    color: #252525 !important;
+    border-color: #D0D0CA !important;
+    -webkit-text-fill-color: #252525 !important;
+    color-scheme: light;
+}
+
+html[data-tema="claro"] .segunda-forma-check {
+    color: #333333 !important;
+}
+
+html[data-tema="claro"] .pagamento-resumo {
+    border-color: #DEDEDA !important;
+}
+
+html[data-tema="claro"] .pagamento-linha strong {
+    color: #252525 !important;
+}
+
+html[data-tema="claro"] .pagamento-linha.saldo {
+    background: #FFF7DF !important;
+    border-color: #E5D29B !important;
+}
+
+html[data-tema="claro"] .pagamento-linha.saldo strong {
+    color: #795600 !important;
+}
+
+/* Itens do carrinho */
+html[data-tema="claro"] .carrinho-item {
+    border-color: #E5E5E0 !important;
+}
+
+html[data-tema="claro"] .carrinho-item:hover {
+    background: #F7F7F3 !important;
+}
+
+html[data-tema="claro"] .carrinho-item-nome {
+    color: #252525 !important;
+}
+
+html[data-tema="claro"] .carrinho-item-preco {
+    color: #666666 !important;
+}
+
+html[data-tema="claro"] .quantidade {
+    color: #252525 !important;
+}
+
+html[data-tema="claro"] .carrinho-item-subtotal {
+    color: #795600 !important;
+}
+
+html[data-tema="claro"] .btn-qtd {
+    background: #EAEAE5 !important;
+    color: #252525 !important;
+}
+
+html[data-tema="claro"] .btn-qtd:hover {
+    background: #FDE68A !important;
+    color: #252525 !important;
+}
+
+html[data-tema="claro"] .carrinho-vazio,
+html[data-tema="claro"] .sem-produtos {
+    color: #666666 !important;
+}
+
+/* Totais */
+html[data-tema="claro"] .total-linha {
+    color: #666666 !important;
+}
+
+html[data-tema="claro"] .total-linha.final {
+    color: #252525 !important;
+    border-color: #DEDEDA !important;
+}
+
+html[data-tema="claro"] .total-linha.final span:last-child,
+html[data-tema="claro"] .carrinho-footer strong,
+html[data-tema="claro"] .carrinho-footer .valor,
+html[data-tema="claro"] .carrinho-footer .total-valor {
+    color: #795600 !important;
+}
+
+/* Botão de finalizar */
+html[data-tema="claro"] .carrinho-footer .btn-finalizar {
+    background: #FDE68A !important;
+    color: #252525 !important;
+    border-color: #E0BE4C !important;
+}
+
+html[data-tema="claro"] .carrinho-footer .btn-finalizar:hover:not(:disabled) {
+    background: #F9D96A !important;
+    color: #252525 !important;
+}
+
+html[data-tema="claro"] .carrinho-footer .btn-finalizar:disabled {
+    background: #E5E5E0 !important;
+    color: #777777 !important;
+    border-color: #D5D5D0 !important;
+}
+
+/* Paginação dos produtos */
+html[data-tema="claro"] .paginacao-produtos,
+html[data-tema="claro"] .paginacao-vendas {
+    background: #FFFFFF !important;
+    border-color: #DEDEDA !important;
+}
+
+html[data-tema="claro"] .paginacao-info,
+html[data-tema="claro"] .paginacao-info .paginacao-total {
+    color: #555555 !important;
+}
+
+html[data-tema="claro"] .btn-paginacao {
+    background: #FFFFFF !important;
+    color: #333333 !important;
+    border: 1px solid #D0D0CA !important;
+}
+
+html[data-tema="claro"] .btn-paginacao:hover,
+html[data-tema="claro"] .btn-paginacao:active {
+    background: #FDE68A !important;
+    color: #252525 !important;
+    border-color: #D8B84E !important;
+}
+
+/* Histórico de vendas */
+html[data-tema="claro"] .pdv-table-container {
+    background: #FFFFFF !important;
+    border-color: #DEDEDA !important;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+html[data-tema="claro"] .pdv-table {
+    background: #FFFFFF !important;
+    color: #252525 !important;
+}
+
+html[data-tema="claro"] .pdv-table thead {
+    background: #F1F1EC !important;
+}
+
+html[data-tema="claro"] .pdv-table th {
+    color: #795600 !important;
+    border-color: #DEDEDA !important;
+}
+
+html[data-tema="claro"] .pdv-table td {
+    color: #444444 !important;
+    border-color: #E5E5E0 !important;
+}
+
+html[data-tema="claro"] .pdv-table tbody tr:hover {
+    background: #F7F7F3 !important;
+}
+
+html[data-tema="claro"] .venda-id,
+html[data-tema="claro"] .desconto-positivo,
+html[data-tema="claro"] .valor-total {
+    color: #795600 !important;
+}
+
+html[data-tema="claro"] .sem-desconto,
+html[data-tema="claro"] .pdv-table td[colspan] {
+    color: #666666 !important;
+}
+
+html[data-tema="claro"] .paginacao-btn {
+    background: #FFFFFF !important;
+    color: #333333 !important;
+    border-color: #D0D0CA !important;
+}
+
+html[data-tema="claro"] .paginacao-btn:hover:not(.desabilitado) {
+    background: #FFF4C7 !important;
+    color: #252525 !important;
+    border-color: #D8B84E !important;
+}
+
+html[data-tema="claro"] .paginacao-btn.proxima {
+    background: #FDE68A !important;
+    color: #252525 !important;
+    border-color: #D8B84E !important;
+}
+
+
