@@ -78,75 +78,64 @@ PDV — Nova Adega
              PRODUTOS
         ================================================== -->
 
+
         <section class="produtos-col">
 
             <div class="produtos-header">
-
-                <input
-                    type="text"
-                    id="busca-produto"
-                    placeholder="Buscar por nome..."
-                    autocomplete="off"
-                >
-
+                <input type="text" id="busca-produto" placeholder="Buscar por nome..." autocomplete="off">
             </div>
 
-
-            <div
-                class="produtos-grid"
-                id="grade-produtos"
-            >
+            <div class="produtos-grid" id="grade-produtos">
 
                 {% for p in produtos %}
-
-                <div
-                    class="produto-card {% if p.estoque_atual == 0 %}sem-estoque{% endif %}"
-                    data-id="{{ p.id }}"
-                    data-nome="{{ p.nome }}"
-                    data-preco="{{ p.preco }}"
-                    data-estoque="{{ p.estoque_atual }}"
-                    data-nome-lower="{{ p.nome.lower() }}"
-                    onclick="adicionarAoCarrinho(this)"
-                >
-
+                <div class="produto-card {% if p.estoque_atual == 0 %}sem-estoque{% endif %}" data-id="{{ p.id }}"
+                    data-nome="{{ p.nome }}" data-preco="{{ p.preco }}" data-estoque="{{ p.estoque_atual }}"
+                    data-nome-lower="{{ p.nome.lower() }}" onclick="adicionarAoCarrinho(this)">
                     {% if p.imagem_url %}
-
-                    <img
-                        src="{{ p.imagem_url }}"
-                        alt="{{ p.nome }}"
-                    >
-
+                    <img src="{{ p.imagem_url }}" alt="{{ p.nome }}">
                     {% endif %}
-
 
                     <div class="produto-card-nome">
                         {{ p.nome }}
                     </div>
 
-
                     <div class="produto-card-preco">
                         R$ {{ "%.2f"|format(p.preco) }}
                     </div>
 
-
                     <div class="produto-card-estoque">
                         Estoque: {{ p.estoque_atual }}
                     </div>
-
                 </div>
-
                 {% endfor %}
 
-
                 {% if not produtos %}
-
                 <div class="sem-produtos">
                     Nenhum produto disponível.
                 </div>
-
                 {% endif %}
 
             </div>
+
+            <!-- PAGINAÇÃO -->
+            <nav class="paginacao-produtos" aria-label="Paginação dos produtos">
+
+                <span class="paginacao-info">
+                    Página {{ pagina }} de {{ total_paginas }}
+                    — {{ total_produtos }} produto(s)
+                </span>
+
+                <div class="paginacao-botoes">
+                    {% if pagina > 1 %}
+                    <a class="btn-paginacao" href="/pdv/?pagina={{ pagina - 1 }}">← Anterior</a>
+                    {% endif %}
+
+                    {% if pagina < total_paginas %} <a class="btn-paginacao" href="/pdv/?pagina={{ pagina + 1 }}">
+                        Próxima →</a>
+                        {% endif %}
+                </div>
+
+            </nav>
 
         </section>
 
@@ -173,26 +162,16 @@ PDV — Nova Adega
                 </label>
 
 
-                <select
-                    class="cliente-select"
-                    id="select-cliente"
-                    onchange="atualizarCliente(this)"
-                >
+                <select class="cliente-select" id="select-cliente" onchange="atualizarCliente(this)">
 
-                    <option
-                        value="0"
-                        data-associado="false"
-                    >
+                    <option value="0" data-associado="false">
                         Sem identificação
                     </option>
 
 
                     {% for c in clientes %}
 
-                    <option
-                        value="{{ c.id }}"
-                        data-associado="{{ 'true' if c.is_associado else 'false' }}"
-                    >
+                    <option value="{{ c.id }}" data-associado="{{ 'true' if c.is_associado else 'false' }}">
 
                         {{ c.nome }}
 
@@ -207,11 +186,7 @@ PDV — Nova Adega
                 </select>
 
 
-                <div
-                    class="desconto-badge"
-                    id="badge-desconto"
-                    style="display:none"
-                >
+                <div class="desconto-badge" id="badge-desconto" style="display:none">
 
                     ✓ {{ desconto_associado|default(0)|int }}%
                     de desconto aplicado
@@ -225,15 +200,9 @@ PDV — Nova Adega
                  ITENS DO CARRINHO
             ================================================== -->
 
-            <div
-                class="carrinho-itens"
-                id="lista-carrinho"
-            >
+            <div class="carrinho-itens" id="lista-carrinho">
 
-                <div
-                    class="carrinho-vazio"
-                    id="msg-vazio"
-                >
+                <div class="carrinho-vazio" id="msg-vazio">
 
                     <span class="carrinho-vazio-icon">
                         🛒
@@ -257,11 +226,7 @@ PDV — Nova Adega
                      DESCONTO MANUAL
                 ================================================== -->
 
-                <div
-                    class="desconto-manual"
-                    id="desconto-manual"
-                    style="display:none"
-                >
+                <div class="desconto-manual" id="desconto-manual" style="display:none">
 
                     <div class="desconto-manual-titulo">
                         Desconto manual
@@ -270,10 +235,7 @@ PDV — Nova Adega
 
                     <div class="desconto-manual-controles">
 
-                        <select
-                            id="tipo-desconto"
-                            onchange="atualizarDescontoManual()"
-                        >
+                        <select id="tipo-desconto" onchange="atualizarDescontoManual()">
 
                             <option value="percentual">
                                 %
@@ -286,23 +248,13 @@ PDV — Nova Adega
                         </select>
 
 
-                        <input
-                            type="number"
-                            id="valor-desconto-manual"
-                            min="0"
-                            step="0.01"
-                            value="0"
-                            placeholder="0,00"
-                            oninput="atualizarDescontoManual()"
-                        >
+                        <input type="number" id="valor-desconto-manual" min="0" step="0.01" value="0" placeholder="0,00"
+                            oninput="atualizarDescontoManual()">
 
                     </div>
 
 
-                    <small
-                        id="erro-desconto"
-                        class="erro-campo"
-                    ></small>
+                    <small id="erro-desconto" class="erro-campo"></small>
 
                 </div>
 
@@ -311,11 +263,7 @@ PDV — Nova Adega
                      PAGAMENTO
                 ================================================== -->
 
-                <div
-                    class="pagamento-section"
-                    id="pagamento-section"
-                    style="display:none"
-                >
+                <div class="pagamento-section" id="pagamento-section" style="display:none">
 
                     <div class="pagamento-titulo">
                         Forma de pagamento
@@ -358,14 +306,8 @@ PDV — Nova Adega
                             </select>
 
 
-                            <input
-                                type="number"
-                                id="valor-pagamento-1"
-                                min="0"
-                                step="0.01"
-                                value="0"
-                                placeholder="0,00"
-                            >
+                            <input type="number" id="valor-pagamento-1" min="0" step="0.01" value="0"
+                                placeholder="0,00">
 
                         </div>
 
@@ -376,21 +318,14 @@ PDV — Nova Adega
 
                     <label class="segunda-forma-check">
 
-                        <input
-                            type="checkbox"
-                            id="usar-segunda-forma"
-                        >
+                        <input type="checkbox" id="usar-segunda-forma">
 
                         Usar uma segunda forma de pagamento
 
                     </label>
 
 
-                    <div
-                        class="pagamento-bloco"
-                        id="segunda-forma-container"
-                        style="display:none"
-                    >
+                    <div class="pagamento-bloco" id="segunda-forma-container" style="display:none">
 
                         <label for="forma-pagamento-2">
                             2ª forma de pagamento
@@ -424,14 +359,8 @@ PDV — Nova Adega
                             </select>
 
 
-                            <input
-                                type="number"
-                                id="valor-pagamento-2"
-                                min="0"
-                                step="0.01"
-                                value="0"
-                                placeholder="0,00"
-                            >
+                            <input type="number" id="valor-pagamento-2" min="0" step="0.01" value="0"
+                                placeholder="0,00">
 
                         </div>
 
@@ -468,10 +397,7 @@ PDV — Nova Adega
                         </div>
 
 
-                        <div
-                            class="pagamento-linha saldo"
-                            id="linha-saldo"
-                        >
+                        <div class="pagamento-linha saldo" id="linha-saldo">
 
                             <span id="label-saldo">
                                 Saldo restante
@@ -486,10 +412,7 @@ PDV — Nova Adega
                     </div>
 
 
-                    <small
-                        id="erro-pagamento"
-                        class="erro-campo"
-                    ></small>
+                    <small id="erro-pagamento" class="erro-campo"></small>
 
                 </div>
 
@@ -498,11 +421,7 @@ PDV — Nova Adega
                      TOTAIS
                 ================================================== -->
 
-                <div
-                    class="totais"
-                    id="totais"
-                    style="display:none"
-                >
+                <div class="totais" id="totais" style="display:none">
 
                     <div class="total-linha">
 
@@ -517,11 +436,7 @@ PDV — Nova Adega
                     </div>
 
 
-                    <div
-                        class="total-linha desconto"
-                        id="linha-desconto"
-                        style="display:none"
-                    >
+                    <div class="total-linha desconto" id="linha-desconto" style="display:none">
 
                         <span id="label-desconto">
                             Desconto (0%)
@@ -551,108 +466,48 @@ PDV — Nova Adega
 
                 <!-- OBSERVAÇÃO -->
 
-                <textarea
-                    class="obs-input"
-                    id="obs-input"
-                    rows="2"
-                    placeholder="Observação (opcional)..."
-                ></textarea>
+                <textarea class="obs-input" id="obs-input" rows="2" placeholder="Observação (opcional)..."></textarea>
 
 
                 <!-- =================================================
                      FORMULÁRIO
                 ================================================== -->
 
-                <form
-                    id="form-venda"
-                    action="/pdv/finalizar"
-                    method="post"
-                >
+                <form id="form-venda" action="/pdv/finalizar" method="post">
 
-                    <input
-                        type="hidden"
-                        name="carrinho_json"
-                        id="input-carrinho"
-                    >
+                    <input type="hidden" name="carrinho_json" id="input-carrinho">
 
 
-                    <input
-                        type="hidden"
-                        name="cliente_id"
-                        id="input-cliente-id"
-                        value="0"
-                    >
+                    <input type="hidden" name="cliente_id" id="input-cliente-id" value="0">
 
 
-                    <input
-                        type="hidden"
-                        name="observacao"
-                        id="input-obs"
-                    >
+                    <input type="hidden" name="observacao" id="input-obs">
 
 
-                    <input
-                        type="hidden"
-                        id="config-desconto"
-                        value="{{ desconto_associado|default(0) }}"
-                    >
+                    <input type="hidden" id="config-desconto" value="{{ desconto_associado|default(0) }}">
 
 
-                    <input
-                        type="hidden"
-                        name="desconto_manual"
-                        id="input-desconto-manual"
-                        value="0"
-                    >
+                    <input type="hidden" name="desconto_manual" id="input-desconto-manual" value="0">
 
 
-                    <input
-                        type="hidden"
-                        name="tipo_desconto"
-                        id="input-tipo-desconto"
-                        value="percentual"
-                    >
+                    <input type="hidden" name="tipo_desconto" id="input-tipo-desconto" value="percentual">
 
 
                     <!-- PAGAMENTOS -->
 
-                    <input
-                        type="hidden"
-                        name="forma_pagamento_1"
-                        id="input-forma-pagamento-1"
-                    >
+                    <input type="hidden" name="forma_pagamento_1" id="input-forma-pagamento-1">
 
 
-                    <input
-                        type="hidden"
-                        name="valor_pagamento_1"
-                        id="input-valor-pagamento-1"
-                        value="0"
-                    >
+                    <input type="hidden" name="valor_pagamento_1" id="input-valor-pagamento-1" value="0">
 
 
-                    <input
-                        type="hidden"
-                        name="forma_pagamento_2"
-                        id="input-forma-pagamento-2"
-                    >
+                    <input type="hidden" name="forma_pagamento_2" id="input-forma-pagamento-2">
 
 
-                    <input
-                        type="hidden"
-                        name="valor_pagamento_2"
-                        id="input-valor-pagamento-2"
-                        value="0"
-                    >
+                    <input type="hidden" name="valor_pagamento_2" id="input-valor-pagamento-2" value="0">
 
 
-                    <button
-                        class="btn-finalizar"
-                        id="btn-finalizar"
-                        type="button"
-                        disabled
-                        onclick="finalizarVenda()"
-                    >
+                    <button class="btn-finalizar" id="btn-finalizar" type="button" disabled onclick="finalizarVenda()">
 
                         Finalizar venda
 
@@ -853,7 +708,7 @@ PDV — Nova Adega
 
         const option =
             select.options[
-                select.selectedIndex
+            select.selectedIndex
             ];
 
 
@@ -1037,17 +892,17 @@ PDV — Nova Adega
         const descontoAssociado =
             clienteAtual.associado
                 ? subtotal *
-                    (DESCONTO_PCT / 100)
+                (DESCONTO_PCT / 100)
                 : 0;
 
 
         let descontoManualCalculado =
             descontoManual.tipo === 'percentual'
                 ? subtotal *
-                    (
-                        descontoManual.valor /
-                        100
-                    )
+                (
+                    descontoManual.valor /
+                    100
+                )
                 : descontoManual.valor;
 
 
@@ -2128,13 +1983,13 @@ PDV — Nova Adega
 
         const descontoCalculado =
             descontoManual.tipo ===
-            'percentual'
+                'percentual'
 
                 ? subtotal *
-                    (
-                        descontoManual.valor /
-                        100
-                    )
+                (
+                    descontoManual.valor /
+                    100
+                )
 
                 : descontoManual.valor;
 

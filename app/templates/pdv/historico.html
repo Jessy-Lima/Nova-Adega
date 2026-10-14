@@ -69,15 +69,15 @@
 
                         {% if v.desconto and v.desconto > 0 %}
 
-                            <span class="desconto-positivo">
-                                − R$ {{ "%.2f"|format(v.desconto) }}
-                            </span>
+                        <span class="desconto-positivo">
+                            − R$ {{ "%.2f"|format(v.desconto) }}
+                        </span>
 
                         {% else %}
 
-                            <span class="sem-desconto">
-                                —
-                            </span>
+                        <span class="sem-desconto">
+                            —
+                        </span>
 
                         {% endif %}
 
@@ -110,6 +110,41 @@
         </table>
 
     </div>
+
+
+    <nav class="paginacao-vendas" aria-label="Paginação do histórico de vendas">
+
+        <span class="paginacao-info">
+            Página {{ pagina }} de {{ total_paginas }}
+            <span class="paginacao-total">
+                · {{ total_vendas }} venda(s)
+            </span>
+        </span>
+
+        <div class="paginacao-botoes">
+
+            {% if pagina > 1 %}
+            <a class="paginacao-btn" href="/pdv/historico?pagina={{ pagina - 1 }}">
+                ← Anterior
+            </a>
+            {% else %}
+            <span class="paginacao-btn desabilitado">
+                ← Anterior
+            </span>
+            {% endif %}
+
+            {% if pagina < total_paginas %} <a class="paginacao-btn proxima"
+                href="/pdv/historico?pagina={{ pagina + 1 }}">
+                Próxima →
+                </a>
+                {% else %}
+                <span class="paginacao-btn desabilitado">
+                    Próxima →
+                </span>
+                {% endif %}
+
+        </div>
+    </nav>
 
 </main>
 

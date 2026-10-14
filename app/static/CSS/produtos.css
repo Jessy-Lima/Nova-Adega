@@ -759,3 +759,270 @@
 
     text-decoration: none !important;
 }
+
+
+/* =========================================================
+   NOVA ADEGA — EDIÇÃO DE PRODUTOS E MOVIMENTAÇÕES
+========================================================= */
+
+/* Títulos e textos dos formulários */
+.container h1,
+.container h2,
+.container h3 {
+    color: #FDE68A;
+    font-weight: 700;
+}
+
+.container p {
+    line-height: 1.6;
+}
+
+/* Cartões e áreas de formulário */
+.container form,
+.container .card,
+.container .formulario,
+.container .form-container,
+.container .form-card,
+.container .secao-movimentacoes,
+.container .movimentacoes {
+    color: #F9FAFB;
+}
+
+.container .card,
+.container .formulario,
+.container .form-container,
+.container .form-card,
+.container .secao-movimentacoes,
+.container .movimentacoes {
+    background: #1E1E1E;
+    border: 1px solid #3F3F46;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.20);
+    margin-bottom: 24px;
+}
+
+/* Rótulos dos campos */
+.container form label {
+    display: block;
+    margin-bottom: 8px;
+    color: #FDE68A;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Campos de texto, números, seleção e descrição */
+.container form input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+.container form select,
+.container form textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    background: #121212;
+    color: #F9FAFB;
+    border: 1px solid #3F3F46;
+    border-radius: 9px;
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.container form input:focus,
+.container form select:focus,
+.container form textarea:focus {
+    border-color: #FDE68A;
+    box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.12);
+}
+
+.container form input::placeholder,
+.container form textarea::placeholder {
+    color: #A1A1AA;
+    opacity: 1;
+}
+
+/* Remove a aparência azul dos botões padrão */
+.container button,
+.container input[type="submit"],
+.container a.btn {
+    font-family: inherit;
+    transition: background 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+}
+
+/* Botões principais, inclusive os que usam classes Bootstrap */
+.container button[type="submit"],
+.container input[type="submit"],
+.container .btn-primary,
+.container .btn-success,
+.container .btn-registrar,
+.container .btn-salvar,
+.container .btn-movimentacao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: #FDE68A !important;
+    color: #292014 !important;
+    border: 1px solid #FDE68A !important;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.container button[type="submit"]:hover,
+.container input[type="submit"]:hover,
+.container .btn-primary:hover,
+.container .btn-success:hover,
+.container .btn-registrar:hover,
+.container .btn-salvar:hover,
+.container .btn-movimentacao:hover {
+    background: #FEF3C7 !important;
+    border-color: #FEF3C7 !important;
+    color: #292014 !important;
+    transform: translateY(-1px);
+}
+
+/* Botões secundários */
+.container .btn-secondary,
+.container .btn-voltar,
+.container .btn-cancelar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 18px;
+    background: #27272A !important;
+    color: #F9FAFB !important;
+    border: 1px solid #52525B !important;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.container .btn-secondary:hover,
+.container .btn-voltar:hover,
+.container .btn-cancelar:hover {
+    background: #3F3F46 !important;
+    border-color: #FDE68A !important;
+}
+
+/* Cabeçalho da área de movimentações */
+.container .secao-movimentacoes h2,
+.container .movimentacoes h2,
+.container .card h2 {
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #3F3F46;
+}
+
+/* Tabelas de movimentações */
+.container .table,
+.container .secao-movimentacoes table,
+.container .movimentacoes table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #F9FAFB;
+}
+
+.container .table th,
+.container .secao-movimentacoes th,
+.container .movimentacoes th {
+    padding: 13px;
+    background: #27272A;
+    color: #FDE68A;
+    text-align: left;
+    border-bottom: 1px solid #52525B;
+}
+
+.container .table td,
+.container .secao-movimentacoes td,
+.container .movimentacoes td {
+    padding: 13px;
+    border-bottom: 1px solid #3F3F46;
+}
+
+/* Tema claro */
+html[data-tema="claro"] .container h1,
+html[data-tema="claro"] .container h2,
+html[data-tema="claro"] .container h3 {
+    color: #5C3514;
+}
+
+html[data-tema="claro"] .container .card,
+html[data-tema="claro"] .container .formulario,
+html[data-tema="claro"] .container .form-container,
+html[data-tema="claro"] .container .form-card,
+html[data-tema="claro"] .container .secao-movimentacoes,
+html[data-tema="claro"] .container .movimentacoes {
+    background: #FFFFFF;
+    color: #29251F;
+    border-color: #E5D5C5;
+    box-shadow: 0 8px 25px rgba(65, 45, 25, 0.08);
+}
+
+html[data-tema="claro"] .container form label {
+    color: #5C5146;
+}
+
+html[data-tema="claro"] .container form input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+html[data-tema="claro"] .container form select,
+html[data-tema="claro"] .container form textarea {
+    background: #FFFFFF;
+    color: #29251F;
+    border-color: #D8C8B7;
+}
+
+html[data-tema="claro"] .container form input::placeholder,
+html[data-tema="claro"] .container form textarea::placeholder {
+    color: #82766A;
+}
+
+html[data-tema="claro"] .container .table,
+html[data-tema="claro"] .container .secao-movimentacoes table,
+html[data-tema="claro"] .container .movimentacoes table {
+    color: #29251F;
+}
+
+html[data-tema="claro"] .container .table th,
+html[data-tema="claro"] .container .secao-movimentacoes th,
+html[data-tema="claro"] .container .movimentacoes th {
+    background: #F5EBDD;
+    color: #5C3514;
+    border-color: #E5D5C5;
+}
+
+html[data-tema="claro"] .container .table td,
+html[data-tema="claro"] .container .secao-movimentacoes td,
+html[data-tema="claro"] .container .movimentacoes td {
+    border-color: #E5D5C5;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .container .card,
+    .container .formulario,
+    .container .form-container,
+    .container .form-card,
+    .container .secao-movimentacoes,
+    .container .movimentacoes {
+        padding: 17px;
+    }
+
+    .container button[type="submit"],
+    .container input[type="submit"],
+    .container .btn-primary,
+    .container .btn-success,
+    .container .btn-registrar,
+    .container .btn-salvar,
+    .container .btn-movimentacao {
+        max-width: 100%;
+    }
+}

@@ -1206,3 +1206,316 @@ body {
     }
 
 }
+
+/* ==========================================
+   NOVA ADEGA — IDENTIDADE VISUAL CLARA
+   Produtos, Categorias, Clientes e Admin
+========================================== */
+
+html[data-tema="claro"] {
+    --fundo-pagina: #F7F6F2;
+    --fundo-painel: #FFFFFF;
+    --fundo-titulo: #FFE4C4;
+    --texto-principal: #29251F;
+    --texto-secundario: #665F56;
+    --borda-clara: #E5DED5;
+    --destaque-dourado: #896000;
+}
+
+/* Fundo geral e textos */
+html[data-tema="claro"] body {
+    background-color: var(--fundo-pagina);
+    color: var(--texto-principal);
+}
+
+/* Painéis, cartões e áreas de conteúdo */
+html[data-tema="claro"] .card,
+html[data-tema="claro"] .painel,
+html[data-tema="claro"] .container-card,
+html[data-tema="claro"] .conteudo-card,
+html[data-tema="claro"] .form-container,
+html[data-tema="claro"] .tabela-container {
+    background-color: var(--fundo-painel);
+    color: var(--texto-principal);
+    border-color: var(--borda-clara);
+}
+
+/* Títulos com contraste bisque */
+html[data-tema="claro"] main h1,
+html[data-tema="claro"] main h2,
+html[data-tema="claro"] main h3,
+html[data-tema="claro"] .page-title,
+html[data-tema="claro"] .titulo-pagina {
+    color: var(--texto-principal);
+}
+
+/* Cabeçalhos de seções */
+html[data-tema="claro"] .card-header,
+html[data-tema="claro"] .painel-header,
+html[data-tema="claro"] .titulo-secao {
+    background-color: var(--fundo-titulo);
+    color: var(--texto-principal);
+    border-color: var(--borda-clara);
+}
+
+/* Textos, descrições e etiquetas */
+html[data-tema="claro"] main p,
+html[data-tema="claro"] main label,
+html[data-tema="claro"] main td,
+html[data-tema="claro"] main th,
+html[data-tema="claro"] main span {
+    color: var(--texto-principal);
+}
+
+/* Campos de formulário */
+html[data-tema="claro"] main input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="hidden"]),
+html[data-tema="claro"] main select,
+html[data-tema="claro"] main textarea {
+    background-color: #FFFFFF;
+    color: var(--texto-principal);
+    border-color: #D5CCC1;
+    color-scheme: light;
+}
+
+html[data-tema="claro"] main input::placeholder,
+html[data-tema="claro"] main textarea::placeholder {
+    color: #77716A;
+    opacity: 1;
+}
+
+/* Tabelas */
+html[data-tema="claro"] main table {
+    background-color: #FFFFFF;
+    color: var(--texto-principal);
+    border-color: var(--borda-clara);
+}
+
+html[data-tema="claro"] main thead,
+html[data-tema="claro"] main th {
+    background-color: var(--fundo-titulo);
+    color: var(--texto-principal);
+}
+
+html[data-tema="claro"] main td {
+    border-color: var(--borda-clara);
+}
+
+html[data-tema="claro"] main tbody tr:hover {
+    background-color: #FAF3EA;
+}
+
+/* Links e destaques */
+html[data-tema="claro"] main a:not(.btn):not(.botao) {
+    color: var(--destaque-dourado);
+}
+
+/* Bordas suaves */
+html[data-tema="claro"] main hr {
+    border-color: var(--borda-clara);
+}
+
+/* Cores gerais do modo claro */
+html[data-tema="claro"] body {
+    background: #F7F6F2 !important;
+    color: #29251F !important;
+}
+
+html[data-tema="claro"] main {
+    background: #F7F6F2 !important;
+    color: #29251F !important;
+}
+
+/* ==========================================
+NOVA ADEGA — PAINEL PRINCIPAL NO TEMA CLARO
+========================================== */
+
+html[data-tema="claro"] body {
+background: #F7F6F2 !important;
+color: #29251F !important;
+}
+
+html[data-tema="claro"] .home-container {
+background: #F7F6F2 !important;
+color: #29251F !important;
+}
+
+/* Boas-vindas */
+html[data-tema="claro"] .boas-vindas {
+background: #FFFFFF !important;
+border-color: #E5DED5 !important;
+}
+
+html[data-tema="claro"] .subtitulo {
+color: #896000 !important;
+}
+
+html[data-tema="claro"] .boas-vindas h1,
+html[data-tema="claro"] .boas-vindas strong {
+color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .boas-vindas p {
+color: #665F56 !important;
+}
+
+/* Botão nova venda */
+html[data-tema="claro"] .btn-nova-venda {
+background: #FDE68A !important;
+color: #5C3514 !important;
+border: 1px solid #E5C06A !important;
+}
+
+html[data-tema="claro"] .btn-nova-venda:hover {
+background: #F9D96A !important;
+}
+
+/* Cards de resumo */
+html[data-tema="claro"] .card-resumo {
+background: #FFFFFF !important;
+border-color: #E5DED5 !important;
+}
+
+html[data-tema="claro"] .card-resumo:hover {
+background: #FFFCF7 !important;
+border-color: #D8C3A5 !important;
+}
+
+html[data-tema="claro"] .card-icone {
+background: #FFF5E9 !important;
+}
+
+html[data-tema="claro"] .card-info span {
+color: #665F56 !important;
+}
+
+html[data-tema="claro"] .card-info strong {
+color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .card-info a {
+color: #896000 !important;
+}
+
+html[data-tema="claro"] .card-info a:hover {
+color: #5C3514 !important;
+}
+
+/* Títulos e descrições das seções */
+html[data-tema="claro"] .titulo-secao h2,
+html[data-tema="claro"] .painel-cabecalho h2 {
+color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .titulo-secao p {
+color: #665F56 !important;
+}
+
+html[data-tema="claro"] .label-secao {
+color: #896000 !important;
+}
+
+html[data-tema="claro"] .link-ver-tudo {
+color: #896000 !important;
+}
+
+/* Cards de categorias */
+html[data-tema="claro"] .card-categoria {
+background: #FFFFFF !important;
+border-color: #E5DED5 !important;
+color: #29251F !important;
+}
+
+html[data-tema="claro"] .card-categoria:hover {
+background: #FFFCF7 !important;
+border-color: #D8C3A5 !important;
+box-shadow: 0 8px 25px rgba(65, 45, 25, 0.08) !important;
+}
+
+html[data-tema="claro"] .icone-categoria {
+background: #FFF5E9 !important;
+}
+
+html[data-tema="claro"] .card-categoria h3 {
+color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .card-categoria p {
+color: #665F56 !important;
+}
+
+html[data-tema="claro"] .card-categoria .seta {
+color: #896000 !important;
+}
+
+/* Painéis inferiores */
+html[data-tema="claro"] .painel,
+html[data-tema="claro"] .painel-associados {
+background: #FFFFFF !important;
+border-color: #E5DED5 !important;
+}
+
+html[data-tema="claro"] .painel-cabecalho {
+border-bottom-color: #E5DED5 !important;
+}
+
+html[data-tema="claro"] .icone-painel,
+html[data-tema="claro"] .status-icone {
+background: #FFF5E9 !important;
+}
+
+html[data-tema="claro"] .estoque-status strong {
+color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .estoque-status p,
+html[data-tema="claro"] .desconto p {
+color: #665F56 !important;
+}
+
+html[data-tema="claro"] .desconto > strong {
+color: #896000 !important;
+}
+
+html[data-tema="claro"] .desconto span {
+color: #765000 !important;
+}
+
+/* Botões dos painéis */
+html[data-tema="claro"] .btn-painel {
+background: #FFF5E9 !important;
+color: #765000 !important;
+border-color: #E5C6A5 !important;
+}
+
+html[data-tema="claro"] .btn-painel:hover {
+background: #FDE68A !important;
+color: #5C3514 !important;
+border-color: #E5C06A !important;
+}
+
+/* Acessos rápidos */
+html[data-tema="claro"] .atalho {
+background: #FFFFFF !important;
+border-color: #E5DED5 !important;
+}
+
+html[data-tema="claro"] .atalho:hover {
+background: #FFFCF7 !important;
+border-color: #D8C3A5 !important;
+}
+
+html[data-tema="claro"] .atalho > span {
+background: #FFF5E9 !important;
+}
+
+html[data-tema="claro"] .atalho strong {
+color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .atalho small {
+color: #665F56 !important;
+}
+
+html[data-tema="claro"] .atalho b {
+color: #896000 !important;
+}

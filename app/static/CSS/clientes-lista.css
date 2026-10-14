@@ -745,3 +745,299 @@
         font-size: 12px;
     }
 }
+
+
+/* =========================================================
+   AJUSTES EXCLUSIVOS DO MODO CLARO — LISTA DE CLIENTES
+   O MODO ESCURO PERMANECE INALTERADO
+========================================================= */
+
+html[data-tema="claro"] .conteudo {
+    color: #29251F;
+}
+
+html[data-tema="claro"] .cabecalho-pagina h1 {
+    color: #5C3514;
+}
+
+html[data-tema="claro"] .cabecalho-pagina p {
+    color: #625548;
+}
+
+/* Área externa da busca */
+html[data-tema="claro"] .filtros {
+    background: #FFFFFF !important;
+    border: 1px solid #E5D5C5 !important;
+    box-shadow: none !important;
+}
+
+/* Campo de busca completamente branco */
+html[data-tema="claro"] .campo-busca {
+    background: #FFFFFF !important;
+    border: 1px solid #E5D5C5 !important;
+    box-shadow: none;
+}
+
+html[data-tema="claro"] .campo-busca:focus-within {
+    border-color: #C49A58 !important;
+    box-shadow: 0 0 0 3px rgba(196, 154, 88, 0.12) !important;
+}
+
+html[data-tema="claro"] .campo-busca input {
+    background: #FFFFFF !important;
+    color: #29251F !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+html[data-tema="claro"] .campo-busca input::placeholder {
+    color: #82766A !important;
+    opacity: 1;
+}
+
+html[data-tema="claro"] .campo-busca span {
+    color: #82766A;
+}
+
+/* Tabela e nomes dos clientes */
+html[data-tema="claro"] .tabela-container {
+    background: #FFFFFF !important;
+    border-color: #E5D5C5 !important;
+    box-shadow: 0 8px 24px rgba(65, 45, 25, 0.06) !important;
+}
+
+html[data-tema="claro"] .tabela-container thead {
+    background: #FFE4C4 !important;
+}
+
+html[data-tema="claro"] .tabela-container th {
+    color: #5C3514 !important;
+    border-color: #E5D5C5 !important;
+}
+
+html[data-tema="claro"] .tabela-container td {
+    background: #FFFFFF !important;
+    color: #29251F !important;
+    border-color: #F0E5D9 !important;
+}
+
+html[data-tema="claro"] .tabela-container tbody tr:hover td {
+    background: #FFF5E9 !important;
+}
+
+/* Nome do cliente: mesma paleta dourada/marrom das categorias */
+html[data-tema="claro"] .cliente-nome strong {
+    color: #8A5700 !important;
+}
+
+html[data-tema="claro"] .avatar {
+    background: #FFF5E9 !important;
+    border-color: #E5C6A5 !important;
+    color: #8A5700 !important;
+}
+
+/* Status */
+html[data-tema="claro"] .status.ativo {
+    color: #765000 !important;
+    background: #FFF5D8 !important;
+}
+
+html[data-tema="claro"] .status.ativo > span {
+    background: #B78320 !important;
+    box-shadow: none !important;
+}
+
+html[data-tema="claro"] .status.inativo {
+    color: #625548 !important;
+    background: #F3F0EC !important;
+}
+
+html[data-tema="claro"] .status.inativo > span {
+    background: #92877B !important;
+}
+
+/* Botões de ação */
+html[data-tema="claro"] .btn-editar {
+    background: #FFF5E9 !important;
+    border-color: #E5C6A5 !important;
+    color: #765000 !important;
+}
+
+html[data-tema="claro"] .btn-editar:hover {
+    background: #FFE4C4 !important;
+    border-color: #C49A58 !important;
+}
+
+html[data-tema="claro"] .btn-status {
+    background: #FFFFFF !important;
+    border-color: #D8C8B7 !important;
+    color: #5C5146 !important;
+}
+
+html[data-tema="claro"] .btn-status:hover {
+    background: #FFF5E9 !important;
+    border-color: #C49A58 !important;
+    color: #765000 !important;
+}
+
+/* Paginação e botão voltar */
+html[data-tema="claro"] .info-paginacao p {
+    color: #625548 !important;
+}
+
+html[data-tema="claro"] .btn-pagina,
+html[data-tema="claro"] .paginacao a {
+    background: #FFFFFF !important;
+    border-color: #E5D5C5 !important;
+    color: #765000 !important;
+}
+
+html[data-tema="claro"] .btn-pagina:hover,
+html[data-tema="claro"] .paginacao a:hover {
+    background: #FFF5E9 !important;
+    border-color: #C49A58 !important;
+    color: #5C3514 !important;
+    box-shadow: none !important;
+}
+
+html[data-tema="claro"] .conteudo > .voltar {
+    color: #765000 !important;
+}
+
+html[data-tema="claro"] .conteudo > .voltar:hover {
+    color: #5C3514 !important;
+}
+
+/* Mensagem de cadastro */
+html[data-tema="claro"] .mensagem.sucesso {
+    background: #FFF5E9 !important;
+    border-color: #E5D5C5 !important;
+    color: #5C3514 !important;
+}
+
+/* Estado sem clientes */
+html[data-tema="claro"] .nenhum strong {
+    color: #5C3514 !important;
+}
+
+html[data-tema="claro"] .nenhum span {
+    color: #625548 !important;
+}
+
+/* =========================================================
+CORREÇÃO FINAL — LISTA DE CLIENTES NO MODO CLARO
+Não altera o modo escuro
+========================================================= */
+
+html[data-tema="claro"] body .page-wrapper .conteudo {
+background: transparent !important;
+color: #29251F !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .conteudo .cabecalho-pagina h1 {
+color: #5C3514 !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .conteudo .cabecalho-pagina p {
+color: #625548 !important;
+}
+
+/* Barra externa dos filtros */
+html[data-tema="claro"] body .page-wrapper .conteudo .filtros {
+background: #FFFFFF !important;
+border: 1px solid #E5D5C5 !important;
+box-shadow: 0 4px 14px rgba(65, 45, 25, 0.05) !important;
+}
+
+/* Campo de pesquisa branco */
+html[data-tema="claro"] body .page-wrapper .conteudo .filtros .campo-busca {
+background: #FFFFFF !important;
+border: 1px solid #E5D5C5 !important;
+box-shadow: none !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .conteudo .filtros .campo-busca input {
+background: #FFFFFF !important;
+color: #29251F !important;
+border: none !important;
+outline: none !important;
+box-shadow: none !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .conteudo .filtros .campo-busca input::placeholder {
+color: #82766A !important;
+opacity: 1 !important;
+}
+
+/* Botões de pesquisa e limpar */
+html[data-tema="claro"] body .page-wrapper .conteudo .btn-filtrar {
+background: #FDE68A !important;
+color: #29251F !important;
+border-color: #E5C65A !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .conteudo .btn-limpar {
+background: #FFFFFF !important;
+color: #5C5146 !important;
+border-color: #D8C8B7 !important;
+}
+
+/* Tabela branca */
+html[data-tema="claro"] body .page-wrapper .conteudo .tabela-container {
+background: #FFFFFF !important;
+border: 1px solid #E5D5C5 !important;
+box-shadow: 0 8px 24px rgba(65, 45, 25, 0.06) !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .conteudo .tabela-container table {
+background: #FFFFFF !important;
+color: #29251F !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .conteudo .tabela-container thead,
+html[data-tema="claro"] body .page-wrapper .conteudo .tabela-container th {
+background: #FFE4C4 !important;
+color: #5C3514 !important;
+border-color: #E5D5C5 !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .conteudo .tabela-container td {
+background: #FFFFFF !important;
+color: #29251F !important;
+border-color: #F0E5D9 !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .conteudo .tabela-container tbody tr:hover td {
+background: #FFF5E9 !important;
+}
+
+/* Nome do cliente na mesma paleta das categorias */
+html[data-tema="claro"] body .page-wrapper .conteudo .cliente-nome strong {
+color: #8A5700 !important;
+}
+
+/* Botão de novo cliente */
+html[data-tema="claro"] body .page-wrapper .conteudo .btn-novo {
+background: #FDE68A !important;
+color: #29251F !important;
+border-color: #E5C65A !important;
+}
+
+/* Paginação */
+html[data-tema="claro"] body .page-wrapper .conteudo .paginacao a {
+background: #FFFFFF !important;
+color: #765000 !important;
+border-color: #E5D5C5 !important;
+box-shadow: none !important;
+transform: none !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .conteudo .paginacao .pagina-atual {
+background: #FDE68A !important;
+color: #29251F !important;
+border-color: #E5C65A !important;
+}
+
+html[data-tema="claro"] body .page-wrapper .conteudo .paginacao span {
+color: #625548 !important;
+}
