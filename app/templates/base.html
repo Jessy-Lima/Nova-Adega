@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR" data-tema="escuro">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,12 @@
     </script>
 
     <link rel="stylesheet" href="/static/CSS/home.css?v=8">
+
     {% block styles %}{% endblock %}
+
+    <!-- Responsividade para celulares, tablets e computadores -->
+    <link rel="stylesheet" href="/static/CSS/responsivo.css?v=1">
+
     <link rel="stylesheet" href="/static/CSS/voltar.css?v=2">
 
     <style>
@@ -262,13 +267,8 @@
             <a href="/categorias/">Categorias</a>
             <a href="/clientes/">Clientes</a>
 
-            <button
-                type="button"
-                id="alternar-tema"
-                class="botao-tema"
-                aria-label="Ativar modo claro"
-                title="Alternar modo claro/escuro"
-            >☀️</button>
+            <button type="button" id="alternar-tema" class="botao-tema" aria-label="Ativar modo claro"
+                title="Alternar modo claro/escuro">☀️</button>
 
             <a href="/auth/logout" class="btn-sair">Sair</a>
         </div>
@@ -335,4 +335,5 @@
         })();
     </script>
 </body>
+
 </html>
