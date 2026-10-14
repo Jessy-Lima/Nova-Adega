@@ -949,3 +949,112 @@ html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:hover {
         min-width: 0;
     }
 }
+
+
+/* ==========================================
+   LISTAGEM RESPONSIVA DE CATEGORIAS
+========================================== */
+
+.categorias-listagem,
+.categorias-tabela-desktop,
+.categorias-cards-mobile {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.categorias-tabela-desktop {
+    display: block;
+    overflow-x: auto;
+}
+
+.categorias-tabela-desktop table {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.categorias-tabela-desktop th,
+.categorias-tabela-desktop td {
+    padding: 12px 8px;
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.categorias-cards-mobile {
+    display: none;
+}
+
+.categoria-card-mobile {
+    width: 100%;
+    min-width: 0;
+    padding: 16px;
+    margin-bottom: 12px;
+    border: 1px solid rgba(253, 230, 138, 0.25);
+    border-radius: 12px;
+    background: #1E1E1E;
+    color: #F9FAFB;
+}
+
+.categoria-card-mobile h3 {
+    margin: 0 0 14px;
+    overflow-wrap: anywhere;
+    color: #FDE68A;
+}
+
+.categoria-info-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(253, 230, 138, 0.12);
+}
+
+.categoria-info-mobile > * {
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.categoria-acoes-mobile {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+}
+
+.categoria-acoes-mobile a,
+.categoria-acoes-mobile button {
+    max-width: 100%;
+    padding: 9px 12px;
+    overflow-wrap: anywhere;
+}
+
+.categoria-acoes-mobile form {
+    min-width: 0;
+    max-width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+    .categorias-tabela-desktop {
+        display: none;
+    }
+
+    .categorias-cards-mobile {
+        display: block;
+    }
+
+    .categorias-acoes-mobile {
+        width: 100%;
+    }
+
+    .categoria-acoes-mobile {
+        flex-direction: column;
+    }
+
+    .categoria-acoes-mobile a,
+    .categoria-acoes-mobile button {
+        width: 100%;
+    }
+}
