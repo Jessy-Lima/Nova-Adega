@@ -472,25 +472,87 @@ label {
     }
 }
 
-/* Ajuste da tabela de categorias no celular */
-@media screen and (max-width: 480px) {
 
-    .categorias-container {
+/* ==========================================
+   CATEGORIAS - RESPONSIVIDADE
+========================================== */
+
+.titulo-pagina,
+.tabela-container,
+.paginacao,
+.voltar {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.tabela-container {
+    overflow-x: hidden;
+}
+
+.tabela-container table {
+    width: 100%;
+    min-width: 0;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.tabela-container th,
+.tabela-container td {
+    min-width: 0;
+    padding: 10px 6px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+.tabela-container .acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.tabela-container .acoes form {
+    min-width: 0;
+}
+
+@media screen and (max-width: 600px) {
+    .titulo-pagina {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .btn-nova {
+        width: 100%;
+        text-align: center;
+    }
+
+    .tabela-container th,
+    .tabela-container td {
+        padding: 9px 4px;
+        font-size: 12px;
+    }
+
+    .tabela-container .acoes {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .tabela-container .acoes a,
+    .tabela-container .acoes button {
         width: 100%;
         max-width: 100%;
-        overflow-x: auto;
-    }
-
-    .categorias-container table {
-        width: 100%;
-        min-width: 0;
-        table-layout: auto;
-    }
-
-    .categorias-container th,
-    .categorias-container td {
-        white-space: normal;
+        padding: 7px 5px;
+        font-size: 12px;
         overflow-wrap: anywhere;
     }
 
+    .paginacao {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
 }
