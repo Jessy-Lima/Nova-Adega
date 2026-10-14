@@ -71,6 +71,14 @@ Login - Nova Adega
         </p>
 
 
+        {% if erro %}
+        <div class="login-error" role="alert">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            {{ erro }}
+        </div>
+        {% endif %}
+
+
         <!-- FORMULÁRIO -->
 
         <form method="POST">
