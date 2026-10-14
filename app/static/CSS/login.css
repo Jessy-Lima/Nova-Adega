@@ -372,3 +372,25 @@ html[data-tema="claro"] .login-card button:hover {
     background-color: #F9D96A !important;
 }
 
+
+
+/* Mensagem de erro no login */
+.login-error {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0;
+    padding: 13px 15px;
+    border: 1px solid #f0b8b8;
+    border-radius: 10px;
+    background-color: #fff0f0;
+    color: #b42318;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.login-error i {
+    flex-shrink: 0;
+    font-size: 17px;
+}
