@@ -12,7 +12,7 @@
 {% block styles %}
 
 <link rel="stylesheet" href="/static/CSS/novo-produto.css">
-    
+
 
 {% endblock %}
 
@@ -34,9 +34,9 @@
             <h1>
 
                 {{
-                    "Editar produto"
-                    if editando
-                    else "Novo produto"
+                "Editar produto"
+                if editando
+                else "Novo produto"
                 }}
 
             </h1>
@@ -45,9 +45,9 @@
             <p>
 
                 {{
-                    "Atualize as informações do produto."
-                    if editando
-                    else "Cadastre um novo produto no sistema."
+                "Atualize as informações do produto."
+                if editando
+                else "Cadastre um novo produto no sistema."
                 }}
 
             </p>
@@ -72,21 +72,11 @@
 
         <!-- FORMULÁRIO -->
 
-        <form
-
-            action="{{
+        <form action="{{
                 '/produtos/' + editando.id|string + '/editar'
                 if editando
                 else '/produtos/novo'
-            }}"
-
-            method="post"
-
-            enctype="multipart/form-data"
-
-            class="produto-form"
-
-        >
+            }}" method="post" enctype="multipart/form-data" class="produto-form">
 
 
 
@@ -101,21 +91,9 @@
                 </label>
 
 
-                <input
-
-                    type="text"
-
-                    id="nome"
-
-                    name="nome"
-
+                <input type="text" id="nome" name="nome"
                     value="{{ editando.nome if editando else (valores.nome if valores else '') }}"
-
-                    placeholder="Digite o nome do produto"
-
-                    required
-
-                >
+                    placeholder="Digite o nome do produto" required>
 
             </div>
 
@@ -137,25 +115,9 @@
                     </label>
 
 
-                    <input
-
-                        type="number"
-
-                        id="preco"
-
-                        name="preco"
-
-                        step="0.01"
-
-                        min="0"
-
+                    <input type="number" id="preco" name="preco" step="0.01" min="0"
                         value="{{ editando.preco if editando else (valores.preco if valores else '0.00') }}"
-
-                        placeholder="0,00"
-
-                        required
-
-                    >
+                        placeholder="0,00" required>
 
                 </div>
 
@@ -172,23 +134,9 @@
                     </label>
 
 
-                    <input
-
-                        type="number"
-
-                        id="estoque_atual"
-
-                        name="estoque_atual"
-
-                        min="0"
-
+                    <input type="number" id="estoque_atual" name="estoque_atual" min="0"
                         value="{{ editando.estoque_atual if editando else (valores.estoque_atual if valores else '0') }}"
-
-                        placeholder="0"
-
-                        required
-
-                    >
+                        placeholder="0" required>
 
                 </div>
 
@@ -208,13 +156,7 @@
                 </label>
 
 
-                <select
-
-                    name="categoria_id"
-
-                    id="categoria_id"
-
-                >
+                <select name="categoria_id" id="categoria_id">
 
                     <option value="0">
 
@@ -225,22 +167,8 @@
 
                     {% for c in categorias %}
 
-                    <option
-
-                        value="{{ c.id }}"
-
-                        {{
-                            'selected'
-                            if
-                            (
-                                (editando and editando.categoria_id == c.id)
-                                or
-                                (valores and valores.categoria_id == c.id)
-                            )
-                            else ''
-                        }}
-
-                    >
+                    <option value="{{ c.id }}" {{ 'selected' if ( (editando and editando.categoria_id==c.id) or (valores
+                        and valores.categoria_id==c.id) ) else '' }}>
 
                         {{ c.nome }}
 
@@ -269,15 +197,7 @@
                 </p>
 
 
-                <img
-
-                    src="{{ editando.imagem_url }}"
-
-                    alt="{{ editando.nome }}"
-
-                    class="produto-imagem-preview"
-
-                >
+                <img src="{{ editando.imagem_url }}" alt="{{ editando.nome }}" class="produto-imagem-preview">
 
 
             </div>
@@ -289,43 +209,16 @@
             <!-- UPLOAD DE IMAGEM -->
 
             <div class="form-grupo">
+                <label for="imagem">Imagem do produto</label>
 
-                <label for="imagem">
+                <input type="file" id="imagem" name="imagem" accept=".jpg,.jpeg,.png,.webp" class="input-arquivo">
+            </div>
+            <small>
 
+                Formatos aceitos:
+                JPG, JPEG, PNG e WEBP.
 
-                    {{
-
-                        "Nova imagem (deixe vazio para manter a atual)"
-
-                        if editando
-
-                        else "Imagem do produto"
-
-                    }}
-
-
-                </label>
-
-
-                <input
-
-                    type="file"
-
-                    id="imagem"
-
-                    name="imagem"
-
-                    accept=".jpg,.jpeg,.png,.webp"
-
-                >
-
-
-                <small>
-
-                    Formatos aceitos:
-                    JPG, JPEG, PNG e WEBP.
-
-                </small>
+            </small>
 
             </div>
 
@@ -336,21 +229,15 @@
             <div class="form-botoes">
 
 
-                <button
-
-                    type="submit"
-
-                    class="btn-salvar"
-
-                >
+                <button type="submit" class="btn-salvar">
 
                     {{
 
-                        "Salvar alterações"
+                    "Salvar alterações"
 
-                        if editando
+                    if editando
 
-                        else "Criar produto"
+                    else "Criar produto"
 
                     }}
 
@@ -358,13 +245,7 @@
 
 
 
-                <a
-
-                    href="/produtos/"
-
-                    class="btn-cancelar"
-
-                >
+                <a href="/produtos/" class="btn-cancelar">
 
                     Cancelar
 

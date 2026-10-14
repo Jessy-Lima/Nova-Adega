@@ -2,6 +2,7 @@
 from fastapi import FastAPI, Request, Depends, HTTPException
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from app.auth import get_usuario_opcional
@@ -17,7 +18,13 @@ from app.controllers import pdv_controller
 app = FastAPI(title="Sistema de Ponto de venda")
 
 #Configurar a pasta para servir os arquivos estáticos (CSS, JS e IMG)
-app.mount("/static", StaticFiles(directory="app/static"), name="static")
+BASE_DIR = Path(__file__).resolve().parent
+
+app.mount(
+    "/static",
+    StaticFiles(directory=BASE_DIR / "static"),
+    name="static"
+)
 
 #Configurar o jinja2 para renderizar os HTML
 templates = Jinja2Templates(directory="app/templates")

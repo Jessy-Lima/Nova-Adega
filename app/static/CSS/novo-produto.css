@@ -1,397 +1,365 @@
-/* =========================================================
-   NOVA ADEGA — CADASTRO DE PRODUTO
-   CSS EXCLUSIVO DA PÁGINA
-========================================================= */
 
+/* ==========================================
+   NOVA ADEGA - NOVO PRODUTO
+   CORES BASEADAS NA IMAGEM DE REFERÊNCIA
+========================================== */
 
-/* =========================================================
-   CONTAINER PRINCIPAL
-========================================================= */
+:root {
+    --fundo: #111111;
+    --cartao: #1f1f1f;
+    --campo: #111111;
+    --borda: #383838;
+    --texto: #f5f5f5;
+    --texto-secundario: #a0a0a0;
+    --amarelo: #ffe58a;
+    --amarelo-hover: #ffda70;
+    --preto: #000000;
+}
 
+/* FUNDO PRINCIPAL */
 main.container {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 45px 30px 60px;
-
-    color: #F9FAFB;
+    padding: 35px 34px 45px;
+    box-sizing: border-box;
+    background-color: var(--fundo);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 
-/* =========================================================
-   TÍTULO
-========================================================= */
-
-main.container > h1 {
-    margin: 0 0 8px;
-
-    font-size: 34px;
-    font-weight: 700;
-
-    color: #FDE68A;
-
-    letter-spacing: -0.5px;
+/* Título: Novo produto */
+.form-titulo {
+    color: #f5f5f5;
+    font-size: 42px;
+    font-weight: bold;
+    margin: 0 0 18px;
 }
 
-main.container > p {
-    margin: 0 0 30px;
-
-    color: #FDE68A;
-
-    font-size: 16px;
+/* Subtítulo */
+.form-subtitulo {
+    color: #f5f5f5;
+    font-size: 24px;
+    margin: 0 0 18px;
 }
 
-
-/* =========================================================
-   FORMULÁRIO
-========================================================= */
-
-main.container form {
-    width: 100%;
-
+/* CARTÃO DO FORMULÁRIO */
+.produto-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     padding: 32px;
-
-    background: #1E1E1E;
-
-    border: 1px solid #3F3F46;
-    border-radius: 16px;
-
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.30);
+    background-color: var(--cartao);
+    border: 1px solid #3a3a3a;
+    border-radius: 18px;
+    box-sizing: border-box;
 }
 
-
-/* =========================================================
-   LABELS — AMARELO
-========================================================= */
-
-main.container form label {
-    display: block;
-
-    margin-bottom: 8px;
-
-    color: #FDE68A;
-
-    font-size: 14px;
-    font-weight: 600;
+/* GRUPOS DE CAMPOS */
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    gap: 8px;
 }
 
+/* RÓTULOS */
+.produto-form label {
+    color: var(--amarelo);
+    font-size: 15px;
+    font-weight: bold;
+}
 
-/* =========================================================
-   CAMPOS
-========================================================= */
-
-main.container form input[type="text"],
-main.container form input[type="number"],
-main.container form input[type="file"],
-main.container form select {
-
+/* CAMPOS */
+.produto-form input[type="text"],
+.produto-form input[type="number"],
+.produto-form input[type="date"],
+.produto-form select,
+.produto-form textarea {
     width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    box-sizing: border-box;
 
-    min-height: 46px;
+    background-color: var(--campo);
+    color: var(--texto);
 
-    padding: 11px 14px;
-
-    margin-bottom: 20px;
-
-    background: #121212;
-
-    color: #F9FAFB;
-
-    border: 1px solid #3F3F46;
-
+    border: 1px solid var(--borda);
     border-radius: 9px;
 
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+/* TEXTO DE EXEMPLO */
+.produto-form input::placeholder,
+.produto-form textarea::placeholder {
+    color: #777777;
+    opacity: 1;
+}
+
+/* FOCO NOS CAMPOS */
+.produto-form input:focus,
+.produto-form select:focus,
+.produto-form textarea:focus {
     outline: none;
+    border-color: var(--amarelo);
+}
+
+/* LINHAS COM DOIS CAMPOS */
+.form-linha {
+    display: flex;
+    gap: 25px;
+    width: 100%;
+}
+
+.form-linha .form-grupo {
+    flex: 1;
+    min-width: 0;
+}
+
+/* ÁREA DE TEXTO */
+.produto-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* ==========================================
+   CAMPO DE IMAGEM
+========================================== */
+
+.produto-form input[type="file"] {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    padding: 10px;
+    box-sizing: border-box;
+
+    background-color: var(--campo);
+    color: var(--texto);
+
+    border: 1px dashed #444444;
+    border-radius: 9px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+/* BOTÃO ESCOLHER ARQUIVO */
+.produto-form input[type="file"]::file-selector-button {
+    background-color: var(--amarelo) !important;
+    color: var(--preto) !important;
+
+    border: 1px solid var(--amarelo) !important;
+    border-radius: 6px !important;
+
+    padding: 9px 14px !important;
+    margin-right: 8px !important;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* EFEITO DO BOTÃO DE ARQUIVO */
+.produto-form input[type="file"]::file-selector-button:hover {
+    background-color: var(--amarelo-hover) !important;
+    border-color: var(--amarelo-hover) !important;
+}
+
+/* COMPATIBILIDADE COM CHROME E EDGE */
+.produto-form input[type="file"]::-webkit-file-upload-button {
+    background-color: var(--amarelo) !important;
+    color: var(--preto) !important;
+
+    border: 1px solid var(--amarelo) !important;
+    border-radius: 6px !important;
+
+    padding: 9px 14px !important;
+    margin-right: 8px !important;
 
     font-size: 14px;
-
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
-}
-
-
-/* =========================================================
-   PLACEHOLDER
-========================================================= */
-
-main.container form input::placeholder {
-    color: #71717A;
-}
-
-
-/* =========================================================
-   FOCO DOS CAMPOS
-========================================================= */
-
-main.container form input[type="text"]:focus,
-main.container form input[type="number"]:focus,
-main.container form select:focus {
-
-    border-color: #FDE68A;
-
-    box-shadow:
-        0 0 0 3px rgba(253, 230, 138, 0.10);
-
-    background: #171717;
-}
-
-
-/* =========================================================
-   SELECT
-========================================================= */
-
-main.container form select {
+    font-weight: bold;
     cursor: pointer;
 }
 
-main.container form select option {
-    background: #1E1E1E;
-
-    color: #F9FAFB;
+/* TEXTO DE AJUDA */
+.form-ajuda {
+    color: var(--texto);
+    font-size: 14px;
+    margin-top: 2px;
 }
 
+/* PRÉVIA DA IMAGEM */
+#preview-container {
+    margin-top: 12px;
+    text-align: center;
+}
 
-/* =========================================================
-   CAMPO DE IMAGEM
-========================================================= */
+#preview-imagem {
+    display: inline-block;
+    max-width: 100%;
+    max-height: 260px;
+    object-fit: contain;
 
-main.container form input[type="file"] {
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+}
 
-    padding: 9px;
+/* MENSAGENS DE ERRO */
+.erro,
+.mensagem-erro,
+.erro-campo {
+    color: #ff7777;
+    font-size: 13px;
+}
 
-    background: #171717;
+/* ==========================================
+   BOTÕES
+========================================== */
 
-    border: 1px dashed #52525B;
+.form-botoes {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 4px;
+}
+
+/* CRIAR PRODUTO */
+.btn-salvar {
+    min-height: 48px;
+    padding: 12px 24px;
+
+    background-color: var(--amarelo);
+    color: var(--preto);
+
+    border: 1px solid var(--amarelo);
+    border-radius: 9px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
 
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
-main.container form input[type="file"]:hover {
-    border-color: #FDE68A;
+.btn-salvar:hover {
+    background-color: var(--amarelo-hover);
+    border-color: var(--amarelo-hover);
 }
 
+/* CANCELAR */
+.btn-cancelar {
+    min-height: 48px;
+    padding: 12px 24px;
 
-/* =========================================================
-   TEXTO DE FORMATOS ACEITOS
-========================================================= */
+    background-color: var(--amarelo);
+    color: var(--preto);
 
-main.container form small,
-main.container form .ajuda,
-main.container form p {
+    border: 1px solid var(--amarelo);
+    border-radius: 9px;
 
-    color: #FDE68A;
-}
-
-
-/* =========================================================
-   ÁREA DOS BOTÕES
-========================================================= */
-
-main.container form button,
-main.container form input[type="submit"],
-main.container form a {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
 
     display: inline-flex;
-
     align-items: center;
     justify-content: center;
-
-    min-height: 46px;
-
-    padding: 0 24px;
-
-    margin-top: 8px;
-
-    border-radius: 9px;
-
-    font-size: 14px;
-    font-weight: 700;
-
-    text-decoration: none;
+    box-sizing: border-box;
 
     cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
-
-/* =========================================================
-   BOTÃO CRIAR PRODUTO
-========================================================= */
-
-main.container form button,
-main.container form input[type="submit"] {
-
-    background: #FDE68A;
-
-    color: #121212;
-
-    border: 1px solid #FDE68A;
+.btn-cancelar:hover {
+    background-color: var(--amarelo-hover);
+    border-color: var(--amarelo-hover);
 }
 
-main.container form button:hover,
-main.container form input[type="submit"]:hover {
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
 
-    background: #FEF3C7;
-
-    border-color: #FEF3C7;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 6px 18px rgba(253, 230, 138, 0.18);
-}
-
-
-/* =========================================================
-   BOTÃO CANCELAR
-========================================================= */
-
-main.container form a {
-
-    margin-left: 10px;
-
-    background: #FDE68A;
-
-    color: #121212;
-
-    border: 1px solid #FDE68A;
-}
-
-main.container form a:hover {
-
-    background: #FEF3C7;
-
-    border-color: #FEF3C7;
-
-    transform: translateY(-1px);
-
-    box-shadow:
-        0 6px 18px rgba(253, 230, 138, 0.18);
-}
-
-
-/* =========================================================
-   MENSAGEM DE ERRO
-========================================================= */
-
-main.container .erro,
-main.container .mensagem-erro {
-
-    width: 100%;
-
-    margin-bottom: 20px;
-
-    padding: 12px 15px;
-
-    background: #2A1717;
-
-    color: #FCA5A5;
-
-    border: 1px solid #7F1D1D;
-
-    border-radius: 9px;
-
-    font-size: 14px;
-}
-
-
-/* =========================================================
-   LINK VOLTAR
-========================================================= */
-
-main.container > a {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    margin-top: 20px;
-
-    color: #FDE68A;
-
-    font-size: 14px;
-    font-weight: 600;
-
-    text-decoration: none;
-
-    transition: color 0.2s ease;
-}
-
-main.container > a:hover {
-    color: #FEF3C7;
-}
-
-
-/* =========================================================
-   RESPONSIVO
-========================================================= */
-
-@media (max-width: 700px) {
-
+@media (max-width: 768px) {
     main.container {
-        padding: 30px 18px 45px;
+        padding: 22px 14px;
     }
 
-    main.container > h1 {
-        font-size: 28px;
+    .form-titulo {
+        font-size: 30px;
     }
 
-    main.container > p {
-        font-size: 14px;
-
-        margin-bottom: 24px;
+    .form-subtitulo {
+        font-size: 16px;
     }
 
-    main.container form {
-        padding: 22px;
-
-        border-radius: 12px;
+    .produto-form {
+        padding: 20px 16px;
+        gap: 18px;
     }
 
-    main.container form button,
-    main.container form input[type="submit"],
-    main.container form a {
+    .form-linha {
+        flex-direction: column;
+        gap: 18px;
+    }
 
+    .form-botoes {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btn-salvar,
+    .btn-cancelar {
         width: 100%;
-
-        margin-left: 0;
-        margin-top: 10px;
+        box-sizing: border-box;
     }
 }
 
-/* =========================================================
-   BOTÃO VOLTAR - PADRÃO
-========================================================= */
 
-main.container > a {
-    display: inline-flex !important;
-    align-items: center !important;
-
-    color: #9CA3AF !important;
-
-    font-size: 14px !important;
-    font-weight: 500 !important;
-
-    line-height: 20px !important;
-
-    text-decoration: none !important;
-
-    margin-top: 24px !important;
-    padding: 0 !important;
-
-    transition: color 0.2s ease, transform 0.2s ease !important;
+/* Diminuir o título e o subtítulo */
+main.container h1.form-titulo {
+    font-size: 30px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 12px !important;
 }
 
-main.container > a:hover {
-    color: #FDE68A !important;
-    transform: translateX(-3px) !important;
+main.container .form-subtitulo {
+    font-size: 18px !important;
+    line-height: 1.4 !important;
+    margin-bottom: 18px !important;
+}
 
-    text-decoration: none !important;
+
+main.container h1 {
+    font-size: 30px !important;
+}
+
+main.container h2,
+main.container p.form-subtitulo {
+    font-size: 18px !important;
+}
+
+
+/* Subtítulo: Cadastre um novo produto no sistema */
+main.container .form-subtitulo {
+    font-size: 16px !important;
+    line-height: 1.4 !important;
+    font-weight: normal !important;
+}
+
+
+main.container h2,
+main.container p {
+    font-size: 16px !important;
 }
