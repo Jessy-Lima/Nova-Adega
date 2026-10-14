@@ -1488,7 +1488,7 @@ html[data-tema="claro"] .container .movimentacoes td {
 html[data-tema="claro"] .paginacao .btn-pagina {
     background-color: #FFFFFF !important;
     color: #27272A !important;
-    border: 1px solid #D4D4D8 !important;
+    border: 1px solid #FFE4C4 !important;
 }
 
 html[data-tema="claro"] .paginacao .btn-pagina:hover {
@@ -1544,7 +1544,7 @@ html[data-tema="claro"] .paginacao .btn-pagina:hover {
 /* TEMA CLARO — hover uniforme em todas as células da linha */
 html[data-tema="claro"] .tabela-container tbody tr:hover,
 html[data-tema="claro"] .tabela-container tbody tr:hover td {
-    background-color: #FFF4E8;
+    background-color: #FDE68A;
 }
 
 /* A célula de ações continua sendo uma célula normal da tabela */
