@@ -1553,3 +1553,163 @@ html[data-tema="claro"] .tabela-container tbody tr:hover td {
     white-space: nowrap;
     vertical-align: middle;
 }
+
+
+/* =========================================================
+   CORREÇÃO RESPONSIVA — AÇÕES DOS PRODUTOS
+   Ajuste exclusivo da página de produtos
+========================================================= */
+
+/* Mantém os botões visíveis dentro da coluna */
+.container .tabela-container td.acoes-produto {
+    display: table-cell;
+    min-width: 190px;
+    white-space: normal;
+    vertical-align: middle;
+    overflow: visible;
+}
+
+/* Organiza os botões lado a lado quando houver espaço */
+.container .acoes-produto .btn-editar,
+.container .acoes-produto .btn-desativar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 38px;
+    margin: 3px 4px 3px 0;
+    padding: 9px 12px;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+/* Evita que o formulário esconda o botão */
+.container .acoes-produto .form-desativar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    max-width: 100%;
+    margin: 3px 0;
+    padding: 0;
+    overflow: visible;
+    vertical-align: middle;
+}
+
+.container .acoes-produto .form-desativar .btn-desativar {
+    width: auto;
+    max-width: 100%;
+    flex-shrink: 0;
+}
+
+/* No celular, mantém a tabela rolável horizontalmente */
+@media (max-width: 768px) {
+    .container .tabela-container {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        overflow-y: visible;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .container .tabela-container table {
+        display: table;
+        width: 100%;
+        min-width: 800px;
+        table-layout: auto;
+    }
+
+    .container .tabela-container thead {
+        display: table-header-group;
+    }
+
+    .container .tabela-container tbody {
+        display: table-row-group;
+    }
+
+    .container .tabela-container tbody tr {
+        display: table-row;
+    }
+
+    .container .tabela-container tbody td {
+        display: table-cell;
+    }
+
+    .container .tabela-container td.acoes-produto {
+        display: table-cell;
+        min-width: 190px;
+        white-space: normal;
+        overflow: visible;
+    }
+
+    .container .acoes-produto .btn-editar,
+    .container .acoes-produto .btn-desativar {
+        min-height: 40px;
+        font-size: 13px;
+    }
+}
+
+
+/* ==========================================
+   CORREÇÃO FINAL — BOTÕES DOS PRODUTOS
+========================================== */
+
+.container .tabela-container {
+    overflow-x: auto !important;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+}
+
+.container .tabela-container table {
+    min-width: 800px;
+    table-layout: auto;
+}
+
+.container .tabela-container td.acoes-produto {
+    display: table-cell !important;
+    min-width: 190px;
+    white-space: normal;
+    vertical-align: middle;
+}
+
+.container .acoes-produto .form-desativar {
+    display: inline-flex !important;
+    width: auto !important;
+    min-width: 0;
+    margin: 3px 0;
+    padding: 0;
+    overflow: visible;
+    vertical-align: middle;
+}
+
+.container .acoes-produto .btn-editar,
+.container .acoes-produto .btn-desativar {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: auto !important;
+    min-width: 0;
+    max-width: none;
+    min-height: 40px;
+    margin: 3px 4px 3px 0;
+    padding: 9px 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .container .tabela-container {
+        overflow-x: auto !important;
+    }
+
+    .container .tabela-container table {
+        width: 800px;
+        min-width: 800px;
+    }
+
+    .container .tabela-container td.acoes-produto {
+        display: table-cell !important;
+        min-width: 190px;
+    }
+}

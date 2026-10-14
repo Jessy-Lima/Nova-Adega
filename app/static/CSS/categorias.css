@@ -951,110 +951,279 @@ html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:hover {
 }
 
 
-/* ==========================================
-   LISTAGEM RESPONSIVA DE CATEGORIAS
-========================================== */
 
-.categorias-listagem,
-.categorias-tabela-desktop,
-.categorias-cards-mobile {
+/* =========================================================
+   LISTAGEM DE CATEGORIAS — DESKTOP, TABLET E CELULAR
+   Estilos exclusivos da página de categorias
+========================================================= */
+
+/* Container da listagem */
+.categorias-page .categorias-listagem {
     width: 100%;
     min-width: 0;
-    max-width: 100%;
 }
 
-.categorias-tabela-desktop {
+/* Tabela original para computador e tablet */
+.categorias-page .categorias-tabela-desktop {
     display: block;
-    overflow-x: auto;
-}
-
-.categorias-tabela-desktop table {
     width: 100%;
     min-width: 0;
-    table-layout: fixed;
+    overflow-x: auto;
+    background: #1f1f22;
+    border: 1px solid #333338;
+    border-radius: 12px;
+}
+
+.categorias-page .categorias-tabela-desktop table {
+    width: 100%;
+    min-width: 650px;
     border-collapse: collapse;
 }
 
-.categorias-tabela-desktop th,
-.categorias-tabela-desktop td {
-    padding: 12px 8px;
-    overflow-wrap: anywhere;
-    white-space: normal;
+.categorias-page .categorias-tabela-desktop thead {
+    background: #29292e;
 }
 
-.categorias-cards-mobile {
+.categorias-page .categorias-tabela-desktop th {
+    padding: 15px 18px;
+    text-align: left;
+    color: #a1a1aa;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #333338;
+    white-space: nowrap;
+}
+
+.categorias-page .categorias-tabela-desktop td {
+    padding: 16px 18px;
+    color: #e4e4e7;
+    font-size: 14px;
+    border-bottom: 1px solid #333338;
+    vertical-align: middle;
+}
+
+.categorias-page .categorias-tabela-desktop tbody tr {
+    transition: background 0.2s;
+}
+
+.categorias-page .categorias-tabela-desktop tbody tr:hover {
+    background: #29292e;
+}
+
+.categorias-page .categorias-tabela-desktop tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Ações na tabela */
+.categorias-page .categorias-tabela-desktop .acoes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.categorias-page .categorias-tabela-desktop .acoes form {
+    margin: 0;
+}
+
+/* Cards: ficam escondidos no computador */
+.categorias-page .categorias-cards-mobile {
     display: none;
 }
 
-.categoria-card-mobile {
-    width: 100%;
-    min-width: 0;
-    padding: 16px;
-    margin-bottom: 12px;
-    border: 1px solid rgba(253, 230, 138, 0.25);
-    border-radius: 12px;
-    background: #1E1E1E;
-    color: #F9FAFB;
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media screen and (max-width: 768px) {
+    .categorias-page .categorias-tabela-desktop {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .categorias-page .categorias-tabela-desktop table {
+        min-width: 650px;
+    }
 }
 
-.categoria-card-mobile h3 {
-    margin: 0 0 14px;
-    overflow-wrap: anywhere;
-    color: #FDE68A;
-}
-
-.categoria-info-mobile {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(253, 230, 138, 0.12);
-}
-
-.categoria-info-mobile > * {
-    min-width: 0;
-    overflow-wrap: anywhere;
-}
-
-.categoria-acoes-mobile {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 14px;
-}
-
-.categoria-acoes-mobile a,
-.categoria-acoes-mobile button {
-    max-width: 100%;
-    padding: 9px 12px;
-    overflow-wrap: anywhere;
-}
-
-.categoria-acoes-mobile form {
-    min-width: 0;
-    max-width: 100%;
-}
+/* =========================================================
+   CELULAR
+========================================================= */
 
 @media screen and (max-width: 600px) {
-    .categorias-tabela-desktop {
+    /* Esconde a tabela e mostra os cards */
+    .categorias-page .categorias-tabela-desktop {
         display: none;
     }
 
-    .categorias-cards-mobile {
-        display: block;
-    }
-
-    .categorias-acoes-mobile {
-        width: 100%;
-    }
-
-    .categoria-acoes-mobile {
+    .categorias-page .categorias-cards-mobile {
+        display: flex;
         flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        min-width: 0;
     }
 
-    .categoria-acoes-mobile a,
-    .categoria-acoes-mobile button {
+    .categorias-page .categoria-card-mobile {
+        display: block;
         width: 100%;
+        min-width: 0;
+        padding: 16px;
+        box-sizing: border-box;
+        background: #1f1f22;
+        border: 1px solid #333338;
+        border-radius: 12px;
     }
+
+    .categorias-page .categoria-card-mobile h3 {
+        margin: 0 0 12px;
+        color: #f8fafc;
+        font-size: 17px;
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+    }
+
+    .categorias-page .categoria-info-mobile {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-width: 0;
+        padding: 11px 0;
+        border-top: 1px solid #333338;
+    }
+
+    .categorias-page .categoria-info-mobile > span:first-child {
+        color: #a1a1aa;
+        font-size: 13px;
+    }
+
+    .categorias-page .categoria-info-mobile strong {
+        color: #e4e4e7;
+        font-size: 14px;
+    }
+
+    .categorias-page .categoria-acoes-mobile {
+        display: flex;
+        align-items: stretch;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-top: 14px;
+        margin-top: 4px;
+        border-top: 1px solid #333338;
+    }
+
+    .categorias-page .categoria-acoes-mobile form {
+        display: flex;
+        margin: 0;
+    }
+
+    .categorias-page .categoria-acoes-mobile .btn-editar,
+    .categorias-page .categoria-acoes-mobile .btn-status {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        padding: 9px 12px;
+        box-sizing: border-box;
+        font-size: 13px;
+        white-space: normal;
+    }
+
+    .categorias-page .sem-resultados {
+        width: 100%;
+        padding: 24px 12px !important;
+        box-sizing: border-box;
+        text-align: center;
+        color: #a1a1aa !important;
+        background: #1f1f22;
+        border: 1px solid #333338;
+        border-radius: 12px;
+    }
+
+    /* Paginação no celular */
+    .categorias-page .paginacao {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        text-align: center;
+    }
+
+    .categorias-page .paginacao > div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .categorias-page .paginacao > div a {
+        min-width: 0;
+    }
+}
+
+/* Celulares estreitos */
+@media screen and (max-width: 380px) {
+    .categorias-page .categoria-card-mobile {
+        padding: 12px;
+    }
+
+    .categorias-page .categoria-acoes-mobile {
+        gap: 6px;
+    }
+
+    .categorias-page .categoria-acoes-mobile .btn-editar,
+    .categorias-page .categoria-acoes-mobile .btn-status {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+}
+
+/* =========================================================
+   TEMA CLARO — LISTAGEM DE CATEGORIAS
+========================================================= */
+
+html[data-tema="claro"] .categorias-page .categorias-tabela-desktop,
+html[data-tema="claro"] .categorias-page .categoria-card-mobile {
+    background: #ffffff;
+    border-color: #e5d5c5;
+}
+
+html[data-tema="claro"] .categorias-page .categorias-tabela-desktop thead {
+    background: #fff5e9;
+}
+
+html[data-tema="claro"] .categorias-page .categorias-tabela-desktop th {
+    color: #765000;
+    border-bottom-color: #e5d5c5;
+}
+
+html[data-tema="claro"] .categorias-page .categorias-tabela-desktop td {
+    color: #29251f;
+    border-bottom-color: #eee3d8;
+}
+
+html[data-tema="claro"] .categorias-page .categorias-tabela-desktop tbody tr:hover {
+    background: #fffaf3;
+}
+
+html[data-tema="claro"] .categorias-page .categoria-card-mobile h3,
+html[data-tema="claro"] .categorias-page .categoria-info-mobile strong {
+    color: #5c3514;
+}
+
+html[data-tema="claro"] .categorias-page .categoria-info-mobile > span:first-child {
+    color: #625548;
+}
+
+html[data-tema="claro"] .categorias-page .categoria-info-mobile,
+html[data-tema="claro"] .categorias-page .categoria-acoes-mobile {
+    border-color: #eee3d8;
+}
+
+html[data-tema="claro"] .categorias-page .sem-resultados {
+    background: #ffffff;
+    border-color: #e5d5c5;
+    color: #625548 !important;
 }

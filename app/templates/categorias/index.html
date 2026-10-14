@@ -1,90 +1,55 @@
+
 {% extends "base.html" %}
 
 {% block title %}
 Categorias — Nova Adega
 {% endblock %}
 
-
 {% block styles %}
-
-<link rel="stylesheet" href="/static/CSS/categorias.css?v=7">
-
+<link rel="stylesheet" href="/static/CSS/categorias.css?v=9">
 {% endblock %}
-
 
 {% block content %}
 
-<div class="container">
-
+<div class="container categorias-page">
 
     <!-- CABEÇALHO -->
-
     <section class="titulo-pagina">
-
         <div>
-
-            <h1>
-                Categorias
-            </h1>
-
-            <p>
-                Gerencie as categorias dos produtos da Nova Adega.
-            </p>
-
+            <h1>Categorias</h1>
+            <p>Gerencie as categorias dos produtos da Nova Adega.</p>
         </div>
-
 
         <a href="/categorias/nova" class="btn-nova">
             + Nova categoria
         </a>
-
     </section>
 
-
     <!-- MENSAGENS -->
-
     {% if request.query_params.get('criado') == 'ok' %}
-
     <div class="mensagem sucesso">
-
         Categoria criada com sucesso!
-
     </div>
-
     {% endif %}
-
 
     {% if request.query_params.get('editado') == 'ok' %}
-
     <div class="mensagem sucesso">
-
         Categoria atualizada com sucesso!
-
     </div>
-
     {% endif %}
 
-
     {% if request.query_params.get('erro') == 'produtos_vinculados' %}
-
     <div class="mensagem erro">
-
         Não é possível desativar
         "{{ request.query_params.get('categoria') }}"
         pois ela possui produtos ativos vinculados.
-
     </div>
-
     {% endif %}
 
-
-
     <!-- LISTAGEM DE CATEGORIAS -->
-
     <section class="categorias-listagem">
 
-        <!-- TABELA PARA COMPUTADOR -->
-
+        <!-- TABELA PARA COMPUTADOR E TABLET -->
         <div class="categorias-tabela-desktop">
             <table>
                 <thead>
@@ -143,7 +108,6 @@ Categorias — Nova Adega
         </div>
 
         <!-- CARDS PARA CELULAR -->
-
         <div class="categorias-cards-mobile">
             {% for c in categorias %}
             <article class="categoria-card-mobile">
@@ -159,6 +123,7 @@ Categorias — Nova Adega
 
                 <div class="categoria-info-mobile">
                     <span>Status</span>
+
                     {% if c.ativo %}
                     <span class="status ativo">Ativa</span>
                     {% else %}
@@ -189,52 +154,34 @@ Categorias — Nova Adega
     </section>
 
     <!-- PAGINAÇÃO -->
-
     {% if total_categorias > 0 %}
-
     <div class="paginacao">
 
         <span>
             Página {{ pagina }} de {{ total_paginas }}
         </span>
 
-
         <div>
-
             {% if pagina > 1 %}
-
             <a href="/categorias?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}">
                 ← Anterior
             </a>
-
             {% endif %}
 
-
-            {% if pagina < total_paginas %} <a href="/categorias?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}">
+            {% if pagina < total_paginas %}
+            <a href="/categorias?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}">
                 Próxima →
-                </a>
-
-                {% endif %}
-
+            </a>
+            {% endif %}
         </div>
 
     </div>
-
     {% endif %}
 
-
     <!-- VOLTAR -->
-
     <div class="voltar">
-
-        <a href="/">
-
-            ← Voltar ao início
-
-        </a>
-
+        <a href="/">← Voltar ao início</a>
     </div>
-
 
 </div>
 

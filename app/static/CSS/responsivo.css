@@ -475,84 +475,71 @@ label {
 
 /* ==========================================
    CATEGORIAS - RESPONSIVIDADE
+   Exclusivo para a página de categorias
 ========================================== */
 
-.titulo-pagina,
-.tabela-container,
-.paginacao,
-.voltar {
+/* Aplica estas regras somente à listagem de categorias */
+.categorias-page .categorias-listagem {
     width: 100%;
     min-width: 0;
     max-width: 100%;
 }
 
-.tabela-container {
-    overflow-x: hidden;
-}
-
-.tabela-container table {
+.categorias-page .categorias-tabela-desktop {
     width: 100%;
     min-width: 0;
-    table-layout: fixed;
-    border-collapse: collapse;
+    max-width: 100%;
+    overflow-x: auto;
 }
 
-.tabela-container th,
-.tabela-container td {
-    min-width: 0;
-    padding: 10px 6px;
-    white-space: normal;
-    overflow-wrap: anywhere;
-    word-break: normal;
+.categorias-page .categorias-tabela-desktop table {
+    width: 100%;
+    min-width: 650px;
+    table-layout: auto;
 }
 
-.tabela-container .acoes {
+.categorias-page .categorias-tabela-desktop .acoes {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
 }
 
-.tabela-container .acoes form {
-    min-width: 0;
+.categorias-page .categorias-cards-mobile {
+    display: none;
 }
 
 @media screen and (max-width: 600px) {
-    .titulo-pagina {
+    .categorias-page .titulo-pagina {
         display: flex;
         flex-direction: column;
         align-items: stretch;
         gap: 12px;
     }
 
-    .btn-nova {
+    .categorias-page .btn-nova {
         width: 100%;
         text-align: center;
     }
 
-    .tabela-container th,
-    .tabela-container td {
-        padding: 9px 4px;
-        font-size: 12px;
+    .categorias-page .categorias-tabela-desktop {
+        display: none;
     }
 
-    .tabela-container .acoes {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .tabela-container .acoes a,
-    .tabela-container .acoes button {
-        width: 100%;
-        max-width: 100%;
-        padding: 7px 5px;
-        font-size: 12px;
-        overflow-wrap: anywhere;
-    }
-
-    .paginacao {
+    .categorias-page .categorias-cards-mobile {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .categorias-page .categoria-card-mobile {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .categorias-page .categoria-acoes-mobile {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
     }
 }
