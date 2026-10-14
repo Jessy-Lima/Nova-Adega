@@ -1483,6 +1483,20 @@ html[data-tema="claro"] .container .movimentacoes td {
 }
 
 
+/* PAGINAÇÃO — TEMA CLARO */
+
+html[data-tema="claro"] .paginacao .btn-pagina {
+    background-color: #FFFFFF !important;
+    color: #27272A !important;
+    border: 1px solid #FFE4C4 !important;
+}
+
+html[data-tema="claro"] .paginacao .btn-pagina:hover {
+    background-color: #FDE68A !important;
+    color: #121212 !important;
+    border-color: #FDE68A !important;
+}
+
 
 /* Responsividade \*/
 
@@ -1530,7 +1544,7 @@ html[data-tema="claro"] .container .movimentacoes td {
 /* TEMA CLARO — hover uniforme em todas as células da linha */
 html[data-tema="claro"] .tabela-container tbody tr:hover,
 html[data-tema="claro"] .tabela-container tbody tr:hover td {
-    background-color: #FFF4E8;
+    background-color: #FDE68A;
 }
 
 /* A célula de ações continua sendo uma célula normal da tabela */
