@@ -1319,59 +1319,32 @@ PDV — Nova Adega
         }
 
 
-        else if (valorPago < total) {
-
+        else if (
+            valorPago > total &&
+            !(
+                forma1.value === 'dinheiro' &&
+                !usarSegunda.checked
+            )
+        ) {
             if (erro) {
-
                 erro.textContent =
-                    'O valor pago ainda não fecha o total da venda.';
-
+                    'O valor pago não pode ser maior que o total, exceto em dinheiro.';
             }
-
 
             if (labelSaldo) {
-
-                labelSaldo.textContent =
-                    'Saldo restante';
-
+                labelSaldo.textContent = 'Valor excedente';
             }
-
         }
-
-
-        else if (valorPago > total) {
-
-            if (erro) {
-
-                erro.textContent =
-                    'O valor pago não pode ser maior que o total da venda.';
-
-            }
-
-
-            if (labelSaldo) {
-
-                labelSaldo.textContent =
-                    'Valor excedente';
-
-            }
-
-        }
-
-
         else {
-
             pagamentoValido = true;
 
-
             if (labelSaldo) {
-
                 labelSaldo.textContent =
-                    'Saldo restante';
-
+                    valorPago > total ? 'Troco' : 'Saldo restante';
             }
-
         }
+
+
 
 
         if (linhaSaldo) {
