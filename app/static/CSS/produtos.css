@@ -1483,6 +1483,20 @@ html[data-tema="claro"] .container .movimentacoes td {
 }
 
 
+/* PAGINAÇÃO — TEMA CLARO */
+
+html[data-tema="claro"] .paginacao .btn-pagina {
+    background-color: #FFFFFF !important;
+    color: #27272A !important;
+    border: 1px solid #D4D4D8 !important;
+}
+
+html[data-tema="claro"] .paginacao .btn-pagina:hover {
+    background-color: #FDE68A !important;
+    color: #121212 !important;
+    border-color: #FDE68A !important;
+}
+
 
 /* Responsividade \*/
 
