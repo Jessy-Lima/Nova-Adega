@@ -1,0 +1,283 @@
+
+/* ========================================
+   PÁGINA DE DETALHES DO PRODUTO - NOVA ADEGA
+   ======================================== */
+
+/* Fundo da página */
+body:has(.produto-detalhe) {
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(253, 230, 138, 0.07),
+            transparent 30%
+        ),
+        #101010;
+}
+
+/* Área principal */
+main.container:has(.produto-detalhe) {
+    width: min(1120px, calc(100% - 40px));
+    max-width: 1120px;
+    margin: 42px auto 56px;
+    padding: 0;
+}
+
+/* Mensagem de sucesso */
+main.container:has(.produto-detalhe) .mensagem-sucesso {
+    margin-bottom: 24px;
+    padding: 16px 20px;
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    border-radius: 12px;
+    background: rgba(22, 101, 52, 0.18);
+    color: #86efac;
+    font-size: 0.95rem;
+}
+
+/* Cartão principal do produto */
+.produto-detalhe {
+    display: grid !important;
+    grid-template-columns: minmax(280px, 400px) minmax(0, 1fr);
+    align-items: center;
+    gap: 42px;
+    padding: 36px;
+    border: 1px solid rgba(253, 230, 138, 0.16);
+    border-radius: 22px;
+    background: linear-gradient(
+        145deg,
+        #202020,
+        #171717 75%,
+        #1d1a10
+    );
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.3);
+}
+
+/* Área da imagem */
+.produto-detalhe-imagem {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 360px;
+    padding: 20px;
+    overflow: hidden;
+    border: 1px solid #e8e5dc;
+    border-radius: 16px;
+    background: #f8f7f3;
+}
+
+.produto-detalhe-imagem img {
+    display: block;
+    width: 100%;
+    height: 330px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.produto-detalhe-imagem:hover img {
+    transform: scale(1.04);
+}
+
+/* Informações do produto */
+.produto-detalhe-info {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    gap: 26px;
+    min-width: 0;
+}
+
+.produto-detalhe-titulo {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+}
+
+/* Categoria */
+.produto-detalhe-info .produto-categoria {
+    display: inline-flex;
+    width: fit-content;
+    margin: 0 0 14px !important;
+    padding: 7px 13px;
+    border: 1px solid rgba(253, 230, 138, 0.25);
+    border-radius: 30px;
+    background: rgba(253, 230, 138, 0.08);
+    color: #fde68a;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Nome do produto */
+.produto-detalhe-info h1 {
+    margin: 0 !important;
+    color: #fafafa;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 750;
+    line-height: 1.2;
+    letter-spacing: -0.6px;
+    overflow-wrap: anywhere;
+}
+
+/* Informações de preço e estoque */
+.produto-informacoes {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin: 0 !important;
+}
+
+.info-produto {
+    display: flex !important;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.035);
+}
+
+.info-produto span {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
+
+.info-produto strong {
+    color: #f9fafb;
+    font-size: 1.4rem;
+    font-weight: 750;
+    overflow-wrap: anywhere;
+}
+
+.info-produto .produto-preco {
+    color: #fde68a;
+}
+
+/* Botões de ação */
+.produto-acoes {
+    display: flex !important;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 0 !important;
+}
+
+.produto-detalhe .btn-editar,
+.produto-acoes a {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 45px;
+    padding: 0 17px !important;
+    border-radius: 10px !important;
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: none !important;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.produto-detalhe .btn-editar {
+    border: 1px solid #e5c66c !important;
+    background: transparent !important;
+    color: #fde68a !important;
+}
+
+.produto-detalhe .btn-editar:hover {
+    transform: translateY(-2px);
+    background: rgba(253, 230, 138, 0.1) !important;
+}
+
+.produto-acoes a:hover {
+    transform: translateY(-2px);
+}
+
+/* Registrar movimentação */
+.produto-detalhe .btn-movimentacao {
+    border: 1px solid #e5c66c !important;
+    background: #f5d778 !important;
+    color: #211b0c !important;
+}
+
+.produto-detalhe .btn-movimentacao:hover {
+    background: #ffe69a !important;
+}
+
+/* Histórico */
+.produto-detalhe .btn-historico {
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: #f3f4f6 !important;
+}
+
+.produto-detalhe .btn-historico:hover {
+    border-color: rgba(253, 230, 138, 0.5) !important;
+    background: rgba(253, 230, 138, 0.08) !important;
+}
+
+/* Voltar para produtos */
+.voltar-pagina {
+    margin-top: 24px !important;
+}
+
+.voltar-pagina a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #c2c2c2 !important;
+    font-size: 0.95rem;
+    text-decoration: none !important;
+    transition: color 0.2s ease;
+}
+
+.voltar-pagina a:hover {
+    color: #fde68a !important;
+}
+
+/* Tablets e celulares */
+@media (max-width: 780px) {
+    main.container:has(.produto-detalhe) {
+        width: calc(100% - 28px);
+        margin-top: 24px;
+    }
+
+    .produto-detalhe {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 26px;
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    .produto-detalhe-imagem {
+        min-height: 280px;
+    }
+
+    .produto-detalhe-imagem img {
+        height: 260px;
+    }
+
+    .produto-detalhe-info {
+        gap: 22px;
+    }
+
+    .produto-detalhe-info h1 {
+        font-size: 1.9rem;
+    }
+}
+
+/* Celulares pequenos */
+@media (max-width: 420px) {
+    .produto-informacoes {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .produto-acoes {
+        flex-direction: column;
+    }
+
+    .produto-acoes a {
+        width: 100%;
+    }
+}
