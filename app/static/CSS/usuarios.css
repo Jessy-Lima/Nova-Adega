@@ -1,0 +1,395 @@
+/* =========================================
+   PÁGINA DE USUÁRIOS — NOVA ADEGA
+   ========================================= */
+
+.container {
+    width: min(1200px, calc(100% - 40px));
+    margin: 35px auto;
+    color: var(--texto, #f5f5f5);
+}
+
+/* Título e descrição */
+
+.titulo-pagina {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.titulo-pagina h1 {
+    margin: 0 0 10px;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.titulo-pagina p {
+    margin: 0;
+    color: var(--texto-secundario, #b8b8b8);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Botão de novo usuário */
+
+.btn-novo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 18px;
+    border-radius: 8px;
+    background: #FDE68A;
+    color: #000000;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.btn-novo:hover {
+    background: #fff0b2;
+    transform: translateY(-1px);
+}
+
+/* Área da tabela */
+
+.tabela-container {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #303030;
+    border-radius: 12px;
+    background: #181818;
+}
+
+.tabela-container table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabela-container thead {
+    background: #222222;
+}
+
+.tabela-container th {
+    padding: 16px 20px;
+    color: #f5f5f5;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 1px solid #383838;
+}
+
+.tabela-container td {
+    padding: 16px 20px;
+    color: #e5e5e5;
+    font-size: 14px;
+    border-bottom: 1px solid #303030;
+}
+
+.tabela-container tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.tabela-container tbody tr:hover {
+    background: #202020;
+}
+
+/* Perfil do usuário */
+
+.perfil {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #FDE68A;
+    color: #000000;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Status */
+
+.status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.status.ativo {
+    background: #14532d;
+    color: #bbf7d0;
+}
+
+.status.inativo {
+    background: #7f1d1d;
+    color: #fecaca;
+}
+
+/* Ações */
+
+.acoes-usuario {
+    white-space: nowrap;
+}
+
+.acoes-usuario a,
+.acoes-usuario button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 34px;
+    padding: 7px 12px;
+    margin: 2px;
+    border: none;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-editar {
+    background: #FDE68A;
+    color: #000000;
+}
+
+.btn-editar:hover {
+    background: #fff0b2;
+}
+
+.btn-desativar {
+    background: #7f1d1d;
+    color: #ffffff;
+}
+
+.btn-desativar:hover {
+    background: #991b1b;
+}
+
+.btn-ativar {
+    background: #166534;
+    color: #ffffff;
+}
+
+.btn-ativar:hover {
+    background: #15803d;
+}
+
+/* Formulários de ação */
+
+.form-status {
+    display: inline;
+    margin: 0;
+}
+
+/* Mensagens */
+
+.mensagem-sucesso,
+.mensagem-erro {
+    padding: 13px 16px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.mensagem-sucesso {
+    border: 1px solid #166534;
+    background: #14532d;
+    color: #bbf7d0;
+}
+
+.mensagem-erro {
+    border: 1px solid #991b1b;
+    background: #450a0a;
+    color: #fecaca;
+}
+
+/* Tabela vazia */
+
+.tabela-vazia {
+    padding: 30px !important;
+    text-align: center;
+    color: #a3a3a3 !important;
+}
+
+/* Link para voltar */
+
+.voltar-pagina {
+    margin-top: 25px;
+}
+
+.voltar-pagina a {
+    color: #a3a3a3;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.voltar-pagina a:hover {
+    color: #ffffff;
+}
+
+/* =========================================
+   FORMULÁRIO DE CADASTRO E EDIÇÃO
+   ========================================= */
+
+.form-usuario {
+    width: min(650px, 100%);
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #303030;
+    border-radius: 14px;
+    background: #181818;
+    box-sizing: border-box;
+}
+
+.form-titulo {
+    margin-bottom: 28px;
+}
+
+.form-titulo h1 {
+    margin: 0 0 10px;
+    font-size: 28px;
+}
+
+.form-titulo p {
+    margin: 0;
+    color: #b8b8b8;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.usuario-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-grupo label {
+    color: #eeeeee;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-grupo label span {
+    color: #a3a3a3;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.form-grupo input,
+.form-grupo select {
+    width: 100%;
+    min-height: 44px;
+    padding: 11px 13px;
+    box-sizing: border-box;
+    border: 1px solid #404040;
+    border-radius: 8px;
+    outline: none;
+    background: #111111;
+    color: #f5f5f5;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.form-grupo input:focus,
+.form-grupo select:focus {
+    border-color: #FDE68A;
+    box-shadow: 0 0 0 3px rgb(139 92 246 / 15%);
+}
+
+.form-grupo input::placeholder {
+    color: #777777;
+}
+
+.form-botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.btn-salvar,
+.btn-cancelar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 11px 18px;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-salvar {
+    background: #FDE68A;
+    color: #ffffff;
+}
+
+.btn-salvar:hover {
+    background: #FDE68A;
+}
+
+.btn-cancelar {
+    background: #303030;
+    color: #eeeeee;
+}
+
+.btn-cancelar:hover {
+    background: #404040;
+}
+
+/* =========================================
+   RESPONSIVIDADE
+   ========================================= */
+
+@media (max-width: 600px) {
+    .container {
+        width: calc(100% - 24px);
+        margin: 24px auto;
+    }
+
+    .titulo-pagina {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .btn-novo {
+        align-self: flex-start;
+    }
+
+    .form-usuario {
+        padding: 20px;
+    }
+
+    .form-botoes {
+        flex-direction: column;
+    }
+
+    .btn-salvar,
+    .btn-cancelar {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .tabela-container th,
+    .tabela-container td {
+        padding: 12px;
+    }
+}
