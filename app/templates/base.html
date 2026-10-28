@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR" data-tema="escuro">
 
@@ -17,7 +16,6 @@
     </script>
 
     <link rel="stylesheet" href="/static/CSS/home.css?v=8">
-    <link rel="stylesheet" href="/static/CSS/confirmacao.css?v=1">
 
     {% block styles %}{% endblock %}
 
@@ -266,9 +264,11 @@
             <a href="/produtos/">Produtos</a>
             <a href="/categorias/">Categorias</a>
             <a href="/clientes/">Clientes</a>
+            {% if usuario and usuario.role == "admin" %}
+            <a href="/usuarios/">Funcionários</a>
+            {% endif %}
 
-            <button type="button" id="alternar-tema" class="botao-tema"
-                aria-label="Ativar modo claro"
+            <button type="button" id="alternar-tema" class="botao-tema" aria-label="Ativar modo claro"
                 title="Alternar modo claro/escuro">☀️</button>
 
             <a href="/auth/logout" class="btn-sair">Sair</a>
@@ -288,7 +288,6 @@
 
     {% block scripts %}{% endblock %}
 
-    <!-- Alternância entre tema claro e escuro -->
     <script>
         (() => {
             const botao = document.getElementById("alternar-tema");
@@ -301,7 +300,13 @@
 
                 const modoClaro = tema === "claro";
 
-                botao.textContent = modoClaro ? "🌙" : "☀️";
+                botao.innerHTML = modoClaro
+                    ? '<i data-lucide="moon"></i>'
+                    : '<i data-lucide="sun"></i>';
+
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
                 botao.setAttribute(
                     "aria-label",
                     modoClaro ? "Ativar modo escuro" : "Ativar modo claro"
@@ -334,203 +339,6 @@
                     // A alternância permanece ativa na página atual.
                 }
             });
-        })();
-    </script>
-
-    <!-- Janela de confirmação reutilizável -->
-    <div id="modal-confirmacao" class="modal-confirmacao" hidden>
-        <div class="modal-confirmacao-conteudo"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="confirmacao-titulo"
-            aria-describedby="confirmacao-mensagem">
-
-            <div class="confirmacao-icone" aria-hidden="true">!</div>
-
-            <h2 id="confirmacao-titulo">Confirmar ação</h2>
-
-            <p id="confirmacao-mensagem">
-                Tem certeza de que deseja continuar?
-            </p>
-
-            <div class="confirmacao-acoes">
-                <button type="button"
-                    id="confirmacao-cancelar"
-                    class="btn-confirmacao btn-cancelar">
-                    Cancelar
-                </button>
-
-                <button type="button"
-                    id="confirmacao-confirmar"
-                    class="btn-confirmacao btn-confirmar">
-                    Confirmar
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Lógica das confirmações -->
-    <script>
-        (() => {
-            const modal = document.getElementById("modal-confirmacao");
-            const titulo = document.getElementById("confirmacao-titulo");
-            const mensagem = document.getElementById("confirmacao-mensagem");
-            const botaoCancelar =
-                document.getElementById("confirmacao-cancelar");
-            const botaoConfirmar =
-                document.getElementById("confirmacao-confirmar");
-
-            if (
-                !modal ||
-                !titulo ||
-                !mensagem ||
-                !botaoCancelar ||
-                !botaoConfirmar
-            ) {
-                return;
-            }
-
-            let formularioPendente = null;
-            let acaoPendente = null;
-            let botaoAnterior = null;
-
-            function abrirModal(configuracao, formulario = null) {
-                formularioPendente = formulario;
-                botaoAnterior = document.activeElement;
-
-                titulo.textContent =
-                    configuracao.titulo || "Confirmar ação";
-
-                mensagem.textContent =
-                    configuracao.mensagem ||
-                    "Tem certeza de que deseja continuar?";
-
-                botaoConfirmar.textContent =
-                    configuracao.confirmar || "Confirmar";
-
-                modal.hidden = false;
-                botaoCancelar.focus();
-            }
-
-            function restaurarFoco() {
-                if (
-                    botaoAnterior &&
-                    typeof botaoAnterior.focus === "function"
-                ) {
-                    botaoAnterior.focus();
-                }
-
-                botaoAnterior = null;
-            }
-
-            function fecharModal() {
-                modal.hidden = true;
-                formularioPendente = null;
-
-                if (acaoPendente) {
-                    const resolver = acaoPendente;
-                    acaoPendente = null;
-                    resolver(false);
-                }
-
-                restaurarFoco();
-            }
-
-            // Intercepta formulários que possuem data-confirm.
-            document.addEventListener("submit", (evento) => {
-                const formulario = evento.target;
-
-                if (
-                    !(formulario instanceof HTMLFormElement) ||
-                    !formulario.matches("form[data-confirm]")
-                ) {
-                    return;
-                }
-
-                evento.preventDefault();
-
-                if (formulario.dataset.confirmando === "true") {
-                    return;
-                }
-
-                abrirModal({
-                    titulo:
-                        formulario.dataset.confirmTitle ||
-                        "Confirmar ação",
-                    mensagem: formulario.dataset.confirm,
-                    confirmar:
-                        formulario.dataset.confirmButton || "Confirmar"
-                }, formulario);
-            });
-
-            // Cancela a ação.
-            botaoCancelar.addEventListener("click", fecharModal);
-
-            // Confirma a ação.
-            botaoConfirmar.addEventListener("click", () => {
-                if (acaoPendente) {
-                    const executarAcao = acaoPendente;
-                    acaoPendente = null;
-
-                    modal.hidden = true;
-                    formularioPendente = null;
-                    restaurarFoco();
-
-                    executarAcao(true);
-                    return;
-                }
-
-                const formulario = formularioPendente;
-
-                if (!formulario) {
-                    fecharModal();
-                    return;
-                }
-
-                formularioPendente = null;
-                formulario.dataset.confirmando = "true";
-                modal.hidden = true;
-
-                restaurarFoco();
-
-                HTMLFormElement.prototype.submit.call(formulario);
-            });
-
-            // Fecha ao clicar no fundo da janela.
-            modal.addEventListener("click", (evento) => {
-                if (evento.target === modal) {
-                    fecharModal();
-                }
-            });
-
-            // Fecha ao pressionar Escape.
-            document.addEventListener("keydown", (evento) => {
-                if (!modal.hidden && evento.key === "Escape") {
-                    fecharModal();
-                }
-            });
-
-            // Permite usar a confirmação em ações JavaScript,
-            // como remover um produto do carrinho do PDV.
-            window.confirmarAcao = function (
-                texto,
-                tituloAcao = "Confirmar ação",
-                textoBotao = "Confirmar"
-            ) {
-                if (!modal.hidden) {
-                    return Promise.resolve(false);
-                }
-
-                return new Promise((resolver) => {
-                    acaoPendente = resolver;
-
-                    abrirModal({
-                        titulo: tituloAcao,
-                        mensagem: texto,
-                        confirmar: textoBotao
-                    });
-                });
-            };
         })();
     </script>
 </body>

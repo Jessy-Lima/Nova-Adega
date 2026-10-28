@@ -86,14 +86,7 @@ Categorias — Nova Adega
                                     Editar
                                 </a>
 
-                                <!-- FORMULÁRIO COM CONFIRMAÇÃO -->
-                                <form
-                                    action="/categorias/{{ c.id }}/toggle-ativo"
-                                    method="post"
-                                    data-confirm="Tem certeza de que deseja {{ 'desativar' if c.ativo else 'ativar' }} a categoria {{ c.nome }}?"
-                                    data-confirm-title="Confirmar categoria"
-                                    data-confirm-button="{{ 'Desativar' if c.ativo else 'Ativar' }}"
-                                >
+                                <form action="/categorias/{{ c.id }}/toggle-ativo" method="post">
                                     <button type="submit" class="btn-status">
                                         {{ "Desativar" if c.ativo else "Ativar" }}
                                     </button>
@@ -143,14 +136,7 @@ Categorias — Nova Adega
                         Editar
                     </a>
 
-                    <!-- FORMULÁRIO COM CONFIRMAÇÃO -->
-                    <form
-                        action="/categorias/{{ c.id }}/toggle-ativo"
-                        method="post"
-                        data-confirm="Tem certeza de que deseja {{ 'desativar' if c.ativo else 'ativar' }} a categoria {{ c.nome }}?"
-                        data-confirm-title="Confirmar categoria"
-                        data-confirm-button="{{ 'Desativar' if c.ativo else 'Ativar' }}"
-                    >
+                    <form action="/categorias/{{ c.id }}/toggle-ativo" method="post">
                         <button type="submit" class="btn-status">
                             {{ "Desativar" if c.ativo else "Ativar" }}
                         </button>
