@@ -6,27 +6,27 @@ Uma aplicação web desenvolvida com Python e FastAPI para facilitar o gerenciam
 
 ---
 
-## 📌 Sobre o projeto
+## Sobre o projeto
 
 O **Nova Adega** é um sistema de ponto de venda desenvolvido para centralizar as principais tarefas de gerenciamento de uma adega em uma única aplicação.
 
 O sistema permite organizar os produtos, acompanhar o estoque, cadastrar clientes e registrar vendas, tornando o processo de gerenciamento mais prático e organizado.
 
-## ✨ Funcionalidades
+## Funcionalidades
 
-- 🔐 **Autenticação:** acesso ao sistema por meio de login.
-- 📦 **Produtos:** cadastro, consulta e gerenciamento de produtos.
-- 🗂️ **Categorias:** organização dos produtos por categoria.
-- 📊 **Controle de estoque:** acompanhamento das quantidades e registro de entradas e saídas.
-- 👥 **Clientes:** cadastro e gerenciamento de clientes.
-- 🛒 **Ponto de venda (PDV):** seleção de produtos e finalização de vendas.
-- 💳 **Formas de pagamento:** possibilidade de utilizar uma ou duas formas de pagamento na mesma venda.
-- 🏷️ **Descontos:** aplicação de descontos em valor fixo ou porcentagem.
-- 🧾 **Histórico de vendas:** consulta das vendas registradas no sistema.
+- **Autenticação:** acesso ao sistema por meio de login.
+- **Produtos:** cadastro, consulta e gerenciamento de produtos.
+- **Categorias:** organização dos produtos por categoria.
+- **Controle de estoque:** acompanhamento das quantidades e registro de entradas e saídas.
+- **Clientes:** cadastro e gerenciamento de clientes.
+- **Ponto de venda (PDV):** seleção de produtos e finalização de vendas.
+- **Formas de pagamento:** possibilidade de utilizar uma ou duas formas de pagamento na mesma venda.
+- **Descontos:** aplicação de descontos em valor fixo ou porcentagem.
+- **Histórico de vendas:** consulta das vendas registradas no sistema.
 
 ---
 
-## 🛠️ Tecnologias utilizadas
+## Tecnologias utilizadas
 
 | Tecnologia | Utilização |
 |---|---|
@@ -43,7 +43,7 @@ O sistema permite organizar os produtos, acompanhar o estoque, cadastrar cliente
 
 ---
 
-## 📋 Pré-requisitos
+## Pré-requisitos
 
 Antes de executar o projeto, verifique se você possui os seguintes programas instalados:
 
@@ -65,7 +65,7 @@ py --version
 
 ---
 
-## 🚀 Como executar o projeto
+## Como executar o projeto
 
 ### 1. Clonar o repositório
 
@@ -194,7 +194,7 @@ Para encerrar a execução, volte ao terminal e pressione `Ctrl + C`.
 
 ---
 
-## 🧪 Como executar os testes
+## Como executar os testes
 
 O projeto utiliza o Pytest para executar testes automatizados.
 
@@ -222,7 +222,7 @@ Se algum teste falhar, verifique a mensagem apresentada no terminal para identif
 
 ---
 
-## 📁 Estrutura do projeto
+## Estrutura do projeto
 
 A organização principal do projeto segue a estrutura abaixo:
 
@@ -252,7 +252,7 @@ Nova-Adega/
 
 ---
 
-## 🌐 Endereços úteis
+## Endereços úteis
 
 Depois de iniciar o servidor, os seguintes endereços poderão ser utilizados:
 
@@ -266,7 +266,7 @@ As páginas de gerenciamento e do PDV podem exigir que o usuário esteja autenti
 
 ---
 
-## ⚠️ Problemas comuns
+## Problemas comuns
 
 ### O comando `python` não funciona
 
@@ -298,7 +298,7 @@ http://127.0.0.1:8000
 
 ---
 
-## 👥 Objetivo do projeto
+## Objetivo do projeto
 
 O Nova Adega tem como objetivo aplicar conhecimentos de desenvolvimento web, banco de dados, organização de código, autenticação e testes automatizados na construção de um sistema de gerenciamento e ponto de venda.
 
