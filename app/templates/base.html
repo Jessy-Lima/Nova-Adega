@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR" data-tema="escuro">
 
@@ -16,7 +17,6 @@
     </script>
 
     <link rel="stylesheet" href="/static/CSS/home.css?v=8">
-    <script src="https://unpkg.com/lucide@latest"></script>
 
     {% block styles %}{% endblock %}
 
@@ -267,9 +267,7 @@
             <a href="/clientes/">Clientes</a>
 
             <button type="button" id="alternar-tema" class="botao-tema" aria-label="Ativar modo claro"
-                title="Alternar modo claro/escuro">
-                <i data-lucide="sun"></i>
-            </button>
+                title="Alternar modo claro/escuro">☀️</button>
 
             <a href="/auth/logout" class="btn-sair">Sair</a>
         </div>
@@ -288,6 +286,7 @@
 
     {% block scripts %}{% endblock %}
 
+    <!-- Alternância entre tema claro e escuro -->
     <script>
         (() => {
             const botao = document.getElementById("alternar-tema");
@@ -341,15 +340,6 @@
             });
         })();
     </script>
-
-
-    <!-- Inicialização dos ícones Lucide -->
-    <script>
-        if (window.lucide) {
-            lucide.createIcons();
-        }
-    </script>
-
 </body>
 
 </html>
