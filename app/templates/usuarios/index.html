@@ -1,160 +1,305 @@
-
 {% extends "base.html" %}
 
+
 {% block title %}
+
 Usuários — Nova Adega
+
 {% endblock %}
 
+
+
 {% block styles %}
-<link rel="stylesheet" href="/static/CSS/usuarios.css">
+
+<link
+    rel="stylesheet"
+    href="/static/CSS/usuarios.css"
+>
+
 {% endblock %}
+
+
 
 {% block content %}
 
+
 <main class="container">
 
+
     <!-- TÍTULO DA PÁGINA -->
+
     <div class="titulo-pagina">
 
+
         <div>
-            <h1>Usuários</h1>
+
+            <h1>
+                Usuários
+            </h1>
 
             <p>
                 Gerencie os usuários e permissões do sistema.
             </p>
+
         </div>
 
-        <a href="/usuarios/novo" class="btn-novo">
+
+        <a
+            href="/usuarios/novo"
+            class="btn-novo"
+        >
             + Novo usuário
         </a>
 
+
     </div>
+
+
 
     <!-- MENSAGENS DE SUCESSO -->
+
     {% if request.query_params.get('criado') == 'ok' %}
+
     <div class="mensagem-sucesso">
+
         Usuário criado com sucesso!
+
     </div>
+
     {% endif %}
+
+
 
     {% if request.query_params.get('editado') == 'ok' %}
+
     <div class="mensagem-sucesso">
+
         Usuário atualizado com sucesso!
+
     </div>
+
     {% endif %}
+
+
 
     <!-- MENSAGEM DE ERRO -->
+
     {% if request.query_params.get('erro') == 'autoproprio' %}
+
     <div class="mensagem-erro">
+
         Você não pode desativar sua própria conta.
+
     </div>
+
     {% endif %}
 
+
+
     <!-- TABELA -->
+
     <div class="tabela-container">
+
 
         <table>
 
+
             <thead>
+
                 <tr>
-                    <th>Nome</th>
-                    <th>E-mail</th>
-                    <th>Perfil</th>
-                    <th>Status</th>
-                    <th>Ações</th>
+
+                    <th>
+                        Nome
+                    </th>
+
+                    <th>
+                        E-mail
+                    </th>
+
+                    <th>
+                        Perfil
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Ações
+                    </th>
+
                 </tr>
+
             </thead>
+
+
 
             <tbody>
 
+
                 {% for u in usuarios %}
+
                 <tr>
 
+
                     <!-- NOME -->
+
                     <td>
+
                         {{ u.nome }}
+
                     </td>
+
+
 
                     <!-- E-MAIL -->
+
                     <td>
+
                         {{ u.email }}
+
                     </td>
+
+
 
                     <!-- PERFIL -->
+
                     <td>
+
                         <span class="perfil">
+
                             {{ u.role }}
+
                         </span>
+
                     </td>
+
+
 
                     <!-- STATUS -->
+
                     <td>
+
+
                         {% if u.ativo %}
+
                         <span class="status ativo">
+
                             Ativo
+
                         </span>
+
+
                         {% else %}
+
                         <span class="status inativo">
+
                             Inativo
+
                         </span>
+
                         {% endif %}
+
+
                     </td>
 
+
+
                     <!-- AÇÕES -->
+
                     <td class="acoes-usuario">
 
+
                         <!-- EDITAR -->
+
                         <a
                             href="/usuarios/{{ u.id }}/editar"
                             class="btn-editar"
                         >
+
                             Editar
+
                         </a>
 
-                        <!-- ATIVAR / DESATIVAR COM CONFIRMAÇÃO -->
+
+
+                        <!-- ATIVAR / DESATIVAR -->
+
                         <form
                             action="/usuarios/{{ u.id }}/toggle-ativo"
                             method="post"
                             class="form-status"
-                            data-confirm="{% if u.ativo %}Tem certeza de que deseja desativar o usuário {{ u.nome }}?{% else %}Tem certeza de que deseja ativar o usuário {{ u.nome }}?{% endif %}"
-                            data-confirm-title="{% if u.ativo %}Desativar usuário{% else %}Ativar usuário{% endif %}"
-                            data-confirm-button="{% if u.ativo %}Sim, desativar{% else %}Sim, ativar{% endif %}"
                         >
+
                             <button
                                 type="submit"
                                 class="{{ 'btn-desativar' if u.ativo else 'btn-ativar' }}"
                             >
-                                {{ "Desativar" if u.ativo else "Ativar" }}
+
+                                {{
+                                    "Desativar"
+                                    if u.ativo
+                                    else "Ativar"
+                                }}
+
                             </button>
+
                         </form>
 
+
                     </td>
 
+
                 </tr>
+
                 {% endfor %}
 
+
+
                 <!-- SEM USUÁRIOS -->
+
                 {% if not usuarios %}
+
                 <tr>
-                    <td colspan="5" class="tabela-vazia">
+
+                    <td
+                        colspan="5"
+                        class="tabela-vazia"
+                    >
+
                         Nenhum usuário encontrado.
+
                     </td>
+
                 </tr>
+
                 {% endif %}
+
 
             </tbody>
 
+
         </table>
 
+
     </div>
+
+
 
     <!-- VOLTAR -->
+
     <div class="voltar-pagina">
+
         <a href="/">
+
             ← Voltar para o início
+
         </a>
+
     </div>
 
+
 </main>
+
 
 {% endblock %}

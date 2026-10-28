@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR" data-tema="escuro">
 
@@ -265,6 +264,9 @@
             <a href="/produtos/">Produtos</a>
             <a href="/categorias/">Categorias</a>
             <a href="/clientes/">Clientes</a>
+            {% if usuario and usuario.role == "admin" %}
+            <a href="/usuarios/">Funcionários</a>
+            {% endif %}
 
             <button type="button" id="alternar-tema" class="botao-tema" aria-label="Ativar modo claro"
                 title="Alternar modo claro/escuro">☀️</button>
@@ -286,7 +288,6 @@
 
     {% block scripts %}{% endblock %}
 
-    <!-- Alternância entre tema claro e escuro -->
     <script>
         (() => {
             const botao = document.getElementById("alternar-tema");

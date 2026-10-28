@@ -1,21 +1,29 @@
-
 {% extends "base.html" %}
 
 {% block title %}
 Produtos — Nova Adega
 {% endblock %}
 
+
 {% block styles %}
+
 <link rel="stylesheet" href="/static/CSS/produtos.css">
+
 {% endblock %}
+
 
 {% block content %}
 
+
 <main class="container">
 
+
     <!-- TÍTULO DA PÁGINA -->
+
     <div class="titulo-pagina">
+
         <div>
+
             <h1>
                 {% if categoria_selecionada %}
                 {{ categoria_selecionada }}
@@ -31,185 +39,300 @@ Produtos — Nova Adega
                 Gerencie os produtos disponíveis no sistema.
                 {% endif %}
             </p>
+
         </div>
 
+
         {% if usuario.role == 'admin' %}
+
         <a href="/produtos/novo" class="btn-novo">
             + Novo produto
         </a>
+
         {% endif %}
+
     </div>
 
+
+
     <!-- MENSAGENS -->
+
     {% if request.query_params.get('criado') == 'ok' %}
+
     <div class="mensagem-sucesso">
         Produto criado com sucesso!
     </div>
+
     {% endif %}
 
+
     {% if request.query_params.get('desativado') == 'ok' %}
+
     <div class="mensagem-sucesso">
         Produto desativado.
     </div>
+
     {% endif %}
 
+
+
     <!-- FILTROS -->
+
     <form method="get" action="/produtos/" class="filtros">
 
+
         <!-- BUSCA -->
+
         <div class="campo">
+
             <label for="busca">
                 Buscar produto
             </label>
 
-            <input
-                type="text"
-                id="busca"
-                name="busca"
-                placeholder="Buscar por nome..."
-                value="{{ busca }}"
-            >
+            <input type="text" id="busca" name="busca" placeholder="Buscar por nome..." value="{{ busca }}">
+
         </div>
 
+
+
         <!-- CATEGORIA -->
+
         <div class="campo">
+
             <label for="categoria_id">
                 Categoria
             </label>
 
             <select name="categoria_id" id="categoria_id">
+
                 <option value="0">
                     Todas as categorias
                 </option>
 
+
                 {% for c in categorias %}
-                <option
-                    value="{{ c.id }}"
-                    {{ 'selected' if categoria_id == c.id else '' }}
-                >
+
+                <option value="{{ c.id }}" {{ 'selected' if categoria_id==c.id else '' }}>
+
                     {{ c.nome }}
+
                 </option>
+
                 {% endfor %}
+
             </select>
+
         </div>
 
+
+
         <!-- BOTÕES -->
+
         <div class="acoes-filtro">
+
             <button type="submit" class="btn-filtrar">
                 Filtrar
             </button>
 
+
             {% if busca or categoria_id %}
+
             <a href="/produtos/" class="btn-limpar">
                 Limpar
             </a>
+
             {% endif %}
+
         </div>
+
 
     </form>
 
+
+
     <!-- TABELA -->
+
     <div class="tabela-container">
+
         <table>
+
+
             <thead>
+
                 <tr>
-                    <th>Imagem</th>
-                    <th>Nome</th>
-                    <th>Categoria</th>
-                    <th>Preço</th>
-                    <th>Estoque</th>
-                    <th>Ações</th>
+
+                    <th>
+                        Imagem
+                    </th>
+
+                    <th>
+                        Nome
+                    </th>
+
+                    <th>
+                        Categoria
+                    </th>
+
+                    <th>
+                        Preço
+                    </th>
+
+                    <th>
+                        Estoque
+                    </th>
+
+                    <th>
+                        Ações
+                    </th>
+
                 </tr>
+
             </thead>
 
+
+
             <tbody>
+
+
                 {% for p in produtos %}
+
                 <tr>
 
+
                     <!-- IMAGEM -->
+
                     <td>
-                        <img
-                            src="{{ p.imagem_url }}"
-                            alt="{{ p.nome }}"
-                            class="produto-imagem"
-                        >
+
+                        <img src="{{ p.imagem_url }}" alt="{{ p.nome }}" class="produto-imagem">
+
                     </td>
+
+
 
                     <!-- NOME -->
+
                     <td>
+
                         <a href="/produtos/{{ p.id }}" class="link-produto">
+
                             {{ p.nome }}
+
                         </a>
+
                     </td>
+
+
 
                     <!-- CATEGORIA -->
+
                     <td>
+
                         {{ p.categoria.nome if p.categoria else "—" }}
+
                     </td>
+
+
 
                     <!-- PREÇO -->
+
                     <td class="produto-preco">
-                        R$ {{ "%.2f"|format(p.preco) }}
+
+                        R$
+                        {{ "%.2f"|format(p.preco) }}
+
                     </td>
+
+
 
                     <!-- ESTOQUE -->
+
                     <td>
+
                         <span class="estoque">
+
                             {{ p.estoque_atual }}
+
                         </span>
+
                     </td>
 
+
+
                     <!-- AÇÕES -->
+
                     <td class="acoes-produto">
+
 
                         {% if usuario.role == 'admin' %}
 
-                        <a
-                            href="/produtos/{{ p.id }}/editar"
-                            class="btn-editar"
-                        >
+
+                        <a href="/produtos/{{ p.id }}/editar" class="btn-editar">
                             Editar
                         </a>
 
-                        <!-- FORMULÁRIO COM CONFIRMAÇÃO PERSONALIZADA -->
-                        <form
-                            action="/produtos/{{ p.id }}/desativar"
-                            method="post"
-                            class="form-desativar"
-                            data-confirm="Tem certeza de que deseja desativar o produto {{ p.nome }}?"
-                            data-confirm-title="Desativar produto"
-                            data-confirm-button="Sim, desativar"
-                        >
+
+
+                        <form action="/produtos/{{ p.id }}/desativar" method="post" class="form-desativar"
+                            onsubmit="return confirm('Desativar {{ p.nome }}?')">
+
                             <button type="submit" class="btn-desativar">
                                 Desativar
                             </button>
+
                         </form>
 
+
                         {% else %}
+
                         —
+
                         {% endif %}
 
+
                     </td>
+
+
                 </tr>
+
                 {% endfor %}
 
+
+
                 <!-- SEM PRODUTOS -->
+
                 {% if not produtos %}
+
                 <tr>
+
                     <td colspan="6" class="tabela-vazia">
+
                         Nenhum produto encontrado.
+
                     </td>
+
                 </tr>
+
                 {% endif %}
+
+
             </tbody>
+
+
         </table>
+
     </div>
 
+
+
     <!-- PAGINAÇÃO -->
+
     {% if total_paginas > 1 %}
+
     <div class="paginacao">
 
+
         <div class="info-paginacao">
+
             <p>
                 {{ total_produtos }} produtos encontrados
             </p>
@@ -217,39 +340,59 @@ Produtos — Nova Adega
             <p>
                 Página {{ pagina }} de {{ total_paginas }}
             </p>
+
         </div>
+
+
 
         <div class="botoes-paginacao">
 
+
             {% if pagina > 1 %}
-            <a
-                href="/produtos/?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}&busca={{ busca }}&categoria_id={{ categoria_id }}"
-                class="btn-pagina"
-            >
+
+            <a href="/produtos/?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}&busca={{ busca }}&categoria_id={{ categoria_id }}"
+                class="btn-pagina">
+
                 ← Anterior
+
             </a>
+
             {% endif %}
 
-            {% if pagina < total_paginas %}
-            <a
+
+
+            {% if pagina < total_paginas %} <a
                 href="/produtos/?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}&busca={{ busca }}&categoria_id={{ categoria_id }}"
-                class="btn-pagina"
-            >
+                class="btn-pagina">
+
                 Próxima →
-            </a>
-            {% endif %}
+
+                </a>
+
+                {% endif %}
+
 
         </div>
+
+
     </div>
+
     {% endif %}
 
+
+
     <!-- VOLTAR -->
+
     <div class="voltar-pagina">
+
         <a href="/">
             ← Voltar para o início
         </a>
+
     </div>
 
+
 </main>
+
 
 {% endblock %}
