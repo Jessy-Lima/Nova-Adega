@@ -16,6 +16,7 @@
     </script>
 
     <link rel="stylesheet" href="/static/CSS/home.css?v=8">
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     {% block styles %}{% endblock %}
 
@@ -266,7 +267,9 @@
             <a href="/clientes/">Clientes</a>
 
             <button type="button" id="alternar-tema" class="botao-tema" aria-label="Ativar modo claro"
-                title="Alternar modo claro/escuro">☀️</button>
+                title="Alternar modo claro/escuro">
+                <i data-lucide="sun"></i>
+            </button>
 
             <a href="/auth/logout" class="btn-sair">Sair</a>
         </div>
@@ -297,7 +300,13 @@
 
                 const modoClaro = tema === "claro";
 
-                botao.textContent = modoClaro ? "🌙" : "☀️";
+                botao.innerHTML = modoClaro
+                    ? '<i data-lucide="moon"></i>'
+                    : '<i data-lucide="sun"></i>';
+
+                if (window.lucide) {
+                    lucide.createIcons();
+                }
                 botao.setAttribute(
                     "aria-label",
                     modoClaro ? "Ativar modo escuro" : "Ativar modo claro"
@@ -332,6 +341,15 @@
             });
         })();
     </script>
+
+
+    <!-- Inicialização dos ícones Lucide -->
+    <script>
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    </script>
+
 </body>
 
 </html>

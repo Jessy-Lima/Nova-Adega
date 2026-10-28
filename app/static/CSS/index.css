@@ -291,3 +291,16 @@ html[data-tema="claro"] .btn-entrar:hover {
 background: #F9D96A !important;
 color: #5C3514 !important;
 }
+
+/* Ícone profissional da página inicial */
+.index-icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.index-icone svg {
+    width: 48px;
+    height: 48px;
+    stroke-width: 1.6;
+}
