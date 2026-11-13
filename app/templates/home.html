@@ -15,7 +15,7 @@
             <span class="subtitulo">PAINEL PRINCIPAL</span>
 
             <h1>
-                Olá, {{ usuario.nome }}! 
+                Olá, {{ usuario.nome }}!
                 <i data-lucide="hand"></i>
             </h1>
 
@@ -46,7 +46,7 @@
             <div class="card-info">
                 <span>Produtos</span>
                 <strong>Estoque</strong>
-                <a href="/produtos/">Gerenciar 
+                <a href="/produtos/">Gerenciar
                     <i data-lucide="arrow-right"></i>
                 </a>
             </div>
@@ -224,6 +224,8 @@
 
 
         <!-- ESTOQUE -->
+
+        <!-- ESTOQUE -->
         <div class="painel">
 
             <div class="painel-cabecalho">
@@ -241,20 +243,75 @@
 
             <div class="painel-conteudo">
 
+                {% if total_estoque_baixo > 0 %}
+
                 <div class="estoque-status">
+
+                    <div class="status-icone">
+                        <i data-lucide="alert-triangle"></i>
+                    </div>
+
+                    <div>
+                        <strong>
+                            {{ total_estoque_baixo }}
+                            produto(s) com estoque baixo
+                        </strong>
+
+                        <p>
+                            Confira os produtos que precisam de reposição.
+                        </p>
+                    </div>
+
+                </div>
+
+                {% for produto in produtos_estoque_baixo %}
+
+                <div class="estoque-status">
+
                     <div class="status-icone">
                         <i data-lucide="package"></i>
                     </div>
 
                     <div>
-                        <strong>Confira seu estoque</strong>
+                        <strong>{{ produto.nome }}</strong>
 
                         <p>
-                            Verifique produtos com estoque baixo
-                            para evitar falta de mercadorias.
+                            Apenas {{ produto.estoque_atual }}
+                            unidade(s) disponíveis.
                         </p>
                     </div>
+
                 </div>
+
+                {% endfor %}
+
+                {% if total_estoque_baixo > 5 %}
+                <p>
+                    Existem mais
+                    {{ total_estoque_baixo - 5 }}
+                    produto(s) com estoque baixo.
+                </p>
+                {% endif %}
+
+                {% else %}
+
+                <div class="estoque-status">
+
+                    <div class="status-icone">
+                        <i data-lucide="package-check"></i>
+                    </div>
+
+                    <div>
+                        <strong>Estoque normal!</strong>
+
+                        <p>
+                            Nenhum produto está com estoque baixo.
+                        </p>
+                    </div>
+
+                </div>
+
+                {% endif %}
 
                 <a href="/produtos/" class="btn-painel">
                     Ver estoque →

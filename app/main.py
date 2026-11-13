@@ -6,6 +6,9 @@ from pathlib import Path
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from app.auth import get_usuario_opcional
+from sqlalchemy.orm import Session
+from app.database import get_db
+from app.models.produto import Produto
 
 from app.controllers import auth_controller
 from app.controllers import usuario_controller
@@ -39,25 +42,50 @@ app.include_router(cliente_controller.router)
 app.include_router(pdv_controller.router)
 
 
+
 @app.get("/")
 def tela_inicial(
     request: Request,
-    usuario = Depends(get_usuario_opcional)
+    usuario=Depends(get_usuario_opcional),
+    db: Session = Depends(get_db)
 ):
-    #Tela não logado
+    # Tela para usuário não logado
     if usuario is None:
         return templates.TemplateResponse(
             request,
             "index.html",
             {"request": request}
         )
-    #Logado - exibir a tela de funcionario
+
+    # Buscar produtos ativos com estoque baixo
+    consulta_estoque_baixo = (
+        db.query(Produto)
+        .filter(
+            Produto.ativo == True,
+            Produto.estoque_atual <= 10
+        )
+        .order_by(Produto.estoque_atual.asc())
+    )
+
+    total_estoque_baixo = consulta_estoque_baixo.count()
+
+    produtos_estoque_baixo = (
+        consulta_estoque_baixo
+        .limit(5)
+        .all()
+    )
+
+    # Exibir Dashboard
     return templates.TemplateResponse(
         request,
         "home.html",
-        {"request": request, "usuario": usuario}
+        {
+            "request": request,
+            "usuario": usuario,
+            "produtos_estoque_baixo": produtos_estoque_baixo,
+            "total_estoque_baixo": total_estoque_baixo
+        }
     )
-
 
 
 # =========================================
