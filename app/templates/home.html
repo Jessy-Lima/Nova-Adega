@@ -15,7 +15,8 @@
             <span class="subtitulo">PAINEL PRINCIPAL</span>
 
             <h1>
-                Olá, {{ usuario.nome }}! 👋
+                Olá, {{ usuario.nome }}! 
+                <i data-lucide="hand"></i>
             </h1>
 
             <p>
@@ -25,7 +26,8 @@
         </div>
 
         <a href="/pdv/" class="btn-nova-venda">
-            🛒 Iniciar nova venda
+            <i data-lucide="shopping-cart"></i>
+            Iniciar nova venda
         </a>
 
     </section>
@@ -37,18 +39,24 @@
     <section class="resumo">
 
         <div class="card-resumo">
-            <div class="card-icone">📦</div>
+            <div class="card-icone">
+                <i data-lucide="package"></i>
+            </div>
 
             <div class="card-info">
                 <span>Produtos</span>
                 <strong>Estoque</strong>
-                <a href="/produtos/">Gerenciar →</a>
+                <a href="/produtos/">Gerenciar 
+                    <i data-lucide="arrow-right"></i>
+                </a>
             </div>
         </div>
 
 
         <div class="card-resumo">
-            <div class="card-icone">👥</div>
+            <div class="card-icone">
+                <i data-lucide="users"></i>
+            </div>
 
             <div class="card-info">
                 <span>Clientes</span>
@@ -59,7 +67,9 @@
 
 
         <div class="card-resumo">
-            <div class="card-icone">💰</div>
+            <div class="card-icone">
+                <i data-lucide="shopping-cart"></i>
+            </div>
 
             <div class="card-info">
                 <span>Vendas</span>
@@ -70,7 +80,9 @@
 
 
         <div class="card-resumo">
-            <div class="card-icone">📋</div>
+            <div class="card-icone">
+                <i data-lucide="clipboard-list"></i>
+            </div>
 
             <div class="card-info">
                 <span>Histórico</span>
@@ -107,7 +119,9 @@
 
             <a href="/produtos/categoria/cerveja" class="card-categoria">
 
-                <div class="icone-categoria">🍺</div>
+                <div class="icone-categoria">
+                    <i data-lucide="beer"></i>
+                </div>
 
                 <div>
                     <h3>Cervejas</h3>
@@ -123,7 +137,9 @@
 
             <a href="/produtos/categoria/destilados" class="card-categoria">
 
-                <div class="icone-categoria">🥃</div>
+                <div class="icone-categoria">
+                    <i data-lucide="glass-water"></i>
+                </div>
 
                 <div>
                     <h3>Destilados</h3>
@@ -139,7 +155,9 @@
 
             <a href="/produtos/categoria/vinhos" class="card-categoria">
 
-                <div class="icone-categoria">🍷</div>
+                <div class="icone-categoria">
+                    <i data-lucide="wine"></i>
+                </div>
 
                 <div>
                     <h3>Vinhos</h3>
@@ -155,7 +173,9 @@
 
             <a href="/produtos/categoria/refrigerantes" class="card-categoria">
 
-                <div class="icone-categoria">🥤</div>
+                <div class="icone-categoria">
+                    <i data-lucide="cup-soda"></i>
+                </div>
 
                 <div>
                     <h3>Refrigerantes</h3>
@@ -171,7 +191,9 @@
 
             <a href="/produtos/categoria/outros" class="card-categoria">
 
-                <div class="icone-categoria">🛒</div>
+                <div class="icone-categoria">
+                    <i data-lucide="package"></i>
+                </div>
 
                 <div>
                     <h3>Outros</h3>
@@ -205,7 +227,9 @@
                     <h2>Estoque</h2>
                 </div>
 
-                <span class="icone-painel">⚠️</span>
+                <span class="icone-painel">
+                    <i data-lucide="triangle-alert"></i>
+                </span>
 
             </div>
 
@@ -213,7 +237,7 @@
 
                 <div class="estoque-status">
                     <div class="status-icone">
-                        📦
+                        <i data-lucide="package"></i>
                     </div>
 
                     <div>
@@ -245,7 +269,9 @@
                     <h2>Clientes associados</h2>
                 </div>
 
-                <span class="icone-painel">⭐</span>
+                <span class="icone-painel">
+                    <i data-lucide="badge-percent"></i>
+                </span>
 
             </div>
 
@@ -297,7 +323,9 @@
         <div class="atalhos">
 
             <a href="/pdv/" class="atalho">
-                <span>🛒</span>
+                <span>
+                    <i data-lucide="shopping-cart"></i>
+                </span>
                 <div>
                     <strong>PDV</strong>
                     <small>Realizar uma venda</small>
@@ -307,32 +335,39 @@
 
 
             <a href="/produtos/" class="atalho">
-                <span>📦</span>
+                <span>
+                    <i data-lucide="package"></i>
+
+                </span>
                 <div>
                     <strong>Produtos</strong>
                     <small>Gerenciar estoque</small>
                 </div>
-                <b>→</b>
+                <b><i data-lucide="arrow-right"></i></b>
             </a>
 
 
             <a href="/clientes/" class="atalho">
-                <span>👥</span>
+                <span>
+                    <i data-lucide="users"></i>
+                </span>
                 <div>
                     <strong>Clientes</strong>
                     <small>Gerenciar clientes</small>
                 </div>
-                <b>→</b>
+                <b><i data-lucide="arrow-right"></i></b>
             </a>
 
 
             <a href="/movimentacoes/" class="atalho">
-                <span>📋</span>
+                <span>
+                    <i data-lucide="clipboard-list"></i>
+                </span>
                 <div>
                     <strong>Movimentações</strong>
                     <small>Consultar histórico</small>
                 </div>
-                <b>→</b>
+                <b><i data-lucide="arrow-right"></i></b>
             </a>
 
         </div>

@@ -1613,3 +1613,94 @@ html[data-tema="claro"] .paginacao-btn.proxima {
 }
 
 
+
+/* =========================================
+   PAGINAÇÃO DO HISTÓRICO DE VENDAS
+   PADRÃO VISUAL NOVA ADEGA
+========================================= */
+
+.paginacao-vendas {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 18px 20px;
+    margin-top: 22px;
+    background-color: #1E1E1E;
+    border: 1px solid rgba(253, 230, 138, 0.15);
+    border-radius: 12px;
+}
+
+.paginacao-vendas .paginacao-info {
+    color: #9CA3AF;
+    font-size: 14px;
+}
+
+.paginacao-vendas .paginacao-total {
+    color: #9CA3AF;
+}
+
+.paginacao-vendas .paginacao-botoes {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Botões anterior e próxima */
+.paginacao-vendas .paginacao-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    box-sizing: border-box;
+    padding: 0 16px;
+    background-color: #27272A;
+    color: #FDE68A;
+    border: 1px solid rgba(253, 230, 138, 0.30);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
+}
+
+/* Efeito ao passar o mouse */
+.paginacao-vendas a.paginacao-btn:hover {
+    background-color: #FDE68A;
+    color: #121212;
+    border-color: #FDE68A;
+}
+
+/* Botões desabilitados */
+.paginacao-vendas .paginacao-btn.desabilitado {
+    background-color: #27272A;
+    color: #777777;
+    border-color: rgba(253, 230, 138, 0.10);
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+/* Ajuste para celulares */
+@media (max-width: 600px) {
+    .paginacao-vendas {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+        padding: 16px;
+    }
+
+    .paginacao-vendas .paginacao-info {
+        text-align: center;
+    }
+
+    .paginacao-vendas .paginacao-botoes {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
