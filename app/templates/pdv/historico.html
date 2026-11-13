@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}Histórico de Vendas — Nova Adega{% endblock %}
@@ -11,12 +12,10 @@
 <main class="pdv-container">
 
     <div class="pdv-page-header">
-
         <div>
             <h1>📋 Histórico de vendas</h1>
             <p>Consulte todas as vendas realizadas.</p>
         </div>
-
     </div>
 
     <div class="pdv-table-container">
@@ -29,6 +28,7 @@
                     <th>Data</th>
                     <th>Cliente</th>
                     <th>Itens</th>
+                    <th>Pagamento</th>
                     <th>Desconto</th>
                     <th>Total</th>
                     <th>Operador</th>
@@ -60,21 +60,36 @@
                     </td>
 
                     <td>
-
-                        {% if v.desconto and v.desconto > 0 %}
-
-                        <span class="desconto-positivo">
-                            − R$ {{ "%.2f"|format(v.desconto) }}
-                        </span>
-
-                        {% else %}
-
-                        <span class="sem-desconto">
-                            —
-                        </span>
-
+                        {% if v.forma_pagamento_1 %}
+                            <strong>{{ v.forma_pagamento_1 | capitalize }}</strong>
+                            <br>
+                            <small>
+                                R$ {{ "%.2f"|format(v.valor_pagamento_1 or 0) }}
+                            </small>
                         {% endif %}
 
+                        {% if v.forma_pagamento_2 %}
+                            <br>
+                            <strong>{{ v.forma_pagamento_2 | capitalize }}</strong>
+                            <br>
+                            <small>
+                                R$ {{ "%.2f"|format(v.valor_pagamento_2 or 0) }}
+                            </small>
+                        {% endif %}
+
+                        {% if not v.forma_pagamento_1 and not v.forma_pagamento_2 %}
+                            —
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if v.desconto and v.desconto > 0 %}
+                            <span class="desconto-positivo">
+                                − R$ {{ "%.2f"|format(v.desconto) }}
+                            </span>
+                        {% else %}
+                            <span class="sem-desconto">—</span>
+                        {% endif %}
                     </td>
 
                     <td class="valor-total">
@@ -90,13 +105,11 @@
                 {% endfor %}
 
                 {% if not vendas %}
-
                 <tr>
-                    <td colspan="7">
+                    <td colspan="8">
                         Nenhuma venda encontrada.
                     </td>
                 </tr>
-
                 {% endif %}
 
             </tbody>
@@ -104,7 +117,6 @@
         </table>
 
     </div>
-
 
     <nav class="paginacao-vendas" aria-label="Paginação do histórico de vendas">
 
@@ -118,26 +130,28 @@
         <div class="paginacao-botoes">
 
             {% if pagina > 1 %}
-            <a class="paginacao-btn" href="/pdv/historico?pagina={{ pagina - 1 }}">
-                ← Anterior
-            </a>
+                <a class="paginacao-btn" href="/pdv/historico?pagina={{ pagina - 1 }}">
+                    ← Anterior
+                </a>
             {% else %}
-            <span class="paginacao-btn desabilitado">
-                ← Anterior
-            </span>
+                <span class="paginacao-btn desabilitado">
+                    ← Anterior
+                </span>
             {% endif %}
 
-            {% if pagina < total_paginas %} <a class="paginacao-btn proxima"
-                href="/pdv/historico?pagina={{ pagina + 1 }}">
-                Próxima →
+            {% if pagina < total_paginas %}
+                <a class="paginacao-btn proxima"
+                   href="/pdv/historico?pagina={{ pagina + 1 }}">
+                    Próxima →
                 </a>
-                {% else %}
+            {% else %}
                 <span class="paginacao-btn desabilitado">
                     Próxima →
                 </span>
-                {% endif %}
+            {% endif %}
 
         </div>
+
     </nav>
 
 </main>
