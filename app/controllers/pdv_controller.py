@@ -34,9 +34,11 @@ PRODUTOS_POR_PAGINA = 8
 def tela_pdv(
     request: Request,
     pagina: int = 1,
+    busca: str = "",
     db: Session = Depends(get_db),
     usuario=Depends(get_usuario_logado)
 ):
+    # Buscar produtos ativos e com estoque
     consulta_produtos = (
         db.query(Produto)
         .filter(
@@ -45,6 +47,15 @@ def tela_pdv(
         )
     )
 
+    # Pesquisar em todos os produtos do banco
+    busca = busca.strip()
+
+    if busca:
+        consulta_produtos = consulta_produtos.filter(
+            Produto.nome.ilike(f"%{busca}%")
+        )
+
+    # Contar os produtos encontrados
     total_produtos = consulta_produtos.count()
 
     total_paginas = max(
@@ -54,6 +65,7 @@ def tela_pdv(
 
     pagina = max(1, min(pagina, total_paginas))
 
+    # Buscar produtos da página atual
     produtos = (
         consulta_produtos
         .order_by(Produto.nome)
@@ -62,6 +74,7 @@ def tela_pdv(
         .all()
     )
 
+    # Buscar clientes ativos
     clientes = (
         db.query(Cliente)
         .filter(Cliente.ativo == True)
@@ -82,6 +95,7 @@ def tela_pdv(
             "total_paginas": total_paginas,
             "total_produtos": total_produtos,
             "produtos_por_pagina": PRODUTOS_POR_PAGINA,
+            "busca": busca,
         }
     )
 
@@ -328,7 +342,7 @@ def finalizar_venda(
     print(f"Total recebido:    R$ {total_pago:.2f}")
     print("====================================")
 
-    # Para pagamento dividido, os valores devem fechar o total.
+    # Validar se os pagamentos fecham o total
     if abs(total_pago - total_liquido) > 0.001:
         return RedirectResponse(
             url="/pdv/?erro=valor_pagamento",

@@ -1841,3 +1841,175 @@ html[data-tema="claro"] .aviso-estoque-baixo span strong {
         padding: 8px;
     }
 }
+<<<<<<< HEAD
+=======
+
+
+/* =========================================
+   BUSCA RÁPIDA — BOTÃO PEQUENO E DISCRETO
+========================================= */
+
+.btn-busca-rapida {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    width: auto;
+    padding: 7px 10px;
+
+    background: transparent;
+    color: #A1A1AA;
+    border: 1px solid transparent;
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.btn-busca-rapida:hover {
+    background: rgba(253, 230, 138, 0.06);
+    color: #FDE68A;
+}
+
+.busca-rapida-icone {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+}
+
+.busca-rapida-texto {
+    display: flex;
+    align-items: center;
+}
+
+.busca-rapida-texto strong {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.busca-rapida-texto small,
+.busca-rapida-seta {
+    display: none;
+}
+
+/* PAINEL DE PESQUISA */
+
+.painel-busca-rapida {
+    display: none;
+    margin-top: 12px;
+}
+
+.painel-busca-rapida.ativo {
+    display: block;
+}
+
+.busca-rapida-campo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.busca-rapida-campo > i {
+    color: #FDE68A;
+    flex-shrink: 0;
+}
+
+.busca-rapida-campo #busca-produto {
+    flex: 1;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0;
+}
+
+.btn-fechar-busca {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+
+    background: transparent;
+    color: #A1A1AA;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-fechar-busca:hover {
+    color: #FDE68A;
+    background: #292929;
+}
+
+.busca-rapida-dica {
+    margin-top: 8px;
+    color: #A1A1AA;
+    font-size: 11px;
+}
+
+/* MODO CLARO */
+
+html[data-tema="claro"] .btn-busca-rapida {
+    color: #666666;
+}
+
+html[data-tema="claro"] .btn-busca-rapida:hover {
+    color: #795600;
+    background: rgba(179, 138, 37, 0.08);
+}
+
+html[data-tema="claro"] .busca-rapida-campo > i {
+    color: #795600;
+}
+
+html[data-tema="claro"] .btn-fechar-busca {
+    color: #666666;
+}
+
+html[data-tema="claro"] .btn-fechar-busca:hover {
+    color: #795600;
+    background: #F5F0E2;
+}
+
+html[data-tema="claro"] .busca-rapida-dica {
+    color: #777777;
+}
+
+/* =====================================================
+   BUSCA RÁPIDA
+===================================================== */
+
+.painel-busca-rapida {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.busca-rapida-campo {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    gap: 10px;
+}
+
+.busca-rapida-campo input {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 10px;
+    font-size: 14px;
+}
+
+.busca-rapida-campo input::placeholder {
+    opacity: 1;
+    font-size: 14px;
+}
+
+.btn-fechar-busca {
+    flex-shrink: 0;
+}
+>>>>>>> 942f34dae9226429aec6a1f90f8fe449599582ee
