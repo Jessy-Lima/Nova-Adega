@@ -6,13 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Nova Adega{% endblock %}</title>
 
+    <!-- Biblioteca de ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <script>
-        try {
-            document.documentElement.dataset.tema =
-                localStorage.getItem("tema-nova-adega") || "escuro";
-        } catch (erro) {
-            document.documentElement.dataset.tema = "escuro";
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.lucide) {
+                lucide.createIcons();
+            } else {
+                console.error("Lucide não foi carregado!");
+            }
+        });
+
     </script>
 
     <link rel="stylesheet" href="/static/CSS/home.css?v=8">
@@ -22,7 +27,12 @@
     <link rel="stylesheet" href="/static/CSS/voltar.css?v=2">
     <link rel="stylesheet" href="/static/CSS/responsivo.css?v=1">
 
+
     <style>
+        /* =====================================
+       BOTÃO DE ALTERAR TEMA
+    ===================================== */
+
         .botao-tema {
             width: 34px;
             height: 34px;
@@ -43,7 +53,60 @@
             border-color: #E6BD42;
         }
 
-        /* PALETA DO TEMA CLARO */
+        /* =====================================
+       ÍCONES LUCIDE - NOVA ADEGA
+    ===================================== */
+
+        /* Ícones do menu */
+        .navbar .menu a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navbar .menu a svg {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* Logo */
+        .logo-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .logo-link svg {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        /* Botão de tema */
+        .botao-tema svg {
+            width: 19px;
+            height: 19px;
+            stroke-width: 2;
+        }
+
+        /* Botão Sair */
+        .navbar .menu .btn-sair {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .navbar .menu .btn-sair svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* =====================================
+       PALETA DO TEMA CLARO
+    ===================================== */
+
         html[data-tema="claro"] {
             color-scheme: light;
             --fundo: #F7F6F2;
@@ -62,7 +125,10 @@
             color: var(--texto) !important;
         }
 
-        /* MENU E RODAPÉ */
+        /* =====================================
+       MENU E RODAPÉ
+    ===================================== */
+
         html[data-tema="claro"] .navbar,
         html[data-tema="claro"] .footer {
             background: var(--branco) !important;
@@ -85,7 +151,10 @@
             border-color: var(--borda-clara) !important;
         }
 
-        /* TÍTULOS E TEXTOS */
+        /* =====================================
+       TÍTULOS E TEXTOS
+    ===================================== */
+
         html[data-tema="claro"] main.page-wrapper h1,
         html[data-tema="claro"] main.page-wrapper h2,
         html[data-tema="claro"] main.page-wrapper h3,
@@ -100,7 +169,10 @@
             color: var(--texto) !important;
         }
 
-        /* PAINÉIS, CARTÕES E FORMULÁRIOS */
+        /* =====================================
+       PAINÉIS, CARTÕES E FORMULÁRIOS
+    ===================================== */
+
         html[data-tema="claro"] main.page-wrapper .card,
         html[data-tema="claro"] main.page-wrapper .painel,
         html[data-tema="claro"] main.page-wrapper .container-card,
@@ -124,7 +196,10 @@
             border-color: var(--borda-clara) !important;
         }
 
-        /* TABELAS */
+        /* =====================================
+       TABELAS
+    ===================================== */
+
         html[data-tema="claro"] main.page-wrapper table {
             background: var(--branco) !important;
             color: var(--texto) !important;
@@ -153,7 +228,10 @@
             background: var(--hover-claro) !important;
         }
 
-        /* NOMES DE CLIENTES, PRODUTOS E CATEGORIAS */
+        /* =====================================
+       NOMES DE CLIENTES, PRODUTOS E CATEGORIAS
+    ===================================== */
+
         html[data-tema="claro"] main.page-wrapper .produto-nome,
         html[data-tema="claro"] main.page-wrapper .nome-produto,
         html[data-tema="claro"] main.page-wrapper .nome-cliente,
@@ -165,7 +243,10 @@
             font-weight: 600 !important;
         }
 
-        /* CAMPOS DE TEXTO, BUSCA E CADASTRO */
+        /* =====================================
+       CAMPOS DE TEXTO, BUSCA E CADASTRO
+    ===================================== */
+
         html[data-tema="claro"] main.page-wrapper input,
         html[data-tema="claro"] main.page-wrapper select,
         html[data-tema="claro"] main.page-wrapper textarea {
@@ -184,7 +265,10 @@
             opacity: 1;
         }
 
-        /* ÁREAS DE BUSCA DE CLIENTES */
+        /* =====================================
+       ÁREAS DE BUSCA DE CLIENTES
+    ===================================== */
+
         html[data-tema="claro"] main.page-wrapper .search-box,
         html[data-tema="claro"] main.page-wrapper .input-group,
         html[data-tema="claro"] main.page-wrapper .input-group-text,
@@ -201,7 +285,10 @@
             color: var(--marrom-escuro) !important;
         }
 
-        /* ESTOQUE — PADRÃO VISUAL CLARO */
+        /* =====================================
+       ESTOQUE - PADRÃO VISUAL CLARO
+    ===================================== */
+
         html[data-tema="claro"] main.page-wrapper .estoque,
         html[data-tema="claro"] main.page-wrapper .produto-card-estoque,
         html[data-tema="claro"] main.page-wrapper .estoque-quantidade,
@@ -216,7 +303,10 @@
             font-weight: 600 !important;
         }
 
-        /* BOTÕES SECUNDÁRIOS */
+        /* =====================================
+       BOTÕES SECUNDÁRIOS
+    ===================================== */
+
         html[data-tema="claro"] main.page-wrapper .btn-dark,
         html[data-tema="claro"] main.page-wrapper .btn-secondary {
             background: var(--bisque) !important;
@@ -230,7 +320,10 @@
             border-color: #D8B995;
         }
 
-        /* PAGINAÇÃO */
+        /* =====================================
+       PAGINAÇÃO
+    ===================================== */
+
         html[data-tema="claro"] main.page-wrapper .paginacao,
         html[data-tema="claro"] main.page-wrapper .pagination,
         html[data-tema="claro"] main.page-wrapper .paginacao-container {
@@ -249,29 +342,51 @@
             color: #625548 !important;
         }
     </style>
+
 </head>
 
 <body>
     {% block navbar %}
     <header class="navbar">
         <div class="logo">
-            <a href="/">🍷 Nova Adega</a>
+            <a href="/" class="logo-link">
+                <i data-lucide="wine"></i>
+                Nova Adega
+            </a>
         </div>
 
         <div class="menu">
-            <a href="/pdv/">PDV</a>
-            <a href="/pdv/historico/">Histórico</a>
-            <a href="/produtos/">Produtos</a>
-            <a href="/categorias/">Categorias</a>
-            <a href="/clientes/">Clientes</a>
+            <a href="/pdv/">
+                <i data-lucide="shopping-cart"></i>
+                PDV
+            </a>
+            <a href="/pdv/historico/">
+                <i data-lucide="history"></i>
+                Histórico</a>
+            <a href="/produtos/">
+                <i data-lucide="package"></i>
+                Produtos</a>
+            <a href="/categorias/">
+                <i data-lucide="tag"></i>
+                Categorias</a>
+            <a href="/clientes/">
+                <i data-lucide="users"></i>
+                Clientes</a>
             {% if usuario and usuario.role == "admin" %}
-            <a href="/usuarios/">Funcionários</a>
+            <a href="/usuarios/">
+                <i data-lucide="user-cog"></i>
+                Funcionários</a>
             {% endif %}
 
-            <button type="button" id="alternar-tema" class="botao-tema" aria-label="Ativar modo claro"
-                title="Alternar modo claro/escuro">☀️</button>
+            <button type="button" id="alternar-tema" class="botao-tema" aria-label="Alternar modo claro ou escuro"
+                title="Alternar modo claro/escuro">
+                <i data-lucide="sun"></i>
+            </button>
 
-            <a href="/auth/logout" class="btn-sair">Sair</a>
+            <a href="/auth/logout" class="btn-sair">
+                <i data-lucide="log-out"></i>
+                Sair
+            </a>
         </div>
     </header>
     {% endblock %}
