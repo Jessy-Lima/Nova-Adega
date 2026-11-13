@@ -393,3 +393,19 @@
         padding: 12px;
     }
 }
+
+/* =========================================
+   PADRONIZAÇÃO DA LARGURA - USUÁRIOS
+========================================= */
+
+.page-wrapper > .usuarios-container {
+    display: block;
+    width: 100%;
+    max-width: 1500px;
+
+    margin: 0 auto;
+
+    padding: 40px 23px 60px;
+
+    box-sizing: border-box;
+}
