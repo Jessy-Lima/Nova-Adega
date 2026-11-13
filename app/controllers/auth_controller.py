@@ -89,7 +89,7 @@ def fazer_login(
             "auth/login.html",
             {
                 "request": request,
-                "erro": "E-mail ou senha incorretos"
+                "erro": "Senha incorreta. Digite novamente."
             }
         )
     

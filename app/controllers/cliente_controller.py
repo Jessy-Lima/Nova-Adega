@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, Request, Form
-from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.models.cliente import Cliente
-from app.auth import get_admin
+from app.auth import get_usuario_logado
 
 
 router = APIRouter(
@@ -13,10 +13,10 @@ router = APIRouter(
     tags=["Clientes"]
 )
 
-
 templates = Jinja2Templates(
     directory="app/templates"
 )
+
 
 # ============================================================
 # LISTAR CLIENTES
@@ -29,24 +29,30 @@ def listar_clientes(
     pagina: int = 1,
     por_pagina: int = 10,
     db: Session = Depends(get_db),
-    admin=Depends(get_admin)
+    usuario=Depends(get_usuario_logado)
 ):
+    """Lista os clientes com busca e paginação."""
 
-    # Garante que a página nunca seja menor que 1
+    # Garante que a página seja válida
     if pagina < 1:
         pagina = 1
 
-    # Busca todos os clientes
+    # Limita a quantidade de registros por página
+    por_pagina = max(1, min(por_pagina, 100))
+
+    # Consulta os clientes
     query = db.query(Cliente)
 
     # Filtra por nome ou telefone
-    if busca:
+    if busca.strip():
+        termo = f"%{busca.strip()}%"
+
         query = query.filter(
-            Cliente.nome.ilike(f"%{busca}%") |
-            Cliente.telefone.ilike(f"%{busca}%")
+            Cliente.nome.ilike(termo) |
+            Cliente.telefone.ilike(termo)
         )
 
-    # Conta o total de clientes encontrados
+    # Total de clientes encontrados
     total_clientes = query.count()
 
     # Calcula o total de páginas
@@ -55,8 +61,7 @@ def listar_clientes(
         (total_clientes + por_pagina - 1) // por_pagina
     )
 
-    # Se a página informada não existir,
-    # volta para a última página
+    # Evita acessar uma página inexistente
     if pagina > total_paginas:
         pagina = total_paginas
 
@@ -69,13 +74,12 @@ def listar_clientes(
         .all()
     )
 
-    # Envia os dados para a página
     return templates.TemplateResponse(
         request,
         "clientes/index.html",
         {
             "request": request,
-            "usuario": admin,
+            "usuario": usuario,
             "clientes": clientes,
             "busca": busca,
             "pagina": pagina,
@@ -93,15 +97,16 @@ def listar_clientes(
 @router.get("/novo")
 def form_novo(
     request: Request,
-    admin=Depends(get_admin)
+    usuario=Depends(get_usuario_logado)
 ):
+    """Exibe o formulário de cadastro de cliente."""
 
     return templates.TemplateResponse(
         request,
         "clientes/form.html",
         {
             "request": request,
-            "usuario": admin,
+            "usuario": usuario,
             "editando": None
         }
     )
@@ -114,29 +119,46 @@ def form_novo(
 @router.post("/novo")
 def criar(
     request: Request,
-
     nome: str = Form(...),
-
     telefone: str = Form(""),
-
     is_associado: bool = Form(False),
-
     db: Session = Depends(get_db),
-
-    admin=Depends(get_admin)
+    usuario=Depends(get_usuario_logado)
 ):
+    """Cadastra um novo cliente."""
 
+    nome = nome.strip()
+    telefone = telefone.strip()
+
+    # Valida o nome
+    if not nome:
+        return templates.TemplateResponse(
+            request,
+            "clientes/form.html",
+            {
+                "request": request,
+                "usuario": usuario,
+                "editando": None,
+                "erro": "O nome do cliente é obrigatório.",
+                "valores": {
+                    "nome": nome,
+                    "telefone": telefone,
+                    "is_associado": is_associado
+                }
+            },
+            status_code=400
+        )
+
+    # Cria o cliente
     cliente = Cliente(
-        nome=nome.strip(),
-        telefone=telefone.strip() or None,
+        nome=nome,
+        telefone=telefone or None,
         is_associado=is_associado,
         ativo=True
     )
 
     db.add(cliente)
-
     db.commit()
-
     db.refresh(cliente)
 
     return RedirectResponse(
@@ -152,13 +174,11 @@ def criar(
 @router.get("/{cliente_id}/editar")
 def form_editar(
     cliente_id: int,
-
     request: Request,
-
     db: Session = Depends(get_db),
-
-    admin=Depends(get_admin)
+    usuario=Depends(get_usuario_logado)
 ):
+    """Exibe o formulário de edição do cliente."""
 
     editando = (
         db.query(Cliente)
@@ -167,9 +187,8 @@ def form_editar(
     )
 
     if not editando:
-
         return RedirectResponse(
-            url="/clientes",
+            url="/clientes/",
             status_code=302
         )
 
@@ -178,7 +197,7 @@ def form_editar(
         "clientes/form.html",
         {
             "request": request,
-            "usuario": admin,
+            "usuario": usuario,
             "editando": editando
         }
     )
@@ -191,17 +210,14 @@ def form_editar(
 @router.post("/{cliente_id}/editar")
 def editar(
     cliente_id: int,
-
+    request: Request,
     nome: str = Form(...),
-
     telefone: str = Form(""),
-
     is_associado: bool = Form(False),
-
     db: Session = Depends(get_db),
-
-    admin=Depends(get_admin)
+    usuario=Depends(get_usuario_logado)
 ):
+    """Atualiza os dados de um cliente."""
 
     editando = (
         db.query(Cliente)
@@ -210,23 +226,34 @@ def editar(
     )
 
     if not editando:
-
         return RedirectResponse(
-            url="/clientes",
+            url="/clientes/",
             status_code=302
         )
 
-    editando.nome = nome.strip()
+    nome = nome.strip()
+    telefone = telefone.strip()
 
-    editando.telefone = (
-        telefone.strip()
-        or None
-    )
+    # Valida o nome
+    if not nome:
+        return templates.TemplateResponse(
+            request,
+            "clientes/form.html",
+            {
+                "request": request,
+                "usuario": usuario,
+                "editando": editando,
+                "erro": "O nome do cliente é obrigatório."
+            },
+            status_code=400
+        )
 
+    # Atualiza os dados
+    editando.nome = nome
+    editando.telefone = telefone or None
     editando.is_associado = is_associado
 
     db.commit()
-
     db.refresh(editando)
 
     return RedirectResponse(
@@ -242,11 +269,10 @@ def editar(
 @router.post("/{cliente_id}/toggle-ativo")
 def toggle_ativo(
     cliente_id: int,
-
     db: Session = Depends(get_db),
-
-    admin=Depends(get_admin)
+    usuario=Depends(get_usuario_logado)
 ):
+    """Ativa ou desativa um cliente."""
 
     cliente = (
         db.query(Cliente)
@@ -255,12 +281,10 @@ def toggle_ativo(
     )
 
     if cliente:
-
         cliente.ativo = not cliente.ativo
-
         db.commit()
 
     return RedirectResponse(
-        url="/clientes",
+        url="/clientes/",
         status_code=302
     )

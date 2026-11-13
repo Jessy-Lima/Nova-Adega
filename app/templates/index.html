@@ -26,10 +26,8 @@ Bem-vindo - Nova Adega
 
 {% block styles %}
 
-<link
-    rel="stylesheet"
-    href="/static/CSS/index.css"
->
+<link rel="stylesheet" href="/static/CSS/index.css?v=3">
+
 
 {% endblock %}
 
@@ -47,10 +45,11 @@ Bem-vindo - Nova Adega
 
         <!-- ÍCONE -->
 
-        <div class="index-icone">
-            🍷
-        </div>
+        <!-- ÍCONE -->
 
+        <div class="index-icone">
+            <i data-lucide="wine"></i>
+        </div>
 
         <!-- TÍTULO -->
 
@@ -70,10 +69,7 @@ Bem-vindo - Nova Adega
 
         <div class="index-botoes">
 
-            <a
-                href="/auth/login"
-                class="btn-entrar"
-            >
+            <a href="/auth/login" class="btn-entrar">
                 Entrar
             </a>
 

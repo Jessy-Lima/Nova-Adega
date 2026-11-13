@@ -1,0 +1,545 @@
+/* ==========================================
+   NOVA ADEGA - RESPONSIVIDADE
+   Celulares, tablets, notebooks e desktops
+========================================== */
+
+/* CONFIGURAÇÕES GERAIS */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    width: 100%;
+    min-width: 0;
+    overflow-x: clip;
+}
+
+body {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+}
+
+img,
+video,
+iframe {
+    max-width: 100%;
+}
+
+img {
+    height: auto;
+}
+
+button,
+input,
+select,
+textarea {
+    max-width: 100%;
+    font: inherit;
+}
+
+.page-wrapper {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+td,
+th,
+label {
+    overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   NOTEBOOKS E TABLETS
+   Até 1024px
+========================================== */
+
+@media screen and (max-width: 1024px) {
+
+    .page-wrapper {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        max-width: 100%;
+    }
+
+    .home-container,
+    .pdv-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .resumo,
+    .categorias,
+    .atalhos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .area-inferior {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .pdv-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .produtos-col,
+    .carrinho-col {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .produtos-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* ==========================================
+   TABLETS E CELULARES
+   Até 768px
+========================================== */
+
+@media screen and (max-width: 768px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    .page-wrapper {
+        padding: 12px;
+    }
+
+    /* MENU */
+
+    .navbar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 14px;
+    }
+
+    .logo {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .menu {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .menu a {
+        max-width: 100%;
+        padding: 6px 8px;
+        overflow-wrap: anywhere;
+    }
+
+    .menu .botao-tema {
+        flex-shrink: 0;
+    }
+
+    /* TÍTULOS */
+
+    h1 {
+        font-size: clamp(1.35rem, 5vw, 1.8rem);
+    }
+
+    h2 {
+        font-size: clamp(1.15rem, 4vw, 1.45rem);
+    }
+
+    /* PÁGINA INICIAL */
+
+    .home-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 12px 0;
+    }
+
+    .boas-vindas {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .resumo,
+    .categorias,
+    .atalhos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .area-inferior {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+    }
+
+    .card-resumo,
+    .card-categoria,
+    .painel,
+    .atalho {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    /* PDV */
+
+    .pdv-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .pdv-titulo {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .pdv-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+    }
+
+    .produtos-col,
+    .carrinho-col {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .produtos-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .produto-card {
+        min-width: 0;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    .produto-card img {
+        width: 100%;
+        max-height: 160px;
+        object-fit: contain;
+    }
+
+    .carrinho-item {
+        min-width: 0;
+        max-width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .carrinho-item-info {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .carrinho-item-controles {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    /* PAGAMENTOS E DESCONTOS */
+
+    .desconto-manual-controles,
+    .pagamento-controles {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .pagamento-bloco,
+    .pagamento-resumo {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    /* FORMULÁRIOS */
+
+    form {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]),
+    select,
+    textarea {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    /* TABELAS */
+
+    .tabela-container,
+    .table-responsive,
+    .pdv-table-container {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .tabela-container table,
+    .table-responsive table,
+    .pdv-table-container table {
+        min-width: 600px;
+        border-collapse: collapse;
+    }
+
+    .tabela-container th,
+    .tabela-container td,
+    .table-responsive th,
+    .table-responsive td,
+    .pdv-table-container th,
+    .pdv-table-container td {
+        white-space: nowrap;
+    }
+
+    /* AÇÕES E BOTÕES */
+
+    .pdv-page-header,
+    .pdv-page-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .pdv-page-actions .btn {
+        max-width: 100%;
+    }
+
+    button {
+        min-height: 40px;
+    }
+
+    /* RODAPÉ */
+
+    .footer {
+        padding: 16px 12px;
+        text-align: center;
+    }
+}
+
+/* ==========================================
+   CELULARES PEQUENOS
+   Até 480px
+========================================== */
+
+@media screen and (max-width: 480px) {
+
+    .page-wrapper {
+        padding: 8px;
+    }
+
+    .navbar {
+        padding: 12px 8px;
+    }
+
+    .menu {
+        gap: 6px;
+    }
+
+    .menu a {
+        font-size: 13px;
+    }
+
+    .resumo,
+    .categorias,
+    .atalhos {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .boas-vindas {
+        padding: 14px;
+    }
+
+    /* PRODUTOS */
+
+    .produtos-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .produto-card {
+        padding: 8px;
+    }
+
+    .produto-card img {
+        max-height: 125px;
+    }
+
+    /* CARRINHO */
+
+    .carrinho-col {
+        padding: 10px;
+    }
+
+    .carrinho-footer {
+        min-width: 0;
+    }
+
+    .carrinho-footer .btn-finalizar {
+        width: 100%;
+        min-height: 46px;
+    }
+
+    /* BOTÕES */
+
+    .pdv-page-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pdv-page-actions .btn {
+        width: 100%;
+    }
+
+    .btn-qtd {
+        min-width: 32px;
+        min-height: 32px;
+    }
+
+    /* TABELAS DE CLIENTES E OUTRAS TELAS */
+
+    .tabela-container table,
+    .table-responsive table,
+    .pdv-table-container table {
+        min-width: 650px;
+        width: 650px;
+    }
+}
+
+/* ==========================================
+   CELULARES MUITO ESTREITOS
+   Até 350px
+========================================== */
+
+@media screen and (max-width: 350px) {
+
+    .page-wrapper {
+        padding: 6px;
+    }
+
+    .produtos-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .produto-card img {
+        max-height: 180px;
+    }
+
+    .menu {
+        gap: 5px;
+    }
+
+    .menu a {
+        font-size: 12px;
+    }
+}
+
+
+/* ==========================================
+   CATEGORIAS - RESPONSIVIDADE
+   Exclusivo para a página de categorias
+========================================== */
+
+/* Aplica estas regras somente à listagem de categorias */
+.categorias-page .categorias-listagem {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.categorias-page .categorias-tabela-desktop {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.categorias-page .categorias-tabela-desktop table {
+    width: 100%;
+    min-width: 650px;
+    table-layout: auto;
+}
+
+.categorias-page .categorias-tabela-desktop .acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.categorias-page .categorias-cards-mobile {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .categorias-page .titulo-pagina {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .categorias-page .btn-nova {
+        width: 100%;
+        text-align: center;
+    }
+
+    .categorias-page .categorias-tabela-desktop {
+        display: none;
+    }
+
+    .categorias-page .categorias-cards-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .categorias-page .categoria-card-mobile {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .categorias-page .categoria-acoes-mobile {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+}
