@@ -307,11 +307,6 @@ def finalizar_venda(
                 status_code=303
             )
 
-        if forma_pagamento_1 == forma_pagamento_2:
-            return RedirectResponse(
-                url="/pdv/?erro=pagamento_2",
-                status_code=303
-            )
     else:
         forma_pagamento_2 = None
         valor_pagamento_2 = 0.0
