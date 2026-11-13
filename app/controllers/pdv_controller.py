@@ -1,3 +1,4 @@
+
 # ============================================================
 # controllers/pdv_controller.py
 # PONTO DE VENDA - NOVA ADEGA
@@ -18,14 +19,8 @@ from app.models.cliente import Cliente
 from app.auth import get_usuario_logado
 
 
-router = APIRouter(
-    prefix="/pdv",
-    tags=["PDV"]
-)
-
-templates = Jinja2Templates(
-    directory="app/templates"
-)
+router = APIRouter(prefix="/pdv", tags=["PDV"])
+templates = Jinja2Templates(directory="app/templates")
 
 DESCONTO_ASSOCIADO = 10.0
 PRODUTOS_POR_PAGINA = 8
@@ -42,7 +37,6 @@ def tela_pdv(
     db: Session = Depends(get_db),
     usuario=Depends(get_usuario_logado)
 ):
-    # Produtos ativos que possuem estoque
     consulta_produtos = (
         db.query(Produto)
         .filter(
@@ -51,19 +45,15 @@ def tela_pdv(
         )
     )
 
-    # Total de produtos disponíveis
     total_produtos = consulta_produtos.count()
 
-    # Total de páginas
     total_paginas = max(
         1,
         ceil(total_produtos / PRODUTOS_POR_PAGINA)
     )
 
-    # Garante uma página válida
     pagina = max(1, min(pagina, total_paginas))
 
-    # Busca apenas os produtos da página atual
     produtos = (
         consulta_produtos
         .order_by(Produto.nome)
@@ -72,7 +62,6 @@ def tela_pdv(
         .all()
     )
 
-    # Clientes ativos
     clientes = (
         db.query(Cliente)
         .filter(Cliente.ativo == True)
@@ -119,7 +108,11 @@ def finalizar_venda(
     # Ler carrinho
     try:
         itens = json.loads(carrinho_json)
-    except (json.JSONDecodeError, ValueError):
+
+        if not isinstance(itens, list):
+            raise ValueError("O carrinho precisa ser uma lista.")
+
+    except (json.JSONDecodeError, ValueError, TypeError):
         return RedirectResponse(
             url="/pdv/?erro=json",
             status_code=303
@@ -151,66 +144,78 @@ def finalizar_venda(
     total_bruto = 0.0
     itens_validados = []
 
-    for item in itens:
-        produto_id = item.get("produto_id")
+    try:
+        for item in itens:
+            if not isinstance(item, dict):
+                return RedirectResponse(
+                    url="/pdv/?erro=json",
+                    status_code=303
+                )
 
-        try:
+            produto_id = int(item.get("produto_id"))
             quantidade = int(item.get("quantidade"))
-        except (ValueError, TypeError):
-            return RedirectResponse(
-                url="/pdv/?erro=quantidade",
-                status_code=303
+
+            if quantidade <= 0:
+                return RedirectResponse(
+                    url="/pdv/?erro=quantidade",
+                    status_code=303
+                )
+
+            produto = (
+                db.query(Produto)
+                .filter(
+                    Produto.id == produto_id,
+                    Produto.ativo == True
+                )
+                .first()
             )
 
-        if quantidade <= 0:
-            return RedirectResponse(
-                url="/pdv/?erro=quantidade",
-                status_code=303
-            )
+            if not produto:
+                return RedirectResponse(
+                    url="/pdv/?erro=produto_inexistente",
+                    status_code=303
+                )
 
-        produto = (
-            db.query(Produto)
-            .filter(
-                Produto.id == produto_id,
-                Produto.ativo == True
-            )
-            .first()
+            if produto.estoque_atual < quantidade:
+                return RedirectResponse(
+                    url="/pdv/?erro=estoque",
+                    status_code=303
+                )
+
+            preco = round(float(produto.preco), 2)
+            subtotal_item = round(preco * quantidade, 2)
+            total_bruto += subtotal_item
+
+            itens_validados.append({
+                "produto": produto,
+                "quantidade": quantidade,
+                "preco": preco,
+                "produto_nome": produto.nome,
+            })
+
+    except (ValueError, TypeError, AttributeError):
+        return RedirectResponse(
+            url="/pdv/?erro=quantidade",
+            status_code=303
         )
 
-        if not produto:
-            return RedirectResponse(
-                url=f"/pdv/?erro=produto_inexistente&id={produto_id}",
-                status_code=303
-            )
-
-        if produto.estoque_atual < quantidade:
-            return RedirectResponse(
-                url=f"/pdv/?erro=estoque&produto={produto.nome}",
-                status_code=303
-            )
-
-        preco = float(produto.preco)
-        subtotal = preco * quantidade
-        total_bruto += subtotal
-
-        itens_validados.append({
-            "produto": produto,
-            "quantidade": quantidade,
-            "preco": preco,
-            "produto_nome": produto.nome,
-        })
+    total_bruto = round(total_bruto, 2)
 
     # Desconto de associado
     desconto_associado = 0.0
 
     if cliente and cliente.is_associado:
-        desconto_associado = (
-            total_bruto * DESCONTO_ASSOCIADO / 100
+        desconto_associado = round(
+            total_bruto * DESCONTO_ASSOCIADO / 100,
+            2
         )
 
     # Validar desconto manual
     try:
-        desconto_manual = float(desconto_manual or 0)
+        desconto_manual = round(
+            float(desconto_manual or 0),
+            2
+        )
     except (ValueError, TypeError):
         return RedirectResponse(
             url="/pdv/?erro=desconto",
@@ -223,65 +228,113 @@ def finalizar_venda(
             status_code=303
         )
 
-    limite_desconto_manual = max(
-        0.0,
-        total_bruto - desconto_associado
+    limite_desconto_manual = round(
+        max(0.0, total_bruto - desconto_associado),
+        2
     )
 
-    if desconto_manual > limite_desconto_manual + 0.01:
+    if desconto_manual > limite_desconto_manual:
         return RedirectResponse(
             url="/pdv/?erro=desconto_maior",
             status_code=303
         )
 
-    # Calcular total
-    desconto_total = desconto_associado + desconto_manual
-    total_liquido = max(0.0, total_bruto - desconto_total)
+    # Calcular total líquido
+    desconto_total = round(
+        desconto_associado + desconto_manual,
+        2
+    )
 
-    total_liquido = round(total_liquido, 2)
-    desconto_total = round(desconto_total, 2)
-    total_bruto = round(total_bruto, 2)
+    total_liquido = round(
+        max(0.0, total_bruto - desconto_total),
+        2
+    )
 
-    # Validar valores dos pagamentos
+    # ========================================================
+    # VALIDAR PAGAMENTOS
+    # ========================================================
+
     try:
-        valor_pagamento_1 = float(valor_pagamento_1 or 0)
-        valor_pagamento_2 = float(valor_pagamento_2 or 0)
+        valor_pagamento_1 = round(
+            float(valor_pagamento_1 or 0), 2
+        )
+        valor_pagamento_2 = round(
+            float(valor_pagamento_2 or 0), 2
+        )
     except (ValueError, TypeError):
         return RedirectResponse(
             url="/pdv/?erro=pagamento",
             status_code=303
         )
 
-    forma_pagamento_1 = (forma_pagamento_1 or "").strip()
-    forma_pagamento_2 = (forma_pagamento_2 or "").strip()
+    forma_pagamento_1 = (
+        forma_pagamento_1 or ""
+    ).strip().lower()
 
-    if valor_pagamento_1 < 0 or valor_pagamento_2 < 0:
+    forma_pagamento_2 = (
+        forma_pagamento_2 or ""
+    ).strip().lower()
+
+    formas_permitidas = {
+        "dinheiro",
+        "pix",
+        "cartao_credito",
+        "cartao_debito",
+    }
+
+    if (
+        valor_pagamento_1 < 0
+        or valor_pagamento_2 < 0
+    ):
         return RedirectResponse(
             url="/pdv/?erro=pagamento",
             status_code=303
         )
 
-    if valor_pagamento_1 <= 0 or not forma_pagamento_1:
+    if (
+        valor_pagamento_1 <= 0
+        or forma_pagamento_1 not in formas_permitidas
+    ):
         return RedirectResponse(
             url="/pdv/?erro=pagamento_1",
             status_code=303
         )
 
-    if valor_pagamento_2 > 0 and not forma_pagamento_2:
-        return RedirectResponse(
-            url="/pdv/?erro=pagamento_2",
-            status_code=303
-        )
+    if valor_pagamento_2 > 0:
+        if forma_pagamento_2 not in formas_permitidas:
+            return RedirectResponse(
+                url="/pdv/?erro=pagamento_2",
+                status_code=303
+            )
 
-    if valor_pagamento_2 == 0:
+        if forma_pagamento_1 == forma_pagamento_2:
+            return RedirectResponse(
+                url="/pdv/?erro=pagamento_2",
+                status_code=303
+            )
+    else:
         forma_pagamento_2 = None
+        valor_pagamento_2 = 0.0
 
     total_pago = round(
         valor_pagamento_1 + valor_pagamento_2,
         2
     )
 
-    if abs(total_pago - total_liquido) > 0.01:
+    # Diagnóstico no terminal do VS Code
+    print("===== DIAGNÓSTICO DE PAGAMENTO =====")
+    print(f"Total bruto:       R$ {total_bruto:.2f}")
+    print(f"Desconto:          R$ {desconto_total:.2f}")
+    print(f"Total líquido:     R$ {total_liquido:.2f}")
+    print(f"Forma 1:           {forma_pagamento_1}")
+    print(f"Valor 1:           R$ {valor_pagamento_1:.2f}")
+    print(f"Forma 2:           {forma_pagamento_2}")
+    print(f"Valor 2:           R$ {valor_pagamento_2:.2f}")
+    print(f"Total recebido:    R$ {total_pago:.2f}")
+    print("====================================")
+
+    # Para pagamento dividido, os valores devem fechar o total.
+    if abs(total_pago - total_liquido) > 0.001:
         return RedirectResponse(
             url="/pdv/?erro=valor_pagamento",
             status_code=303
@@ -302,31 +355,33 @@ def finalizar_venda(
         desconto=desconto_total,
         tipo_desconto=tipo_desconto or None,
         forma_pagamento_1=forma_pagamento_1,
-        valor_pagamento_1=round(valor_pagamento_1, 2),
+        valor_pagamento_1=valor_pagamento_1,
         forma_pagamento_2=forma_pagamento_2,
-        valor_pagamento_2=round(valor_pagamento_2, 2),
+        valor_pagamento_2=valor_pagamento_2,
         observacao=observacao.strip() or None
     )
 
-    db.add(venda)
-    db.flush()
-
-    # Criar itens e baixar estoque
-    for item in itens_validados:
-        item_venda = ItemVenda(
-            venda_id=venda.id,
-            produto_id=item["produto"].id,
-            produto_nome=item["produto_nome"],
-            quantidade=item["quantidade"],
-            preco_unitario=item["preco"]
-        )
-
-        db.add(item_venda)
-        item["produto"].estoque_atual -= item["quantidade"]
-
-    # Salvar no banco
     try:
+        db.add(venda)
+        db.flush()
+
+        # Criar itens e baixar estoque
+        for item in itens_validados:
+            item_venda = ItemVenda(
+                venda_id=venda.id,
+                produto_id=item["produto"].id,
+                produto_nome=item["produto_nome"],
+                quantidade=item["quantidade"],
+                preco_unitario=item["preco"]
+            )
+
+            db.add(item_venda)
+
+            item["produto"].estoque_atual -= item["quantidade"]
+
         db.commit()
+        db.refresh(venda)
+
     except Exception as erro:
         db.rollback()
         print("ERRO AO FINALIZAR VENDA:")
@@ -421,4 +476,3 @@ def historico_vendas(
             "total_vendas": total_vendas
         }
     )
-
