@@ -10,6 +10,7 @@ from app.database import get_db
 from app.models.categoria import Categoria
 from app.auth import get_usuario_logado
 
+
 router = APIRouter(
     prefix="/categorias",
     tags=["Categorias"]
@@ -19,26 +20,43 @@ templates = Jinja2Templates(directory="app/templates")
 
 
 # ============================================================
-# LISTAGEM
+# LISTAGEM DE CATEGORIAS
 # ============================================================
 
 @router.get("/")
 def listar_categorias(
     request: Request,
+    busca: str = "",
     pagina: int = 1,
     por_pagina: int = 5,
     db: Session = Depends(get_db),
     usuario=Depends(get_usuario_logado)
 ):
-    """Lista as categorias ordenadas por nome."""
+    """Lista as categorias, permitindo buscar pelo nome."""
 
     if pagina < 1:
         pagina = 1
 
-    # Evita valores inválidos para a quantidade por página.
     por_pagina = max(1, min(por_pagina, 100))
 
-    total_categorias = db.query(Categoria).count()
+    # --------------------------------------------------------
+    # CONSULTA
+    # --------------------------------------------------------
+
+    query = db.query(Categoria)
+
+    # Se o usuário digitou algo, filtra pelo nome.
+    if busca.strip():
+        termo = f"%{busca.strip()}%"
+        query = query.filter(
+            Categoria.nome.ilike(termo)
+        )
+
+    # --------------------------------------------------------
+    # PAGINAÇÃO
+    # --------------------------------------------------------
+
+    total_categorias = query.count()
 
     total_paginas = max(
         1,
@@ -49,12 +67,16 @@ def listar_categorias(
         pagina = total_paginas
 
     categorias = (
-        db.query(Categoria)
+        query
         .order_by(Categoria.nome)
         .offset((pagina - 1) * por_pagina)
         .limit(por_pagina)
         .all()
     )
+
+    # --------------------------------------------------------
+    # TEMPLATE
+    # --------------------------------------------------------
 
     return templates.TemplateResponse(
         request,
@@ -63,6 +85,7 @@ def listar_categorias(
             "request": request,
             "usuario": usuario,
             "categorias": categorias,
+            "busca": busca,
             "pagina": pagina,
             "por_pagina": por_pagina,
             "total_categorias": total_categorias,
@@ -292,6 +315,7 @@ def toggle_ativo(
         )
 
     if categoria.ativo:
+
         produtos_ativos = [
             produto
             for produto in categoria.produtos

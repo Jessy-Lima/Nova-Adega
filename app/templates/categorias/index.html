@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% block title %}
@@ -6,7 +5,7 @@ Categorias — Nova Adega
 {% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="/static/CSS/categorias.css?v=9">
+<link rel="stylesheet" href="/static/CSS/categorias.css?v=10">
 {% endblock %}
 
 {% block content %}
@@ -15,169 +14,386 @@ Categorias — Nova Adega
 
     <!-- CABEÇALHO -->
     <section class="titulo-pagina">
+
         <div>
             <h1>Categorias</h1>
-            <p>Gerencie as categorias dos produtos da Nova Adega.</p>
+
+            <p>
+                Gerencie as categorias dos produtos da Nova Adega.
+            </p>
         </div>
 
         <a href="/categorias/nova" class="btn-nova">
             + Nova categoria
         </a>
+
     </section>
 
+
     <!-- MENSAGENS -->
+
     {% if request.query_params.get('criado') == 'ok' %}
+
     <div class="mensagem sucesso">
         Categoria criada com sucesso!
     </div>
+
     {% endif %}
 
+
     {% if request.query_params.get('editado') == 'ok' %}
+
     <div class="mensagem sucesso">
         Categoria atualizada com sucesso!
     </div>
+
     {% endif %}
 
+
     {% if request.query_params.get('erro') == 'produtos_vinculados' %}
+
     <div class="mensagem erro">
         Não é possível desativar
         "{{ request.query_params.get('categoria') }}"
         pois ela possui produtos ativos vinculados.
     </div>
+
     {% endif %}
 
-    <!-- LISTAGEM DE CATEGORIAS -->
+
+    <!-- =========================================
+         FILTRO
+         ========================================= -->
+
+    <section class="filtros">
+
+        <form method="get" action="/categorias">
+
+            <div class="campo-busca">
+
+                <span>🔍</span>
+
+                <input
+                    type="text"
+                    name="busca"
+                    placeholder="Buscar por nome..."
+                    value="{{ busca }}"
+                >
+
+            </div>
+
+
+            <button type="submit" class="btn-filtrar">
+                Buscar
+            </button>
+
+
+            {% if busca %}
+
+            <a href="/categorias" class="btn-limpar">
+                Limpar
+            </a>
+
+            {% endif %}
+
+        </form>
+
+    </section>
+
+
+    <!-- =========================================
+         LISTAGEM DE CATEGORIAS
+         ========================================= -->
+
     <section class="categorias-listagem">
 
-        <!-- TABELA PARA COMPUTADOR E TABLET -->
+
+        <!-- TABELA DESKTOP / TABLET -->
+
         <div class="categorias-tabela-desktop">
+
             <table>
+
                 <thead>
+
                     <tr>
-                        <th>Nome</th>
-                        <th>Produtos ativos</th>
-                        <th>Status</th>
-                        <th>Ações</th>
+
+                        <th>
+                            Nome
+                        </th>
+
+                        <th>
+                            Produtos ativos
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Ações
+                        </th>
+
                     </tr>
+
                 </thead>
 
+
                 <tbody>
+
                     {% for c in categorias %}
+
                     <tr>
-                        <td class="categoria-nome">{{ c.nome }}</td>
+
+                        <!-- NOME -->
+
+                        <td class="categoria-nome">
+                            {{ c.nome }}
+                        </td>
+
+
+                        <!-- PRODUTOS ATIVOS -->
 
                         <td>
+
                             <span class="quantidade-produtos">
-                                {{ c.produtos | selectattr('ativo') | list | length }}
+
+                                {{ c.produtos
+                                | selectattr('ativo')
+                                | list
+                                | length }}
+
                             </span>
+
                         </td>
 
+
+                        <!-- STATUS -->
+
                         <td>
+
                             {% if c.ativo %}
-                            <span class="status ativo">Ativa</span>
+
+                            <span class="status ativo">
+                                Ativa
+                            </span>
+
                             {% else %}
-                            <span class="status inativo">Inativa</span>
+
+                            <span class="status inativo">
+                                Inativa
+                            </span>
+
                             {% endif %}
+
                         </td>
 
+
+                        <!-- AÇÕES -->
+
                         <td>
+
                             <div class="acoes">
-                                <a href="/categorias/{{ c.id }}/editar" class="btn-editar">
+
+                                <a
+                                    href="/categorias/{{ c.id }}/editar"
+                                    class="btn-editar"
+                                >
                                     Editar
                                 </a>
 
-                                <form action="/categorias/{{ c.id }}/toggle-ativo" method="post">
-                                    <button type="submit" class="btn-status">
+
+                                <form
+                                    action="/categorias/{{ c.id }}/toggle-ativo"
+                                    method="post"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="btn-status"
+                                    >
                                         {{ "Desativar" if c.ativo else "Ativar" }}
                                     </button>
+
                                 </form>
+
                             </div>
+
                         </td>
+
                     </tr>
+
                     {% endfor %}
 
+
                     {% if not categorias %}
+
                     <tr>
+
                         <td colspan="4" class="sem-resultados">
-                            Nenhuma categoria cadastrada.
+
+                            {% if busca %}
+                                Nenhuma categoria encontrada para "{{ busca }}".
+                            {% else %}
+                                Nenhuma categoria cadastrada.
+                            {% endif %}
+
                         </td>
+
                     </tr>
+
                     {% endif %}
+
                 </tbody>
+
             </table>
+
         </div>
 
-        <!-- CARDS PARA CELULAR -->
+
+        <!-- =========================================
+             CARDS PARA CELULAR
+             ========================================= -->
+
         <div class="categorias-cards-mobile">
+
             {% for c in categorias %}
+
             <article class="categoria-card-mobile">
 
-                <h3>{{ c.nome }}</h3>
+                <h3>
+                    {{ c.nome }}
+                </h3>
+
 
                 <div class="categoria-info-mobile">
-                    <span>Produtos ativos</span>
+
+                    <span>
+                        Produtos ativos
+                    </span>
+
                     <strong>
-                        {{ c.produtos | selectattr('ativo') | list | length }}
+                        {{ c.produtos
+                        | selectattr('ativo')
+                        | list
+                        | length }}
                     </strong>
+
                 </div>
 
+
                 <div class="categoria-info-mobile">
-                    <span>Status</span>
+
+                    <span>
+                        Status
+                    </span>
+
 
                     {% if c.ativo %}
-                    <span class="status ativo">Ativa</span>
+
+                    <span class="status ativo">
+                        Ativa
+                    </span>
+
                     {% else %}
-                    <span class="status inativo">Inativa</span>
+
+                    <span class="status inativo">
+                        Inativa
+                    </span>
+
                     {% endif %}
+
                 </div>
 
+
                 <div class="categoria-acoes-mobile">
-                    <a href="/categorias/{{ c.id }}/editar" class="btn-editar">
+
+                    <a
+                        href="/categorias/{{ c.id }}/editar"
+                        class="btn-editar"
+                    >
                         Editar
                     </a>
 
-                    <form action="/categorias/{{ c.id }}/toggle-ativo" method="post">
-                        <button type="submit" class="btn-status">
+
+                    <form
+                        action="/categorias/{{ c.id }}/toggle-ativo"
+                        method="post"
+                    >
+
+                        <button
+                            type="submit"
+                            class="btn-status"
+                        >
                             {{ "Desativar" if c.ativo else "Ativar" }}
                         </button>
+
                     </form>
+
                 </div>
 
             </article>
+
             {% else %}
+
             <p class="sem-resultados">
-                Nenhuma categoria cadastrada.
+
+                {% if busca %}
+                    Nenhuma categoria encontrada para "{{ busca }}".
+                {% else %}
+                    Nenhuma categoria cadastrada.
+                {% endif %}
+
             </p>
+
             {% endfor %}
+
         </div>
 
     </section>
 
-    <!-- PAGINAÇÃO -->
+
+    <!-- =========================================
+         PAGINAÇÃO
+         ========================================= -->
+
     {% if total_categorias > 0 %}
+
     <div class="paginacao">
 
         <span>
             Página {{ pagina }} de {{ total_paginas }}
         </span>
 
+
         <div>
+
             {% if pagina > 1 %}
-            <a href="/categorias?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}">
+
+            <a
+                href="/categorias?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}{% if busca %}&busca={{ busca }}{% endif %}"
+            >
                 ← Anterior
             </a>
+
             {% endif %}
 
+
             {% if pagina < total_paginas %}
-            <a href="/categorias?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}">
+
+            <a
+                href="/categorias?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}{% if busca %}&busca={{ busca }}{% endif %}"
+            >
                 Próxima →
             </a>
+
             {% endif %}
+
         </div>
 
     </div>
-    {% endif %}
 
+    {% endif %}
 
 </div>
 

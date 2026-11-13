@@ -194,6 +194,39 @@ def test_finalizar_venda_com_dois_pagamentos(
     assert venda.forma_pagamento_2 == "pix"
     assert venda.valor_pagamento_2 == 20.00
 
+    def test_finalizar_venda_com_mesma_forma_de_pagamento(
+    cliente,
+    db_session_test
+):
+        produto = criar_produto(db_session_test)
+
+    dados = criar_dados_venda(
+        produto,
+        forma_pagamento_1="pix",
+        valor_pagamento_1=30,
+        forma_pagamento_2="pix",
+        valor_pagamento_2=20
+    )
+
+    resposta = cliente.post(
+        "/pdv/finalizar",
+        data=dados,
+        follow_redirects=False
+    )
+
+    assert resposta.status_code == 303
+
+    venda = db_session_test.query(Venda).first()
+
+    assert venda is not None
+    assert venda.total_liquido == 50.00
+
+    assert venda.forma_pagamento_1 == "pix"
+    assert venda.valor_pagamento_1 == 30.00
+
+    assert venda.forma_pagamento_2 == "pix"
+    assert venda.valor_pagamento_2 == 20.00
+
 def test_nao_finalizar_venda_quando_pagamentos_nao_fecham_total(
     cliente,
     db_session_test

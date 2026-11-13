@@ -1227,3 +1227,478 @@ html[data-tema="claro"] .categorias-page .sem-resultados {
     border-color: #e5d5c5;
     color: #625548 !important;
 }
+
+/* =========================================================
+   CATEGORIAS — PADRÃO VISUAL DAS TABELAS
+   ========================================================= */
+
+/* FILTROS */
+
+.categorias-page .filtros {
+    width: 100%;
+    margin-bottom: 25px;
+    padding: 18px;
+
+    background: #1E1E1E;
+
+    border: 1px solid rgba(253, 230, 138, 0.12);
+
+    border-radius: 14px;
+
+    box-sizing: border-box;
+}
+
+.categorias-page .filtros form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+/* CAMPO DE BUSCA */
+
+.categorias-page .campo-busca {
+    flex: 1;
+
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0 14px;
+
+    background: #000000;
+
+    border: 1px solid #363636;
+
+    border-radius: 9px;
+
+    box-sizing: border-box;
+}
+
+.categorias-page .campo-busca:focus-within {
+    border-color: #FDE68A;
+
+    box-shadow:
+        0 0 0 3px rgba(253, 230, 138, 0.07);
+}
+
+.categorias-page .campo-busca span {
+    font-size: 15px;
+}
+
+.categorias-page .campo-busca input {
+    width: 100%;
+    height: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #F9FAFB;
+
+    font-size: 14px;
+}
+
+.categorias-page .campo-busca input::placeholder {
+    color: #d6d6d6;
+}
+
+
+/* BOTÃO BUSCAR */
+
+.categorias-page .btn-filtrar {
+    height: 42px;
+
+    padding: 0 20px;
+
+    background: #FDE68A;
+
+    color: #121212;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.categorias-page .btn-filtrar:hover {
+    background: #FEF3C7;
+
+    transform: translateY(-1px);
+}
+
+
+/* BOTÃO LIMPAR */
+
+.categorias-page .btn-limpar {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    height: 42px;
+
+    padding: 0 18px;
+
+    background: #27272A;
+
+    color: #F9FAFB;
+
+    border: 1px solid #3F3F46;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.categorias-page .btn-limpar:hover {
+    background: #323236;
+
+    border-color: #52525B;
+}
+
+
+/* =========================================================
+   TABELA
+   ========================================================= */
+
+.categorias-page .categorias-tabela-desktop {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    background: #1E1E1E;
+
+    border: 1px solid rgba(253, 230, 138, 0.12);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.20);
+}
+
+
+/* TABELA */
+
+.categorias-page .categorias-tabela-desktop table {
+
+    width: 100%;
+
+    min-width: 800px;
+
+    border-collapse: collapse;
+}
+
+
+/* CABEÇALHO */
+
+.categorias-page .categorias-tabela-desktop thead {
+
+    background: #232323;
+}
+
+.categorias-page .categorias-tabela-desktop th {
+
+    height: 54px;
+
+    padding: 0 20px;
+
+    color: #9CA3AF;
+
+    text-align: left;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    border-bottom: 1px solid #333333;
+}
+
+
+/* CÉLULAS */
+
+.categorias-page .categorias-tabela-desktop td {
+
+    height: 70px;
+
+    padding: 12px 20px;
+
+    color: #D1D5DB;
+
+    font-size: 14px;
+
+    border-bottom: 1px solid #2B2B2B;
+
+    vertical-align: middle;
+}
+
+
+/* EFEITO AO PASSAR O MOUSE */
+
+.categorias-page .categorias-tabela-desktop tbody tr {
+
+    transition: 0.2s ease;
+}
+
+.categorias-page .categorias-tabela-desktop tbody tr:hover {
+
+    background: rgba(253, 230, 138, 0.035);
+}
+
+.categorias-page .categorias-tabela-desktop tbody tr:last-child td {
+
+    border-bottom: none;
+}
+
+
+/* NOME */
+
+.categorias-page .categoria-nome {
+
+    color: #F9FAFB !important;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* QUANTIDADE DE PRODUTOS */
+
+.categorias-page .quantidade-produtos {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 32px;
+    height: 28px;
+
+    padding: 0 9px;
+
+    background: rgba(253, 230, 138, 0.10) !important;
+
+    border: 1px solid rgba(253, 230, 138, 0.20) !important;
+
+    border-radius: 999px;
+
+    color: #FDE68A !important;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.categorias-page .status {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 6px 11px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+}
+
+.categorias-page .status.ativo {
+
+    background: rgba(34, 197, 94, 0.15);
+
+    color: #86efac;
+
+    border: 1px solid rgba(34, 197, 94, 0.35);
+}
+
+.categorias-page .status.inativo {
+
+    background: rgba(239, 68, 68, 0.12);
+
+    color: #fca5a5;
+
+    border: 1px solid rgba(239, 68, 68, 0.30);
+}
+
+
+/* =========================================================
+   BOTÕES DE AÇÃO
+   ========================================================= */
+
+.categorias-page .acoes {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.categorias-page .acoes form {
+
+    margin: 0;
+}
+
+
+/* EDITAR */
+
+.categorias-page .btn-editar {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+
+    padding: 0 16px;
+
+    box-sizing: border-box;
+
+    background: transparent;
+
+    color: #FDE68A;
+
+    border: 1px solid rgba(253, 230, 138, 0.35);
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition: 0.2s ease;
+}
+
+.categorias-page .btn-editar:hover {
+
+    background: rgba(253, 230, 138, 0.08);
+
+    border-color: #FDE68A;
+
+    transform: translateY(-1px);
+}
+
+
+/* ATIVAR / DESATIVAR */
+
+.categorias-page .btn-status {
+
+    min-height: 40px;
+
+    padding: 0 16px;
+
+    box-sizing: border-box;
+
+    background: #27272A;
+
+    color: #D1D5DB;
+
+    border: 1px solid #3F3F46;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.categorias-page .btn-status:hover {
+
+    background: #323236;
+
+    border-color: #52525B;
+
+    color: #F9FAFB;
+
+    transform: translateY(-1px);
+}
+
+
+/* SEM RESULTADOS */
+
+.categorias-page .sem-resultados {
+
+    padding: 40px !important;
+
+    text-align: center;
+
+    color: #9CA3AF !important;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+
+@media screen and (max-width: 700px) {
+
+    .categorias-page .filtros form {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .categorias-page .campo-busca {
+
+        width: 100%;
+    }
+
+    .categorias-page .btn-filtrar,
+    .categorias-page .btn-limpar {
+
+        width: 100%;
+    }
+
+    .categorias-page .categorias-tabela-desktop {
+
+        border-radius: 12px;
+    }
+
+    .categorias-page .categorias-tabela-desktop table {
+
+        min-width: 650px;
+    }
+}
