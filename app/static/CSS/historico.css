@@ -1,0 +1,697 @@
+/* =====================================================
+   HISTÓRICO DE VENDAS — NOVA ADEGA
+   Visual organizado e responsivo
+===================================================== */
+
+.historico-page {
+    --hist-card: #1E1E1E;
+    --hist-borda: #383838;
+    --hist-texto: #F9FAFB;
+    --hist-secundario: #A1A1AA;
+    --hist-destaque: #FDE68A;
+}
+
+/* CABEÇALHO */
+
+.historico-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.historico-titulo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.historico-icone {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(253, 230, 138, 0.10);
+    border: 1px solid rgba(253, 230, 138, 0.20);
+    border-radius: 13px;
+    color: var(--hist-destaque);
+}
+
+.historico-icone svg {
+    width: 25px;
+    height: 25px;
+}
+
+.historico-titulo h1 {
+    color: var(--hist-texto);
+    font-size: 27px;
+    font-weight: 750;
+    margin: 0 0 6px;
+}
+
+.historico-titulo p {
+    color: var(--hist-secundario);
+    font-size: 14px;
+    margin: 0;
+}
+
+.historico-contador {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 15px;
+    background: var(--hist-card);
+    border: 1px solid var(--hist-borda);
+    border-radius: 10px;
+    color: var(--hist-destaque);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.historico-contador svg {
+    width: 17px;
+    height: 17px;
+}
+
+/* CARD PRINCIPAL */
+
+.historico-card {
+    background: var(--hist-card);
+    border: 1px solid var(--hist-borda);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+.historico-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 21px 23px;
+    border-bottom: 1px solid var(--hist-borda);
+}
+
+.historico-card-header h2 {
+    color: var(--hist-texto);
+    font-size: 17px;
+    margin: 0 0 5px;
+}
+
+.historico-card-header p {
+    color: var(--hist-secundario);
+    font-size: 13px;
+    margin: 0;
+}
+
+.historico-pagina {
+    color: var(--hist-destaque);
+    background: rgba(253, 230, 138, 0.08);
+    padding: 7px 11px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* TABELA */
+
+.historico-tabela-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.historico-tabela {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+    color: var(--hist-texto);
+}
+
+.historico-tabela thead {
+    background: #242424;
+}
+
+.historico-tabela th {
+    padding: 15px 16px;
+    color: var(--hist-destaque);
+    font-size: 11px;
+    font-weight: 700;
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    border-bottom: 1px solid var(--hist-borda);
+}
+
+.historico-tabela td {
+    padding: 17px 16px;
+    border-bottom: 1px solid #303030;
+    color: #D4D4D8;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.historico-tabela tbody tr {
+    transition: background 0.2s ease;
+}
+
+.historico-tabela tbody tr:hover {
+    background: #262626;
+}
+
+.historico-tabela tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* NÚMERO DA VENDA */
+
+.historico-venda-id {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--hist-destaque);
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.historico-venda-id svg {
+    width: 13px;
+    height: 13px;
+    opacity: 0.65;
+}
+
+.historico-venda-id:hover {
+    color: #FFFFFF;
+}
+
+/* DATA */
+
+.historico-data {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+.historico-data strong {
+    color: var(--hist-texto);
+    font-size: 13px;
+}
+
+.historico-data small {
+    color: var(--hist-secundario);
+    font-size: 12px;
+}
+
+/* CLIENTE E OPERADOR */
+
+.historico-cliente,
+.historico-operador {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+}
+
+.historico-cliente svg,
+.historico-operador svg {
+    width: 15px;
+    height: 15px;
+    color: var(--hist-destaque);
+    flex-shrink: 0;
+}
+
+/* QUANTIDADE DE ITENS */
+
+.historico-itens {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 9px;
+    background: #292929;
+    border: 1px solid #3C3C3C;
+    border-radius: 7px;
+    color: var(--hist-texto);
+    font-weight: 700;
+}
+
+.historico-itens svg {
+    width: 14px;
+    height: 14px;
+    color: var(--hist-destaque);
+}
+
+/* PAGAMENTOS */
+
+.historico-pagamentos {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 115px;
+}
+
+.historico-pagamento {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.historico-pagamento span {
+    color: var(--hist-secundario);
+    font-size: 11px;
+}
+
+.historico-pagamento strong {
+    color: var(--hist-texto);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.historico-sem-dado {
+    color: var(--hist-secundario);
+    font-size: 12px;
+}
+
+/* DESCONTO */
+
+.historico-desconto {
+    display: inline-block;
+    padding: 6px 9px;
+    background: rgba(74, 222, 128, 0.09);
+    border: 1px solid rgba(74, 222, 128, 0.18);
+    border-radius: 7px;
+    color: #86EFAC;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.historico-sem-desconto {
+    color: #777777;
+    font-size: 12px;
+}
+
+/* TOTAL */
+
+.historico-total {
+    color: var(--hist-destaque);
+    font-size: 14px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+/* HISTÓRICO VAZIO */
+
+.historico-vazio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 45px 15px;
+    text-align: center;
+}
+
+.historico-vazio svg {
+    width: 35px;
+    height: 35px;
+    color: var(--hist-destaque);
+    margin-bottom: 5px;
+}
+
+.historico-vazio strong {
+    color: var(--hist-texto);
+    font-size: 15px;
+}
+
+.historico-vazio span {
+    color: var(--hist-secundario);
+    font-size: 13px;
+}
+
+/* PAGINAÇÃO */
+
+.historico-paginacao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 17px 20px;
+    background: var(--hist-card);
+    border: 1px solid var(--hist-borda);
+    border-radius: 12px;
+}
+
+.historico-paginacao-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    color: var(--hist-secundario);
+    font-size: 13px;
+}
+
+.historico-paginacao-info strong {
+    color: var(--hist-destaque);
+}
+
+.historico-paginacao-botoes {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.historico-btn-pagina {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 39px;
+    padding: 0 14px;
+    background: #292929;
+    color: var(--hist-texto);
+    border: 1px solid #454545;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.historico-btn-pagina svg {
+    width: 15px;
+    height: 15px;
+}
+
+.historico-btn-pagina:hover:not(.desabilitado) {
+    border-color: var(--hist-destaque);
+    color: var(--hist-destaque);
+}
+
+.historico-btn-pagina.proxima {
+    background: var(--hist-destaque);
+    border-color: var(--hist-destaque);
+    color: #121212;
+}
+
+.historico-btn-pagina.proxima:hover {
+    background: #FEF3C7;
+    color: #121212;
+}
+
+.historico-btn-pagina.desabilitado {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* =====================================================
+   MODO CLARO
+===================================================== */
+
+html[data-tema="claro"] .historico-page {
+    --hist-card: #FFFFFF;
+    --hist-borda: #E1E1DC;
+    --hist-texto: #252525;
+    --hist-secundario: #777777;
+    --hist-destaque: #8A6100;
+}
+
+html[data-tema="claro"] .historico-icone {
+    background: #FFF6DA;
+    border-color: #E9DDBB;
+}
+
+html[data-tema="claro"] .historico-contador {
+    background: #FFF9E8;
+    border-color: #E9DDBB;
+}
+
+html[data-tema="claro"] .historico-pagina {
+    background: #FFF7DF;
+}
+
+html[data-tema="claro"] .historico-tabela thead {
+    background: #F4F3EF;
+}
+
+html[data-tema="claro"] .historico-tabela td {
+    border-color: #ECECE7;
+    color: #444444;
+}
+
+html[data-tema="claro"] .historico-tabela tbody tr:hover {
+    background: #FAF8F0;
+}
+
+html[data-tema="claro"] .historico-data strong {
+    color: #252525;
+}
+
+html[data-tema="claro"] .historico-itens {
+    background: #F5F3EB;
+    border-color: #E3DDCA;
+    color: #333333;
+}
+
+html[data-tema="claro"] .historico-pagamento strong {
+    color: #333333;
+}
+
+html[data-tema="claro"] .historico-paginacao {
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+html[data-tema="claro"] .historico-btn-pagina {
+    background: #FFFFFF;
+    color: #333333;
+    border-color: #D8D8D0;
+}
+
+html[data-tema="claro"] .historico-btn-pagina.proxima {
+    background: #FDE68A;
+    color: #252525;
+    border-color: #D8B84E;
+}
+
+html[data-tema="claro"] .historico-btn-pagina.proxima:hover {
+    background: #F9D96A;
+}
+
+html[data-tema="claro"] .historico-vazio strong {
+    color: #252525;
+}
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 750px) {
+    .historico-header {
+        align-items: flex-start;
+    }
+
+    .historico-titulo h1 {
+        font-size: 23px;
+    }
+
+    .historico-contador {
+        margin-left: 67px;
+    }
+
+    .historico-card-header {
+        padding: 17px;
+    }
+
+    .historico-tabela {
+        min-width: 1050px;
+    }
+}
+
+@media (max-width: 520px) {
+    .historico-header {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .historico-contador {
+        margin-left: 0;
+    }
+
+    .historico-titulo h1 {
+        font-size: 21px;
+    }
+
+    .historico-titulo p {
+        font-size: 12px;
+    }
+
+    .historico-paginacao {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 15px;
+    }
+
+    .historico-paginacao-info {
+        justify-content: center;
+    }
+
+    .historico-paginacao-botoes {
+        width: 100%;
+    }
+
+    .historico-btn-pagina {
+        flex: 1;
+    }
+}
+
+
+/* =====================================================
+   FILTRO DE ORDENAÇÃO
+===================================================== */
+
+.historico-filtro {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.historico-filtro label {
+    color: var(--hist-secundario);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.historico-filtro select {
+    min-width: 175px;
+    padding: 10px 35px 10px 12px;
+    background-color: #292929;
+    color: var(--hist-texto);
+    border: 1px solid #454545;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.historico-filtro select:hover {
+    border-color: var(--hist-destaque);
+}
+
+.historico-filtro select:focus {
+    border-color: var(--hist-destaque);
+    box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.10);
+}
+
+.historico-filtro select option {
+    background: #1E1E1E;
+    color: #F9FAFB;
+}
+
+/* TEMA CLARO */
+
+html[data-tema="claro"] .historico-filtro select {
+    background-color: #FFFFFF;
+    color: #252525;
+    border-color: #D8D8D0;
+}
+
+html[data-tema="claro"] .historico-filtro select option {
+    background: #FFFFFF;
+    color: #252525;
+}
+
+html[data-tema="claro"] .historico-filtro select:hover,
+html[data-tema="claro"] .historico-filtro select:focus {
+    border-color: #8A6100;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 520px) {
+    .historico-filtro {
+        width: 100%;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .historico-filtro select {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+
+/* =========================================================
+   FILTRO DE ORDENAÇÃO
+========================================================= */
+
+.historico-filtro {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.historico-filtro label {
+    color: #d6d3d1;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.historico-filtro select {
+    min-width: 145px;
+    padding: 9px 30px 9px 12px;
+
+    background-color: #171717;
+    color: #f9fafb;
+
+    border: 1px solid rgba(253, 230, 138, 0.2);
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-family: inherit;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.historico-filtro select:hover {
+    border-color: rgba(253, 230, 138, 0.55);
+}
+
+.historico-filtro select:focus {
+    border-color: #fde68a;
+    box-shadow: 0 0 0 2px rgba(253, 230, 138, 0.12);
+}
+
+.historico-filtro select option {
+    background-color: #1e1e1e;
+    color: #f9fafb;
+}
+
+@media (max-width: 600px) {
+    .historico-filtro {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .historico-filtro select {
+        flex: 1;
+        min-width: 0;
+    }
+}
