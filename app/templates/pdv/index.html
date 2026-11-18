@@ -133,35 +133,33 @@ PDV — Nova Adega
 
             </div>
 
-            <!-- PAGINAÇÃO -->
-            <nav class="paginacao-produtos" aria-label="Paginação dos produtos">
+        <!-- PAGINAÇÃO -->
+<nav class="paginacao-produtos" aria-label="Paginação dos produtos">
 
-                <span class="paginacao-info">
-                    Página {{ pagina }} de {{ total_paginas }}
-                    — {{ total_produtos }} produto(s)
-                </span>
+    <span class="paginacao-info">
+        Página {{ pagina }} de {{ total_paginas }}
+        — {{ total_produtos }} produto(s)
+    </span>
 
-                <div class="paginacao-botoes">
+    <div class="paginacao-botoes">
 
-                    {% if pagina > 1 %}
-                    <a class="btn-paginacao" href="/pdv/?pagina={{ pagina - 1 }}&busca={{ busca }}">
-                        ← Anterior
-                    </a>
-                    {% endif %}
+        {% if pagina > 1 %}
+        <a class="btn-paginacao"
+           href="/pdv/?pagina={{ pagina - 1 }}&busca={{ busca }}">
+            ← Anterior
+        </a>
+        {% endif %}
 
+        {% if pagina < total_paginas %}
+        <a class="btn-paginacao"
+           href="/pdv/?pagina={{ pagina + 1 }}&busca={{ busca }}">
+            Próxima →
+        </a>
+        {% endif %}
 
-                    {% if pagina < total_paginas %}
-                    <a class="btn-paginacao" href="/pdv/?pagina={{ pagina + 1 }}">
+    </div>
 
-                    {% if pagina < total_paginas %} <a class="btn-paginacao"
-                        href="/pdv/?pagina={{ pagina + 1 }}&busca={{ busca }}">
-
-                        Próxima →
-                    </a>
-                    {% endif %}
-
-                </div>
-            </nav>
+</nav>
 
         </section>
 
