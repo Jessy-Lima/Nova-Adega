@@ -1,3 +1,4 @@
+
 from fastapi import APIRouter, Depends, Request, Form
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
@@ -28,10 +29,11 @@ def listar_clientes(
     busca: str = "",
     pagina: int = 1,
     por_pagina: int = 14,
+    ordenar: str = "nome_az",
     db: Session = Depends(get_db),
     usuario=Depends(get_usuario_logado)
 ):
-    """Lista os clientes com busca e paginação."""
+    """Lista os clientes com busca, ordenação e paginação."""
 
     # Garante que a página seja válida
     if pagina < 1:
@@ -39,6 +41,18 @@ def listar_clientes(
 
     # Limita a quantidade de registros por página
     por_pagina = max(1, min(por_pagina, 100))
+
+    # Opções permitidas de ordenação
+    ordenacoes = {
+        "nome_az": Cliente.nome.asc(),
+        "nome_za": Cliente.nome.desc(),
+        "ativos": Cliente.ativo.desc(),
+        "inativos": Cliente.ativo.asc()
+    }
+
+    # Evita valores de ordenação inválidos
+    if ordenar not in ordenacoes:
+        ordenar = "nome_az"
 
     # Consulta os clientes
     query = db.query(Cliente)
@@ -68,7 +82,10 @@ def listar_clientes(
     # Busca os clientes da página atual
     clientes = (
         query
-        .order_by(Cliente.nome)
+        .order_by(
+            ordenacoes[ordenar],
+            Cliente.nome.asc()
+        )
         .offset((pagina - 1) * por_pagina)
         .limit(por_pagina)
         .all()
@@ -86,6 +103,7 @@ def listar_clientes(
             "por_pagina": por_pagina,
             "total_clientes": total_clientes,
             "total_paginas": total_paginas,
+            "ordenar": ordenar
         }
     )
 

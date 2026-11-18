@@ -5,152 +5,372 @@
 
 {% block styles %}
 <link rel="stylesheet" href="/static/CSS/pdv.css?v=10">
+<link rel="stylesheet" href="/static/CSS/historico.css?v=3">
 {% endblock %}
 
 {% block content %}
 
-<main class="pdv-container">
+<main class="pdv-container historico-page">
 
-    <div class="pdv-page-header">
-        <div>
-            <h1>
+    <!-- CABEÇALHO -->
+    <header class="historico-header">
+
+        <div class="historico-titulo">
+
+            <div class="historico-icone">
                 <i data-lucide="clipboard-list"></i>
-                Histórico de vendas
-            </h1>
-            <p>Consulte todas as vendas realizadas.</p>
+            </div>
+
+            <div>
+                <h1>Histórico de vendas</h1>
+                <p>Consulte e acompanhe todas as vendas realizadas.</p>
+            </div>
+
         </div>
-    </div>
 
-    <div class="pdv-table-container">
+        <div class="historico-contador">
+            <i data-lucide="receipt"></i>
+            <span>{{ total_vendas }} venda(s)</span>
+        </div>
 
-        <table class="pdv-table">
+    </header>
 
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Data</th>
-                    <th>Cliente</th>
-                    <th>Itens</th>
-                    <th>Pagamento</th>
-                    <th>Desconto</th>
-                    <th>Total</th>
-                    <th>Operador</th>
-                </tr>
-            </thead>
 
-            <tbody>
+    <!-- CARD PRINCIPAL -->
+    <section class="historico-card">
 
-                {% for v in vendas %}
+        <!-- CABEÇALHO DA TABELA -->
+        <div class="historico-card-header">
 
-                <tr>
+            <div>
+                <h2>Vendas realizadas</h2>
+                <p>Selecione uma venda para consultar os detalhes.</p>
+            </div>
 
-                    <td>
-                        <a href="/pdv/venda/{{ v.id }}" class="venda-id">
-                            #{{ v.id }}
-                        </a>
-                    </td>
+            <div class="historico-controles">
 
-                    <td>
-                        {{ v.criado_em.strftime('%d/%m/%Y %H:%M') }}
-                    </td>
 
-                    <td>
-                        {{ v.cliente.nome if v.cliente else "Balcão" }}
-                    </td>
+                <!-- FILTRO DE ORDENAÇÃO -->
+                <form
+                    method="GET"
+                    action="/pdv/historico"
+                    class="historico-filtro"
+                >
 
-                    <td>
-                        {{ v.itens | length }}
-                    </td>
+                    <label for="ordenar">
+                        Ordenar por:
+                    </label>
 
-                    <td>
-                        {% if v.forma_pagamento_1 %}
-                            <strong>{{ v.forma_pagamento_1 | capitalize }}</strong>
-                            <br>
-                            <small>
-                                R$ {{ "%.2f"|format(v.valor_pagamento_1 or 0) }}
-                            </small>
-                        {% endif %}
+                    <select
+                        name="ordenar"
+                        id="ordenar"
+                        onchange="this.form.submit()"
+                    >
 
-                        {% if v.forma_pagamento_2 %}
-                            <br>
-                            <strong>{{ v.forma_pagamento_2 | capitalize }}</strong>
-                            <br>
-                            <small>
-                                R$ {{ "%.2f"|format(v.valor_pagamento_2 or 0) }}
-                            </small>
-                        {% endif %}
+                        <option value="recentes"
+                            {% if ordenar == 'recentes' %}selected{% endif %}>
+                            Mais recentes
+                        </option>
 
-                        {% if not v.forma_pagamento_1 and not v.forma_pagamento_2 %}
-                            —
-                        {% endif %}
-                    </td>
+                        <option value="antigas"
+                            {% if ordenar == 'antigas' %}selected{% endif %}>
+                            Mais antigas
+                        </option>
 
-                    <td>
-                        {% if v.desconto and v.desconto > 0 %}
-                            <span class="desconto-positivo">
+                        <option value="maior_valor"
+                            {% if ordenar == 'maior_valor' %}selected{% endif %}>
+                            Maior valor
+                        </option>
+
+                        <option value="menor_valor"
+                            {% if ordenar == 'menor_valor' %}selected{% endif %}>
+                            Menor valor
+                        </option>
+
+                        <option value="cliente_az"
+                            {% if ordenar == 'cliente_az' %}selected{% endif %}>
+                            Cliente A–Z
+                        </option>
+
+                        <option value="cliente_za"
+                            {% if ordenar == 'cliente_za' %}selected{% endif %}>
+                            Cliente Z–A
+                        </option>
+
+                    </select>
+
+                    <input type="hidden" name="pagina" value="1">
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- TABELA DE VENDAS -->
+        <div class="pdv-table-container">
+
+            <table class="pdv-table">
+
+                <thead>
+                    <tr>
+                        <th>Venda</th>
+                        <th>Data</th>
+                        <th>Cliente</th>
+                        <th>Itens</th>
+                        <th>Pagamento</th>
+                        <th>Desconto</th>
+                        <th>Total</th>
+                        <th>Operador</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for v in vendas %}
+
+                    <tr>
+
+                        <!-- IDENTIFICAÇÃO -->
+                        <td>
+                            <a
+                                href="/pdv/venda/{{ v.id }}"
+                                class="historico-venda-id"
+                            >
+                                #{{ v.id }}
+                                <i data-lucide="external-link"></i>
+                            </a>
+                        </td>
+
+                        <!-- DATA -->
+                        <td>
+                            <div class="historico-data">
+
+                                <strong>
+                                    {{ v.criado_em.strftime('%d/%m/%Y') }}
+                                </strong>
+
+                                <small>
+                                    {{ v.criado_em.strftime('%H:%M') }}
+                                </small>
+
+                            </div>
+                        </td>
+
+                        <!-- CLIENTE -->
+                        <td>
+                            <span class="historico-cliente">
+
+                                <i data-lucide="user"></i>
+
+                                {{ v.cliente.nome if v.cliente else "Balcão" }}
+
+                            </span>
+                        </td>
+
+                        <!-- ITENS -->
+                        <td>
+                            <span class="historico-itens">
+
+                                <i data-lucide="package"></i>
+
+                                {{ v.itens | length }}
+
+                            </span>
+                        </td>
+
+                        <!-- PAGAMENTO -->
+                        <td>
+
+                            <div class="historico-pagamentos">
+
+                                {% if v.forma_pagamento_1 %}
+
+                                <div class="historico-pagamento">
+
+                                    <span>
+                                        {{ v.forma_pagamento_1 | replace('_', ' ') | title }}
+                                    </span>
+
+                                    <strong>
+                                        R$ {{ "%.2f"|format(v.valor_pagamento_1 or 0) }}
+                                    </strong>
+
+                                </div>
+
+                                {% endif %}
+
+                                {% if v.forma_pagamento_2 %}
+
+                                <div class="historico-pagamento">
+
+                                    <span>
+                                        {{ v.forma_pagamento_2 | replace('_', ' ') | title }}
+                                    </span>
+
+                                    <strong>
+                                        R$ {{ "%.2f"|format(v.valor_pagamento_2 or 0) }}
+                                    </strong>
+
+                                </div>
+
+                                {% endif %}
+
+                                {% if not v.forma_pagamento_1 and not v.forma_pagamento_2 %}
+
+                                <span class="historico-sem-dado">
+                                    Não informado
+                                </span>
+
+                                {% endif %}
+
+                            </div>
+
+                        </td>
+
+                        <!-- DESCONTO -->
+                        <td>
+
+                            {% if v.desconto and v.desconto > 0 %}
+
+                            <span class="historico-desconto">
                                 − R$ {{ "%.2f"|format(v.desconto) }}
                             </span>
-                        {% else %}
-                            <span class="sem-desconto">—</span>
-                        {% endif %}
-                    </td>
 
-                    <td class="valor-total">
-                        R$ {{ "%.2f"|format(v.total_liquido) }}
-                    </td>
+                            {% else %}
 
-                    <td>
-                        {{ v.usuario.nome if v.usuario else "—" }}
-                    </td>
+                            <span class="historico-sem-desconto">
+                                Sem desconto
+                            </span>
 
-                </tr>
+                            {% endif %}
 
-                {% endfor %}
+                        </td>
 
-                {% if not vendas %}
-                <tr>
-                    <td colspan="8">
-                        Nenhuma venda encontrada.
-                    </td>
-                </tr>
-                {% endif %}
+                        <!-- TOTAL -->
+                        <td>
 
-            </tbody>
+                            <strong class="historico-total">
+                                R$ {{ "%.2f"|format(v.total_liquido) }}
+                            </strong>
 
-        </table>
+                        </td>
 
-    </div>
+                        <!-- OPERADOR -->
+                        <td>
 
-    <nav class="paginacao-vendas" aria-label="Paginação do histórico de vendas">
+                            <span class="historico-operador">
 
-        <span class="paginacao-info">
-            Página {{ pagina }} de {{ total_paginas }}
-            <span class="paginacao-total">
+                                <i data-lucide="user-round"></i>
+
+                                {{ v.usuario.nome if v.usuario else "—" }}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+
+                    <!-- NENHUMA VENDA -->
+                    {% if not vendas %}
+
+                    <tr>
+                        <td colspan="8">
+
+                            <div class="historico-vazio">
+
+                                <i data-lucide="receipt-text"></i>
+
+                                <strong>
+                                    Nenhuma venda encontrada
+                                </strong>
+
+                                <span>
+                                    As vendas realizadas aparecerão aqui.
+                                </span>
+
+                            </div>
+
+                        </td>
+                    </tr>
+
+                    {% endif %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- PAGINAÇÃO -->
+    <nav
+        class="historico-paginacao"
+        aria-label="Paginação do histórico de vendas"
+    >
+
+        <div class="historico-paginacao-info">
+
+            <span>Exibindo página</span>
+
+            <strong>
+                {{ pagina }} de {{ total_paginas }}
+            </strong>
+
+            <span>
                 · {{ total_vendas }} venda(s)
             </span>
-        </span>
 
-        <div class="paginacao-botoes">
+        </div>
 
+
+        <div class="historico-paginacao-botoes">
+
+            <!-- ANTERIOR -->
             {% if pagina > 1 %}
-                <a class="paginacao-btn" href="/pdv/historico?pagina={{ pagina - 1 }}">
-                    ← Anterior
-                </a>
+
+            <a
+                class="historico-btn-pagina"
+                href="/pdv/historico?pagina={{ pagina - 1 }}&ordenar={{ ordenar }}"
+            >
+                <i data-lucide="chevron-left"></i>
+                Anterior
+            </a>
+
             {% else %}
-                <span class="paginacao-btn desabilitado">
-                    ← Anterior
-                </span>
+
+            <span class="historico-btn-pagina desabilitado">
+                <i data-lucide="chevron-left"></i>
+                Anterior
+            </span>
+
             {% endif %}
 
+
+            <!-- PRÓXIMA -->
             {% if pagina < total_paginas %}
-                <a class="paginacao-btn proxima"
-                   href="/pdv/historico?pagina={{ pagina + 1 }}">
-                    Próxima →
-                </a>
+
+            <a
+                class="historico-btn-pagina proxima"
+                href="/pdv/historico?pagina={{ pagina + 1 }}&ordenar={{ ordenar }}"
+            >
+                Próxima
+                <i data-lucide="chevron-right"></i>
+            </a>
+
             {% else %}
-                <span class="paginacao-btn desabilitado">
-                    Próxima →
-                </span>
+
+            <span class="historico-btn-pagina desabilitado">
+                Próxima
+                <i data-lucide="chevron-right"></i>
+            </span>
+
             {% endif %}
 
         </div>

@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}
@@ -5,17 +6,14 @@ Clientes — Nova Adega
 {% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="/static/CSS/clientes-lista.css?v=3">
+<link rel="stylesheet" href="/static/CSS/clientes-lista.css?v=4">
 {% endblock %}
 
 {% block content %}
 
-<!-- =========================================
-     CONTEÚDO
-     ========================================= -->
-
 <main class="conteudo">
 
+    <!-- CABEÇALHO -->
     <div class="cabecalho-pagina">
 
         <div>
@@ -32,10 +30,8 @@ Clientes — Nova Adega
 
     </div>
 
-    <!-- =========================================
-         MENSAGENS
-         ========================================= -->
 
+    <!-- MENSAGENS -->
     {% if request.query_params.get('criado') == 'ok' %}
     <div class="mensagem sucesso">
         Cliente cadastrado com sucesso!
@@ -48,18 +44,23 @@ Clientes — Nova Adega
     </div>
     {% endif %}
 
-    <!-- =========================================
-         BUSCA
-         ========================================= -->
 
+    <!-- BUSCA E ORDENAÇÃO -->
     <section class="filtros">
 
         <form method="get" action="/clientes">
 
             <div class="campo-busca">
-                <span><i data-lucide="search"></i></span>
+                <span>
+                    <i data-lucide="search"></i>
+                </span>
 
-                <input type="text" name="busca" placeholder="Buscar por nome..." value="{{ busca }}">
+                <input
+                    type="text"
+                    name="busca"
+                    placeholder="Buscar por nome..."
+                    value="{{ busca }}"
+                >
             </div>
 
             <button type="submit" class="btn-filtrar">
@@ -72,14 +73,52 @@ Clientes — Nova Adega
             </a>
             {% endif %}
 
+            <!-- ORDENAÇÃO -->
+            <div class="filtro-ordenacao">
+
+                <label for="ordenar">
+                    Ordenar por:
+                </label>
+
+                <select
+                    name="ordenar"
+                    id="ordenar"
+                    onchange="this.form.submit()"
+                >
+
+                    <option value="nome_az"
+                        {% if ordenar == 'nome_az' %}selected{% endif %}>
+                        Nome A–Z
+                    </option>
+
+                    <option value="nome_za"
+                        {% if ordenar == 'nome_za' %}selected{% endif %}>
+                        Nome Z–A
+                    </option>
+
+                    <option value="ativos"
+                        {% if ordenar == 'ativos' %}selected{% endif %}>
+                        Ativos primeiro
+                    </option>
+
+                    <option value="inativos"
+                        {% if ordenar == 'inativos' %}selected{% endif %}>
+                        Inativos primeiro
+                    </option>
+
+                </select>
+
+            </div>
+
+            <input type="hidden" name="pagina" value="1">
+            <input type="hidden" name="por_pagina" value="{{ por_pagina }}">
+
         </form>
 
     </section>
 
-    <!-- =========================================
-         TABELA
-         ========================================= -->
 
+    <!-- TABELA -->
     <section class="tabela-container">
 
         <table>
@@ -142,11 +181,17 @@ Clientes — Nova Adega
 
                         <div class="acoes">
 
-                            <a href="/clientes/{{ c.id }}/editar" class="btn-editar">
+                            <a
+                                href="/clientes/{{ c.id }}/editar"
+                                class="btn-editar"
+                            >
                                 Editar
                             </a>
 
-                            <form action="/clientes/{{ c.id }}/toggle-ativo" method="post">
+                            <form
+                                action="/clientes/{{ c.id }}/toggle-ativo"
+                                method="post"
+                            >
 
                                 <button type="submit" class="btn-status">
                                     {{ "Desativar" if c.ativo else "Ativar" }}
@@ -162,6 +207,8 @@ Clientes — Nova Adega
 
                 {% endfor %}
 
+
+                <!-- NENHUM CLIENTE -->
                 {% if not clientes %}
                 <tr>
                     <td colspan="5" class="nenhum">
@@ -188,10 +235,8 @@ Clientes — Nova Adega
 
     </section>
 
-    <!-- =========================================
-         PAGINAÇÃO
-         ========================================= -->
 
+    <!-- PAGINAÇÃO -->
     {% if total_clientes > 0 %}
 
     <div class="paginacao">
@@ -211,18 +256,27 @@ Clientes — Nova Adega
         <div class="botoes-paginacao">
 
             {% if pagina > 1 %}
-            <a href="/clientes?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}{% if busca %}&busca={{ busca }}{% endif %}"
-                class="btn-pagina">
+
+            <a
+                href="/clientes?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}&ordenar={{ ordenar }}{% if busca %}&busca={{ busca }}{% endif %}"
+                class="btn-pagina"
+            >
                 ← Anterior
             </a>
+
             {% endif %}
 
-            {% if pagina < total_paginas %} <a
-                href="/clientes?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}{% if busca %}&busca={{ busca }}{% endif %}"
-                class="btn-pagina">
+
+            {% if pagina < total_paginas %}
+
+            <a
+                href="/clientes?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}&ordenar={{ ordenar }}{% if busca %}&busca={{ busca }}{% endif %}"
+                class="btn-pagina"
+            >
                 Próxima →
-                </a>
-                {% endif %}
+            </a>
+
+            {% endif %}
 
         </div>
 

@@ -1841,8 +1841,7 @@ html[data-tema="claro"] .aviso-estoque-baixo span strong {
         padding: 8px;
     }
 }
-<<<<<<< HEAD
-=======
+
 
 
 /* =========================================
@@ -2012,4 +2011,27 @@ html[data-tema="claro"] .busca-rapida-dica {
 .btn-fechar-busca {
     flex-shrink: 0;
 }
->>>>>>> 942f34dae9226429aec6a1f90f8fe449599582ee
+
+/* BOTÃO REMOVER PRODUTO */
+.btn-remover {
+    background: transparent;
+    border: none;
+    color: #FDE68A;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s ease;
+}
+
+.btn-remover i {
+    width: 17px;
+    height: 17px;
+}
+
+.btn-remover:hover {
+    background: rgba(253, 230, 138, 0.12);
+    color: #ffffff;
+}
