@@ -1702,3 +1702,118 @@ html[data-tema="claro"] .categorias-page .sem-resultados {
         min-width: 650px;
     }
 }
+
+/* =========================================================
+   ORDENAÇÃO — CATEGORIAS
+   Mesmo padrão visual do histórico de vendas
+========================================================= */
+
+.categorias-page .categorias-ordenacao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.categorias-page .categorias-ordenacao label {
+    color: #9CA3AF;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.categorias-page .categorias-ordenacao select {
+    height: 42px;
+    min-width: 190px;
+    padding: 0 34px 0 12px;
+    box-sizing: border-box;
+
+    background: #27272A;
+    color: #F9FAFB;
+
+    border: 1px solid rgba(253, 230, 138, 0.25);
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.categorias-page .categorias-ordenacao select:hover {
+    border-color: #FDE68A;
+}
+
+.categorias-page .categorias-ordenacao select:focus {
+    border-color: #FDE68A;
+    box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.08);
+}
+
+.categorias-page .categorias-ordenacao select option {
+    background: #1E1E1E;
+    color: #F9FAFB;
+}
+
+/* TEMA CLARO */
+
+html[data-tema="claro"] .categorias-page .categorias-ordenacao label {
+    color: #765000;
+}
+
+html[data-tema="claro"] .categorias-page .categorias-ordenacao select {
+    background: #FFFFFF;
+    color: #5C3514;
+    border-color: #E5C6A5;
+}
+
+html[data-tema="claro"] .categorias-page .categorias-ordenacao select option {
+    background: #FFFFFF;
+    color: #5C3514;
+}
+
+/* RESPONSIVIDADE */
+
+@media screen and (max-width: 700px) {
+
+    .categorias-page .categorias-ordenacao {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .categorias-page .categorias-ordenacao label {
+        font-size: 13px;
+    }
+
+    .categorias-page .categorias-ordenacao select {
+        font-family: inherit;
+        font-weight: inherit;
+        width: 100%;
+        min-width: 0;
+    }
+
+}
+
+/* =========================================================
+   ORDENAÇÃO — FONTE IGUAL À DO HISTÓRICO
+========================================================= */
+
+.categorias-page .categorias-ordenacao label,
+.categorias-page .categorias-ordenacao select,
+.categorias-page .categorias-ordenacao select option {
+    font-family: inherit !important;
+    font-size: 13px !important;
+}
+
+.categorias-page .categorias-ordenacao label {
+    font-weight: 500 !important;
+}
+
+.categorias-page .categorias-ordenacao select {
+    font-weight: 500 !important;
+}

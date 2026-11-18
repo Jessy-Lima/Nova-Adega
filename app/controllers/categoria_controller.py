@@ -27,12 +27,13 @@ templates = Jinja2Templates(directory="app/templates")
 def listar_categorias(
     request: Request,
     busca: str = "",
+    ordenar: str = "nome_az",
     pagina: int = 1,
     por_pagina: int = 14,
     db: Session = Depends(get_db),
     usuario=Depends(get_usuario_logado)
 ):
-    """Lista as categorias, permitindo buscar pelo nome."""
+    """Lista, busca e ordena as categorias."""
 
     if pagina < 1:
         pagina = 1
@@ -45,18 +46,69 @@ def listar_categorias(
 
     query = db.query(Categoria)
 
-    # Se o usuário digitou algo, filtra pelo nome.
     if busca.strip():
         termo = f"%{busca.strip()}%"
+
         query = query.filter(
             Categoria.nome.ilike(termo)
+        )
+
+    total_categorias = query.count()
+
+    # --------------------------------------------------------
+    # BUSCA DAS CATEGORIAS
+    # --------------------------------------------------------
+
+    todas_categorias = query.all()
+
+    # --------------------------------------------------------
+    # ORDENAÇÃO
+    # --------------------------------------------------------
+
+    opcoes_ordenacao = [
+        "nome_az",
+        "nome_za",
+        "mais_produtos",
+        "menos_produtos"
+    ]
+
+    if ordenar not in opcoes_ordenacao:
+        ordenar = "nome_az"
+
+    if ordenar == "nome_az":
+
+        todas_categorias.sort(
+            key=lambda c: (c.nome or "").casefold()
+        )
+
+    elif ordenar == "nome_za":
+
+        todas_categorias.sort(
+            key=lambda c: (c.nome or "").casefold(),
+            reverse=True
+        )
+
+    elif ordenar == "mais_produtos":
+
+        todas_categorias.sort(
+            key=lambda c: (
+                -sum(1 for p in c.produtos if p.ativo),
+                (c.nome or "").casefold()
+            )
+        )
+
+    elif ordenar == "menos_produtos":
+
+        todas_categorias.sort(
+            key=lambda c: (
+                sum(1 for p in c.produtos if p.ativo),
+                (c.nome or "").casefold()
+            )
         )
 
     # --------------------------------------------------------
     # PAGINAÇÃO
     # --------------------------------------------------------
-
-    total_categorias = query.count()
 
     total_paginas = max(
         1,
@@ -66,13 +118,10 @@ def listar_categorias(
     if pagina > total_paginas:
         pagina = total_paginas
 
-    categorias = (
-        query
-        .order_by(Categoria.nome)
-        .offset((pagina - 1) * por_pagina)
-        .limit(por_pagina)
-        .all()
-    )
+    inicio = (pagina - 1) * por_pagina
+    fim = inicio + por_pagina
+
+    categorias = todas_categorias[inicio:fim]
 
     # --------------------------------------------------------
     # TEMPLATE
@@ -86,6 +135,7 @@ def listar_categorias(
             "usuario": usuario,
             "categorias": categorias,
             "busca": busca,
+            "ordenar": ordenar,
             "pagina": pagina,
             "por_pagina": por_pagina,
             "total_categorias": total_categorias,
