@@ -1,4 +1,3 @@
-
 /* =====================================================
    HISTÓRICO DE VENDAS — NOVA ADEGA
    Visual organizado e responsivo
@@ -550,5 +549,149 @@ html[data-tema="claro"] .historico-vazio strong {
 
     .historico-btn-pagina {
         flex: 1;
+    }
+}
+
+
+/* =====================================================
+   FILTRO DE ORDENAÇÃO
+===================================================== */
+
+.historico-filtro {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.historico-filtro label {
+    color: var(--hist-secundario);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.historico-filtro select {
+    min-width: 175px;
+    padding: 10px 35px 10px 12px;
+    background-color: #292929;
+    color: var(--hist-texto);
+    border: 1px solid #454545;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.historico-filtro select:hover {
+    border-color: var(--hist-destaque);
+}
+
+.historico-filtro select:focus {
+    border-color: var(--hist-destaque);
+    box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.10);
+}
+
+.historico-filtro select option {
+    background: #1E1E1E;
+    color: #F9FAFB;
+}
+
+/* TEMA CLARO */
+
+html[data-tema="claro"] .historico-filtro select {
+    background-color: #FFFFFF;
+    color: #252525;
+    border-color: #D8D8D0;
+}
+
+html[data-tema="claro"] .historico-filtro select option {
+    background: #FFFFFF;
+    color: #252525;
+}
+
+html[data-tema="claro"] .historico-filtro select:hover,
+html[data-tema="claro"] .historico-filtro select:focus {
+    border-color: #8A6100;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 520px) {
+    .historico-filtro {
+        width: 100%;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .historico-filtro select {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+
+/* =========================================================
+   FILTRO DE ORDENAÇÃO
+========================================================= */
+
+.historico-filtro {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.historico-filtro label {
+    color: #d6d3d1;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.historico-filtro select {
+    min-width: 145px;
+    padding: 9px 30px 9px 12px;
+
+    background-color: #171717;
+    color: #f9fafb;
+
+    border: 1px solid rgba(253, 230, 138, 0.2);
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-family: inherit;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.historico-filtro select:hover {
+    border-color: rgba(253, 230, 138, 0.55);
+}
+
+.historico-filtro select:focus {
+    border-color: #fde68a;
+    box-shadow: 0 0 0 2px rgba(253, 230, 138, 0.12);
+}
+
+.historico-filtro select option {
+    background-color: #1e1e1e;
+    color: #f9fafb;
+}
+
+@media (max-width: 600px) {
+    .historico-filtro {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .historico-filtro select {
+        flex: 1;
+        min-width: 0;
     }
 }

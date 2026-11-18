@@ -446,18 +446,40 @@ def detalhe_venda(
 # HISTÓRICO DE VENDAS
 # ============================================================
 
+
+# ============================================================
+# HISTÓRICO DE VENDAS
+# ============================================================
+
 @router.get("/historico")
 def historico_vendas(
     request: Request,
     pagina: int = 1,
+    ordenar: str = "recentes",
     db: Session = Depends(get_db),
     usuario=Depends(get_usuario_logado)
 ):
     por_pagina = 10
     pagina = max(1, pagina)
 
+    # Opções de ordenação permitidas
+    ordenacoes = {
+        "recentes": Venda.criado_em.desc(),
+        "antigas": Venda.criado_em.asc(),
+        "maior_valor": Venda.total_liquido.desc(),
+        "menor_valor": Venda.total_liquido.asc(),
+        "cliente_az": Cliente.nome.asc(),
+        "cliente_za": Cliente.nome.desc(),
+    }
+
+    # Impedir valores inválidos na ordenação
+    if ordenar not in ordenacoes:
+        ordenar = "recentes"
+
+    # Contar todas as vendas
     total_vendas = db.query(Venda).count()
 
+    # Calcular paginação
     total_paginas = max(
         1,
         ceil(total_vendas / por_pagina)
@@ -465,9 +487,20 @@ def historico_vendas(
 
     pagina = min(pagina, total_paginas)
 
+    # Consulta das vendas
+    consulta = db.query(Venda)
+
+    # Ordenação por cliente precisa consultar a tabela Cliente
+    if ordenar in ("cliente_az", "cliente_za"):
+        consulta = consulta.outerjoin(
+            Cliente,
+            Venda.cliente_id == Cliente.id
+        )
+
+    # Aplicar ordenação e paginação
     vendas = (
-        db.query(Venda)
-        .order_by(Venda.criado_em.desc())
+        consulta
+        .order_by(ordenacoes[ordenar], Venda.id.desc())
         .offset((pagina - 1) * por_pagina)
         .limit(por_pagina)
         .all()
@@ -482,6 +515,8 @@ def historico_vendas(
             "vendas": vendas,
             "pagina": pagina,
             "total_paginas": total_paginas,
-            "total_vendas": total_vendas
+            "total_vendas": total_vendas,
+            "ordenar": ordenar
         }
     )
+
