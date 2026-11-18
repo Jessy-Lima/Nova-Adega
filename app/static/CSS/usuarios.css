@@ -140,28 +140,96 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     min-height: 34px;
+
     padding: 7px 12px;
+
     margin: 2px;
-    border: none;
-    border-radius: 6px;
+
     font-family: inherit;
     font-size: 13px;
     font-weight: 600;
+
     text-decoration: none;
+
     cursor: pointer;
+
     transition: background 0.2s;
 }
 
-.btn-editar {
+
+/* =========================================================
+   BOTÃO EDITAR — PADRÃO PRODUTOS
+========================================================= */
+
+.acoes-usuario .btn-editar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 14px;
+
+    background: transparent;
+
+    color: #FDE68A;
+
+    border: 1px solid #FDE68A;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    box-sizing: border-box;
+
+    width: auto;
+    min-width: 0;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    flex-shrink: 0;
+}
+
+.acoes-usuario .btn-editar:hover {
     background: #FDE68A;
-    color: #000000;
+
+    color: #121212;
+
+    border-color: #FDE68A;
+
+    transform: none;
 }
 
-.btn-editar:hover {
-    background: #fff0b2;
+
+/* =========================================================
+   BOTÕES ATIVAR / DESATIVAR
+   NÃO ALTERAR
+========================================================= */
+
+.btn-desativar {
+    background: #7f1d1d;
+    color: #ffffff;
 }
 
+.btn-desativar:hover {
+    background: #991b1b;
+}
+
+.btn-ativar {
+    background: #166534;
+    color: #ffffff;
+}
+
+.btn-ativar:hover {
+    background: #15803d;
+}
 .btn-desativar {
     background: #7f1d1d;
     color: #ffffff;

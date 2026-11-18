@@ -440,7 +440,75 @@
     margin: 0;
 }
 
-.btn-editar,
+/* =========================================================
+   AÇÕES
+   ========================================================= */
+
+.acoes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.acoes form {
+    margin: 0;
+}
+
+
+/* =========================================================
+   BOTÃO EDITAR — PADRÃO PRODUTOS
+========================================================= */
+
+.btn-editar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 14px;
+
+    background: transparent;
+
+    color: #FDE68A;
+
+    border: 1px solid #FDE68A;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    box-sizing: border-box;
+
+    width: auto;
+    min-width: 0;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    flex-shrink: 0;
+}
+
+.btn-editar:hover {
+    background: #FDE68A;
+
+    color: #121212;
+
+    border-color: #FDE68A;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   BOTÃO STATUS
+   NÃO ALTERAR
+========================================================= */
+
 .btn-status {
     width: 110px;
     height: 40px;
@@ -462,37 +530,26 @@
 
     cursor: pointer;
 
-    transition: 0.2s ease;
-}
-
-.btn-editar {
-    border: 1px solid rgba(253, 230, 138, 0.18);
-
-    background: rgba(253, 230, 138, 0.08);
-
-    color: #FDE68A;
-}
-
-.btn-editar:hover {
-    background: rgba(253, 230, 138, 0.14);
-
-    border-color: rgba(253, 230, 138, 0.35);
-}
-
-.btn-status {
     border: 1px solid #3A3A3A;
 
     background: #242424;
 
     color: #D1D5DB;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .btn-status:hover {
     border-color: #FDE68A;
 
     color: #FDE68A;
-}
 
+    transform: translateY(-1px);
+}
 
 /* =========================================================
    PAGINAÇÃO

@@ -1,4 +1,3 @@
-
 /* =========================================================
    CATEGORIAS — NOVA ADEGA
 ========================================================= */
@@ -189,31 +188,48 @@
     margin: 0;
 }
 
-/* BOTÃO EDITAR */
+
+/* =========================================================
+   BOTÃO EDITAR
+   MESMO PADRÃO DO BOTÃO EDITAR DE PRODUTOS
+========================================================= */
+
 .btn-editar {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 40px;
-    padding: 0 13px;
-    box-sizing: border-box;
-    background: #FFF5E9;
-    color: #765000;
-    border: 1px solid #E5C6A5;
+
+    padding: 9px 14px;
+
+    background: transparent;
+
+    color: #FDE68A;
+
+    border: 1px solid #FDE68A;
+
     border-radius: 7px;
+
     text-decoration: none;
+
     font-size: 13px;
     font-weight: 600;
-    transition: background 0.2s, transform 0.2s;
+
+    transition: 0.2s ease;
 }
 
 .btn-editar:hover {
-    background: #FFE4C4;
-    border-color: #C49A58;
-    transform: translateY(-1px);
+    background: #FDE68A;
+    color: #121212;
+    border-color: #FDE68A;
+
+    transform: none;
 }
 
-/* BOTÃO ATIVAR / DESATIVAR */
+
+/* =========================================================
+   BOTÃO ATIVAR / DESATIVAR
+========================================================= */
+
 .btn-status {
     min-height: 40px;
     padding: 0 13px;
@@ -268,6 +284,7 @@ a.voltar:hover {
     transform: translateX(-3px) !important;
     text-decoration: none !important;
 }
+
 
 /* =========================================================
    FORMULÁRIO DE CATEGORIA
@@ -339,6 +356,7 @@ a.voltar:hover {
     box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.10);
 }
 
+
 /* BOTÕES DO FORMULÁRIO */
 .form-botoes {
     display: flex;
@@ -387,6 +405,7 @@ a.voltar:hover {
     background: #3f3f46;
     transform: translateY(-1px);
 }
+
 
 /* PRODUTOS VINCULADOS */
 .produtos-vinculados {
@@ -462,6 +481,7 @@ a.voltar:hover {
     text-align: center;
 }
 
+
 /* CENTRALIZAÇÃO DO FORMULÁRIO */
 .container:has(.form-categoria) {
     min-height: calc(100vh - 70px - 69px);
@@ -481,6 +501,7 @@ a.voltar:hover {
 .container:has(.form-categoria) .voltar {
     margin-top: 22px;
 }
+
 
 /* =========================================================
    PAGINAÇÃO
@@ -553,6 +574,7 @@ a.voltar:hover {
     font-weight: 700;
 }
 
+
 /* ESTOQUE */
 .estoque {
     display: inline-block;
@@ -563,6 +585,7 @@ a.voltar:hover {
     padding: 4px 8px;
     font-weight: 600;
 }
+
 
 /* =========================================================
    TEMA CLARO — FORMULÁRIO
@@ -634,7 +657,9 @@ html[data-tema="claro"] .container:has(.form-categoria) .voltar a:hover {
     color: #5C3514 !important;
 }
 
+
 /* PAGINAÇÃO — TEMA CLARO */
+
 html[data-tema="claro"] main.page-wrapper .container .paginacao > div a,
 html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:link,
 html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:visited {
@@ -650,6 +675,7 @@ html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:hover {
     border-color: #C49A58 !important;
     transform: translateY(-1px);
 }
+
 
 /* =========================================================
    RESPONSIVIDADE — LISTAGEM NO CELULAR
@@ -799,6 +825,7 @@ html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:hover {
         color: #a1a1aa;
         font-size: 12px;
         font-weight: 700;
+        text-align: left;
     }
 
     .acoes {
@@ -907,7 +934,9 @@ html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:hover {
     }
 }
 
+
 /* CELULARES PEQUENOS */
+
 @media screen and (max-width: 380px) {
 
     .page-wrapper > .container:not(:has(.form-categoria)) {
@@ -943,13 +972,15 @@ html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:hover {
     }
 }
 
+
 /* PAGINAÇÃO COM POUCO ESPAÇO */
+
 @media screen and (max-width: 600px) {
+
     .paginacao > div a {
         min-width: 0;
     }
 }
-
 
 
 /* =========================================================
@@ -963,7 +994,9 @@ html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:hover {
     min-width: 0;
 }
 
+
 /* Tabela original para computador e tablet */
+
 .categorias-page .categorias-tabela-desktop {
     display: block;
     width: 100%;
@@ -1015,7 +1048,9 @@ html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:hover {
     border-bottom: none;
 }
 
+
 /* Ações na tabela */
+
 .categorias-page .categorias-tabela-desktop .acoes {
     display: flex;
     align-items: center;
@@ -1027,16 +1062,20 @@ html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:hover {
     margin: 0;
 }
 
+
 /* Cards: ficam escondidos no computador */
+
 .categorias-page .categorias-cards-mobile {
     display: none;
 }
+
 
 /* =========================================================
    TABLET
 ========================================================= */
 
 @media screen and (max-width: 768px) {
+
     .categorias-page .categorias-tabela-desktop {
         display: block;
         overflow-x: auto;
@@ -1048,12 +1087,15 @@ html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:hover {
     }
 }
 
+
 /* =========================================================
    CELULAR
 ========================================================= */
 
 @media screen and (max-width: 600px) {
+
     /* Esconde a tabela e mostra os cards */
+
     .categorias-page .categorias-tabela-desktop {
         display: none;
     }
@@ -1144,6 +1186,7 @@ html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:hover {
     }
 
     /* Paginação no celular */
+
     .categorias-page .paginacao {
         flex-direction: column;
         align-items: center;
@@ -1163,8 +1206,11 @@ html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:hover {
     }
 }
 
+
 /* Celulares estreitos */
+
 @media screen and (max-width: 380px) {
+
     .categorias-page .categoria-card-mobile {
         padding: 12px;
     }
@@ -1179,6 +1225,7 @@ html[data-tema="claro"] main.page-wrapper .container .paginacao > div a:hover {
         font-size: 12px;
     }
 }
+
 
 /* =========================================================
    TEMA CLARO — LISTAGEM DE CATEGORIAS
@@ -1228,9 +1275,10 @@ html[data-tema="claro"] .categorias-page .sem-resultados {
     color: #625548 !important;
 }
 
+
 /* =========================================================
    CATEGORIAS — PADRÃO VISUAL DAS TABELAS
-   ========================================================= */
+========================================================= */
 
 /* FILTROS */
 
@@ -1377,7 +1425,7 @@ html[data-tema="claro"] .categorias-page .sem-resultados {
 
 /* =========================================================
    TABELA
-   ========================================================= */
+========================================================= */
 
 .categorias-page .categorias-tabela-desktop {
 
@@ -1515,7 +1563,7 @@ html[data-tema="claro"] .categorias-page .sem-resultados {
 
 /* =========================================================
    STATUS
-   ========================================================= */
+========================================================= */
 
 .categorias-page .status {
 
@@ -1554,7 +1602,7 @@ html[data-tema="claro"] .categorias-page .sem-resultados {
 
 /* =========================================================
    BOTÕES DE AÇÃO
-   ========================================================= */
+========================================================= */
 
 .categorias-page .acoes {
 
@@ -1573,45 +1621,57 @@ html[data-tema="claro"] .categorias-page .sem-resultados {
 }
 
 
-/* EDITAR */
+/* =========================================================
+   BOTÃO EDITAR
+   PADRÃO IGUAL AO PRODUTOS
+========================================================= */
 
-.categorias-page .btn-editar {
+.categorias-page .acoes .btn-editar {
 
     display: inline-flex;
 
     align-items: center;
     justify-content: center;
 
-    min-height: 40px;
-
-    padding: 0 16px;
+    padding: 9px 14px;
 
     box-sizing: border-box;
+
+    width: auto;
+    min-width: 0;
 
     background: transparent;
 
     color: #FDE68A;
 
-    border: 1px solid rgba(253, 230, 138, 0.35);
+    border: 1px solid #FDE68A;
 
-    border-radius: 8px;
+    border-radius: 7px;
 
     text-decoration: none;
 
     font-size: 13px;
 
-    font-weight: 700;
+    font-weight: 600;
+
+    line-height: normal;
+
+    white-space: nowrap;
 
     transition: 0.2s ease;
+
+    flex-shrink: 0;
 }
 
-.categorias-page .btn-editar:hover {
+.categorias-page .acoes .btn-editar:hover {
 
-    background: rgba(253, 230, 138, 0.08);
+    background: #FDE68A;
+
+    color: #121212;
 
     border-color: #FDE68A;
 
-    transform: translateY(-1px);
+    transform: none;
 }
 
 
@@ -1670,7 +1730,7 @@ html[data-tema="claro"] .categorias-page .sem-resultados {
 
 /* =========================================================
    RESPONSIVO
-   ========================================================= */
+========================================================= */
 
 @media screen and (max-width: 700px) {
 
