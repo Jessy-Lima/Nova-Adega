@@ -5,7 +5,7 @@ Categorias — Nova Adega
 {% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="/static/CSS/categorias.css?v=10">
+<link rel="stylesheet" href="/static/CSS/categorias.css?v=11">
 {% endblock %}
 
 {% block content %}
@@ -61,13 +61,13 @@ Categorias — Nova Adega
     {% endif %}
 
 
-    <!-- =========================================
-         FILTRO
-         ========================================= -->
+    <!-- FILTROS -->
 
     <section class="filtros">
 
         <form method="get" action="/categorias">
+
+            <!-- BUSCA -->
 
             <div class="campo-busca">
 
@@ -83,10 +83,56 @@ Categorias — Nova Adega
             </div>
 
 
+            <!-- ORDENAÇÃO -->
+
+            <div class="categorias-ordenacao">
+
+                <label for="ordenar">
+                    Ordenar por:
+                </label>
+
+                <select
+                    name="ordenar"
+                    id="ordenar"
+                    onchange="this.form.submit()"
+                >
+
+                    <option value="nome_az"
+                        {% if ordenar == 'nome_az' %}selected{% endif %}>
+                        Nome A–Z
+                    </option>
+
+                    <option value="nome_za"
+                        {% if ordenar == 'nome_za' %}selected{% endif %}>
+                        Nome Z–A
+                    </option>
+
+                    <option value="mais_produtos"
+                        {% if ordenar == 'mais_produtos' %}selected{% endif %}>
+                        Mais produtos ativos
+                    </option>
+
+                    <option value="menos_produtos"
+                        {% if ordenar == 'menos_produtos' %}selected{% endif %}>
+                        Menos produtos ativos
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <input type="hidden" name="pagina" value="1">
+
+
+            <!-- BOTÃO BUSCAR -->
+
             <button type="submit" class="btn-filtrar">
                 Buscar
             </button>
 
+
+            <!-- LIMPAR -->
 
             {% if busca %}
 
@@ -101,9 +147,7 @@ Categorias — Nova Adega
     </section>
 
 
-    <!-- =========================================
-         LISTAGEM DE CATEGORIAS
-         ========================================= -->
+    <!-- LISTAGEM DE CATEGORIAS -->
 
     <section class="categorias-listagem">
 
@@ -118,21 +162,13 @@ Categorias — Nova Adega
 
                     <tr>
 
-                        <th>
-                            Nome
-                        </th>
+                        <th>Nome</th>
 
-                        <th>
-                            Produtos ativos
-                        </th>
+                        <th>Produtos ativos</th>
 
-                        <th>
-                            Status
-                        </th>
+                        <th>Status</th>
 
-                        <th>
-                            Ações
-                        </th>
+                        <th>Ações</th>
 
                     </tr>
 
@@ -251,9 +287,7 @@ Categorias — Nova Adega
         </div>
 
 
-        <!-- =========================================
-             CARDS PARA CELULAR
-             ========================================= -->
+        <!-- CARDS PARA CELULAR -->
 
         <div class="categorias-cards-mobile">
 
@@ -353,9 +387,7 @@ Categorias — Nova Adega
     </section>
 
 
-    <!-- =========================================
-         PAGINAÇÃO
-         ========================================= -->
+    <!-- PAGINAÇÃO -->
 
     {% if total_categorias > 0 %}
 
@@ -371,7 +403,7 @@ Categorias — Nova Adega
             {% if pagina > 1 %}
 
             <a
-                href="/categorias?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}{% if busca %}&busca={{ busca }}{% endif %}"
+                href="/categorias?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}&ordenar={{ ordenar }}{% if busca %}&busca={{ busca | urlencode }}{% endif %}"
             >
                 ← Anterior
             </a>
@@ -382,7 +414,7 @@ Categorias — Nova Adega
             {% if pagina < total_paginas %}
 
             <a
-                href="/categorias?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}{% if busca %}&busca={{ busca }}{% endif %}"
+                href="/categorias?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}&ordenar={{ ordenar }}{% if busca %}&busca={{ busca | urlencode }}{% endif %}"
             >
                 Próxima →
             </a>
