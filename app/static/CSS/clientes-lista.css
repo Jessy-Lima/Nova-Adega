@@ -1041,3 +1041,68 @@ border-color: #E5C65A !important;
 html[data-tema="claro"] body .page-wrapper .conteudo .paginacao span {
 color: #625548 !important;
 }
+
+
+
+/* =========================================================
+   FILTRO DE ORDENAÇÃO — CLIENTES
+========================================================= */
+
+.filtro-ordenacao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filtro-ordenacao label {
+    color: #d6d3d1;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.filtro-ordenacao select {
+    min-width: 145px;
+    padding: 9px 30px 9px 12px;
+
+    background-color: #171717;
+    color: #f9fafb;
+
+    border: 1px solid rgba(253, 230, 138, 0.2);
+    border-radius: 7px;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filtro-ordenacao select:hover {
+    border-color: rgba(253, 230, 138, 0.55);
+}
+
+.filtro-ordenacao select:focus {
+    border-color: #fde68a;
+    box-shadow: 0 0 0 2px rgba(253, 230, 138, 0.12);
+}
+
+.filtro-ordenacao select option {
+    background-color: #1e1e1e;
+    color: #f9fafb;
+}
+
+@media (max-width: 600px) {
+    .filtro-ordenacao {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .filtro-ordenacao select {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
