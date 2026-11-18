@@ -1,4 +1,3 @@
-
 {% extends "base.html" %}
 
 {% block title %}
@@ -87,15 +86,11 @@ Produtos — Nova Adega
             </select>
         </div>
 
-        <!-- ORDENAÇÃO AUTOMÁTICA -->
+        <!-- ORDENAÇÃO -->
         <div class="campo campo-ordenacao">
-            <label for="ordenacao">Ordenar por</label>
+            <label for="ordenacao">Ordenar por:</label>
 
-            <select
-                name="ordenacao"
-                id="ordenacao"
-                onchange="this.form.submit()"
-            >
+            <select name="ordenacao" id="ordenacao">
                 <option value="nome_asc"
                     {{ 'selected' if ordenacao == 'nome_asc' else '' }}>
                     Nome (A–Z)
