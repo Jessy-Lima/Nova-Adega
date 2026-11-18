@@ -210,42 +210,64 @@
 
 /* =========================================================
    BOTÕES ATIVAR / DESATIVAR
-   NÃO ALTERAR
+   PADRÃO IGUAL AO BOTÃO DE CLIENTES
 ========================================================= */
 
+.btn-desativar,
+.btn-ativar {
+    width: 110px;
+    height: 40px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border-radius: 8px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* DESATIVAR */
 .btn-desativar {
-    background: #7f1d1d;
-    color: #ffffff;
+    background: #242424;
+    color: #D1D5DB;
+    border: 1px solid #3A3A3A;
 }
 
 .btn-desativar:hover {
-    background: #991b1b;
+    border-color: #FDE68A;
+    color: #FDE68A;
+    transform: translateY(-1px);
 }
 
+/* ATIVAR */
 .btn-ativar {
-    background: #166534;
-    color: #ffffff;
+    background: #242424;
+    color: #D1D5DB;
+    border: 1px solid #3A3A3A;
 }
 
 .btn-ativar:hover {
-    background: #15803d;
-}
-.btn-desativar {
-    background: #7f1d1d;
-    color: #ffffff;
-}
-
-.btn-desativar:hover {
-    background: #991b1b;
-}
-
-.btn-ativar {
-    background: #166534;
-    color: #ffffff;
-}
-
-.btn-ativar:hover {
-    background: #15803d;
+    border-color: #FDE68A;
+    color: #FDE68A;
+    transform: translateY(-1px);
 }
 
 /* Formulários de ação */
