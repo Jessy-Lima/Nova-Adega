@@ -1,17 +1,12 @@
 {% extends "base.html" %}
 
-
 {% block title %}
 Clientes — Nova Adega
 {% endblock %}
 
-
 {% block styles %}
-
 <link rel="stylesheet" href="/static/CSS/clientes-lista.css?v=3">
-
 {% endblock %}
-
 
 {% block content %}
 
@@ -24,13 +19,11 @@ Clientes — Nova Adega
     <div class="cabecalho-pagina">
 
         <div>
-
             <h1>Clientes</h1>
 
             <p>
                 Gerencie os clientes cadastrados no sistema.
             </p>
-
         </div>
 
         <a href="/clientes/novo" class="btn-novo">
@@ -39,28 +32,21 @@ Clientes — Nova Adega
 
     </div>
 
-
     <!-- =========================================
          MENSAGENS
          ========================================= -->
 
     {% if request.query_params.get('criado') == 'ok' %}
-
     <div class="mensagem sucesso">
         Cliente cadastrado com sucesso!
     </div>
-
     {% endif %}
 
-
     {% if request.query_params.get('editado') == 'ok' %}
-
     <div class="mensagem sucesso">
         Cliente atualizado com sucesso!
     </div>
-
     {% endif %}
-
 
     <!-- =========================================
          BUSCA
@@ -71,11 +57,9 @@ Clientes — Nova Adega
         <form method="get" action="/clientes">
 
             <div class="campo-busca">
-
                 <span><i data-lucide="search"></i></span>
 
                 <input type="text" name="busca" placeholder="Buscar por nome..." value="{{ busca }}">
-
             </div>
 
             <button type="submit" class="btn-filtrar">
@@ -83,17 +67,14 @@ Clientes — Nova Adega
             </button>
 
             {% if busca %}
-
             <a href="/clientes" class="btn-limpar">
                 Limpar
             </a>
-
             {% endif %}
 
         </form>
 
     </section>
-
 
     <!-- =========================================
          TABELA
@@ -104,23 +85,14 @@ Clientes — Nova Adega
         <table>
 
             <thead>
-
                 <tr>
-
                     <th>Nome</th>
-
                     <th>Telefone</th>
-
                     <th>CPF</th>
-
                     <th>Status</th>
-
                     <th>Ações</th>
-
                 </tr>
-
             </thead>
-
 
             <tbody>
 
@@ -129,7 +101,6 @@ Clientes — Nova Adega
                 <tr>
 
                     <td>
-
                         <div class="cliente-nome">
 
                             <div class="avatar">
@@ -141,46 +112,31 @@ Clientes — Nova Adega
                             </strong>
 
                         </div>
-
                     </td>
-
 
                     <td>
                         {{ c.telefone or "—" }}
                     </td>
 
-
                     <td>
                         {{ c.cpf or "—" }}
                     </td>
 
-
                     <td>
 
                         {% if c.ativo %}
-
                         <span class="status ativo">
-
                             <span></span>
-
                             Ativo
-
                         </span>
-
                         {% else %}
-
                         <span class="status inativo">
-
                             <span></span>
-
                             Inativo
-
                         </span>
-
                         {% endif %}
 
                     </td>
-
 
                     <td>
 
@@ -189,7 +145,6 @@ Clientes — Nova Adega
                             <a href="/clientes/{{ c.id }}/editar" class="btn-editar">
                                 Editar
                             </a>
-
 
                             <form action="/clientes/{{ c.id }}/toggle-ativo" method="post">
 
@@ -207,11 +162,8 @@ Clientes — Nova Adega
 
                 {% endfor %}
 
-
                 {% if not clientes %}
-
                 <tr>
-
                     <td colspan="5" class="nenhum">
 
                         <div class="nenhum-icone">
@@ -227,9 +179,7 @@ Clientes — Nova Adega
                         </span>
 
                     </td>
-
                 </tr>
-
                 {% endif %}
 
             </tbody>
@@ -238,10 +188,9 @@ Clientes — Nova Adega
 
     </section>
 
-
     <!-- =========================================
-     PAGINAÇÃO
-     ========================================= -->
+         PAGINAÇÃO
+         ========================================= -->
 
     {% if total_clientes > 0 %}
 
@@ -259,25 +208,20 @@ Clientes — Nova Adega
 
         </div>
 
-
         <div class="botoes-paginacao">
 
             {% if pagina > 1 %}
-
             <a href="/clientes?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}{% if busca %}&busca={{ busca }}{% endif %}"
                 class="btn-pagina">
                 ← Anterior
             </a>
-
             {% endif %}
-
 
             {% if pagina < total_paginas %} <a
                 href="/clientes?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}{% if busca %}&busca={{ busca }}{% endif %}"
                 class="btn-pagina">
                 Próxima →
                 </a>
-
                 {% endif %}
 
         </div>
@@ -285,11 +229,6 @@ Clientes — Nova Adega
     </div>
 
     {% endif %}
-
-    <!-- VOLTAR -->
-    <a href="/" class="voltar">
-        ← Voltar para o início
-    </a>
 
 </main>
 
