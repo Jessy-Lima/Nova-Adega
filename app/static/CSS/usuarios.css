@@ -499,3 +499,101 @@
 
     box-sizing: border-box;
 }
+
+
+/* =========================================================
+   FILTRO DE ORDENAÇÃO — USUÁRIOS
+   Mesmo padrão visual do histórico de vendas
+========================================================= */
+
+.usuarios-controles {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 18px;
+}
+
+.usuarios-filtro {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.usuarios-filtro label {
+    color: #d6d3d1;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.usuarios-filtro select {
+    min-width: 175px;
+    padding: 9px 30px 9px 12px;
+
+    background-color: #171717;
+    color: #f9fafb;
+
+    border: 1px solid rgba(253, 230, 138, 0.2);
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-family: inherit;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.usuarios-filtro select:hover {
+    border-color: rgba(253, 230, 138, 0.55);
+}
+
+.usuarios-filtro select:focus {
+    border-color: #fde68a;
+    box-shadow: 0 0 0 2px rgba(253, 230, 138, 0.12);
+}
+
+.usuarios-filtro select option {
+    background-color: #1e1e1e;
+    color: #f9fafb;
+}
+
+/* TEMA CLARO */
+
+html[data-tema="claro"] .usuarios-filtro label {
+    color: #555555;
+}
+
+html[data-tema="claro"] .usuarios-filtro select {
+    background-color: #ffffff;
+    color: #252525;
+    border-color: #D8D8D0;
+}
+
+html[data-tema="claro"] .usuarios-filtro select option {
+    background-color: #ffffff;
+    color: #252525;
+}
+
+html[data-tema="claro"] .usuarios-filtro select:hover,
+html[data-tema="claro"] .usuarios-filtro select:focus {
+    border-color: #8A6100;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 600px) {
+
+    .usuarios-filtro {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .usuarios-filtro select {
+        flex: 1;
+        min-width: 0;
+    }
+
+}
+
