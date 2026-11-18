@@ -30,14 +30,34 @@ PRODUTOS_POR_PAGINA = 14
 # TELA DO PDV
 # ============================================================
 
+
+# ============================================================
+# TELA DO PDV
+# ============================================================
+
 @router.get("/")
 def tela_pdv(
     request: Request,
     pagina: int = 1,
     busca: str = "",
+    ordenar: str = "nome_az",
     db: Session = Depends(get_db),
     usuario=Depends(get_usuario_logado)
 ):
+    # Opções de ordenação permitidas
+    ordenacoes = {
+        "nome_az": Produto.nome.asc(),
+        "nome_za": Produto.nome.desc(),
+        "menor_preco": Produto.preco.asc(),
+        "maior_preco": Produto.preco.desc(),
+        "maior_estoque": Produto.estoque_atual.desc(),
+        "menor_estoque": Produto.estoque_atual.asc(),
+    }
+
+    # Impedir valores inválidos na ordenação
+    if ordenar not in ordenacoes:
+        ordenar = "nome_az"
+
     # Buscar produtos ativos e com estoque
     consulta_produtos = (
         db.query(Produto)
@@ -47,7 +67,7 @@ def tela_pdv(
         )
     )
 
-    # Pesquisar em todos os produtos do banco
+    # Aplicar pesquisa
     busca = busca.strip()
 
     if busca:
@@ -55,7 +75,7 @@ def tela_pdv(
             Produto.nome.ilike(f"%{busca}%")
         )
 
-    # Contar os produtos encontrados
+    # Contar produtos encontrados
     total_produtos = consulta_produtos.count()
 
     total_paginas = max(
@@ -65,10 +85,10 @@ def tela_pdv(
 
     pagina = max(1, min(pagina, total_paginas))
 
-    # Buscar produtos da página atual
+    # Buscar produtos com ordenação e paginação
     produtos = (
         consulta_produtos
-        .order_by(Produto.nome)
+        .order_by(ordenacoes[ordenar], Produto.id.asc())
         .offset((pagina - 1) * PRODUTOS_POR_PAGINA)
         .limit(PRODUTOS_POR_PAGINA)
         .all()
@@ -96,6 +116,7 @@ def tela_pdv(
             "total_produtos": total_produtos,
             "produtos_por_pagina": PRODUTOS_POR_PAGINA,
             "busca": busca,
+            "ordenar": ordenar,
         }
     )
 

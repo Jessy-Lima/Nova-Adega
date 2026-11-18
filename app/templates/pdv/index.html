@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}
@@ -62,23 +63,65 @@ PDV — Nova Adega
 
         <!-- PRODUTOS -->
         <section class="produtos-col">
+
             <div class="produtos-header">
-                <input type="text" id="busca-produto" placeholder="Buscar por nome..." autocomplete="off">
+
+                <input
+                    type="text"
+                    id="busca-produto"
+                    placeholder="Buscar por nome..."
+                    autocomplete="off"
+                >
+
+                <!-- ORDENAÇÃO DOS PRODUTOS -->
+                <div class="pdv-filtro-ordenacao">
+
+                    <label for="ordenar-produtos">
+                        Ordenar por:
+                    </label>
+
+                    <select
+                        id="ordenar-produtos"
+                        aria-label="Ordenar produtos"
+                    >
+                        <option value="padrao">Padrão</option>
+                        <option value="nome-asc">Nome (A–Z)</option>
+                        <option value="nome-desc">Nome (Z–A)</option>
+                        <option value="preco-asc">Menor preço</option>
+                        <option value="preco-desc">Maior preço</option>
+                        <option value="estoque-desc">Maior estoque</option>
+                        <option value="estoque-asc">Menor estoque</option>
+                    </select>
+
+                </div>
+
             </div>
 
             <div class="produtos-grid" id="grade-produtos">
+
                 {% for p in produtos %}
-                <div class="produto-card {% if p.estoque_atual == 0 %}sem-estoque{% endif %}" data-id="{{ p.id }}"
-                    data-nome="{{ p.nome }}" data-preco="{{ p.preco }}" data-estoque="{{ p.estoque_atual }}"
-                    data-nome-lower="{{ p.nome.lower() }}" onclick="adicionarAoCarrinho(this)">
+                <div
+                    class="produto-card {% if p.estoque_atual == 0 %}sem-estoque{% endif %}"
+                    data-id="{{ p.id }}"
+                    data-nome="{{ p.nome }}"
+                    data-preco="{{ p.preco }}"
+                    data-estoque="{{ p.estoque_atual }}"
+                    data-nome-lower="{{ p.nome.lower() }}"
+                    onclick="adicionarAoCarrinho(this)"
+                >
 
                     {% if p.imagem_url %}
                     <img src="{{ p.imagem_url }}" alt="{{ p.nome }}">
                     {% endif %}
 
                     <div class="produto-card-nome">{{ p.nome }}</div>
-                    <div class="produto-card-preco">R$ {{ "%.2f"|format(p.preco) }}</div>
-                    <div class="produto-card-estoque">Estoque: {{ p.estoque_atual }}</div>
+                    <div class="produto-card-preco">
+                        R$ {{ "%.2f"|format(p.preco) }}
+                    </div>
+                    <div class="produto-card-estoque">
+                        Estoque: {{ p.estoque_atual }}
+                    </div>
+
                 </div>
                 {% endfor %}
 
@@ -87,32 +130,39 @@ PDV — Nova Adega
                     Nenhum produto disponível.
                 </div>
                 {% endif %}
+
             </div>
 
             <!-- PAGINAÇÃO -->
             <nav class="paginacao-produtos" aria-label="Paginação dos produtos">
+
                 <span class="paginacao-info">
                     Página {{ pagina }} de {{ total_paginas }}
                     — {{ total_produtos }} produto(s)
                 </span>
 
                 <div class="paginacao-botoes">
+
                     {% if pagina > 1 %}
                     <a class="btn-paginacao" href="/pdv/?pagina={{ pagina - 1 }}">
                         ← Anterior
                     </a>
                     {% endif %}
 
-                    {% if pagina < total_paginas %} <a class="btn-paginacao" href="/pdv/?pagina={{ pagina + 1 }}">
+                    {% if pagina < total_paginas %}
+                    <a class="btn-paginacao" href="/pdv/?pagina={{ pagina + 1 }}">
                         Próxima →
-                        </a>
-                        {% endif %}
+                    </a>
+                    {% endif %}
+
                 </div>
             </nav>
+
         </section>
 
         <!-- CARRINHO -->
         <aside class="carrinho-col">
+
             <div class="carrinho-header">
                 <i data-lucide="shopping-cart"></i>
                 Carrinho
@@ -120,70 +170,123 @@ PDV — Nova Adega
 
             <!-- CLIENTE -->
             <div class="cliente-section">
+
                 <label for="select-cliente">Cliente</label>
-                <select class="cliente-select" id="select-cliente" onchange="atualizarCliente(this)">
+
+                <select
+                    class="cliente-select"
+                    id="select-cliente"
+                    onchange="atualizarCliente(this)"
+                >
 
                     <option value="0" data-associado="false">
                         Sem identificação
                     </option>
 
                     {% for c in clientes %}
-                    <option value="{{ c.id }}" data-associado="{{ 'true' if c.is_associado else 'false' }}">
+                    <option
+                        value="{{ c.id }}"
+                        data-associado="{{ 'true' if c.is_associado else 'false' }}"
+                    >
                         {{ c.nome }}
                         {% if c.is_associado %}
                         — ASSOCIADO
                         {% endif %}
                     </option>
                     {% endfor %}
+
                 </select>
 
-                <div class="desconto-badge" id="badge-desconto" style="display:none">
+                <div
+                    class="desconto-badge"
+                    id="badge-desconto"
+                    style="display:none"
+                >
                     ✓ {{ desconto_associado|default(0)|int }}% de desconto aplicado
                 </div>
+
             </div>
 
             <!-- AVISO DE ESTOQUE BAIXO -->
-            <div id="aviso-estoque-baixo" class="aviso-estoque-baixo" style="display:none" role="status"
-                aria-live="polite">
-            </div>
+            <div
+                id="aviso-estoque-baixo"
+                class="aviso-estoque-baixo"
+                style="display:none"
+                role="status"
+                aria-live="polite"
+            ></div>
 
             <!-- ITENS DO CARRINHO -->
             <div class="carrinho-itens" id="lista-carrinho">
+
                 <div class="carrinho-vazio" id="msg-vazio">
                     <span class="carrinho-vazio-icon">
                         <i data-lucide="shopping-cart"></i>
                     </span>
                     Clique nos produtos para adicionar
                 </div>
+
             </div>
 
             <div class="carrinho-footer">
 
                 <!-- DESCONTO MANUAL -->
-                <div class="desconto-manual" id="desconto-manual" style="display:none">
-                    <div class="desconto-manual-titulo">Desconto manual</div>
+                <div
+                    class="desconto-manual"
+                    id="desconto-manual"
+                    style="display:none"
+                >
+
+                    <div class="desconto-manual-titulo">
+                        Desconto manual
+                    </div>
 
                     <div class="desconto-manual-controles">
-                        <select id="tipo-desconto" onchange="atualizarDescontoManual()">
+
+                        <select
+                            id="tipo-desconto"
+                            onchange="atualizarDescontoManual()"
+                        >
                             <option value="percentual">%</option>
                             <option value="valor">R$</option>
                         </select>
 
-                        <input type="number" id="valor-desconto-manual" min="0" step="0.01" value="0" placeholder="0,00"
-                            oninput="atualizarDescontoManual()">
+                        <input
+                            type="number"
+                            id="valor-desconto-manual"
+                            min="0"
+                            step="0.01"
+                            value="0"
+                            placeholder="0,00"
+                            oninput="atualizarDescontoManual()"
+                        >
+
                     </div>
 
                     <small id="erro-desconto" class="erro-campo"></small>
+
                 </div>
 
                 <!-- PAGAMENTO -->
-                <div class="pagamento-section" id="pagamento-section" style="display:none">
-                    <div class="pagamento-titulo">Forma de pagamento</div>
+                <div
+                    class="pagamento-section"
+                    id="pagamento-section"
+                    style="display:none"
+                >
+
+                    <div class="pagamento-titulo">
+                        Forma de pagamento
+                    </div>
 
                     <!-- PRIMEIRA FORMA -->
                     <div class="pagamento-bloco">
-                        <label for="forma-pagamento-1">1ª forma de pagamento</label>
+
+                        <label for="forma-pagamento-1">
+                            1ª forma de pagamento
+                        </label>
+
                         <div class="pagamento-controles">
+
                             <select id="forma-pagamento-1">
                                 <option value="">Selecione</option>
                                 <option value="dinheiro">Dinheiro</option>
@@ -192,20 +295,43 @@ PDV — Nova Adega
                                 <option value="cartao_debito">Cartão de débito</option>
                             </select>
 
-                            <input type="number" id="valor-pagamento-1" min="0" step="0.01" value="0"
-                                placeholder="0,00">
+                            <input
+                                type="number"
+                                id="valor-pagamento-1"
+                                min="0"
+                                step="0.01"
+                                value="0"
+                                placeholder="0,00"
+                            >
+
                         </div>
+
                     </div>
 
                     <!-- SEGUNDA FORMA -->
                     <label class="segunda-forma-check">
-                        <input type="checkbox" id="usar-segunda-forma">
+
+                        <input
+                            type="checkbox"
+                            id="usar-segunda-forma"
+                        >
+
                         Usar uma segunda forma de pagamento
+
                     </label>
 
-                    <div class="pagamento-bloco" id="segunda-forma-container" style="display:none">
-                        <label for="forma-pagamento-2">2ª forma de pagamento</label>
+                    <div
+                        class="pagamento-bloco"
+                        id="segunda-forma-container"
+                        style="display:none"
+                    >
+
+                        <label for="forma-pagamento-2">
+                            2ª forma de pagamento
+                        </label>
+
                         <div class="pagamento-controles">
+
                             <select id="forma-pagamento-2">
                                 <option value="">Selecione</option>
                                 <option value="dinheiro">Dinheiro</option>
@@ -214,38 +340,57 @@ PDV — Nova Adega
                                 <option value="cartao_debito">Cartão de débito</option>
                             </select>
 
-                            <input type="number" id="valor-pagamento-2" min="0" step="0.01" value="0" placeholder="0,00"
-                                readonly>
+                            <input
+                                type="number"
+                                id="valor-pagamento-2"
+                                min="0"
+                                step="0.01"
+                                value="0"
+                                placeholder="0,00"
+                                readonly
+                            >
+
                         </div>
+
                     </div>
 
                     <!-- RESUMO DO PAGAMENTO -->
                     <div class="pagamento-resumo">
+
                         <div class="pagamento-linha">
                             <span>Total da venda</span>
                             <strong id="pagamento-total">R$ 0,00</strong>
                         </div>
+
                         <div class="pagamento-linha">
                             <span>Valor pago</span>
                             <strong id="pagamento-pago">R$ 0,00</strong>
                         </div>
+
                         <div class="pagamento-linha saldo" id="linha-saldo">
                             <span id="label-saldo">Saldo restante</span>
                             <strong id="pagamento-saldo">R$ 0,00</strong>
                         </div>
+
                     </div>
 
                     <small id="erro-pagamento" class="erro-campo"></small>
+
                 </div>
 
                 <!-- TOTAIS -->
                 <div class="totais" id="totais" style="display:none">
+
                     <div class="total-linha">
                         <span>Subtotal</span>
                         <span id="val-subtotal">R$ 0,00</span>
                     </div>
 
-                    <div class="total-linha desconto" id="linha-desconto" style="display:none">
+                    <div
+                        class="total-linha desconto"
+                        id="linha-desconto"
+                        style="display:none"
+                    >
                         <span id="label-desconto">Desconto</span>
                         <span id="val-desconto">− R$ 0,00</span>
                     </div>
@@ -254,36 +399,94 @@ PDV — Nova Adega
                         <span>Total</span>
                         <span id="val-total">R$ 0,00</span>
                     </div>
+
                 </div>
 
                 <!-- OBSERVAÇÃO -->
-                <textarea class="obs-input" id="obs-input" rows="2" placeholder="Observação (opcional)..."></textarea>
+                <textarea
+                    class="obs-input"
+                    id="obs-input"
+                    rows="2"
+                    placeholder="Observação (opcional)..."
+                ></textarea>
 
                 <!-- FORMULÁRIO -->
                 <form id="form-venda" action="/pdv/finalizar" method="post">
+
                     <input type="hidden" name="carrinho_json" id="input-carrinho">
                     <input type="hidden" name="cliente_id" id="input-cliente-id" value="0">
                     <input type="hidden" name="observacao" id="input-obs">
-                    <input type="hidden" id="config-desconto" value="{{ desconto_associado|default(0) }}">
-                    <input type="hidden" name="desconto_manual" id="input-desconto-manual" value="0">
-                    <input type="hidden" name="tipo_desconto" id="input-tipo-desconto" value="percentual">
-                    <input type="hidden" name="forma_pagamento_1" id="input-forma-pagamento-1">
-                    <input type="hidden" name="valor_pagamento_1" id="input-valor-pagamento-1" value="0">
-                    <input type="hidden" name="forma_pagamento_2" id="input-forma-pagamento-2">
-                    <input type="hidden" name="valor_pagamento_2" id="input-valor-pagamento-2" value="0">
 
-                    <button class="btn-finalizar" id="btn-finalizar" type="button" disabled onclick="finalizarVenda()">
+                    <input
+                        type="hidden"
+                        id="config-desconto"
+                        value="{{ desconto_associado|default(0) }}"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="desconto_manual"
+                        id="input-desconto-manual"
+                        value="0"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="tipo_desconto"
+                        id="input-tipo-desconto"
+                        value="percentual"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="forma_pagamento_1"
+                        id="input-forma-pagamento-1"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="valor_pagamento_1"
+                        id="input-valor-pagamento-1"
+                        value="0"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="forma_pagamento_2"
+                        id="input-forma-pagamento-2"
+                    >
+
+                    <input
+                        type="hidden"
+                        name="valor_pagamento_2"
+                        id="input-valor-pagamento-2"
+                        value="0"
+                    >
+
+                    <button
+                        class="btn-finalizar"
+                        id="btn-finalizar"
+                        type="button"
+                        disabled
+                        onclick="finalizarVenda()"
+                    >
                         Finalizar venda
                     </button>
+
                 </form>
+
             </div>
+
         </aside>
+
     </div>
+
 </main>
 
 {% endblock %}
 
 {% block scripts %}
+
 <script>
     "use strict";
 
@@ -307,9 +510,11 @@ PDV — Nova Adega
     window.descontoInvalido = false;
 
     const elementoDesconto = document.getElementById("config-desconto");
+
     const DESCONTO_PCT = elementoDesconto
         ? Number(elementoDesconto.value) || 0
         : 0;
+
 
     /* =====================================================
        UTILITÁRIOS
@@ -335,12 +540,110 @@ PDV — Nova Adega
         }
     }
 
+
+    /* =====================================================
+       ORDENAÇÃO E BUSCA DOS PRODUTOS
+    ===================================================== */
+
+    const campoBusca = document.getElementById("busca-produto");
+    const seletorOrdenacao = document.getElementById("ordenar-produtos");
+    const gradeProdutos = document.getElementById("grade-produtos");
+
+    // Guarda a ordem original dos produtos.
+    const ordemOriginalProdutos = gradeProdutos
+        ? Array.from(gradeProdutos.querySelectorAll(".produto-card"))
+        : [];
+
+    function aplicarFiltrosProdutos() {
+
+        if (!gradeProdutos) return;
+
+        const termo = campoBusca
+            ? campoBusca.value.toLowerCase().trim()
+            : "";
+
+        const ordenacao = seletorOrdenacao
+            ? seletorOrdenacao.value
+            : "padrao";
+
+        const cards = Array.from(
+            gradeProdutos.querySelectorAll(".produto-card")
+        );
+
+        // Aplica a ordenação escolhida.
+        cards.sort((a, b) => {
+
+            const nomeA = (a.dataset.nome || "").toLocaleLowerCase("pt-BR");
+            const nomeB = (b.dataset.nome || "").toLocaleLowerCase("pt-BR");
+
+            const precoA = Number(a.dataset.preco) || 0;
+            const precoB = Number(b.dataset.preco) || 0;
+
+            const estoqueA = Number(a.dataset.estoque) || 0;
+            const estoqueB = Number(b.dataset.estoque) || 0;
+
+            switch (ordenacao) {
+
+                case "nome-asc":
+                    return nomeA.localeCompare(nomeB, "pt-BR");
+
+                case "nome-desc":
+                    return nomeB.localeCompare(nomeA, "pt-BR");
+
+                case "preco-asc":
+                    return precoA - precoB;
+
+                case "preco-desc":
+                    return precoB - precoA;
+
+                case "estoque-desc":
+                    return estoqueB - estoqueA;
+
+                case "estoque-asc":
+                    return estoqueA - estoqueB;
+
+                case "padrao":
+                default:
+                    return ordemOriginalProdutos.indexOf(a) -
+                        ordemOriginalProdutos.indexOf(b);
+            }
+
+        });
+
+        // Reorganiza os cards sem recriar os elementos.
+        cards.forEach(card => {
+
+            gradeProdutos.appendChild(card);
+
+            const nome = card.dataset.nomeLower || "";
+
+            card.style.display = nome.includes(termo)
+                ? ""
+                : "none";
+
+        });
+
+    }
+
+    // Pesquisa os produtos.
+    if (campoBusca) {
+        campoBusca.addEventListener("input", aplicarFiltrosProdutos);
+    }
+
+    // Ordena os produtos.
+    if (seletorOrdenacao) {
+        seletorOrdenacao.addEventListener("change", aplicarFiltrosProdutos);
+    }
+
+
     /* =====================================================
        AVISO DE ESTOQUE BAIXO
     ===================================================== */
 
     function atualizarAvisoEstoqueBaixo() {
+
         const aviso = document.getElementById("aviso-estoque-baixo");
+
         if (!aviso) return;
 
         const produtosComEstoqueBaixo = carrinho
@@ -351,50 +654,69 @@ PDV — Nova Adega
             .filter(item => item.restante <= 10);
 
         if (produtosComEstoqueBaixo.length === 0) {
+
             aviso.style.display = "none";
             aviso.innerHTML = "";
+
             return;
         }
 
         aviso.innerHTML = `
-        <strong>⚠️ Atenção: estoque baixo!</strong>
-        ${produtosComEstoqueBaixo.map(item => `
-            <span>
-                O produto <strong>${escaparHTML(item.nome)}</strong>
-                possui apenas <strong>${item.restante}</strong>
-                unidade(s) restante(s) no estoque.
-            </span>
-        `).join("")}
-    `;
+            <strong>⚠️ Atenção: estoque baixo!</strong>
+
+            ${produtosComEstoqueBaixo.map(item => `
+                <span>
+                    O produto <strong>${escaparHTML(item.nome)}</strong>
+                    possui apenas <strong>${item.restante}</strong>
+                    unidade(s) restante(s) no estoque.
+                </span>
+            `).join("")}
+        `;
 
         aviso.style.display = "flex";
     }
+
 
     /* =====================================================
        CARRINHO
     ===================================================== */
 
     function adicionarAoCarrinho(card) {
+
         const id = parseInt(card.dataset.id, 10);
         const nome = card.dataset.nome;
         const preco = Number(card.dataset.preco);
         const estoque = parseInt(card.dataset.estoque, 10);
 
-        if (!id || !Number.isFinite(preco) || !Number.isInteger(estoque) || estoque <= 0) {
+        if (
+            !id ||
+            !Number.isFinite(preco) ||
+            !Number.isInteger(estoque) ||
+            estoque <= 0
+        ) {
             alert("Produto sem estoque ou com dados inválidos.");
             return;
         }
 
-        const existente = carrinho.find(item => item.produto_id === id);
+        const existente = carrinho.find(
+            item => item.produto_id === id
+        );
 
         if (existente) {
+
             if (existente.quantidade >= existente.estoque_max) {
-                alert(`Estoque máximo atingido: ${existente.estoque_max} unidade(s).`);
+
+                alert(
+                    `Estoque máximo atingido: ${existente.estoque_max} unidade(s).`
+                );
+
                 return;
             }
 
             existente.quantidade++;
+
         } else {
+
             carrinho.push({
                 produto_id: id,
                 nome: nome,
@@ -402,13 +724,19 @@ PDV — Nova Adega
                 quantidade: 1,
                 estoque_max: estoque
             });
+
         }
 
         renderizarCarrinho();
     }
 
+
     function alterarQtd(produtoId, delta) {
-        const item = carrinho.find(item => item.produto_id === produtoId);
+
+        const item = carrinho.find(
+            item => item.produto_id === produtoId
+        );
+
         if (!item) return;
 
         const novaQuantidade = item.quantidade + delta;
@@ -419,35 +747,51 @@ PDV — Nova Adega
         }
 
         if (novaQuantidade > item.estoque_max) {
-            alert(`Estoque máximo atingido: ${item.estoque_max} unidade(s).`);
+
+            alert(
+                `Estoque máximo atingido: ${item.estoque_max} unidade(s).`
+            );
+
             return;
         }
 
         item.quantidade = novaQuantidade;
+
         renderizarCarrinho();
     }
+
 
     function removerItem(produtoId) {
-        carrinho = carrinho.filter(item => item.produto_id !== produtoId);
+
+        carrinho = carrinho.filter(
+            item => item.produto_id !== produtoId
+        );
+
         renderizarCarrinho();
     }
 
+
     function criarMensagemVazia() {
+
         const div = document.createElement("div");
+
         div.className = "carrinho-vazio";
         div.id = "msg-vazio";
 
         div.innerHTML = `
-        <span class="carrinho-vazio-icon">
-            <i data-lucide="shopping-cart"></i>
-        </span>
-        Clique nos produtos para adicionar
-    `;
+            <span class="carrinho-vazio-icon">
+                <i data-lucide="shopping-cart"></i>
+            </span>
+
+            Clique nos produtos para adicionar
+        `;
 
         return div;
     }
 
+
     function renderizarCarrinho() {
+
         const lista = document.getElementById("lista-carrinho");
         const totais = document.getElementById("totais");
 
@@ -456,19 +800,30 @@ PDV — Nova Adega
         lista.innerHTML = "";
 
         if (carrinho.length === 0) {
+
             lista.appendChild(criarMensagemVazia());
 
-            if (totais) totais.style.display = "none";
+            if (totais) {
+                totais.style.display = "none";
+            }
 
             descontoManual.valor = 0;
 
-            const campoDesconto = document.getElementById("valor-desconto-manual");
-            if (campoDesconto) campoDesconto.value = "0";
+            const campoDesconto = document.getElementById(
+                "valor-desconto-manual"
+            );
+
+            if (campoDesconto) {
+                campoDesconto.value = "0";
+            }
 
             window.descontoInvalido = false;
 
             const erroDesconto = document.getElementById("erro-desconto");
-            if (erroDesconto) erroDesconto.textContent = "";
+
+            if (erroDesconto) {
+                erroDesconto.textContent = "";
+            }
 
             atualizarAvisoEstoqueBaixo();
             renderizarTotais();
@@ -479,86 +834,134 @@ PDV — Nova Adega
         }
 
         carrinho.forEach(item => {
+
             const linha = document.createElement("div");
+
             linha.className = "carrinho-item";
 
             const subtotal = item.preco * item.quantidade;
 
             linha.innerHTML = `
-            <div class="carrinho-item-info">
-                <div class="carrinho-item-nome">${escaparHTML(item.nome)}</div>
-                <div class="carrinho-item-preco">R$ ${formatarNumero(item.preco)}</div>
-            </div>
 
-            <div class="carrinho-item-controles">
-                <button type="button" class="btn-qtd" onclick="alterarQtd(${item.produto_id}, -1)">−</button>
+                <div class="carrinho-item-info">
 
-                <span class="quantidade">${item.quantidade}</span>
+                    <div class="carrinho-item-nome">
+                        ${escaparHTML(item.nome)}
+                    </div>
 
-                <button type="button" class="btn-qtd" onclick="alterarQtd(${item.produto_id}, 1)">+</button>
-            </div>
+                    <div class="carrinho-item-preco">
+                        R$ ${formatarNumero(item.preco)}
+                    </div>
 
-            <div class="carrinho-item-subtotal">
-                R$ ${formatarNumero(subtotal)}
-            </div>
+                </div>
 
-            <button
-            type="button"
-            class="btn-remover"
-            onclick="removerItem(${item.produto_id})"
-            title="Remover produto"
-            aria-label="Remover ${escaparHTML(item.nome)}">
-            <i data-lucide="trash-2"></i>
-            </button>
+                <div class="carrinho-item-controles">
 
-        `;
+                    <button
+                        type="button"
+                        class="btn-qtd"
+                        onclick="alterarQtd(${item.produto_id}, -1)"
+                    >
+                        −
+                    </button>
+
+                    <span class="quantidade">
+                        ${item.quantidade}
+                    </span>
+
+                    <button
+                        type="button"
+                        class="btn-qtd"
+                        onclick="alterarQtd(${item.produto_id}, 1)"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+                <div class="carrinho-item-subtotal">
+                    R$ ${formatarNumero(subtotal)}
+                </div>
+
+                <button
+                    type="button"
+                    class="btn-remover"
+                    onclick="removerItem(${item.produto_id})"
+                    title="Remover produto"
+                    aria-label="Remover ${escaparHTML(item.nome)}"
+                >
+                    <i data-lucide="trash-2"></i>
+                </button>
+
+            `;
 
             lista.appendChild(linha);
+
         });
 
-        if (totais) totais.style.display = "block";
+        if (totais) {
+            totais.style.display = "block";
+        }
 
         atualizarAvisoEstoqueBaixo();
         renderizarTotais();
         atualizarIcones();
     }
 
+
     /* =====================================================
        CLIENTE E DESCONTOS
     ===================================================== */
 
     function atualizarCliente(select) {
+
         const option = select.options[select.selectedIndex];
 
         clienteAtual.id = parseInt(option.value, 10) || 0;
-        clienteAtual.associado = option.dataset.associado === "true";
+
+        clienteAtual.associado =
+            option.dataset.associado === "true";
 
         const badge = document.getElementById("badge-desconto");
 
         if (badge) {
-            badge.style.display = clienteAtual.associado ? "inline-flex" : "none";
+
+            badge.style.display = clienteAtual.associado
+                ? "inline-flex"
+                : "none";
+
         }
 
         renderizarTotais();
     }
 
+
     function calcularSubtotal() {
-        return Number(carrinho.reduce(
-            (total, item) => total + item.preco * item.quantidade,
-            0
-        ).toFixed(2));
+
+        return Number(
+            carrinho.reduce(
+                (total, item) => total + item.preco * item.quantidade,
+                0
+            ).toFixed(2)
+        );
     }
 
+
     function calcularDesconto(subtotal) {
+
         const descontoAssociado = clienteAtual.associado
             ? subtotal * DESCONTO_PCT / 100
             : 0;
 
-        const descontoManualCalculado = descontoManual.tipo === "percentual"
-            ? subtotal * descontoManual.valor / 100
-            : descontoManual.valor;
+        const descontoManualCalculado =
+            descontoManual.tipo === "percentual"
+                ? subtotal * descontoManual.valor / 100
+                : descontoManual.valor;
 
-        const descontoManualPermitido = Math.max(0, subtotal - descontoAssociado);
+        const descontoManualPermitido = Math.max(
+            0,
+            subtotal - descontoAssociado
+        );
 
         const manualLimitado = Math.min(
             descontoManualCalculado,
@@ -566,14 +969,24 @@ PDV — Nova Adega
         );
 
         return {
+
             associado: descontoAssociado,
+
             manual: manualLimitado,
-            total: Math.min(subtotal, descontoAssociado + manualLimitado)
+
+            total: Math.min(
+                subtotal,
+                descontoAssociado + manualLimitado
+            )
+
         };
     }
 
+
     function calcularTotalVenda() {
+
         const subtotal = calcularSubtotal();
+
         const descontos = calcularDesconto(subtotal);
 
         return Number(
@@ -581,9 +994,15 @@ PDV — Nova Adega
         );
     }
 
+
     function atualizarDescontoManual() {
+
         const tipo = document.getElementById("tipo-desconto");
-        const campo = document.getElementById("valor-desconto-manual");
+
+        const campo = document.getElementById(
+            "valor-desconto-manual"
+        );
+
         const erro = document.getElementById("erro-desconto");
 
         if (!tipo || !campo) return;
@@ -592,7 +1011,10 @@ PDV — Nova Adega
             ? "valor"
             : "percentual";
 
-        descontoManual.valor = Math.max(0, Number(campo.value) || 0);
+        descontoManual.valor = Math.max(
+            0,
+            Number(campo.value) || 0
+        );
 
         const subtotal = calcularSubtotal();
 
@@ -600,7 +1022,10 @@ PDV — Nova Adega
             ? subtotal * DESCONTO_PCT / 100
             : 0;
 
-        const limiteManual = Math.max(0, subtotal - descontoAssociado);
+        const limiteManual = Math.max(
+            0,
+            subtotal - descontoAssociado
+        );
 
         let mensagem = "";
 
@@ -608,20 +1033,31 @@ PDV — Nova Adega
             descontoManual.tipo === "percentual" &&
             descontoManual.valor > 100
         ) {
+
             mensagem = "O desconto não pode ser maior que 100%.";
+
         } else if (
             descontoManual.tipo === "valor" &&
             descontoManual.valor > limiteManual + 0.001
         ) {
+
             mensagem = "O desconto não pode ser maior que o subtotal disponível.";
+
         }
 
         window.descontoInvalido = Boolean(mensagem);
 
-        if (erro) erro.textContent = mensagem;
+        if (erro) {
+            erro.textContent = mensagem;
+        }
 
-        const inputManual = document.getElementById("input-desconto-manual");
-        const inputTipo = document.getElementById("input-tipo-desconto");
+        const inputManual = document.getElementById(
+            "input-desconto-manual"
+        );
+
+        const inputTipo = document.getElementById(
+            "input-tipo-desconto"
+        );
 
         const descontos = calcularDesconto(subtotal);
 
@@ -636,11 +1072,13 @@ PDV — Nova Adega
         renderizarTotais();
     }
 
+
     /* =====================================================
        PAGAMENTOS
     ===================================================== */
 
     function atualizarPagamento() {
+
         const forma1 = document.getElementById("forma-pagamento-1");
         const valor1 = document.getElementById("valor-pagamento-1");
 
@@ -649,12 +1087,25 @@ PDV — Nova Adega
 
         const usarSegunda = document.getElementById("usar-segunda-forma");
 
-        const segundaContainer = document.getElementById("segunda-forma-container");
-        const pagamentoSection = document.getElementById("pagamento-section");
+        const segundaContainer = document.getElementById(
+            "segunda-forma-container"
+        );
+
+        const pagamentoSection = document.getElementById(
+            "pagamento-section"
+        );
 
         const erro = document.getElementById("erro-pagamento");
 
-        if (!forma1 || !valor1 || !forma2 || !valor2 || !usarSegunda) return;
+        if (
+            !forma1 ||
+            !valor1 ||
+            !forma2 ||
+            !valor2 ||
+            !usarSegunda
+        ) {
+            return;
+        }
 
         const total = calcularTotalVenda();
 
@@ -664,14 +1115,18 @@ PDV — Nova Adega
         );
 
         if (usarSegunda.checked) {
+
             const restante = Math.max(
                 0,
                 Number((total - primeiroValor).toFixed(2))
             );
 
             valor2.value = restante.toFixed(2);
+
         } else {
+
             valor2.value = "0.00";
+
         }
 
         const valorPagamento1 = Math.max(
@@ -692,16 +1147,26 @@ PDV — Nova Adega
         );
 
         if (pagamentoSection) {
-            pagamentoSection.style.display = total > 0 ? "block" : "none";
+            pagamentoSection.style.display =
+                total > 0 ? "block" : "none";
         }
 
         if (segundaContainer) {
-            segundaContainer.style.display = usarSegunda.checked ? "block" : "none";
+            segundaContainer.style.display =
+                usarSegunda.checked ? "block" : "none";
         }
 
-        const pagamentoTotal = document.getElementById("pagamento-total");
-        const pagamentoPago = document.getElementById("pagamento-pago");
-        const pagamentoSaldo = document.getElementById("pagamento-saldo");
+        const pagamentoTotal = document.getElementById(
+            "pagamento-total"
+        );
+
+        const pagamentoPago = document.getElementById(
+            "pagamento-pago"
+        );
+
+        const pagamentoSaldo = document.getElementById(
+            "pagamento-saldo"
+        );
 
         if (pagamentoTotal) {
             pagamentoTotal.textContent = formatarPagamento(total);
@@ -712,10 +1177,13 @@ PDV — Nova Adega
         }
 
         if (pagamentoSaldo) {
-            pagamentoSaldo.textContent = formatarPagamento(Math.abs(saldo));
+            pagamentoSaldo.textContent = formatarPagamento(
+                Math.abs(saldo)
+            );
         }
 
         const labelSaldo = document.getElementById("label-saldo");
+
         const linhaSaldo = document.getElementById("linha-saldo");
 
         pagamentoValido = false;
@@ -723,26 +1191,42 @@ PDV — Nova Adega
         let mensagem = "";
 
         if (total <= 0) {
+
             mensagem = "Adicione produtos ao carrinho.";
+
         } else if (!forma1.value) {
+
             mensagem = "Selecione a primeira forma de pagamento.";
+
         } else if (valorPagamento1 <= 0) {
+
             mensagem = "Informe um valor válido para a primeira forma de pagamento.";
+
         } else if (usarSegunda.checked && !forma2.value) {
+
             mensagem = "Selecione a segunda forma de pagamento.";
+
         } else if (usarSegunda.checked && valorPagamento2 <= 0) {
+
             mensagem = "O valor da primeira forma deve ser menor que o total da venda.";
+
         } else if (
             usarSegunda.checked &&
             forma1.value === forma2.value
         ) {
+
             mensagem = "Escolha duas formas de pagamento diferentes.";
+
         } else if (Math.abs(saldo) > 0.001) {
+
             mensagem = saldo > 0
                 ? "O valor pago é menor que o total da venda."
                 : "O valor pago é maior que o total da venda.";
+
         } else {
+
             pagamentoValido = true;
+
         }
 
         if (erro) {
@@ -750,14 +1234,17 @@ PDV — Nova Adega
         }
 
         if (labelSaldo) {
+
             labelSaldo.textContent = saldo < -0.001
                 ? "Valor excedente"
                 : saldo > 0.001
                     ? "Saldo restante"
                     : "Pagamento";
+
         }
 
         if (linhaSaldo) {
+
             linhaSaldo.classList.toggle(
                 "pagamento-invalido",
                 !pagamentoValido
@@ -767,12 +1254,15 @@ PDV — Nova Adega
                 "pagamento-ok",
                 pagamentoValido
             );
+
         }
 
         atualizarEstadoBotao();
     }
 
+
     function atualizarEstadoBotao() {
+
         const botao = document.getElementById("btn-finalizar");
 
         if (!botao) return;
@@ -783,12 +1273,15 @@ PDV — Nova Adega
             pagamentoValido !== true;
     }
 
+
     /* =====================================================
        TOTAIS
     ===================================================== */
 
     function renderizarTotais() {
+
         const subtotal = calcularSubtotal();
+
         const descontos = calcularDesconto(subtotal);
 
         const total = Math.max(
@@ -797,7 +1290,9 @@ PDV — Nova Adega
         );
 
         const valSubtotal = document.getElementById("val-subtotal");
+
         const valDesconto = document.getElementById("val-desconto");
+
         const valTotal = document.getElementById("val-total");
 
         if (valSubtotal) {
@@ -805,92 +1300,100 @@ PDV — Nova Adega
         }
 
         if (valDesconto) {
-            valDesconto.textContent = "− " + formatarPagamento(descontos.total);
+            valDesconto.textContent =
+                "− " + formatarPagamento(descontos.total);
         }
 
         if (valTotal) {
             valTotal.textContent = formatarPagamento(total);
         }
 
-        const linhaDesconto = document.getElementById("linha-desconto");
-        const labelDesconto = document.getElementById("label-desconto");
-        const campoManual = document.getElementById("desconto-manual");
+        const linhaDesconto = document.getElementById(
+            "linha-desconto"
+        );
+
+        const labelDesconto = document.getElementById(
+            "label-desconto"
+        );
+
+        const campoManual = document.getElementById(
+            "desconto-manual"
+        );
 
         if (linhaDesconto) {
-            linhaDesconto.style.display = descontos.total > 0 ? "flex" : "none";
+
+            linhaDesconto.style.display =
+                descontos.total > 0 ? "flex" : "none";
+
         }
 
         if (labelDesconto) {
+
             labelDesconto.textContent =
                 descontos.associado > 0 && descontos.manual > 0
                     ? "Desconto (associado + manual)"
                     : descontos.manual > 0
                         ? "Desconto manual"
                         : `Desconto (${DESCONTO_PCT}%)`;
+
         }
 
         if (campoManual) {
-            campoManual.style.display = subtotal > 0 ? "block" : "none";
+            campoManual.style.display =
+                subtotal > 0 ? "block" : "none";
         }
 
         atualizarPagamento();
     }
 
-    /* =====================================================
-       BUSCA DE PRODUTOS
-    ===================================================== */
-
-    const campoBusca = document.getElementById("busca-produto");
-
-    if (campoBusca) {
-        campoBusca.addEventListener("input", function () {
-            const termo = this.value.toLowerCase().trim();
-
-            document.querySelectorAll(".produto-card").forEach(card => {
-                const nome = card.dataset.nomeLower || "";
-
-                card.style.display = nome.includes(termo) ? "" : "none";
-            });
-        });
-    }
 
     /* =====================================================
        FINALIZAR VENDA
     ===================================================== */
 
     function finalizarVenda() {
+
         atualizarPagamento();
 
         if (carrinho.length === 0) {
+
             alert("Adicione pelo menos um produto ao carrinho.");
+
             return;
         }
 
         if (window.descontoInvalido) {
+
             alert("Corrija o desconto antes de finalizar a venda.");
+
             return;
         }
 
         if (!pagamentoValido) {
+
             alert("Confira as formas e os valores de pagamento.");
+
             return;
         }
 
         const formulario = document.getElementById("form-venda");
 
-        document.getElementById("input-carrinho").value = JSON.stringify(
-            carrinho.map(item => ({
-                produto_id: item.produto_id,
-                quantidade: item.quantidade
-            }))
-        );
+        document.getElementById("input-carrinho").value =
+            JSON.stringify(
+                carrinho.map(item => ({
+                    produto_id: item.produto_id,
+                    quantidade: item.quantidade
+                }))
+            );
 
-        document.getElementById("input-cliente-id").value = clienteAtual.id;
+        document.getElementById("input-cliente-id").value =
+            clienteAtual.id;
 
         document.getElementById("input-obs").value =
             document.getElementById("obs-input").value.trim();
 
         const subtotal = calcularSubtotal();
+
         const descontos = calcularDesconto(subtotal);
 
         document.getElementById("input-desconto-manual").value =
@@ -925,79 +1428,121 @@ PDV — Nova Adega
         formulario.submit();
     }
 
+
     /* =====================================================
        EVENTOS E INICIALIZAÇÃO
     ===================================================== */
 
     const forma1 = document.getElementById("forma-pagamento-1");
+
     const valor1 = document.getElementById("valor-pagamento-1");
 
     const forma2 = document.getElementById("forma-pagamento-2");
+
     const valor2 = document.getElementById("valor-pagamento-2");
 
     const usarSegunda = document.getElementById("usar-segunda-forma");
 
+
     // Ao selecionar a primeira forma, preenche o valor total inicialmente.
     if (forma1) {
+
         forma1.addEventListener("change", function () {
+
             if (this.value) {
+
                 valor1.value = calcularTotalVenda().toFixed(2);
+
             } else {
+
                 valor1.value = "0";
+
             }
 
             atualizarPagamento();
+
         });
+
     }
+
 
     // Permite editar o valor da primeira forma de pagamento.
     if (valor1) {
+
         valor1.addEventListener("input", atualizarPagamento);
+
     }
+
 
     // Recalcula a segunda forma quando ela é escolhida.
     if (forma2) {
+
         forma2.addEventListener("change", atualizarPagamento);
+
     }
 
+
     if (usarSegunda) {
+
         usarSegunda.addEventListener("change", function () {
 
             if (!this.checked) {
+
                 if (forma2) forma2.value = "";
+
                 if (valor2) valor2.value = "0.00";
 
                 if (forma1 && forma1.value && valor1) {
+
                     valor1.value = calcularTotalVenda().toFixed(2);
+
                 }
 
             } else if (valor1 && Number(valor1.value) <= 0) {
+
                 valor1.value = calcularTotalVenda().toFixed(2);
+
             }
 
             atualizarPagamento();
+
         });
+
     }
 
+
+    // Inicializa o cliente selecionado.
     const selectCliente = document.getElementById("select-cliente");
 
     if (selectCliente) {
-        const option = selectCliente.options[selectCliente.selectedIndex];
+
+        const option = selectCliente.options[
+            selectCliente.selectedIndex
+        ];
 
         clienteAtual.id = parseInt(option.value, 10) || 0;
-        clienteAtual.associado = option.dataset.associado === "true";
+
+        clienteAtual.associado =
+            option.dataset.associado === "true";
 
         const badge = document.getElementById("badge-desconto");
 
         if (badge) {
+
             badge.style.display = clienteAtual.associado
                 ? "inline-flex"
                 : "none";
+
         }
+
     }
 
+
+    // Inicialização da tela.
+    aplicarFiltrosProdutos();
     renderizarCarrinho();
     atualizarIcones();
 
 </script>
+
 {% endblock %}

@@ -96,6 +96,7 @@
     padding: 20px;
     border-bottom: 1px solid #333333;
     position: relative;
+    gap: 15px;
 }
 
 
@@ -2034,4 +2035,217 @@ html[data-tema="claro"] .busca-rapida-dica {
 .btn-remover:hover {
     background: rgba(253, 230, 138, 0.12);
     color: #ffffff;
+}
+
+
+/* =====================================================
+   FILTRO DE ORDENAÇÃO — PDV
+===================================================== */
+
+.pdv-filtro {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.pdv-filtro label {
+    color: #d6d3d1;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.pdv-filtro select {
+    min-width: 175px;
+    padding: 10px 35px 10px 12px;
+
+    background-color: #171717;
+    color: #f9fafb;
+
+    border: 1px solid rgba(253, 230, 138, 0.2);
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-family: inherit;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pdv-filtro select:hover {
+    border-color: rgba(253, 230, 138, 0.55);
+}
+
+.pdv-filtro select:focus {
+    border-color: #fde68a;
+    box-shadow: 0 0 0 2px rgba(253, 230, 138, 0.12);
+}
+
+.pdv-filtro select option {
+    background-color: #1e1e1e;
+    color: #f9fafb;
+}
+
+/* MODO CLARO */
+
+html[data-tema="claro"] .pdv-filtro label {
+    color: #777777;
+}
+
+html[data-tema="claro"] .pdv-filtro select {
+    background-color: #FFFFFF;
+    color: #252525;
+    border-color: #D8D8D0;
+}
+
+html[data-tema="claro"] .pdv-filtro select option {
+    background-color: #FFFFFF;
+    color: #252525;
+}
+
+html[data-tema="claro"] .pdv-filtro select:hover,
+html[data-tema="claro"] .pdv-filtro select:focus {
+    border-color: #8A6100;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 600px) {
+    .pdv-filtro {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .pdv-filtro select {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+/* =====================================================
+   FILTRO DE ORDENAÇÃO — PDV
+   Mesmo estilo do histórico de vendas
+===================================================== */
+
+.pdv-filtro-ordenacao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.pdv-filtro-ordenacao label {
+    color: #d6d3d1;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.pdv-filtro-ordenacao select {
+    min-width: 145px;
+    padding: 9px 30px 9px 12px;
+
+    background-color: #171717;
+    color: #f9fafb;
+
+    border: 1px solid rgba(253, 230, 138, 0.2);
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-family: inherit;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pdv-filtro-ordenacao select:hover {
+    border-color: rgba(253, 230, 138, 0.55);
+}
+
+.pdv-filtro-ordenacao select:focus {
+    border-color: #fde68a;
+    box-shadow: 0 0 0 2px rgba(253, 230, 138, 0.12);
+}
+
+.pdv-filtro-ordenacao select option {
+    background-color: #1e1e1e;
+    color: #f9fafb;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 600px) {
+    .pdv-filtro-ordenacao {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .pdv-filtro-ordenacao select {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+/* =====================================================
+   FILTRO DE ORDENAÇÃO — PDV
+===================================================== */
+
+.pdv-filtro-ordenacao {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.pdv-filtro-ordenacao label {
+    color: #d6d3d1;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.pdv-filtro-ordenacao select {
+    min-width: 145px;
+    padding: 9px 30px 9px 12px;
+    background-color: #171717;
+    color: #f9fafb;
+    border: 1px solid rgba(253, 230, 138, 0.2);
+    border-radius: 7px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pdv-filtro-ordenacao select:hover {
+    border-color: rgba(253, 230, 138, 0.55);
+}
+
+.pdv-filtro-ordenacao select:focus {
+    border-color: #fde68a;
+    box-shadow: 0 0 0 2px rgba(253, 230, 138, 0.12);
+}
+
+.pdv-filtro-ordenacao select option {
+    background-color: #1e1e1e;
+    color: #f9fafb;
+}
+
+@media (max-width: 600px) {
+    .pdv-filtro-ordenacao {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .pdv-filtro-ordenacao select {
+        flex: 1;
+        min-width: 0;
+    }
 }
