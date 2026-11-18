@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}
@@ -5,7 +6,7 @@ Produtos — Nova Adega
 {% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="/static/CSS/produtos.css">
+<link rel="stylesheet" href="/static/CSS/produtos.css?v=4">
 {% endblock %}
 
 {% block content %}
@@ -17,17 +18,17 @@ Produtos — Nova Adega
         <div>
             <h1>
                 {% if categoria_selecionada %}
-                {{ categoria_selecionada }}
+                    {{ categoria_selecionada }}
                 {% else %}
-                Produtos
+                    Produtos
                 {% endif %}
             </h1>
 
             <p>
                 {% if categoria_selecionada %}
-                Produtos disponíveis nesta categoria.
+                    Produtos disponíveis nesta categoria.
                 {% else %}
-                Gerencie os produtos disponíveis no sistema.
+                    Gerencie os produtos disponíveis no sistema.
                 {% endif %}
             </p>
         </div>
@@ -57,29 +58,73 @@ Produtos — Nova Adega
 
         <!-- BUSCA -->
         <div class="campo">
-            <label for="busca">
-                Buscar produto
-            </label>
+            <label for="busca">Buscar produto</label>
 
-            <input type="text" id="busca" name="busca" placeholder="Buscar por nome..." value="{{ busca }}">
+            <input
+                type="text"
+                id="busca"
+                name="busca"
+                placeholder="Buscar por nome..."
+                value="{{ busca }}"
+            >
         </div>
 
         <!-- CATEGORIA -->
         <div class="campo">
-            <label for="categoria_id">
-                Categoria
-            </label>
+            <label for="categoria_id">Categoria</label>
 
             <select name="categoria_id" id="categoria_id">
-                <option value="0">
-                    Todas as categorias
-                </option>
+                <option value="0">Todas as categorias</option>
 
                 {% for c in categorias %}
-                <option value="{{ c.id }}" {{ 'selected' if categoria_id==c.id else '' }}>
+                <option
+                    value="{{ c.id }}"
+                    {{ 'selected' if categoria_id|int == c.id else '' }}
+                >
                     {{ c.nome }}
                 </option>
                 {% endfor %}
+            </select>
+        </div>
+
+        <!-- ORDENAÇÃO AUTOMÁTICA -->
+        <div class="campo campo-ordenacao">
+            <label for="ordenacao">Ordenar por</label>
+
+            <select
+                name="ordenacao"
+                id="ordenacao"
+                onchange="this.form.submit()"
+            >
+                <option value="nome_asc"
+                    {{ 'selected' if ordenacao == 'nome_asc' else '' }}>
+                    Nome (A–Z)
+                </option>
+
+                <option value="nome_desc"
+                    {{ 'selected' if ordenacao == 'nome_desc' else '' }}>
+                    Nome (Z–A)
+                </option>
+
+                <option value="preco_asc"
+                    {{ 'selected' if ordenacao == 'preco_asc' else '' }}>
+                    Menor preço
+                </option>
+
+                <option value="preco_desc"
+                    {{ 'selected' if ordenacao == 'preco_desc' else '' }}>
+                    Maior preço
+                </option>
+
+                <option value="estoque_asc"
+                    {{ 'selected' if ordenacao == 'estoque_asc' else '' }}>
+                    Menor estoque
+                </option>
+
+                <option value="estoque_desc"
+                    {{ 'selected' if ordenacao == 'estoque_desc' else '' }}>
+                    Maior estoque
+                </option>
             </select>
         </div>
 
@@ -89,7 +134,7 @@ Produtos — Nova Adega
                 Filtrar
             </button>
 
-            {% if busca or categoria_id %}
+            {% if busca or categoria_id|int != 0 or ordenacao != 'nome_asc' %}
             <a href="/produtos/" class="btn-limpar">
                 Limpar
             </a>
@@ -100,8 +145,8 @@ Produtos — Nova Adega
 
     <!-- TABELA -->
     <div class="tabela-container">
-        <table>
 
+        <table>
             <thead>
                 <tr>
                     <th>Imagem</th>
@@ -120,12 +165,19 @@ Produtos — Nova Adega
 
                     <!-- IMAGEM -->
                     <td>
-                        <img src="{{ p.imagem_url }}" alt="{{ p.nome }}" class="produto-imagem">
+                        <img
+                            src="{{ p.imagem_url }}"
+                            alt="{{ p.nome }}"
+                            class="produto-imagem"
+                        >
                     </td>
 
                     <!-- NOME -->
                     <td>
-                        <a href="/produtos/{{ p.id }}" class="link-produto">
+                        <a
+                            href="/produtos/{{ p.id }}"
+                            class="link-produto"
+                        >
                             {{ p.nome }}
                         </a>
                     </td>
@@ -137,8 +189,7 @@ Produtos — Nova Adega
 
                     <!-- PREÇO -->
                     <td class="produto-preco">
-                        R$
-                        {{ "%.2f"|format(p.preco) }}
+                        R$ {{ "%.2f"|format(p.preco) }}
                     </td>
 
                     <!-- ESTOQUE -->
@@ -153,21 +204,29 @@ Produtos — Nova Adega
 
                         {% if usuario.role == 'admin' %}
 
-                        <a href="/produtos/{{ p.id }}/editar" class="btn-editar">
+                        <a
+                            href="/produtos/{{ p.id }}/editar"
+                            class="btn-editar"
+                        >
                             Editar
                         </a>
 
-                        <form action="/produtos/{{ p.id }}/desativar" method="post" class="form-desativar"
-                            onsubmit="return confirm('Desativar {{ p.nome }}?')">
-
-                            <button type="submit" class="btn-desativar">
+                        <form
+                            action="/produtos/{{ p.id }}/desativar"
+                            method="post"
+                            class="form-desativar"
+                            onsubmit="return confirm('Desativar {{ p.nome }}?')"
+                        >
+                            <button
+                                type="submit"
+                                class="btn-desativar"
+                            >
                                 Desativar
                             </button>
-
                         </form>
 
                         {% else %}
-                        —
+                            —
                         {% endif %}
 
                     </td>
@@ -185,43 +244,44 @@ Produtos — Nova Adega
                 {% endif %}
 
             </tbody>
-
         </table>
+
     </div>
 
     <!-- PAGINAÇÃO -->
     {% if total_paginas > 1 %}
+
     <div class="paginacao">
 
         <div class="info-paginacao">
-            <p>
-                {{ total_produtos }} produtos encontrados
-            </p>
-
-            <p>
-                Página {{ pagina }} de {{ total_paginas }}
-            </p>
+            <p>{{ total_produtos }} produtos encontrados</p>
+            <p>Página {{ pagina }} de {{ total_paginas }}</p>
         </div>
 
         <div class="botoes-paginacao">
 
             {% if pagina > 1 %}
-            <a href="/produtos/?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}&busca={{ busca }}&categoria_id={{ categoria_id }}"
-                class="btn-pagina">
+            <a
+                href="/produtos/?pagina={{ pagina - 1 }}&amp;por_pagina={{ por_pagina }}&amp;busca={{ busca|urlencode }}&amp;categoria_id={{ categoria_id }}&amp;ordenacao={{ ordenacao }}"
+                class="btn-pagina"
+            >
                 ← Anterior
             </a>
             {% endif %}
 
-            {% if pagina < total_paginas %} <a
-                href="/produtos/?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}&busca={{ busca }}&categoria_id={{ categoria_id }}"
-                class="btn-pagina">
+            {% if pagina < total_paginas %}
+            <a
+                href="/produtos/?pagina={{ pagina + 1 }}&amp;por_pagina={{ por_pagina }}&amp;busca={{ busca|urlencode }}&amp;categoria_id={{ categoria_id }}&amp;ordenacao={{ ordenacao }}"
+                class="btn-pagina"
+            >
                 Próxima →
-                </a>
-                {% endif %}
+            </a>
+            {% endif %}
 
         </div>
 
     </div>
+
     {% endif %}
 
 </main>
