@@ -19,22 +19,50 @@ templates = Jinja2Templates(directory="app/templates")
 # LISTAGEM
 # ============================================================
 
+# ============================================================
+# LISTAGEM
+# ============================================================
+
 @router.get("/")
 def listar_usuarios(
     request: Request,
     db: Session = Depends(get_db),
-    admin = Depends(get_admin)  # bloqueia quem não é admin
+    admin = Depends(get_admin)
 ):
-    """Lista todos os usuários cadastrados no sistema."""
-    usuarios = db.query(Usuario).order_by(Usuario.nome).all()
+    """Lista todos os usuários com opção de ordenação."""
+
+    # Opção selecionada no filtro
+    ordenar = request.query_params.get("ordenar", "nome_asc")
+
+    # Opções permitidas de ordenação
+    ordenacoes = {
+        "nome_asc": Usuario.nome.asc(),
+        "nome_desc": Usuario.nome.desc(),
+
+        "email_asc": Usuario.email.asc(),
+        "email_desc": Usuario.email.desc(),
+
+        "perfil": Usuario.role.asc(),
+
+        "ativos": Usuario.ativo.desc(),
+        "inativos": Usuario.ativo.asc(),
+
+        "recentes": Usuario.criando_em.desc()
+    }
+
+    # Aplica a ordenação escolhida
+    criterio = ordenacoes.get(ordenar, Usuario.nome.asc())
+
+    usuarios = db.query(Usuario).order_by(criterio).all()
 
     return templates.TemplateResponse(
         request,
         "usuarios/index.html",
         {
             "request": request,
-            "usuario": admin,   # dados de quem está logado (para navbar)
-            "usuarios": usuarios  # lista para exibir na tabela
+            "usuario": admin,
+            "usuarios": usuarios,
+            "ordenar": ordenar
         }
     )
 

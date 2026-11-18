@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}
@@ -5,7 +6,7 @@ Usuários — Nova Adega
 {% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="/static/CSS/usuarios.css?v=2">
+<link rel="stylesheet" href="/static/CSS/usuarios.css?v=3">
 {% endblock %}
 
 {% block content %}
@@ -50,6 +51,71 @@ Usuários — Nova Adega
         Você não pode desativar sua própria conta.
     </div>
     {% endif %}
+
+    <!-- FILTRO DE ORDENAÇÃO -->
+    <div class="usuarios-controles">
+
+        <form
+            method="GET"
+            action="/usuarios/"
+            class="usuarios-filtro"
+        >
+
+            <label for="ordenar">
+                Ordenar por:
+            </label>
+
+            <select
+                name="ordenar"
+                id="ordenar"
+                onchange="this.form.submit()"
+            >
+
+                <option value="nome_asc"
+                    {% if ordenar == 'nome_asc' %}selected{% endif %}>
+                    Nome A–Z
+                </option>
+
+                <option value="nome_desc"
+                    {% if ordenar == 'nome_desc' %}selected{% endif %}>
+                    Nome Z–A
+                </option>
+
+                <option value="email_asc"
+                    {% if ordenar == 'email_asc' %}selected{% endif %}>
+                    E-mail A–Z
+                </option>
+
+                <option value="email_desc"
+                    {% if ordenar == 'email_desc' %}selected{% endif %}>
+                    E-mail Z–A
+                </option>
+
+                <option value="perfil"
+                    {% if ordenar == 'perfil' %}selected{% endif %}>
+                    Perfil
+                </option>
+
+                <option value="ativos"
+                    {% if ordenar == 'ativos' %}selected{% endif %}>
+                    Usuários ativos
+                </option>
+
+                <option value="inativos"
+                    {% if ordenar == 'inativos' %}selected{% endif %}>
+                    Usuários inativos
+                </option>
+
+                <option value="recentes"
+                    {% if ordenar == 'recentes' %}selected{% endif %}>
+                    Mais recentes
+                </option>
+
+            </select>
+
+        </form>
+
+    </div>
 
     <!-- TABELA -->
     <div class="tabela-container">
