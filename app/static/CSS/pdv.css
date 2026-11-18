@@ -1841,6 +1841,8 @@ html[data-tema="claro"] .aviso-estoque-baixo span strong {
         padding: 8px;
     }
 }
+<<<<<<< HEAD
+=======
 
 
 /* =========================================
@@ -2010,3 +2012,4 @@ html[data-tema="claro"] .busca-rapida-dica {
 .btn-fechar-busca {
     flex-shrink: 0;
 }
+>>>>>>> 942f34dae9226429aec6a1f90f8fe449599582ee

@@ -23,7 +23,7 @@ router = APIRouter(prefix="/pdv", tags=["PDV"])
 templates = Jinja2Templates(directory="app/templates")
 
 DESCONTO_ASSOCIADO = 10.0
-PRODUTOS_POR_PAGINA = 8
+PRODUTOS_POR_PAGINA = 14
 
 
 # ============================================================
