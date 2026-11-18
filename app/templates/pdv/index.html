@@ -144,13 +144,18 @@ PDV — Nova Adega
                 <div class="paginacao-botoes">
 
                     {% if pagina > 1 %}
-                    <a class="btn-paginacao" href="/pdv/?pagina={{ pagina - 1 }}">
+                    <a class="btn-paginacao" href="/pdv/?pagina={{ pagina - 1 }}&busca={{ busca }}">
                         ← Anterior
                     </a>
                     {% endif %}
 
+
                     {% if pagina < total_paginas %}
                     <a class="btn-paginacao" href="/pdv/?pagina={{ pagina + 1 }}">
+
+                    {% if pagina < total_paginas %} <a class="btn-paginacao"
+                        href="/pdv/?pagina={{ pagina + 1 }}&busca={{ busca }}">
+
                         Próxima →
                     </a>
                     {% endif %}
@@ -496,6 +501,36 @@ PDV — Nova Adega
 
     let carrinho = [];
 
+    const CHAVE_CARRINHO = "nova_adega_carrinho";
+
+    function salvarCarrinho() {
+        sessionStorage.setItem(
+            CHAVE_CARRINHO,
+            JSON.stringify(carrinho)
+        );
+    }
+
+    function carregarCarrinho() {
+        try {
+            const dados = sessionStorage.getItem(CHAVE_CARRINHO);
+
+            if (!dados) {
+                carrinho = [];
+                return;
+            }
+
+            const carrinhoSalvo = JSON.parse(dados);
+
+            carrinho = Array.isArray(carrinhoSalvo)
+                ? carrinhoSalvo
+                : [];
+
+        } catch (erro) {
+            console.error("Erro ao carregar carrinho:", erro);
+            carrinho = [];
+        }
+    }
+
     let clienteAtual = {
         id: 0,
         associado: false
@@ -727,6 +762,7 @@ PDV — Nova Adega
 
         }
 
+        salvarCarrinho();
         renderizarCarrinho();
     }
 
@@ -757,15 +793,21 @@ PDV — Nova Adega
 
         item.quantidade = novaQuantidade;
 
+        salvarCarrinho();
+
         renderizarCarrinho();
     }
 
 
     function removerItem(produtoId) {
 
+
         carrinho = carrinho.filter(
             item => item.produto_id !== produtoId
         );
+
+        carrinho = carrinho.filter(item => item.produto_id !== produtoId);
+        salvarCarrinho();
 
         renderizarCarrinho();
     }
@@ -1537,9 +1579,11 @@ PDV — Nova Adega
 
     }
 
-
     // Inicialização da tela.
     aplicarFiltrosProdutos();
+
+    carregarCarrinho();
+
     renderizarCarrinho();
     atualizarIcones();
 
