@@ -28,7 +28,7 @@ def listar_categorias(
     request: Request,
     busca: str = "",
     pagina: int = 1,
-    por_pagina: int = 5,
+    por_pagina: int = 14,
     db: Session = Depends(get_db),
     usuario=Depends(get_usuario_logado)
 ):
