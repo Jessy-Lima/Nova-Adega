@@ -19,31 +19,31 @@ PDV — Nova Adega
     {% if erro %}
     <div class="alerta">
         {% if erro == 'vazio' %}
-        Carrinho vazio. Adicione produtos antes de finalizar.
+            Carrinho vazio. Adicione produtos antes de finalizar.
         {% elif erro == 'estoque' %}
-        Estoque insuficiente para o produto selecionado.
+            Estoque insuficiente para o produto selecionado.
         {% elif erro == 'quantidade' %}
-        Quantidade inválida.
+            Quantidade inválida.
         {% elif erro == 'json' %}
-        Não foi possível processar os produtos da venda.
+            Não foi possível processar os produtos da venda.
         {% elif erro == 'produto_inexistente' %}
-        O produto selecionado não existe mais.
+            O produto selecionado não existe mais.
         {% elif erro == 'valor_pagamento' %}
-        A soma dos pagamentos precisa ser igual ao total líquido da venda.
+            A soma dos pagamentos precisa ser igual ao total líquido da venda.
         {% elif erro == 'pagamento' %}
-        Confira os valores informados para o pagamento.
+            Confira os valores informados para o pagamento.
         {% elif erro == 'pagamento_1' %}
-        Selecione a primeira forma de pagamento e informe um valor válido.
+            Selecione a primeira forma de pagamento e informe um valor válido.
         {% elif erro == 'pagamento_2' %}
-        Confira a segunda forma de pagamento e seu valor.
+            Confira a segunda forma de pagamento e seu valor.
         {% elif erro == 'desconto' %}
-        O desconto informado é inválido.
+            O desconto informado é inválido.
         {% elif erro == 'desconto_maior' %}
-        O desconto não pode ser maior que o valor permitido.
+            O desconto não pode ser maior que o valor permitido.
         {% elif erro == 'salvar' %}
-        Não foi possível salvar a venda. Confira o terminal do servidor.
+            Não foi possível salvar a venda. Confira o terminal do servidor.
         {% else %}
-        Ocorreu um erro. Tente novamente.
+            Ocorreu um erro. Tente novamente.
         {% endif %}
     </div>
     {% endif %}
@@ -65,36 +65,26 @@ PDV — Nova Adega
         <section class="produtos-col">
 
             <div class="produtos-header">
-
                 <input
                     type="text"
                     id="busca-produto"
                     placeholder="Buscar por nome..."
                     autocomplete="off"
+                    value="{{ busca }}"
                 >
 
-                <!-- ORDENAÇÃO DOS PRODUTOS -->
                 <div class="pdv-filtro-ordenacao">
+                    <label for="ordenar-produtos">Ordenar por:</label>
 
-                    <label for="ordenar-produtos">
-                        Ordenar por:
-                    </label>
-
-                    <select
-                        id="ordenar-produtos"
-                        aria-label="Ordenar produtos"
-                    >
-                        <option value="padrao">Padrão</option>
-                        <option value="nome-asc">Nome (A–Z)</option>
-                        <option value="nome-desc">Nome (Z–A)</option>
-                        <option value="preco-asc">Menor preço</option>
-                        <option value="preco-desc">Maior preço</option>
-                        <option value="estoque-desc">Maior estoque</option>
-                        <option value="estoque-asc">Menor estoque</option>
+                    <select id="ordenar-produtos" aria-label="Ordenar produtos">
+                        <option value="nome_az" {% if ordenar == 'nome_az' %}selected{% endif %}>Nome (A–Z)</option>
+                        <option value="nome_za" {% if ordenar == 'nome_za' %}selected{% endif %}>Nome (Z–A)</option>
+                        <option value="menor_preco" {% if ordenar == 'menor_preco' %}selected{% endif %}>Menor preço</option>
+                        <option value="maior_preco" {% if ordenar == 'maior_preco' %}selected{% endif %}>Maior preço</option>
+                        <option value="maior_estoque" {% if ordenar == 'maior_estoque' %}selected{% endif %}>Maior estoque</option>
+                        <option value="menor_estoque" {% if ordenar == 'menor_estoque' %}selected{% endif %}>Menor estoque</option>
                     </select>
-
                 </div>
-
             </div>
 
             <div class="produtos-grid" id="grade-produtos">
@@ -106,60 +96,63 @@ PDV — Nova Adega
                     data-nome="{{ p.nome }}"
                     data-preco="{{ p.preco }}"
                     data-estoque="{{ p.estoque_atual }}"
-                    data-nome-lower="{{ p.nome.lower() }}"
                     onclick="adicionarAoCarrinho(this)"
                 >
-
                     {% if p.imagem_url %}
                     <img src="{{ p.imagem_url }}" alt="{{ p.nome }}">
                     {% endif %}
 
                     <div class="produto-card-nome">{{ p.nome }}</div>
+
                     <div class="produto-card-preco">
                         R$ {{ "%.2f"|format(p.preco) }}
                     </div>
+
                     <div class="produto-card-estoque">
                         Estoque: {{ p.estoque_atual }}
                     </div>
-
                 </div>
                 {% endfor %}
 
                 {% if not produtos %}
                 <div class="sem-produtos">
-                    Nenhum produto disponível.
+                    {% if busca %}
+                        Nenhum produto encontrado para "{{ busca }}".
+                    {% else %}
+                        Nenhum produto disponível.
+                    {% endif %}
                 </div>
                 {% endif %}
 
             </div>
 
-        <!-- PAGINAÇÃO -->
-<nav class="paginacao-produtos" aria-label="Paginação dos produtos">
+            <!-- PAGINAÇÃO -->
+            <nav class="paginacao-produtos" aria-label="Paginação dos produtos">
+                <span class="paginacao-info">
+                    Página {{ pagina }} de {{ total_paginas }}
+                    — {{ total_produtos }} produto(s)
+                </span>
 
-    <span class="paginacao-info">
-        Página {{ pagina }} de {{ total_paginas }}
-        — {{ total_produtos }} produto(s)
-    </span>
+                <div class="paginacao-botoes">
+                    {% if pagina > 1 %}
+                    <a
+                        class="btn-paginacao"
+                        href="/pdv/?pagina={{ pagina - 1 }}&busca={{ busca|urlencode }}&ordenar={{ ordenar }}"
+                    >
+                        ← Anterior
+                    </a>
+                    {% endif %}
 
-    <div class="paginacao-botoes">
-
-        {% if pagina > 1 %}
-        <a class="btn-paginacao"
-           href="/pdv/?pagina={{ pagina - 1 }}&busca={{ busca }}">
-            ← Anterior
-        </a>
-        {% endif %}
-
-        {% if pagina < total_paginas %}
-        <a class="btn-paginacao"
-           href="/pdv/?pagina={{ pagina + 1 }}&busca={{ busca }}">
-            Próxima →
-        </a>
-        {% endif %}
-
-    </div>
-
-</nav>
+                    {% if pagina < total_paginas %}
+                    <a
+                        class="btn-paginacao"
+                        href="/pdv/?pagina={{ pagina + 1 }}&busca={{ busca|urlencode }}&ordenar={{ ordenar }}"
+                    >
+                        Próxima →
+                    </a>
+                    {% endif %}
+                </div>
+            </nav>
 
         </section>
 
@@ -173,7 +166,6 @@ PDV — Nova Adega
 
             <!-- CLIENTE -->
             <div class="cliente-section">
-
                 <label for="select-cliente">Cliente</label>
 
                 <select
@@ -181,7 +173,6 @@ PDV — Nova Adega
                     id="select-cliente"
                     onchange="atualizarCliente(this)"
                 >
-
                     <option value="0" data-associado="false">
                         Sem identificação
                     </option>
@@ -192,12 +183,9 @@ PDV — Nova Adega
                         data-associado="{{ 'true' if c.is_associado else 'false' }}"
                     >
                         {{ c.nome }}
-                        {% if c.is_associado %}
-                        — ASSOCIADO
-                        {% endif %}
+                        {% if c.is_associado %}— ASSOCIADO{% endif %}
                     </option>
                     {% endfor %}
-
                 </select>
 
                 <div
@@ -207,7 +195,6 @@ PDV — Nova Adega
                 >
                     ✓ {{ desconto_associado|default(0)|int }}% de desconto aplicado
                 </div>
-
             </div>
 
             <!-- AVISO DE ESTOQUE BAIXO -->
@@ -221,14 +208,12 @@ PDV — Nova Adega
 
             <!-- ITENS DO CARRINHO -->
             <div class="carrinho-itens" id="lista-carrinho">
-
                 <div class="carrinho-vazio" id="msg-vazio">
                     <span class="carrinho-vazio-icon">
                         <i data-lucide="shopping-cart"></i>
                     </span>
                     Clique nos produtos para adicionar
                 </div>
-
             </div>
 
             <div class="carrinho-footer">
@@ -239,13 +224,11 @@ PDV — Nova Adega
                     id="desconto-manual"
                     style="display:none"
                 >
-
                     <div class="desconto-manual-titulo">
                         Desconto manual
                     </div>
 
                     <div class="desconto-manual-controles">
-
                         <select
                             id="tipo-desconto"
                             onchange="atualizarDescontoManual()"
@@ -263,11 +246,9 @@ PDV — Nova Adega
                             placeholder="0,00"
                             oninput="atualizarDescontoManual()"
                         >
-
                     </div>
 
                     <small id="erro-desconto" class="erro-campo"></small>
-
                 </div>
 
                 <!-- PAGAMENTO -->
@@ -276,20 +257,17 @@ PDV — Nova Adega
                     id="pagamento-section"
                     style="display:none"
                 >
-
                     <div class="pagamento-titulo">
                         Forma de pagamento
                     </div>
 
                     <!-- PRIMEIRA FORMA -->
                     <div class="pagamento-bloco">
-
                         <label for="forma-pagamento-1">
                             1ª forma de pagamento
                         </label>
 
                         <div class="pagamento-controles">
-
                             <select id="forma-pagamento-1">
                                 <option value="">Selecione</option>
                                 <option value="dinheiro">Dinheiro</option>
@@ -306,21 +284,16 @@ PDV — Nova Adega
                                 value="0"
                                 placeholder="0,00"
                             >
-
                         </div>
-
                     </div>
 
                     <!-- SEGUNDA FORMA -->
                     <label class="segunda-forma-check">
-
                         <input
                             type="checkbox"
                             id="usar-segunda-forma"
                         >
-
                         Usar uma segunda forma de pagamento
-
                     </label>
 
                     <div
@@ -328,13 +301,11 @@ PDV — Nova Adega
                         id="segunda-forma-container"
                         style="display:none"
                     >
-
                         <label for="forma-pagamento-2">
                             2ª forma de pagamento
                         </label>
 
                         <div class="pagamento-controles">
-
                             <select id="forma-pagamento-2">
                                 <option value="">Selecione</option>
                                 <option value="dinheiro">Dinheiro</option>
@@ -352,14 +323,11 @@ PDV — Nova Adega
                                 placeholder="0,00"
                                 readonly
                             >
-
                         </div>
-
                     </div>
 
                     <!-- RESUMO DO PAGAMENTO -->
                     <div class="pagamento-resumo">
-
                         <div class="pagamento-linha">
                             <span>Total da venda</span>
                             <strong id="pagamento-total">R$ 0,00</strong>
@@ -374,16 +342,13 @@ PDV — Nova Adega
                             <span id="label-saldo">Saldo restante</span>
                             <strong id="pagamento-saldo">R$ 0,00</strong>
                         </div>
-
                     </div>
 
                     <small id="erro-pagamento" class="erro-campo"></small>
-
                 </div>
 
                 <!-- TOTAIS -->
                 <div class="totais" id="totais" style="display:none">
-
                     <div class="total-linha">
                         <span>Subtotal</span>
                         <span id="val-subtotal">R$ 0,00</span>
@@ -402,7 +367,6 @@ PDV — Nova Adega
                         <span>Total</span>
                         <span id="val-total">R$ 0,00</span>
                     </div>
-
                 </div>
 
                 <!-- OBSERVAÇÃO -->
@@ -479,11 +443,9 @@ PDV — Nova Adega
                 </form>
 
             </div>
-
         </aside>
 
     </div>
-
 </main>
 
 {% endblock %}
@@ -491,1099 +453,944 @@ PDV — Nova Adega
 {% block scripts %}
 
 <script>
-    "use strict";
+"use strict";
 
-    /* =====================================================
-       ESTADO DO PDV
-    ===================================================== */
+/* =====================================================
+   ESTADO DO PDV
+===================================================== */
 
-    let carrinho = [];
+let carrinho = [];
 
-    const CHAVE_CARRINHO = "nova_adega_carrinho";
+const CHAVE_CARRINHO = "nova_adega_carrinho";
 
-    function salvarCarrinho() {
-        sessionStorage.setItem(
-            CHAVE_CARRINHO,
-            JSON.stringify(carrinho)
-        );
-    }
+function salvarCarrinho() {
+    sessionStorage.setItem(
+        CHAVE_CARRINHO,
+        JSON.stringify(carrinho)
+    );
+}
 
-    function carregarCarrinho() {
-        try {
-            const dados = sessionStorage.getItem(CHAVE_CARRINHO);
+function carregarCarrinho() {
+    try {
+        const dados = sessionStorage.getItem(CHAVE_CARRINHO);
 
-            if (!dados) {
-                carrinho = [];
-                return;
-            }
-
-            const carrinhoSalvo = JSON.parse(dados);
-
-            carrinho = Array.isArray(carrinhoSalvo)
-                ? carrinhoSalvo
-                : [];
-
-        } catch (erro) {
-            console.error("Erro ao carregar carrinho:", erro);
+        if (!dados) {
             carrinho = [];
-        }
-    }
-
-    let clienteAtual = {
-        id: 0,
-        associado: false
-    };
-
-    let descontoManual = {
-        tipo: "percentual",
-        valor: 0
-    };
-
-    let pagamentoValido = false;
-    window.descontoInvalido = false;
-
-    const elementoDesconto = document.getElementById("config-desconto");
-
-    const DESCONTO_PCT = elementoDesconto
-        ? Number(elementoDesconto.value) || 0
-        : 0;
-
-
-    /* =====================================================
-       UTILITÁRIOS
-    ===================================================== */
-
-    function formatarNumero(valor) {
-        return Number(valor).toFixed(2).replace(".", ",");
-    }
-
-    function formatarPagamento(valor) {
-        return "R$ " + formatarNumero(valor);
-    }
-
-    function escaparHTML(texto) {
-        const div = document.createElement("div");
-        div.textContent = texto ?? "";
-        return div.innerHTML;
-    }
-
-    function atualizarIcones() {
-        if (window.lucide) {
-            window.lucide.createIcons();
-        }
-    }
-
-
-    /* =====================================================
-       ORDENAÇÃO E BUSCA DOS PRODUTOS
-    ===================================================== */
-
-    const campoBusca = document.getElementById("busca-produto");
-    const seletorOrdenacao = document.getElementById("ordenar-produtos");
-    const gradeProdutos = document.getElementById("grade-produtos");
-
-    // Guarda a ordem original dos produtos.
-    const ordemOriginalProdutos = gradeProdutos
-        ? Array.from(gradeProdutos.querySelectorAll(".produto-card"))
-        : [];
-
-    function aplicarFiltrosProdutos() {
-
-        if (!gradeProdutos) return;
-
-        const termo = campoBusca
-            ? campoBusca.value.toLowerCase().trim()
-            : "";
-
-        const ordenacao = seletorOrdenacao
-            ? seletorOrdenacao.value
-            : "padrao";
-
-        const cards = Array.from(
-            gradeProdutos.querySelectorAll(".produto-card")
-        );
-
-        // Aplica a ordenação escolhida.
-        cards.sort((a, b) => {
-
-            const nomeA = (a.dataset.nome || "").toLocaleLowerCase("pt-BR");
-            const nomeB = (b.dataset.nome || "").toLocaleLowerCase("pt-BR");
-
-            const precoA = Number(a.dataset.preco) || 0;
-            const precoB = Number(b.dataset.preco) || 0;
-
-            const estoqueA = Number(a.dataset.estoque) || 0;
-            const estoqueB = Number(b.dataset.estoque) || 0;
-
-            switch (ordenacao) {
-
-                case "nome-asc":
-                    return nomeA.localeCompare(nomeB, "pt-BR");
-
-                case "nome-desc":
-                    return nomeB.localeCompare(nomeA, "pt-BR");
-
-                case "preco-asc":
-                    return precoA - precoB;
-
-                case "preco-desc":
-                    return precoB - precoA;
-
-                case "estoque-desc":
-                    return estoqueB - estoqueA;
-
-                case "estoque-asc":
-                    return estoqueA - estoqueB;
-
-                case "padrao":
-                default:
-                    return ordemOriginalProdutos.indexOf(a) -
-                        ordemOriginalProdutos.indexOf(b);
-            }
-
-        });
-
-        // Reorganiza os cards sem recriar os elementos.
-        cards.forEach(card => {
-
-            gradeProdutos.appendChild(card);
-
-            const nome = card.dataset.nomeLower || "";
-
-            card.style.display = nome.includes(termo)
-                ? ""
-                : "none";
-
-        });
-
-    }
-
-    // Pesquisa os produtos.
-    if (campoBusca) {
-        campoBusca.addEventListener("input", aplicarFiltrosProdutos);
-    }
-
-    // Ordena os produtos.
-    if (seletorOrdenacao) {
-        seletorOrdenacao.addEventListener("change", aplicarFiltrosProdutos);
-    }
-
-
-    /* =====================================================
-       AVISO DE ESTOQUE BAIXO
-    ===================================================== */
-
-    function atualizarAvisoEstoqueBaixo() {
-
-        const aviso = document.getElementById("aviso-estoque-baixo");
-
-        if (!aviso) return;
-
-        const produtosComEstoqueBaixo = carrinho
-            .map(item => ({
-                nome: item.nome,
-                restante: item.estoque_max - item.quantidade
-            }))
-            .filter(item => item.restante <= 10);
-
-        if (produtosComEstoqueBaixo.length === 0) {
-
-            aviso.style.display = "none";
-            aviso.innerHTML = "";
-
             return;
         }
 
-        aviso.innerHTML = `
-            <strong>⚠️ Atenção: estoque baixo!</strong>
+        const carrinhoSalvo = JSON.parse(dados);
 
-            ${produtosComEstoqueBaixo.map(item => `
-                <span>
-                    O produto <strong>${escaparHTML(item.nome)}</strong>
-                    possui apenas <strong>${item.restante}</strong>
-                    unidade(s) restante(s) no estoque.
-                </span>
-            `).join("")}
-        `;
+        carrinho = Array.isArray(carrinhoSalvo)
+            ? carrinhoSalvo
+            : [];
 
-        aviso.style.display = "flex";
+    } catch (erro) {
+        console.error("Erro ao carregar carrinho:", erro);
+        carrinho = [];
+    }
+}
+
+let clienteAtual = {
+    id: 0,
+    associado: false
+};
+
+let descontoManual = {
+    tipo: "percentual",
+    valor: 0
+};
+
+let pagamentoValido = false;
+window.descontoInvalido = false;
+
+const elementoDesconto = document.getElementById("config-desconto");
+
+const DESCONTO_PCT = elementoDesconto
+    ? Number(elementoDesconto.value) || 0
+    : 0;
+
+
+/* =====================================================
+   UTILITÁRIOS
+===================================================== */
+
+function formatarNumero(valor) {
+    return Number(valor).toFixed(2).replace(".", ",");
+}
+
+function formatarPagamento(valor) {
+    return "R$ " + formatarNumero(valor);
+}
+
+function escaparHTML(texto) {
+    const div = document.createElement("div");
+    div.textContent = texto ?? "";
+    return div.innerHTML;
+}
+
+function atualizarIcones() {
+    if (window.lucide) {
+        window.lucide.createIcons();
+    }
+}
+
+
+/* =====================================================
+   BUSCA E ORDENAÇÃO DOS PRODUTOS
+   A pesquisa e a ordenação são feitas pelo servidor,
+   considerando todos os produtos cadastrados.
+===================================================== */
+
+const campoBusca = document.getElementById("busca-produto");
+const seletorOrdenacao = document.getElementById("ordenar-produtos");
+
+let temporizadorBusca = null;
+
+function pesquisarProdutos() {
+
+    const termo = campoBusca
+        ? campoBusca.value.trim()
+        : "";
+
+    const ordenacao = seletorOrdenacao
+        ? seletorOrdenacao.value
+        : "nome_az";
+
+    const parametros = new URLSearchParams();
+
+    parametros.set("pagina", "1");
+    parametros.set("busca", termo);
+    parametros.set("ordenar", ordenacao);
+
+    window.location.href = "/pdv/?" + parametros.toString();
+}
+
+// Pesquisa automaticamente enquanto digita.
+if (campoBusca) {
+
+    campoBusca.addEventListener("input", function () {
+
+        clearTimeout(temporizadorBusca);
+
+        temporizadorBusca = setTimeout(function () {
+            pesquisarProdutos();
+        }, 450);
+    });
+
+    // Permite pesquisar imediatamente ao apertar Enter.
+    campoBusca.addEventListener("keydown", function (evento) {
+
+        if (evento.key === "Enter") {
+            evento.preventDefault();
+
+            clearTimeout(temporizadorBusca);
+            pesquisarProdutos();
+        }
+    });
+}
+
+// A ordenação também é realizada no banco de dados.
+if (seletorOrdenacao) {
+    seletorOrdenacao.addEventListener("change", pesquisarProdutos);
+}
+
+
+/* =====================================================
+   AVISO DE ESTOQUE BAIXO
+===================================================== */
+
+function atualizarAvisoEstoqueBaixo() {
+
+    const aviso = document.getElementById("aviso-estoque-baixo");
+
+    if (!aviso) return;
+
+    const produtosComEstoqueBaixo = carrinho
+        .map(item => ({
+            nome: item.nome,
+            restante: item.estoque_max - item.quantidade
+        }))
+        .filter(item => item.restante <= 10);
+
+    if (produtosComEstoqueBaixo.length === 0) {
+        aviso.style.display = "none";
+        aviso.innerHTML = "";
+        return;
     }
 
+    aviso.innerHTML = `
+        <strong>⚠️ Atenção: estoque baixo!</strong>
 
-    /* =====================================================
-       CARRINHO
-    ===================================================== */
-
-    function adicionarAoCarrinho(card) {
-
-        const id = parseInt(card.dataset.id, 10);
-        const nome = card.dataset.nome;
-        const preco = Number(card.dataset.preco);
-        const estoque = parseInt(card.dataset.estoque, 10);
-
-        if (
-            !id ||
-            !Number.isFinite(preco) ||
-            !Number.isInteger(estoque) ||
-            estoque <= 0
-        ) {
-            alert("Produto sem estoque ou com dados inválidos.");
-            return;
-        }
-
-        const existente = carrinho.find(
-            item => item.produto_id === id
-        );
-
-        if (existente) {
-
-            if (existente.quantidade >= existente.estoque_max) {
-
-                alert(
-                    `Estoque máximo atingido: ${existente.estoque_max} unidade(s).`
-                );
-
-                return;
-            }
-
-            existente.quantidade++;
-
-        } else {
-
-            carrinho.push({
-                produto_id: id,
-                nome: nome,
-                preco: preco,
-                quantidade: 1,
-                estoque_max: estoque
-            });
-
-        }
-
-        salvarCarrinho();
-        renderizarCarrinho();
-    }
-
-
-    function alterarQtd(produtoId, delta) {
-
-        const item = carrinho.find(
-            item => item.produto_id === produtoId
-        );
-
-        if (!item) return;
-
-        const novaQuantidade = item.quantidade + delta;
-
-        if (novaQuantidade <= 0) {
-            removerItem(produtoId);
-            return;
-        }
-
-        if (novaQuantidade > item.estoque_max) {
-
-            alert(
-                `Estoque máximo atingido: ${item.estoque_max} unidade(s).`
-            );
-
-            return;
-        }
-
-        item.quantidade = novaQuantidade;
-
-        salvarCarrinho();
-
-        renderizarCarrinho();
-    }
-
-
-    function removerItem(produtoId) {
-
-
-        carrinho = carrinho.filter(
-            item => item.produto_id !== produtoId
-        );
-
-        carrinho = carrinho.filter(item => item.produto_id !== produtoId);
-        salvarCarrinho();
-
-        renderizarCarrinho();
-    }
-
-
-    function criarMensagemVazia() {
-
-        const div = document.createElement("div");
-
-        div.className = "carrinho-vazio";
-        div.id = "msg-vazio";
-
-        div.innerHTML = `
-            <span class="carrinho-vazio-icon">
-                <i data-lucide="shopping-cart"></i>
+        ${produtosComEstoqueBaixo.map(item => `
+            <span>
+                O produto <strong>${escaparHTML(item.nome)}</strong>
+                possui apenas <strong>${item.restante}</strong>
+                unidade(s) restante(s) no estoque.
             </span>
+        `).join("")}
+    `;
 
-            Clique nos produtos para adicionar
-        `;
+    aviso.style.display = "flex";
+}
 
-        return div;
+
+/* =====================================================
+   CARRINHO
+===================================================== */
+
+function adicionarAoCarrinho(card) {
+
+    const id = parseInt(card.dataset.id, 10);
+    const nome = card.dataset.nome;
+    const preco = Number(card.dataset.preco);
+    const estoque = parseInt(card.dataset.estoque, 10);
+
+    if (
+        !id ||
+        !Number.isFinite(preco) ||
+        !Number.isInteger(estoque) ||
+        estoque <= 0
+    ) {
+        alert("Produto sem estoque ou com dados inválidos.");
+        return;
     }
 
+    const existente = carrinho.find(
+        item => item.produto_id === id
+    );
 
-    function renderizarCarrinho() {
+    if (existente) {
 
-        const lista = document.getElementById("lista-carrinho");
-        const totais = document.getElementById("totais");
-
-        if (!lista) return;
-
-        lista.innerHTML = "";
-
-        if (carrinho.length === 0) {
-
-            lista.appendChild(criarMensagemVazia());
-
-            if (totais) {
-                totais.style.display = "none";
-            }
-
-            descontoManual.valor = 0;
-
-            const campoDesconto = document.getElementById(
-                "valor-desconto-manual"
+        if (existente.quantidade >= existente.estoque_max) {
+            alert(
+                `Estoque máximo atingido: ${existente.estoque_max} unidade(s).`
             );
-
-            if (campoDesconto) {
-                campoDesconto.value = "0";
-            }
-
-            window.descontoInvalido = false;
-
-            const erroDesconto = document.getElementById("erro-desconto");
-
-            if (erroDesconto) {
-                erroDesconto.textContent = "";
-            }
-
-            atualizarAvisoEstoqueBaixo();
-            renderizarTotais();
-            atualizarEstadoBotao();
-            atualizarIcones();
-
             return;
         }
 
-        carrinho.forEach(item => {
+        existente.quantidade++;
 
-            const linha = document.createElement("div");
+    } else {
 
-            linha.className = "carrinho-item";
-
-            const subtotal = item.preco * item.quantidade;
-
-            linha.innerHTML = `
-
-                <div class="carrinho-item-info">
-
-                    <div class="carrinho-item-nome">
-                        ${escaparHTML(item.nome)}
-                    </div>
-
-                    <div class="carrinho-item-preco">
-                        R$ ${formatarNumero(item.preco)}
-                    </div>
-
-                </div>
-
-                <div class="carrinho-item-controles">
-
-                    <button
-                        type="button"
-                        class="btn-qtd"
-                        onclick="alterarQtd(${item.produto_id}, -1)"
-                    >
-                        −
-                    </button>
-
-                    <span class="quantidade">
-                        ${item.quantidade}
-                    </span>
-
-                    <button
-                        type="button"
-                        class="btn-qtd"
-                        onclick="alterarQtd(${item.produto_id}, 1)"
-                    >
-                        +
-                    </button>
-
-                </div>
-
-                <div class="carrinho-item-subtotal">
-                    R$ ${formatarNumero(subtotal)}
-                </div>
-
-                <button
-                    type="button"
-                    class="btn-remover"
-                    onclick="removerItem(${item.produto_id})"
-                    title="Remover produto"
-                    aria-label="Remover ${escaparHTML(item.nome)}"
-                >
-                    <i data-lucide="trash-2"></i>
-                </button>
-
-            `;
-
-            lista.appendChild(linha);
-
+        carrinho.push({
+            produto_id: id,
+            nome: nome,
+            preco: preco,
+            quantidade: 1,
+            estoque_max: estoque
         });
+    }
+
+    salvarCarrinho();
+    renderizarCarrinho();
+}
+
+function alterarQtd(produtoId, delta) {
+
+    const item = carrinho.find(
+        item => item.produto_id === produtoId
+    );
+
+    if (!item) return;
+
+    const novaQuantidade = item.quantidade + delta;
+
+    if (novaQuantidade <= 0) {
+        removerItem(produtoId);
+        return;
+    }
+
+    if (novaQuantidade > item.estoque_max) {
+        alert(
+            `Estoque máximo atingido: ${item.estoque_max} unidade(s).`
+        );
+        return;
+    }
+
+    item.quantidade = novaQuantidade;
+
+    salvarCarrinho();
+    renderizarCarrinho();
+}
+
+function removerItem(produtoId) {
+
+    carrinho = carrinho.filter(
+        item => item.produto_id !== produtoId
+    );
+
+    salvarCarrinho();
+    renderizarCarrinho();
+}
+
+function criarMensagemVazia() {
+
+    const div = document.createElement("div");
+
+    div.className = "carrinho-vazio";
+    div.id = "msg-vazio";
+
+    div.innerHTML = `
+        <span class="carrinho-vazio-icon">
+            <i data-lucide="shopping-cart"></i>
+        </span>
+        Clique nos produtos para adicionar
+    `;
+
+    return div;
+}
+
+function renderizarCarrinho() {
+
+    const lista = document.getElementById("lista-carrinho");
+    const totais = document.getElementById("totais");
+
+    if (!lista) return;
+
+    lista.innerHTML = "";
+
+    if (carrinho.length === 0) {
+
+        lista.appendChild(criarMensagemVazia());
 
         if (totais) {
-            totais.style.display = "block";
+            totais.style.display = "none";
+        }
+
+        descontoManual.valor = 0;
+
+        const campoDesconto = document.getElementById(
+            "valor-desconto-manual"
+        );
+
+        if (campoDesconto) {
+            campoDesconto.value = "0";
+        }
+
+        window.descontoInvalido = false;
+
+        const erroDesconto = document.getElementById("erro-desconto");
+
+        if (erroDesconto) {
+            erroDesconto.textContent = "";
         }
 
         atualizarAvisoEstoqueBaixo();
         renderizarTotais();
-        atualizarIcones();
-    }
-
-
-    /* =====================================================
-       CLIENTE E DESCONTOS
-    ===================================================== */
-
-    function atualizarCliente(select) {
-
-        const option = select.options[select.selectedIndex];
-
-        clienteAtual.id = parseInt(option.value, 10) || 0;
-
-        clienteAtual.associado =
-            option.dataset.associado === "true";
-
-        const badge = document.getElementById("badge-desconto");
-
-        if (badge) {
-
-            badge.style.display = clienteAtual.associado
-                ? "inline-flex"
-                : "none";
-
-        }
-
-        renderizarTotais();
-    }
-
-
-    function calcularSubtotal() {
-
-        return Number(
-            carrinho.reduce(
-                (total, item) => total + item.preco * item.quantidade,
-                0
-            ).toFixed(2)
-        );
-    }
-
-
-    function calcularDesconto(subtotal) {
-
-        const descontoAssociado = clienteAtual.associado
-            ? subtotal * DESCONTO_PCT / 100
-            : 0;
-
-        const descontoManualCalculado =
-            descontoManual.tipo === "percentual"
-                ? subtotal * descontoManual.valor / 100
-                : descontoManual.valor;
-
-        const descontoManualPermitido = Math.max(
-            0,
-            subtotal - descontoAssociado
-        );
-
-        const manualLimitado = Math.min(
-            descontoManualCalculado,
-            descontoManualPermitido
-        );
-
-        return {
-
-            associado: descontoAssociado,
-
-            manual: manualLimitado,
-
-            total: Math.min(
-                subtotal,
-                descontoAssociado + manualLimitado
-            )
-
-        };
-    }
-
-
-    function calcularTotalVenda() {
-
-        const subtotal = calcularSubtotal();
-
-        const descontos = calcularDesconto(subtotal);
-
-        return Number(
-            Math.max(0, subtotal - descontos.total).toFixed(2)
-        );
-    }
-
-
-    function atualizarDescontoManual() {
-
-        const tipo = document.getElementById("tipo-desconto");
-
-        const campo = document.getElementById(
-            "valor-desconto-manual"
-        );
-
-        const erro = document.getElementById("erro-desconto");
-
-        if (!tipo || !campo) return;
-
-        descontoManual.tipo = tipo.value === "valor"
-            ? "valor"
-            : "percentual";
-
-        descontoManual.valor = Math.max(
-            0,
-            Number(campo.value) || 0
-        );
-
-        const subtotal = calcularSubtotal();
-
-        const descontoAssociado = clienteAtual.associado
-            ? subtotal * DESCONTO_PCT / 100
-            : 0;
-
-        const limiteManual = Math.max(
-            0,
-            subtotal - descontoAssociado
-        );
-
-        let mensagem = "";
-
-        if (
-            descontoManual.tipo === "percentual" &&
-            descontoManual.valor > 100
-        ) {
-
-            mensagem = "O desconto não pode ser maior que 100%.";
-
-        } else if (
-            descontoManual.tipo === "valor" &&
-            descontoManual.valor > limiteManual + 0.001
-        ) {
-
-            mensagem = "O desconto não pode ser maior que o subtotal disponível.";
-
-        }
-
-        window.descontoInvalido = Boolean(mensagem);
-
-        if (erro) {
-            erro.textContent = mensagem;
-        }
-
-        const inputManual = document.getElementById(
-            "input-desconto-manual"
-        );
-
-        const inputTipo = document.getElementById(
-            "input-tipo-desconto"
-        );
-
-        const descontos = calcularDesconto(subtotal);
-
-        if (inputManual) {
-            inputManual.value = descontos.manual.toFixed(2);
-        }
-
-        if (inputTipo) {
-            inputTipo.value = descontoManual.tipo;
-        }
-
-        renderizarTotais();
-    }
-
-
-    /* =====================================================
-       PAGAMENTOS
-    ===================================================== */
-
-    function atualizarPagamento() {
-
-        const forma1 = document.getElementById("forma-pagamento-1");
-        const valor1 = document.getElementById("valor-pagamento-1");
-
-        const forma2 = document.getElementById("forma-pagamento-2");
-        const valor2 = document.getElementById("valor-pagamento-2");
-
-        const usarSegunda = document.getElementById("usar-segunda-forma");
-
-        const segundaContainer = document.getElementById(
-            "segunda-forma-container"
-        );
-
-        const pagamentoSection = document.getElementById(
-            "pagamento-section"
-        );
-
-        const erro = document.getElementById("erro-pagamento");
-
-        if (
-            !forma1 ||
-            !valor1 ||
-            !forma2 ||
-            !valor2 ||
-            !usarSegunda
-        ) {
-            return;
-        }
-
-        const total = calcularTotalVenda();
-
-        const primeiroValor = Math.max(
-            0,
-            Number(valor1.value) || 0
-        );
-
-        if (usarSegunda.checked) {
-
-            const restante = Math.max(
-                0,
-                Number((total - primeiroValor).toFixed(2))
-            );
-
-            valor2.value = restante.toFixed(2);
-
-        } else {
-
-            valor2.value = "0.00";
-
-        }
-
-        const valorPagamento1 = Math.max(
-            0,
-            Number(valor1.value) || 0
-        );
-
-        const valorPagamento2 = usarSegunda.checked
-            ? Math.max(0, Number(valor2.value) || 0)
-            : 0;
-
-        const valorPago = Number(
-            (valorPagamento1 + valorPagamento2).toFixed(2)
-        );
-
-        const saldo = Number(
-            (total - valorPago).toFixed(2)
-        );
-
-        if (pagamentoSection) {
-            pagamentoSection.style.display =
-                total > 0 ? "block" : "none";
-        }
-
-        if (segundaContainer) {
-            segundaContainer.style.display =
-                usarSegunda.checked ? "block" : "none";
-        }
-
-        const pagamentoTotal = document.getElementById(
-            "pagamento-total"
-        );
-
-        const pagamentoPago = document.getElementById(
-            "pagamento-pago"
-        );
-
-        const pagamentoSaldo = document.getElementById(
-            "pagamento-saldo"
-        );
-
-        if (pagamentoTotal) {
-            pagamentoTotal.textContent = formatarPagamento(total);
-        }
-
-        if (pagamentoPago) {
-            pagamentoPago.textContent = formatarPagamento(valorPago);
-        }
-
-        if (pagamentoSaldo) {
-            pagamentoSaldo.textContent = formatarPagamento(
-                Math.abs(saldo)
-            );
-        }
-
-        const labelSaldo = document.getElementById("label-saldo");
-
-        const linhaSaldo = document.getElementById("linha-saldo");
-
-        pagamentoValido = false;
-
-        let mensagem = "";
-
-        if (total <= 0) {
-
-            mensagem = "Adicione produtos ao carrinho.";
-
-        } else if (!forma1.value) {
-
-            mensagem = "Selecione a primeira forma de pagamento.";
-
-        } else if (valorPagamento1 <= 0) {
-
-            mensagem = "Informe um valor válido para a primeira forma de pagamento.";
-
-        } else if (usarSegunda.checked && !forma2.value) {
-
-            mensagem = "Selecione a segunda forma de pagamento.";
-
-        } else if (usarSegunda.checked && valorPagamento2 <= 0) {
-
-            mensagem = "O valor da primeira forma deve ser menor que o total da venda.";
-
-        } else if (
-            usarSegunda.checked &&
-            forma1.value === forma2.value
-        ) {
-
-            mensagem = "Escolha duas formas de pagamento diferentes.";
-
-        } else if (Math.abs(saldo) > 0.001) {
-
-            mensagem = saldo > 0
-                ? "O valor pago é menor que o total da venda."
-                : "O valor pago é maior que o total da venda.";
-
-        } else {
-
-            pagamentoValido = true;
-
-        }
-
-        if (erro) {
-            erro.textContent = mensagem;
-        }
-
-        if (labelSaldo) {
-
-            labelSaldo.textContent = saldo < -0.001
-                ? "Valor excedente"
-                : saldo > 0.001
-                    ? "Saldo restante"
-                    : "Pagamento";
-
-        }
-
-        if (linhaSaldo) {
-
-            linhaSaldo.classList.toggle(
-                "pagamento-invalido",
-                !pagamentoValido
-            );
-
-            linhaSaldo.classList.toggle(
-                "pagamento-ok",
-                pagamentoValido
-            );
-
-        }
-
         atualizarEstadoBotao();
+        atualizarIcones();
+
+        return;
     }
 
+    carrinho.forEach(item => {
 
-    function atualizarEstadoBotao() {
+        const linha = document.createElement("div");
 
-        const botao = document.getElementById("btn-finalizar");
+        linha.className = "carrinho-item";
 
-        if (!botao) return;
+        const subtotal = item.preco * item.quantidade;
 
-        botao.disabled =
-            carrinho.length === 0 ||
-            window.descontoInvalido === true ||
-            pagamentoValido !== true;
+        linha.innerHTML = `
+            <div class="carrinho-item-info">
+                <div class="carrinho-item-nome">
+                    ${escaparHTML(item.nome)}
+                </div>
+
+                <div class="carrinho-item-preco">
+                    R$ ${formatarNumero(item.preco)}
+                </div>
+            </div>
+
+            <div class="carrinho-item-controles">
+                <button
+                    type="button"
+                    class="btn-qtd"
+                    onclick="alterarQtd(${item.produto_id}, -1)"
+                >
+                    −
+                </button>
+
+                <span class="quantidade">
+                    ${item.quantidade}
+                </span>
+
+                <button
+                    type="button"
+                    class="btn-qtd"
+                    onclick="alterarQtd(${item.produto_id}, 1)"
+                >
+                    +
+                </button>
+            </div>
+
+            <div class="carrinho-item-subtotal">
+                R$ ${formatarNumero(subtotal)}
+            </div>
+
+            <button
+                type="button"
+                class="btn-remover"
+                onclick="removerItem(${item.produto_id})"
+                title="Remover produto"
+                aria-label="Remover ${escaparHTML(item.nome)}"
+            >
+                <i data-lucide="trash-2"></i>
+            </button>
+        `;
+
+        lista.appendChild(linha);
+    });
+
+    if (totais) {
+        totais.style.display = "block";
     }
 
+    atualizarAvisoEstoqueBaixo();
+    renderizarTotais();
+    atualizarIcones();
+}
 
-    /* =====================================================
-       TOTAIS
-    ===================================================== */
 
-    function renderizarTotais() {
+/* =====================================================
+   CLIENTE E DESCONTOS
+===================================================== */
 
-        const subtotal = calcularSubtotal();
+function atualizarCliente(select) {
 
-        const descontos = calcularDesconto(subtotal);
+    const option = select.options[select.selectedIndex];
 
-        const total = Math.max(
-            0,
-            subtotal - descontos.total
-        );
+    clienteAtual.id = parseInt(option.value, 10) || 0;
+    clienteAtual.associado = option.dataset.associado === "true";
 
-        const valSubtotal = document.getElementById("val-subtotal");
+    const badge = document.getElementById("badge-desconto");
 
-        const valDesconto = document.getElementById("val-desconto");
-
-        const valTotal = document.getElementById("val-total");
-
-        if (valSubtotal) {
-            valSubtotal.textContent = formatarPagamento(subtotal);
-        }
-
-        if (valDesconto) {
-            valDesconto.textContent =
-                "− " + formatarPagamento(descontos.total);
-        }
-
-        if (valTotal) {
-            valTotal.textContent = formatarPagamento(total);
-        }
-
-        const linhaDesconto = document.getElementById(
-            "linha-desconto"
-        );
-
-        const labelDesconto = document.getElementById(
-            "label-desconto"
-        );
-
-        const campoManual = document.getElementById(
-            "desconto-manual"
-        );
-
-        if (linhaDesconto) {
-
-            linhaDesconto.style.display =
-                descontos.total > 0 ? "flex" : "none";
-
-        }
-
-        if (labelDesconto) {
-
-            labelDesconto.textContent =
-                descontos.associado > 0 && descontos.manual > 0
-                    ? "Desconto (associado + manual)"
-                    : descontos.manual > 0
-                        ? "Desconto manual"
-                        : `Desconto (${DESCONTO_PCT}%)`;
-
-        }
-
-        if (campoManual) {
-            campoManual.style.display =
-                subtotal > 0 ? "block" : "none";
-        }
-
-        atualizarPagamento();
+    if (badge) {
+        badge.style.display = clienteAtual.associado
+            ? "inline-flex"
+            : "none";
     }
 
+    renderizarTotais();
+}
 
-    /* =====================================================
-       FINALIZAR VENDA
-    ===================================================== */
+function calcularSubtotal() {
 
-    function finalizarVenda() {
+    return Number(
+        carrinho.reduce(
+            (total, item) => total + item.preco * item.quantidade,
+            0
+        ).toFixed(2)
+    );
+}
 
-        atualizarPagamento();
+function calcularDesconto(subtotal) {
 
-        if (carrinho.length === 0) {
+    const descontoAssociado = clienteAtual.associado
+        ? subtotal * DESCONTO_PCT / 100
+        : 0;
 
-            alert("Adicione pelo menos um produto ao carrinho.");
+    const descontoManualCalculado =
+        descontoManual.tipo === "percentual"
+            ? subtotal * descontoManual.valor / 100
+            : descontoManual.valor;
 
-            return;
-        }
+    const descontoManualPermitido = Math.max(
+        0,
+        subtotal - descontoAssociado
+    );
 
-        if (window.descontoInvalido) {
+    const manualLimitado = Math.min(
+        descontoManualCalculado,
+        descontoManualPermitido
+    );
 
-            alert("Corrija o desconto antes de finalizar a venda.");
+    return {
+        associado: descontoAssociado,
+        manual: manualLimitado,
+        total: Math.min(
+            subtotal,
+            descontoAssociado + manualLimitado
+        )
+    };
+}
 
-            return;
-        }
+function calcularTotalVenda() {
 
-        if (!pagamentoValido) {
+    const subtotal = calcularSubtotal();
+    const descontos = calcularDesconto(subtotal);
 
-            alert("Confira as formas e os valores de pagamento.");
+    return Number(
+        Math.max(0, subtotal - descontos.total).toFixed(2)
+    );
+}
 
-            return;
-        }
+function atualizarDescontoManual() {
 
-        const formulario = document.getElementById("form-venda");
+    const tipo = document.getElementById("tipo-desconto");
 
-        document.getElementById("input-carrinho").value =
-            JSON.stringify(
-                carrinho.map(item => ({
-                    produto_id: item.produto_id,
-                    quantidade: item.quantidade
-                }))
-            );
+    const campo = document.getElementById(
+        "valor-desconto-manual"
+    );
 
-        document.getElementById("input-cliente-id").value =
-            clienteAtual.id;
+    const erro = document.getElementById("erro-desconto");
 
-        document.getElementById("input-obs").value =
-            document.getElementById("obs-input").value.trim();
+    if (!tipo || !campo) return;
 
-        const subtotal = calcularSubtotal();
+    descontoManual.tipo = tipo.value === "valor"
+        ? "valor"
+        : "percentual";
 
-        const descontos = calcularDesconto(subtotal);
+    descontoManual.valor = Math.max(
+        0,
+        Number(campo.value) || 0
+    );
 
-        document.getElementById("input-desconto-manual").value =
-            descontos.manual.toFixed(2);
+    const subtotal = calcularSubtotal();
 
-        document.getElementById("input-tipo-desconto").value =
-            descontoManual.tipo;
+    const descontoAssociado = clienteAtual.associado
+        ? subtotal * DESCONTO_PCT / 100
+        : 0;
 
-        document.getElementById("input-forma-pagamento-1").value =
-            document.getElementById("forma-pagamento-1").value;
+    const limiteManual = Math.max(
+        0,
+        subtotal - descontoAssociado
+    );
 
-        document.getElementById("input-valor-pagamento-1").value =
-            Number(
-                document.getElementById("valor-pagamento-1").value || 0
-            ).toFixed(2);
+    let mensagem = "";
 
-        const usarSegunda =
-            document.getElementById("usar-segunda-forma").checked;
+    if (
+        descontoManual.tipo === "percentual" &&
+        descontoManual.valor > 100
+    ) {
+        mensagem = "O desconto não pode ser maior que 100%.";
 
-        document.getElementById("input-forma-pagamento-2").value =
-            usarSegunda
-                ? document.getElementById("forma-pagamento-2").value
-                : "";
-
-        document.getElementById("input-valor-pagamento-2").value =
-            usarSegunda
-                ? Number(
-                    document.getElementById("valor-pagamento-2").value || 0
-                ).toFixed(2)
-                : "0.00";
-
-        formulario.submit();
+    } else if (
+        descontoManual.tipo === "valor" &&
+        descontoManual.valor > limiteManual + 0.001
+    ) {
+        mensagem = "O desconto não pode ser maior que o subtotal disponível.";
     }
 
+    window.descontoInvalido = Boolean(mensagem);
 
-    /* =====================================================
-       EVENTOS E INICIALIZAÇÃO
-    ===================================================== */
+    if (erro) {
+        erro.textContent = mensagem;
+    }
+
+    const inputManual = document.getElementById(
+        "input-desconto-manual"
+    );
+
+    const inputTipo = document.getElementById(
+        "input-tipo-desconto"
+    );
+
+    const descontos = calcularDesconto(subtotal);
+
+    if (inputManual) {
+        inputManual.value = descontos.manual.toFixed(2);
+    }
+
+    if (inputTipo) {
+        inputTipo.value = descontoManual.tipo;
+    }
+
+    renderizarTotais();
+}
+
+
+/* =====================================================
+   PAGAMENTOS
+===================================================== */
+
+function atualizarPagamento() {
 
     const forma1 = document.getElementById("forma-pagamento-1");
-
     const valor1 = document.getElementById("valor-pagamento-1");
 
     const forma2 = document.getElementById("forma-pagamento-2");
-
     const valor2 = document.getElementById("valor-pagamento-2");
 
     const usarSegunda = document.getElementById("usar-segunda-forma");
 
+    const segundaContainer = document.getElementById(
+        "segunda-forma-container"
+    );
 
-    // Ao selecionar a primeira forma, preenche o valor total inicialmente.
-    if (forma1) {
+    const pagamentoSection = document.getElementById(
+        "pagamento-section"
+    );
 
-        forma1.addEventListener("change", function () {
+    const erro = document.getElementById("erro-pagamento");
 
-            if (this.value) {
-
-                valor1.value = calcularTotalVenda().toFixed(2);
-
-            } else {
-
-                valor1.value = "0";
-
-            }
-
-            atualizarPagamento();
-
-        });
-
+    if (!forma1 || !valor1 || !forma2 || !valor2 || !usarSegunda) {
+        return;
     }
 
+    const total = calcularTotalVenda();
 
-    // Permite editar o valor da primeira forma de pagamento.
-    if (valor1) {
+    const primeiroValor = Math.max(
+        0,
+        Number(valor1.value) || 0
+    );
 
-        valor1.addEventListener("input", atualizarPagamento);
+    if (usarSegunda.checked) {
 
+        const restante = Math.max(
+            0,
+            Number((total - primeiroValor).toFixed(2))
+        );
+
+        valor2.value = restante.toFixed(2);
+
+    } else {
+
+        valor2.value = "0.00";
     }
 
+    const valorPagamento1 = Math.max(
+        0,
+        Number(valor1.value) || 0
+    );
 
-    // Recalcula a segunda forma quando ela é escolhida.
-    if (forma2) {
+    const valorPagamento2 = usarSegunda.checked
+        ? Math.max(0, Number(valor2.value) || 0)
+        : 0;
 
-        forma2.addEventListener("change", atualizarPagamento);
+    const valorPago = Number(
+        (valorPagamento1 + valorPagamento2).toFixed(2)
+    );
 
+    const saldo = Number(
+        (total - valorPago).toFixed(2)
+    );
+
+    if (pagamentoSection) {
+        pagamentoSection.style.display =
+            total > 0 ? "block" : "none";
     }
 
-
-    if (usarSegunda) {
-
-        usarSegunda.addEventListener("change", function () {
-
-            if (!this.checked) {
-
-                if (forma2) forma2.value = "";
-
-                if (valor2) valor2.value = "0.00";
-
-                if (forma1 && forma1.value && valor1) {
-
-                    valor1.value = calcularTotalVenda().toFixed(2);
-
-                }
-
-            } else if (valor1 && Number(valor1.value) <= 0) {
-
-                valor1.value = calcularTotalVenda().toFixed(2);
-
-            }
-
-            atualizarPagamento();
-
-        });
-
+    if (segundaContainer) {
+        segundaContainer.style.display =
+            usarSegunda.checked ? "block" : "none";
     }
 
+    const pagamentoTotal = document.getElementById("pagamento-total");
+    const pagamentoPago = document.getElementById("pagamento-pago");
+    const pagamentoSaldo = document.getElementById("pagamento-saldo");
 
-    // Inicializa o cliente selecionado.
-    const selectCliente = document.getElementById("select-cliente");
+    if (pagamentoTotal) {
+        pagamentoTotal.textContent = formatarPagamento(total);
+    }
 
-    if (selectCliente) {
+    if (pagamentoPago) {
+        pagamentoPago.textContent = formatarPagamento(valorPago);
+    }
 
-        const option = selectCliente.options[
-            selectCliente.selectedIndex
-        ];
+    if (pagamentoSaldo) {
+        pagamentoSaldo.textContent = formatarPagamento(Math.abs(saldo));
+    }
 
-        clienteAtual.id = parseInt(option.value, 10) || 0;
+    const labelSaldo = document.getElementById("label-saldo");
+    const linhaSaldo = document.getElementById("linha-saldo");
 
-        clienteAtual.associado =
-            option.dataset.associado === "true";
+    pagamentoValido = false;
 
-        const badge = document.getElementById("badge-desconto");
+    let mensagem = "";
 
-        if (badge) {
+    if (total <= 0) {
 
-            badge.style.display = clienteAtual.associado
-                ? "inline-flex"
-                : "none";
+        mensagem = "Adicione produtos ao carrinho.";
 
+    } else if (!forma1.value) {
+
+        mensagem = "Selecione a primeira forma de pagamento.";
+
+    } else if (valorPagamento1 <= 0) {
+
+        mensagem = "Informe um valor válido para a primeira forma de pagamento.";
+
+    } else if (usarSegunda.checked && !forma2.value) {
+
+        mensagem = "Selecione a segunda forma de pagamento.";
+
+    } else if (usarSegunda.checked && valorPagamento2 <= 0) {
+
+        mensagem = "O valor da primeira forma deve ser menor que o total da venda.";
+
+    } else if (Math.abs(saldo) > 0.001) {
+
+        mensagem = saldo > 0
+            ? "O valor pago é menor que o total da venda."
+            : "O valor pago é maior que o total da venda.";
+
+    } else {
+
+        // Permite duas formas de pagamento iguais.
+        pagamentoValido = true;
+    }
+
+    if (erro) {
+        erro.textContent = mensagem;
+    }
+
+    if (labelSaldo) {
+        labelSaldo.textContent = saldo < -0.001
+            ? "Valor excedente"
+            : saldo > 0.001
+                ? "Saldo restante"
+                : "Pagamento";
+    }
+
+    if (linhaSaldo) {
+        linhaSaldo.classList.toggle(
+            "pagamento-invalido",
+            !pagamentoValido
+        );
+
+        linhaSaldo.classList.toggle(
+            "pagamento-ok",
+            pagamentoValido
+        );
+    }
+
+    atualizarEstadoBotao();
+}
+
+function atualizarEstadoBotao() {
+
+    const botao = document.getElementById("btn-finalizar");
+
+    if (!botao) return;
+
+    botao.disabled =
+        carrinho.length === 0 ||
+        window.descontoInvalido === true ||
+        pagamentoValido !== true;
+}
+
+
+/* =====================================================
+   TOTAIS
+===================================================== */
+
+function renderizarTotais() {
+
+    const subtotal = calcularSubtotal();
+    const descontos = calcularDesconto(subtotal);
+
+    const total = Math.max(
+        0,
+        subtotal - descontos.total
+    );
+
+    const valSubtotal = document.getElementById("val-subtotal");
+    const valDesconto = document.getElementById("val-desconto");
+    const valTotal = document.getElementById("val-total");
+
+    if (valSubtotal) {
+        valSubtotal.textContent = formatarPagamento(subtotal);
+    }
+
+    if (valDesconto) {
+        valDesconto.textContent =
+            "− " + formatarPagamento(descontos.total);
+    }
+
+    if (valTotal) {
+        valTotal.textContent = formatarPagamento(total);
+    }
+
+    const linhaDesconto = document.getElementById("linha-desconto");
+    const labelDesconto = document.getElementById("label-desconto");
+    const campoManual = document.getElementById("desconto-manual");
+
+    if (linhaDesconto) {
+        linhaDesconto.style.display =
+            descontos.total > 0 ? "flex" : "none";
+    }
+
+    if (labelDesconto) {
+        labelDesconto.textContent =
+            descontos.associado > 0 && descontos.manual > 0
+                ? "Desconto (associado + manual)"
+                : descontos.manual > 0
+                    ? "Desconto manual"
+                    : `Desconto (${DESCONTO_PCT}%)`;
+    }
+
+    if (campoManual) {
+        campoManual.style.display =
+            subtotal > 0 ? "block" : "none";
+    }
+
+    atualizarPagamento();
+}
+
+
+/* =====================================================
+   FINALIZAR VENDA
+===================================================== */
+
+function finalizarVenda() {
+
+    atualizarPagamento();
+
+    if (carrinho.length === 0) {
+        alert("Adicione pelo menos um produto ao carrinho.");
+        return;
+    }
+
+    if (window.descontoInvalido) {
+        alert("Corrija o desconto antes de finalizar a venda.");
+        return;
+    }
+
+    if (!pagamentoValido) {
+        alert("Confira as formas e os valores de pagamento.");
+        return;
+    }
+
+    const formulario = document.getElementById("form-venda");
+
+    document.getElementById("input-carrinho").value =
+        JSON.stringify(
+            carrinho.map(item => ({
+                produto_id: item.produto_id,
+                quantidade: item.quantidade
+            }))
+        );
+
+    document.getElementById("input-cliente-id").value =
+        clienteAtual.id;
+
+    document.getElementById("input-obs").value =
+        document.getElementById("obs-input").value.trim();
+
+    const subtotal = calcularSubtotal();
+    const descontos = calcularDesconto(subtotal);
+
+    document.getElementById("input-desconto-manual").value =
+        descontos.manual.toFixed(2);
+
+    document.getElementById("input-tipo-desconto").value =
+        descontoManual.tipo;
+
+    document.getElementById("input-forma-pagamento-1").value =
+        document.getElementById("forma-pagamento-1").value;
+
+    document.getElementById("input-valor-pagamento-1").value =
+        Number(
+            document.getElementById("valor-pagamento-1").value || 0
+        ).toFixed(2);
+
+    const usarSegunda =
+        document.getElementById("usar-segunda-forma").checked;
+
+    document.getElementById("input-forma-pagamento-2").value =
+        usarSegunda
+            ? document.getElementById("forma-pagamento-2").value
+            : "";
+
+    document.getElementById("input-valor-pagamento-2").value =
+        usarSegunda
+            ? Number(
+                document.getElementById("valor-pagamento-2").value || 0
+            ).toFixed(2)
+            : "0.00";
+
+    formulario.submit();
+}
+
+
+/* =====================================================
+   EVENTOS E INICIALIZAÇÃO
+===================================================== */
+
+const forma1 = document.getElementById("forma-pagamento-1");
+const valor1 = document.getElementById("valor-pagamento-1");
+
+const forma2 = document.getElementById("forma-pagamento-2");
+const valor2 = document.getElementById("valor-pagamento-2");
+
+const usarSegunda = document.getElementById("usar-segunda-forma");
+
+// Ao selecionar a primeira forma, preenche inicialmente o total.
+if (forma1) {
+    forma1.addEventListener("change", function () {
+
+        if (this.value) {
+            valor1.value = calcularTotalVenda().toFixed(2);
+        } else {
+            valor1.value = "0";
         }
 
+        atualizarPagamento();
+    });
+}
+
+// Permite alterar o valor da primeira forma.
+if (valor1) {
+    valor1.addEventListener("input", atualizarPagamento);
+}
+
+// Atualiza a validação ao escolher a segunda forma.
+if (forma2) {
+    forma2.addEventListener("change", atualizarPagamento);
+}
+
+// Ao ativar ou desativar a segunda forma.
+if (usarSegunda) {
+    usarSegunda.addEventListener("change", function () {
+
+        if (!this.checked) {
+
+            if (forma2) forma2.value = "";
+
+            if (valor2) valor2.value = "0.00";
+
+            if (forma1 && forma1.value && valor1) {
+                valor1.value = calcularTotalVenda().toFixed(2);
+            }
+
+        } else if (valor1 && Number(valor1.value) <= 0) {
+
+            valor1.value = calcularTotalVenda().toFixed(2);
+        }
+
+        atualizarPagamento();
+    });
+}
+
+// Inicializa o cliente selecionado.
+const selectCliente = document.getElementById("select-cliente");
+
+if (selectCliente) {
+
+    const option = selectCliente.options[
+        selectCliente.selectedIndex
+    ];
+
+    clienteAtual.id = parseInt(option.value, 10) || 0;
+
+    clienteAtual.associado =
+        option.dataset.associado === "true";
+
+    const badge = document.getElementById("badge-desconto");
+
+    if (badge) {
+        badge.style.display = clienteAtual.associado
+            ? "inline-flex"
+            : "none";
     }
+}
 
-    // Inicialização da tela.
-    aplicarFiltrosProdutos();
-
-    carregarCarrinho();
-
-    renderizarCarrinho();
-    atualizarIcones();
+// Inicialização da tela.
+carregarCarrinho();
+renderizarCarrinho();
+atualizarIcones();
 
 </script>
 
