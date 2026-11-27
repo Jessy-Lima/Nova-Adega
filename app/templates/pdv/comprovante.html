@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -8,34 +9,94 @@
     <title>Comprovante - Venda #{{ venda.id }}</title>
 
     <style>
+        /* =====================================================
+           VARIÁVEIS DE TEMA
+        ===================================================== */
+
+        :root {
+            color-scheme: light;
+
+            --fundo: #F5F5F5;
+            --card: #FFFFFF;
+            --texto: #27272A;
+            --texto-secundario: #52525B;
+            --dourado: #A16207;
+            --dourado-hover: #854D0E;
+            --borda: #E5E7EB;
+            --fundo-secundario: #F9FAFB;
+            --desconto: #15803D;
+            --botao-texto: #121212;
+        }
+
+        /* =====================================================
+           TEMA ESCURO
+        ===================================================== */
+
+        html[data-tema="escuro"],
+        body[data-tema="escuro"],
+        body.tema-escuro {
+            color-scheme: dark;
+
+            --fundo: #121212;
+            --card: #1E1E1E;
+            --texto: #F9FAFB;
+            --texto-secundario: #A1A1AA;
+            --dourado: #FDE68A;
+            --dourado-hover: #FEF3C7;
+            --borda: rgba(253, 230, 138, 0.15);
+            --fundo-secundario: #121212;
+            --desconto: #86EFAC;
+            --botao-texto: #121212;
+        }
+
+        /* =====================================================
+           ESTILIZAÇÃO GERAL
+        ===================================================== */
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 30px;
-            background: #121212;
-            color: #F9FAFB;
+
+            background: var(--fundo);
+            color: var(--texto);
+
             font-family: Arial, sans-serif;
+
+            transition: background 0.2s, color 0.2s;
         }
 
         .comprovante {
             max-width: 700px;
             margin: 0 auto;
-            background: #1E1E1E;
-            border: 1px solid rgba(253, 230, 138, 0.15);
+
+            background: var(--card);
+
+            border: 1px solid var(--borda);
             border-radius: 18px;
+
             padding: 30px;
+
             box-sizing: border-box;
         }
 
         h1 {
             text-align: center;
-            color: #FDE68A;
+
+            color: var(--dourado);
+
             margin-top: 0;
             margin-bottom: 25px;
         }
 
         h2 {
-            color: #FDE68A;
+            color: var(--dourado);
+
             font-size: 18px;
+
             margin-top: 30px;
             margin-bottom: 15px;
         }
@@ -46,15 +107,21 @@
         }
 
         .informacoes strong {
-            color: #FDE68A;
+            color: var(--dourado);
         }
+
+        /* =====================================================
+           ITENS DA VENDA
+        ===================================================== */
 
         .item {
             display: flex;
             justify-content: space-between;
             gap: 20px;
+
             padding: 12px 0;
-            border-bottom: 1px solid rgba(253, 230, 138, 0.10);
+
+            border-bottom: 1px solid var(--borda);
         }
 
         .item:last-child {
@@ -69,21 +136,27 @@
             white-space: nowrap;
         }
 
+        /* =====================================================
+           TOTAIS
+        ===================================================== */
+
         .totais {
             margin-top: 25px;
             padding-top: 15px;
-            border-top: 1px solid rgba(253, 230, 138, 0.15);
+
+            border-top: 1px solid var(--borda);
         }
 
         .total-linha {
             display: flex;
             justify-content: space-between;
             gap: 20px;
+
             margin: 10px 0;
         }
 
         .desconto {
-            color: #86EFAC;
+            color: var(--desconto);
         }
 
         .total-final {
@@ -94,21 +167,27 @@
             margin-top: 18px;
             padding-top: 18px;
 
-            border-top: 1px solid rgba(253, 230, 138, 0.20);
+            border-top: 1px solid var(--borda);
 
-            color: #FDE68A;
+            color: var(--dourado);
+
             font-size: 22px;
             font-weight: bold;
         }
+
+        /* =====================================================
+           PAGAMENTOS
+        ===================================================== */
 
         .pagamentos {
             margin-top: 30px;
             padding: 20px;
 
-            background: #121212;
+            background: var(--fundo-secundario);
+
             border-radius: 14px;
 
-            border: 1px solid rgba(253, 230, 138, 0.10);
+            border: 1px solid var(--borda);
         }
 
         .pagamento {
@@ -118,7 +197,7 @@
 
             padding: 10px 0;
 
-            border-bottom: 1px solid rgba(253, 230, 138, 0.08);
+            border-bottom: 1px solid var(--borda);
         }
 
         .pagamento:last-child {
@@ -129,15 +208,24 @@
             text-transform: capitalize;
         }
 
+        /* =====================================================
+           OBSERVAÇÃO
+        ===================================================== */
+
         .observacao {
             margin-top: 25px;
             padding: 15px;
 
-            background: #121212;
+            background: var(--fundo-secundario);
+
             border-radius: 12px;
 
-            border: 1px solid rgba(253, 230, 138, 0.10);
+            border: 1px solid var(--borda);
         }
+
+        /* =====================================================
+           BOTÕES
+        ===================================================== */
 
         .botoes {
             display: flex;
@@ -156,8 +244,8 @@
 
             text-decoration: none;
 
-            background: #FDE68A;
-            color: #121212;
+            background: var(--dourado);
+            color: var(--botao-texto);
 
             font-weight: bold;
 
@@ -166,8 +254,12 @@
 
         .botao:hover {
             transform: translateY(-2px);
-            background: #FEF3C7;
+            filter: brightness(1.08);
         }
+
+        /* =====================================================
+           RESPONSIVIDADE
+        ===================================================== */
 
         @media (max-width: 600px) {
 
@@ -198,6 +290,53 @@
                 text-align: center;
             }
         }
+
+        /* =====================================================
+           IMPRESSÃO
+        ===================================================== */
+
+        @media print {
+
+            @page {
+                margin: 15mm;
+            }
+
+            body {
+                background: #FFFFFF !important;
+                color: #000000 !important;
+                padding: 0;
+            }
+
+            .comprovante {
+                background: #FFFFFF !important;
+                color: #000000 !important;
+
+                border: 1px solid #DDDDDD;
+                box-shadow: none;
+            }
+
+            h1,
+            h2,
+            .informacoes strong,
+            .total-final {
+                color: #000000 !important;
+            }
+
+            .pagamentos,
+            .observacao {
+                background: #FFFFFF !important;
+                color: #000000 !important;
+            }
+
+            .botoes {
+                display: none !important;
+            }
+
+            .desconto {
+                color: #000000 !important;
+            }
+        }
+
     </style>
 </head>
 
@@ -207,9 +346,7 @@
 
         <h1>Comprovante de Venda</h1>
 
-        <!-- ====================================================
-             INFORMAÇÕES DA VENDA
-        ===================================================== -->
+        <!-- INFORMAÇÕES DA VENDA -->
 
         <div class="informacoes">
 
@@ -236,10 +373,7 @@
 
         </div>
 
-
-        <!-- ====================================================
-             ITENS DA VENDA
-        ===================================================== -->
+        <!-- ITENS DA VENDA -->
 
         <h2>Itens da venda</h2>
 
@@ -268,10 +402,7 @@
 
         {% endfor %}
 
-
-        <!-- ====================================================
-             TOTAIS
-        ===================================================== -->
+        <!-- TOTAIS -->
 
         <div class="totais">
 
@@ -284,7 +415,6 @@
                 </span>
 
             </div>
-
 
             {% if venda.desconto and venda.desconto > 0 %}
 
@@ -300,7 +430,6 @@
 
             {% endif %}
 
-
             <div class="total-final">
 
                 <span>TOTAL</span>
@@ -313,15 +442,11 @@
 
         </div>
 
-
-        <!-- ====================================================
-             PAGAMENTOS
-        ===================================================== -->
+        <!-- PAGAMENTOS -->
 
         <div class="pagamentos">
 
             <h2>Forma de pagamento</h2>
-
 
             {% if venda.forma_pagamento_1 %}
 
@@ -354,7 +479,6 @@
             </div>
 
             {% endif %}
-
 
             {% if venda.forma_pagamento_2 and venda.valor_pagamento_2 > 0 %}
 
@@ -390,10 +514,7 @@
 
         </div>
 
-
-        <!-- ====================================================
-             OBSERVAÇÃO
-        ===================================================== -->
+        <!-- OBSERVAÇÃO -->
 
         {% if venda.observacao %}
 
@@ -409,10 +530,7 @@
 
         {% endif %}
 
-
-        <!-- ====================================================
-             BOTÕES
-        ===================================================== -->
+        <!-- BOTÕES -->
 
         <div class="botoes">
 
@@ -427,6 +545,20 @@
         </div>
 
     </div>
+
+    <!-- IDENTIFICAÇÃO DO TEMA -->
+
+    <script>
+        (function () {
+            const tema = localStorage.getItem("tema-nova-adega");
+
+            if (tema === "escuro") {
+                document.documentElement.setAttribute("data-tema", "escuro");
+            } else {
+                document.documentElement.setAttribute("data-tema", "claro");
+            }
+        })();
+    </script>
 
 </body>
 
