@@ -559,3 +559,164 @@ label {
     margin-right: auto;
     box-sizing: border-box;
 }
+
+
+/* =========================================================
+   RESPONSIVIDADE GERAL — NOVA ADEGA
+========================================================= */
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.page-wrapper,
+.page-wrapper > *,
+.container,
+.home-container,
+.pdv-container,
+.usuarios-container,
+.categorias-page {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.page-wrapper img,
+.page-wrapper svg,
+.page-wrapper input,
+.page-wrapper select,
+.page-wrapper textarea,
+.page-wrapper button {
+    max-width: 100%;
+}
+
+.page-wrapper [class*="grid"],
+.page-wrapper [class*="layout"],
+.page-wrapper [class*="col"] {
+    min-width: 0;
+}
+
+/* Tabelas */
+.page-wrapper .tabela-container,
+.page-wrapper .table-responsive,
+.page-wrapper .pdv-table-container,
+.page-wrapper .tabela-wrapper {
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Formulários */
+.page-wrapper input,
+.page-wrapper select,
+.page-wrapper textarea {
+    min-width: 0;
+}
+
+.page-wrapper .form-botoes,
+.page-wrapper .acoes {
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+
+    .page-wrapper {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .container,
+    .usuarios-container,
+    .categorias-page,
+    .home-container,
+    .pdv-container {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .page-wrapper .titulo-pagina {
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
+    .page-wrapper .titulo-pagina > a,
+    .page-wrapper .titulo-pagina .btn-novo {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .page-wrapper .filtros,
+    .page-wrapper .filtros form {
+        min-width: 0;
+        max-width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .page-wrapper .form-usuario,
+    .page-wrapper .form-container,
+    .page-wrapper .form-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 22px 18px;
+    }
+
+    .page-wrapper .form-botoes {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .page-wrapper .form-botoes > * {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .page-wrapper {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .navbar {
+        padding: 12px 8px;
+    }
+
+    .navbar .menu {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .navbar .menu a {
+        padding: 6px;
+        font-size: 12px;
+        white-space: normal;
+    }
+
+    .page-wrapper .form-usuario,
+    .page-wrapper .form-container,
+    .page-wrapper .form-card {
+        padding: 18px 14px;
+    }
+
+    .page-wrapper .tabela-container table,
+    .page-wrapper .table-responsive table {
+        min-width: 560px;
+    }
+}
+
+@media (max-width: 360px) {
+
+    .navbar .menu a {
+        font-size: 11px;
+    }
+
+    .page-wrapper .form-usuario {
+        padding: 15px 12px;
+    }
+}

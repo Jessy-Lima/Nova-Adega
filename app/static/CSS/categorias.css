@@ -1885,3 +1885,43 @@ html[data-tema="claro"] .categorias-page .categorias-ordenacao select option {
 .categorias-page .categorias-ordenacao select {
     font-weight: 500 !important;
 }
+
+
+/* =========================================================
+   CATEGORIAS — MODO CLARO
+========================================================= */
+
+html[data-tema="claro"] .categorias-page .filtros {
+    background: #FFFFFF !important;
+    border-color: #E5D5C5 !important;
+    box-shadow: 0 6px 20px rgba(92, 53, 20, 0.05);
+}
+
+html[data-tema="claro"] .categorias-page .campo-busca {
+    background: #FFFFFF !important;
+    border-color: #D8C7B5 !important;
+}
+
+html[data-tema="claro"] .categorias-page .campo-busca input {
+    background: transparent !important;
+    color: #29251F !important;
+}
+
+html[data-tema="claro"] .categorias-page .campo-busca input::placeholder {
+    color: #82766A !important;
+}
+
+html[data-tema="claro"] .categorias-page .categorias-ordenacao select {
+    background: #FFFFFF !important;
+    color: #29251F !important;
+    border-color: #D8C7B5 !important;
+}
+
+html[data-tema="claro"] .categorias-page .categorias-ordenacao select option {
+    background: #FFFFFF !important;
+    color: #29251F !important;
+}
+
+html[data-tema="claro"] .categorias-page .categorias-ordenacao label {
+    color: #5C3514 !important;
+}

@@ -597,3 +597,46 @@ html[data-tema="claro"] .usuarios-filtro select:focus {
 
 }
 
+
+/* =========================================================
+   FUNCIONÁRIOS — FORMULÁRIO NO MODO CLARO
+========================================================= */
+
+html[data-tema="claro"] main.page-wrapper .form-usuario {
+    background: #FFFFFF !important;
+    color: #29251F !important;
+    border-color: #E5D5C5 !important;
+    box-shadow: 0 10px 28px rgba(92, 53, 20, 0.07);
+}
+
+html[data-tema="claro"] main.page-wrapper .form-usuario .form-titulo h1 {
+    color: #5C3514 !important;
+}
+
+html[data-tema="claro"] main.page-wrapper .form-usuario .form-titulo p,
+html[data-tema="claro"] main.page-wrapper .form-usuario .form-grupo label {
+    color: #5C5147 !important;
+}
+
+html[data-tema="claro"] main.page-wrapper .form-usuario .form-grupo input,
+html[data-tema="claro"] main.page-wrapper .form-usuario .form-grupo select {
+    background: #FFFFFF !important;
+    color: #29251F !important;
+    border-color: #D8C7B5 !important;
+}
+
+html[data-tema="claro"] main.page-wrapper .form-usuario .form-grupo input::placeholder {
+    color: #82766A !important;
+}
+
+html[data-tema="claro"] main.page-wrapper .form-usuario .btn-cancelar {
+    background: #F3E8DC !important;
+    color: #5C3514 !important;
+    border: 1px solid #E5D5C5 !important;
+}
+
+html[data-tema="claro"] main.page-wrapper .form-usuario .btn-salvar {
+    background: #FDE68A !important;
+    color: #3D2B0B !important;
+    border: 1px solid #E8C95E !important;
+}
