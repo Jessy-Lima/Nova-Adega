@@ -1107,3 +1107,11 @@ html[data-tema="claro"] .tabela-container tbody tr:hover td {
 
     transform: none !important;
 }
+
+/* =========================================================
+   TÍTULO PRODUTOS — BRANCO NO TEMA ESCURO
+========================================================= */
+
+html:not([data-tema="claro"]) .container .titulo-pagina h1 {
+    color: #FFFFFF !important;
+}

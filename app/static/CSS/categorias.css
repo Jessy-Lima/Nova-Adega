@@ -118,7 +118,7 @@
 
 
 /* =========================================================
-   FILTROS — MESMA ESTRUTURA DE PRODUTOS
+   FILTROS
 ========================================================= */
 
 .categorias-page .filtros {
@@ -136,6 +136,9 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
 }
 
+
+/* CAMPOS */
+
 .categorias-page .filtros .campo {
     display: flex;
     flex-direction: column;
@@ -145,11 +148,16 @@
 }
 
 .categorias-page .filtros .campo label {
+    display: block;
+    margin: 0;
     color: #A1A1AA;
     font-family: inherit;
     font-size: 13px;
     font-weight: 600;
 }
+
+
+/* INPUT E SELECT */
 
 .categorias-page .filtros .campo input,
 .categorias-page .filtros .campo select {
@@ -177,14 +185,84 @@
     box-shadow: 0 0 0 3px rgba(253, 230, 138, .10);
 }
 
+
+/* =========================================================
+   ORDENAÇÃO — MESMO PADRÃO DA PÁGINA CLIENTES
+========================================================= */
+
 .categorias-page .filtros .campo-ordenacao {
-    flex: 0 1 220px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+
+    flex: 0 0 auto;
+    min-width: 0;
+    max-width: none;
 }
+
+/* TEXTO "ORDENAR POR:" */
+
+.categorias-page .filtros .campo-ordenacao label {
+    display: inline-block;
+    margin: 0;
+    color: #D6D3D1;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    white-space: nowrap;
+}
+
+/* SELETOR */
+
+.categorias-page .filtros .campo-ordenacao select {
+    width: auto;
+    min-width: 145px;
+    height: 40px;
+    margin: 0;
+    padding: 9px 30px 9px 12px;
+
+    background-color: #171717;
+    color: #F9FAFB;
+
+    border: 1px solid rgba(253, 230, 138, 0.2);
+    border-radius: 7px;
+
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 400;
+
+    cursor: pointer;
+    outline: none;
+
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.categorias-page .filtros .campo-ordenacao select:hover {
+    border-color: rgba(253, 230, 138, 0.55);
+}
+
+.categorias-page .filtros .campo-ordenacao select:focus {
+    border-color: #FDE68A;
+    box-shadow: 0 0 0 2px rgba(253, 230, 138, 0.12);
+}
+
+.categorias-page .filtros .campo-ordenacao select option {
+    background-color: #1E1E1E;
+    color: #F9FAFB;
+}
+
+
+/* =========================================================
+   AÇÕES DOS FILTROS
+========================================================= */
 
 .categorias-page .filtros .acoes-filtro {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
+    flex-shrink: 0;
 }
 
 .categorias-page .filtros .btn-filtrar,
@@ -707,6 +785,7 @@ html[data-tema="claro"] .categorias-page .filtros .campo label {
     color: #777064;
 }
 
+/* Campos no tema claro */
 html[data-tema="claro"] .categorias-page .filtros .campo input,
 html[data-tema="claro"] .categorias-page .filtros .campo select,
 html[data-tema="claro"] .form-grupo input,
@@ -721,6 +800,28 @@ html[data-tema="claro"] .categorias-page .filtros .campo input::placeholder {
     color: #A8A094;
 }
 
+/* Ordenação no tema claro */
+html[data-tema="claro"] .categorias-page .filtros .campo-ordenacao label {
+    color: #5C5146;
+}
+
+html[data-tema="claro"] .categorias-page .filtros .campo-ordenacao select {
+    background-color: #FFFFFF;
+    color: #252525;
+    border-color: #D8C8B7;
+}
+
+html[data-tema="claro"] .categorias-page .filtros .campo-ordenacao select option {
+    background-color: #FFFFFF;
+    color: #252525;
+}
+
+html[data-tema="claro"] .categorias-page .filtros .campo-ordenacao select:hover,
+html[data-tema="claro"] .categorias-page .filtros .campo-ordenacao select:focus {
+    border-color: #8A6100;
+}
+
+/* Tabela no tema claro */
 html[data-tema="claro"] .categorias-tabela-desktop thead {
     background: #F5F0E8;
 }
@@ -816,15 +917,21 @@ html[data-tema="claro"] .categorias-page .paginacao a:hover {
         flex: 1 1 200px;
     }
 
+    /* Ordenação alinhada como em Clientes */
     .categorias-page .filtros .campo-ordenacao {
-        flex: 0 1 200px;
+        width: 100%;
+        flex: 1 1 100%;
+    }
+
+    .categorias-page .filtros .campo-ordenacao select {
+        flex: 1;
+        min-width: 0;
     }
 
     .categorias-tabela-desktop th,
     .categorias-tabela-desktop td {
         padding: 14px;
     }
-
 }
 
 
@@ -862,10 +969,26 @@ html[data-tema="claro"] .categorias-page .paginacao a:hover {
         gap: 13px;
     }
 
-    .categorias-page .filtros .campo,
-    .categorias-page .filtros .campo-ordenacao {
+    .categorias-page .filtros .campo {
         flex: 1 1 100%;
         width: 100%;
+    }
+
+    .categorias-page .filtros .campo-ordenacao {
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        flex: 1 1 100%;
+    }
+
+    .categorias-page .filtros .campo-ordenacao label {
+        flex-shrink: 0;
+    }
+
+    .categorias-page .filtros .campo-ordenacao select {
+        flex: 1;
+        min-width: 0;
+        width: auto;
     }
 
     .categorias-page .filtros .acoes-filtro {
@@ -925,7 +1048,6 @@ html[data-tema="claro"] .categorias-page .paginacao a:hover {
     .categoria-acoes-mobile .btn-status {
         width: 100%;
     }
-
 }
 
 
@@ -956,5 +1078,9 @@ html[data-tema="claro"] .categorias-page .paginacao a:hover {
     .categoria-acoes-mobile > form {
         width: 100%;
     }
-
 }
+
+
+/* =========================================================
+   FIM — CATEGORIAS NOVA ADEGA
+========================================================= */
