@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 
 {% block title %}
@@ -5,15 +6,15 @@ Categorias — Nova Adega
 {% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="/static/CSS/categorias.css?v=12">
+<link rel="stylesheet" href="/static/CSS/categorias.css?v=15">
 {% endblock %}
 
 {% block content %}
 
-<div class="container categorias-page">
+<main class="container categorias-page">
 
-    <!-- CABEÇALHO -->
-    <section class="titulo-pagina">
+    <!-- TÍTULO DA PÁGINA -->
+    <div class="titulo-pagina">
 
         <div>
             <h1>Categorias</h1>
@@ -27,130 +28,111 @@ Categorias — Nova Adega
             + Nova categoria
         </a>
 
-    </section>
+    </div>
 
 
     <!-- MENSAGENS -->
 
     {% if request.query_params.get('criado') == 'ok' %}
-
     <div class="mensagem sucesso">
         Categoria criada com sucesso!
     </div>
-
     {% endif %}
 
-
     {% if request.query_params.get('editado') == 'ok' %}
-
     <div class="mensagem sucesso">
         Categoria atualizada com sucesso!
     </div>
-
     {% endif %}
 
-
     {% if request.query_params.get('erro') == 'produtos_vinculados' %}
-
     <div class="mensagem erro">
         Não é possível desativar
         "{{ request.query_params.get('categoria') }}"
         pois ela possui produtos ativos vinculados.
     </div>
-
     {% endif %}
 
 
-    <!-- FILTROS -->
+    <!-- FILTROS: MESMA ESTRUTURA DE PRODUTOS -->
 
-    <section class="filtros">
+    <form method="get" action="/categorias" class="filtros">
 
-        <form method="get" action="/categorias">
+        <!-- BUSCA -->
+        <div class="campo">
 
-            <!-- BUSCA -->
+            <label for="busca">
+                Buscar categoria
+            </label>
 
-            <div class="campo-busca">
+            <input
+                type="text"
+                id="busca"
+                name="busca"
+                placeholder="Buscar por nome..."
+                value="{{ busca }}"
+            >
 
-                <span>🔍</span>
-
-                <input
-                    type="text"
-                    name="busca"
-                    placeholder="Buscar por nome..."
-                    value="{{ busca }}"
-                >
-
-            </div>
-
-
-            <!-- ORDENAÇÃO -->
-
-            <div class="categorias-ordenacao">
-
-                <label for="ordenar">
-                    Ordenar por:
-                </label>
-
-                <select
-                    name="ordenar"
-                    id="ordenar"
-                    onchange="this.form.submit()"
-                >
-
-                    <option value="nome_az"
-                        {% if ordenar == 'nome_az' %}selected{% endif %}>
-                        Nome A–Z
-                    </option>
-
-                    <option value="nome_za"
-                        {% if ordenar == 'nome_za' %}selected{% endif %}>
-                        Nome Z–A
-                    </option>
-
-                    <option value="mais_produtos"
-                        {% if ordenar == 'mais_produtos' %}selected{% endif %}>
-                        Mais produtos ativos
-                    </option>
-
-                    <option value="menos_produtos"
-                        {% if ordenar == 'menos_produtos' %}selected{% endif %}>
-                        Menos produtos ativos
-                    </option>
-
-                </select>
-
-            </div>
+        </div>
 
 
-            <input type="hidden" name="pagina" value="1">
+        <!-- ORDENAÇÃO -->
+        <div class="campo campo-ordenacao">
+
+            <label for="ordenar">
+                Ordenar por:
+            </label>
+
+            <select name="ordenar" id="ordenar">
+
+                <option value="nome_az"
+                    {{ 'selected' if ordenar == 'nome_az' else '' }}>
+                    Nome (A–Z)
+                </option>
+
+                <option value="nome_za"
+                    {{ 'selected' if ordenar == 'nome_za' else '' }}>
+                    Nome (Z–A)
+                </option>
+
+                <option value="mais_produtos"
+                    {{ 'selected' if ordenar == 'mais_produtos' else '' }}>
+                    Mais produtos ativos
+                </option>
+
+                <option value="menos_produtos"
+                    {{ 'selected' if ordenar == 'menos_produtos' else '' }}>
+                    Menos produtos ativos
+                </option>
+
+            </select>
+
+        </div>
 
 
-            <!-- BOTÃO BUSCAR -->
+        <!-- BOTÕES -->
+        <div class="acoes-filtro">
 
             <button type="submit" class="btn-filtrar">
-                Buscar
+                Filtrar
             </button>
 
-
-            <!-- LIMPAR -->
-
-            {% if busca %}
-
+            {% if busca or ordenar != 'nome_az' %}
             <a href="/categorias" class="btn-limpar">
                 Limpar
             </a>
-
             {% endif %}
 
-        </form>
+        </div>
 
-    </section>
+        <input type="hidden" name="pagina" value="1">
+
+    </form>
 
 
     <!-- LISTAGEM DE CATEGORIAS -->
 
     <section class="categorias-listagem">
-
 
         <!-- TABELA DESKTOP / TABLET -->
 
@@ -159,21 +141,13 @@ Categorias — Nova Adega
             <table>
 
                 <thead>
-
                     <tr>
-
                         <th>Nome</th>
-
                         <th>Produtos ativos</th>
-
                         <th>Status</th>
-
                         <th>Ações</th>
-
                     </tr>
-
                 </thead>
-
 
                 <tbody>
 
@@ -181,51 +155,30 @@ Categorias — Nova Adega
 
                     <tr>
 
-                        <!-- NOME -->
-
                         <td class="categoria-nome">
                             {{ c.nome }}
                         </td>
 
-
-                        <!-- PRODUTOS ATIVOS -->
-
                         <td>
-
                             <span class="quantidade-produtos">
-
                                 {{ c.produtos
                                 | selectattr('ativo')
                                 | list
                                 | length }}
-
                             </span>
-
                         </td>
 
-
-                        <!-- STATUS -->
-
                         <td>
-
                             {% if c.ativo %}
-
                             <span class="status ativo">
                                 Ativa
                             </span>
-
                             {% else %}
-
                             <span class="status inativo">
                                 Inativa
                             </span>
-
                             {% endif %}
-
                         </td>
-
-
-                        <!-- AÇÕES -->
 
                         <td>
 
@@ -238,19 +191,13 @@ Categorias — Nova Adega
                                     Editar
                                 </a>
 
-
                                 <form
                                     action="/categorias/{{ c.id }}/toggle-ativo"
                                     method="post"
                                 >
-
-                                    <button
-                                        type="submit"
-                                        class="btn-status"
-                                    >
+                                    <button type="submit" class="btn-status">
                                         {{ "Desativar" if c.ativo else "Ativar" }}
                                     </button>
-
                                 </form>
 
                             </div>
@@ -261,23 +208,18 @@ Categorias — Nova Adega
 
                     {% endfor %}
 
-
                     {% if not categorias %}
-
                     <tr>
-
                         <td colspan="4" class="sem-resultados">
 
                             {% if busca %}
-                                Nenhuma categoria encontrada para "{{ busca }}".
+                            Nenhuma categoria encontrada para "{{ busca }}".
                             {% else %}
-                                Nenhuma categoria cadastrada.
+                            Nenhuma categoria cadastrada.
                             {% endif %}
 
                         </td>
-
                     </tr>
-
                     {% endif %}
 
                 </tbody>
@@ -299,12 +241,9 @@ Categorias — Nova Adega
                     {{ c.nome }}
                 </h3>
 
-
                 <div class="categoria-info-mobile">
 
-                    <span>
-                        Produtos ativos
-                    </span>
+                    <span>Produtos ativos</span>
 
                     <strong>
                         {{ c.produtos
@@ -315,30 +254,17 @@ Categorias — Nova Adega
 
                 </div>
 
-
                 <div class="categoria-info-mobile">
 
-                    <span>
-                        Status
-                    </span>
-
+                    <span>Status</span>
 
                     {% if c.ativo %}
-
-                    <span class="status ativo">
-                        Ativa
-                    </span>
-
+                    <span class="status ativo">Ativa</span>
                     {% else %}
-
-                    <span class="status inativo">
-                        Inativa
-                    </span>
-
+                    <span class="status inativo">Inativa</span>
                     {% endif %}
 
                 </div>
-
 
                 <div class="categoria-acoes-mobile">
 
@@ -349,19 +275,13 @@ Categorias — Nova Adega
                         Editar
                     </a>
 
-
                     <form
                         action="/categorias/{{ c.id }}/toggle-ativo"
                         method="post"
                     >
-
-                        <button
-                            type="submit"
-                            class="btn-status"
-                        >
+                        <button type="submit" class="btn-status">
                             {{ "Desativar" if c.ativo else "Ativar" }}
                         </button>
-
                     </form>
 
                 </div>
@@ -373,9 +293,9 @@ Categorias — Nova Adega
             <p class="sem-resultados">
 
                 {% if busca %}
-                    Nenhuma categoria encontrada para "{{ busca }}".
+                Nenhuma categoria encontrada para "{{ busca }}".
                 {% else %}
-                    Nenhuma categoria cadastrada.
+                Nenhuma categoria cadastrada.
                 {% endif %}
 
             </p>
@@ -397,28 +317,18 @@ Categorias — Nova Adega
             Página {{ pagina }} de {{ total_paginas }}
         </span>
 
-
         <div>
 
             {% if pagina > 1 %}
-
-            <a
-                href="/categorias?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}&ordenar={{ ordenar }}{% if busca %}&busca={{ busca | urlencode }}{% endif %}"
-            >
+            <a href="/categorias?pagina={{ pagina - 1 }}&por_pagina={{ por_pagina }}&ordenar={{ ordenar }}{% if busca %}&busca={{ busca | urlencode }}{% endif %}">
                 ← Anterior
             </a>
-
             {% endif %}
 
-
             {% if pagina < total_paginas %}
-
-            <a
-                href="/categorias?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}&ordenar={{ ordenar }}{% if busca %}&busca={{ busca | urlencode }}{% endif %}"
-            >
+            <a href="/categorias?pagina={{ pagina + 1 }}&por_pagina={{ por_pagina }}&ordenar={{ ordenar }}{% if busca %}&busca={{ busca | urlencode }}{% endif %}">
                 Próxima →
             </a>
-
             {% endif %}
 
         </div>
@@ -427,6 +337,6 @@ Categorias — Nova Adega
 
     {% endif %}
 
-</div>
+</main>
 
 {% endblock %}

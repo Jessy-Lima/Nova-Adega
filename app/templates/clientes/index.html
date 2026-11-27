@@ -6,7 +6,7 @@ Clientes — Nova Adega
 {% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="/static/CSS/clientes-lista.css?v=4">
+<link rel="stylesheet" href="/static/CSS/clientes-lista.css?v=5">
 {% endblock %}
 
 {% block content %}
@@ -45,33 +45,23 @@ Clientes — Nova Adega
     {% endif %}
 
 
-    <!-- BUSCA E ORDENAÇÃO -->
+       <!-- BUSCA E ORDENAÇÃO -->
     <section class="filtros">
 
         <form method="get" action="/clientes">
 
-            <div class="campo-busca">
-                <span>
-                    <i data-lucide="search"></i>
-                </span>
+            <!-- BUSCA -->
+            <div class="campo">
+                <label for="busca">Buscar cliente</label>
 
                 <input
                     type="text"
+                    id="busca"
                     name="busca"
                     placeholder="Buscar por nome..."
                     value="{{ busca }}"
                 >
             </div>
-
-            <button type="submit" class="btn-filtrar">
-                Buscar
-            </button>
-
-            {% if busca %}
-            <a href="/clientes" class="btn-limpar">
-                Limpar
-            </a>
-            {% endif %}
 
             <!-- ORDENAÇÃO -->
             <div class="filtro-ordenacao">
@@ -85,7 +75,6 @@ Clientes — Nova Adega
                     id="ordenar"
                     onchange="this.form.submit()"
                 >
-
                     <option value="nome_az"
                         {% if ordenar == 'nome_az' %}selected{% endif %}>
                         Nome A–Z
@@ -105,8 +94,22 @@ Clientes — Nova Adega
                         {% if ordenar == 'inativos' %}selected{% endif %}>
                         Inativos primeiro
                     </option>
-
                 </select>
+
+            </div>
+
+            <!-- BOTÕES -->
+            <div class="acoes-filtro">
+
+                <button type="submit" class="btn-filtrar">
+                    Filtrar
+                </button>
+
+                {% if busca %}
+                <a href="/clientes" class="btn-limpar">
+                    Limpar
+                </a>
+                {% endif %}
 
             </div>
 
@@ -116,7 +119,6 @@ Clientes — Nova Adega
         </form>
 
     </section>
-
 
     <!-- TABELA -->
     <section class="tabela-container">
